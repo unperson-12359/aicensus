@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { ToolGrid } from "@/components/tools/tool-grid";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { Pagination } from "@/components/shared/pagination";
+import { PaginationInfo } from "@/components/shared/pagination-info";
 import { getToolsByCategory } from "@/lib/queries/tools";
 import { getCategoryBySlug, getAllCategorySlugs } from "@/lib/queries/categories";
 
 export const revalidate = 1800;
 
+const TOOLS_PER_PAGE = 12;
+
 interface PageProps {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ page?: string }>;
 }
 
 export async function generateStaticParams() {
@@ -39,8 +43,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function CategoryDetailPage({ params }: PageProps) {
-  const { slug } = await params;
+export default async function CategoryDetailPage({ params, searchParams }: PageProps) {
+  const [{ slug }, sp] = await Promise.all([params, searchParams]);
+  const currentPage = Math.max(1, parseInt(sp.page || "1", 10) || 1);
+  const offset = (currentPage - 1) * TOOLS_PER_PAGE;
+
   let category;
   let result: Awaited<ReturnType<typeof getToolsByCategory>> = { tools: [], count: 0 };
 
@@ -53,10 +60,15 @@ export default async function CategoryDetailPage({ params }: PageProps) {
   if (!category) notFound();
 
   try {
-    result = await getToolsByCategory(slug);
+    result = await getToolsByCategory(slug, {
+      limit: TOOLS_PER_PAGE,
+      offset,
+    });
   } catch {
     // Supabase error
   }
+
+  const totalPages = Math.ceil(result.count / TOOLS_PER_PAGE);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -83,13 +95,13 @@ export default async function CategoryDetailPage({ params }: PageProps) {
       <JsonLd data={jsonLd} />
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <Link
-          href="/categories"
-          className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          All categories
-        </Link>
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Categories", href: "/categories" },
+            { label: category.name },
+          ]}
+        />
 
         <SectionHeading
           title={`${category.name} Tools`}
@@ -102,6 +114,21 @@ export default async function CategoryDetailPage({ params }: PageProps) {
         <div className="mt-8">
           <ToolGrid tools={result.tools} />
         </div>
+
+        {result.count > 0 && (
+          <div className="mt-8 flex flex-col items-center gap-4">
+            <PaginationInfo
+              currentPage={currentPage}
+              perPage={TOOLS_PER_PAGE}
+              total={result.count}
+            />
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              basePath={`/categories/${slug}`}
+            />
+          </div>
+        )}
       </div>
     </>
   );

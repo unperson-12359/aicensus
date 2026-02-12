@@ -59,16 +59,9 @@ export async function getTools(options?: {
       break;
   }
 
-  if (options?.limit) {
-    query = query.limit(options.limit);
-  }
-
-  if (options?.offset) {
-    query = query.range(
-      options.offset,
-      options.offset + (options.limit || 20) - 1
-    );
-  }
+  const limit = options?.limit ?? 20;
+  const offset = options?.offset ?? 0;
+  query = query.range(offset, offset + limit - 1);
 
   const { data, error, count } = await query;
 
@@ -130,7 +123,10 @@ export async function getRecentTools(limit = 6) {
   return getTools({ limit, sort: "newest" });
 }
 
-export async function getToolsByCategory(categorySlug: string) {
+export async function getToolsByCategory(
+  categorySlug: string,
+  options?: { limit?: number; offset?: number }
+) {
   const supabase = await createClient();
 
   const { data: category } = await supabase
@@ -141,12 +137,16 @@ export async function getToolsByCategory(categorySlug: string) {
 
   if (!category) return { tools: [], count: 0 };
 
+  const limit = options?.limit ?? 20;
+  const offset = options?.offset ?? 0;
+
   const { data, count } = await supabase
     .from("tools")
     .select("*, categories(*)", { count: "exact" })
     .eq("status", "published")
     .eq("category_id", category.id)
-    .order("editor_rating", { ascending: false, nullsFirst: false });
+    .order("editor_rating", { ascending: false, nullsFirst: false })
+    .range(offset, offset + limit - 1);
 
   return { tools: (data as ToolWithCategory[]) || [], count: count || 0 };
 }

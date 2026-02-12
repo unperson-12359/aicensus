@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   ExternalLink,
-  ArrowLeft,
   ThumbsUp,
   ThumbsDown,
   Users,
@@ -11,6 +10,7 @@ import {
   Sparkles,
   Target,
 } from "lucide-react";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -121,19 +121,34 @@ export default async function ToolDetailPage({ params }: PageProps) {
     }),
   };
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+      ...(tool.categories
+        ? [{ "@type": "ListItem", position: 2, name: tool.categories.name, item: `${siteUrl}/categories/${tool.categories.slug}` }]
+        : [{ "@type": "ListItem", position: 2, name: "Tools", item: `${siteUrl}/tools` }]),
+      { "@type": "ListItem", position: 3, name: tool.name },
+    ],
+  };
+
   return (
     <>
       <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumbLd} />
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Back Button */}
-        <Link
-          href="/tools"
-          className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to tools
-        </Link>
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            ...(tool.categories
+              ? [{ label: tool.categories.name, href: `/categories/${tool.categories.slug}` }]
+              : [{ label: "Tools", href: "/tools" }]),
+            { label: tool.name },
+          ]}
+        />
 
         {/* Header */}
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">

@@ -48,6 +48,7 @@ export function FilterBar({ categories }: FilterBarProps) {
     } else {
       params.delete(key);
     }
+    params.delete("page");
     router.push(`/tools?${params.toString()}`);
   }
 

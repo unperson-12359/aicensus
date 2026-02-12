@@ -4,9 +4,13 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { getTools } from "@/lib/queries/tools";
 import { getCategories } from "@/lib/queries/categories";
 import { FilterBar } from "@/components/filters/filter-bar";
+import { Pagination } from "@/components/shared/pagination";
+import { PaginationInfo } from "@/components/shared/pagination-info";
 import type { PricingModel, ToolWithCategory, Category } from "@/lib/types/database";
 
 export const revalidate = 1800;
+
+const TOOLS_PER_PAGE = 12;
 
 export const metadata: Metadata = {
   title: "Browse AI Tools — Find the Best AI Apps & Agents",
@@ -21,11 +25,14 @@ interface PageProps {
     pricing?: string;
     verified?: string;
     sort?: string;
+    page?: string;
   }>;
 }
 
 export default async function ToolsPage({ searchParams }: PageProps) {
   const params = await searchParams;
+  const currentPage = Math.max(1, parseInt(params.page || "1", 10) || 1);
+  const offset = (currentPage - 1) * TOOLS_PER_PAGE;
 
   let tools: { tools: ToolWithCategory[]; count: number } = { tools: [], count: 0 };
   let categories: Category[] = [];
@@ -38,12 +45,16 @@ export default async function ToolsPage({ searchParams }: PageProps) {
         pricing: params.pricing as PricingModel | undefined,
         verified: params.verified === "true" ? true : undefined,
         sort: (params.sort as "rating" | "name" | "newest") || "newest",
+        limit: TOOLS_PER_PAGE,
+        offset,
       }),
       getCategories(),
     ]);
   } catch {
     // Supabase not configured yet
   }
+
+  const totalPages = Math.ceil(tools.count / TOOLS_PER_PAGE);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -65,9 +76,25 @@ export default async function ToolsPage({ searchParams }: PageProps) {
       </div>
 
       {tools.count > 0 && (
-        <p className="mt-8 text-center text-sm text-muted-foreground">
-          Showing {tools.tools.length} of {tools.count} tools
-        </p>
+        <div className="mt-8 flex flex-col items-center gap-4">
+          <PaginationInfo
+            currentPage={currentPage}
+            perPage={TOOLS_PER_PAGE}
+            total={tools.count}
+          />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            basePath="/tools"
+            searchParams={{
+              q: params.q,
+              category: params.category,
+              pricing: params.pricing,
+              verified: params.verified,
+              sort: params.sort,
+            }}
+          />
+        </div>
       )}
     </div>
   );
