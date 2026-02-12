@@ -21,7 +21,7 @@ import { VerifiedBadge } from "@/components/shared/verified-badge";
 import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
-import { FadeIn, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
+import { FadeIn, StaggerChildren, StaggerItem } from "@/components/motion";
 import {
   getToolBySlug,
   getToolAlternatives,
@@ -140,7 +140,6 @@ export default async function ToolDetailPage({ params }: PageProps) {
       <JsonLd data={jsonLd} />
       <JsonLd data={breadcrumbLd} />
 
-      <PageTransition>
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <Breadcrumbs
           items={[
@@ -390,7 +389,6 @@ export default async function ToolDetailPage({ params }: PageProps) {
           </FadeIn>
         )}
       </div>
-    </PageTransition>
     </>
   );
 }
