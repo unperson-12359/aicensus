@@ -28,7 +28,7 @@ import {
   getAllToolSlugs,
 } from "@/lib/queries/tools";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{ slug: string }>;

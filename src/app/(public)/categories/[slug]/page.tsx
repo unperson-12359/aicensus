@@ -9,7 +9,7 @@ import { PaginationInfo } from "@/components/shared/pagination-info";
 import { getToolsByCategory } from "@/lib/queries/tools";
 import { getCategoryBySlug, getAllCategorySlugs } from "@/lib/queries/categories";
 
-export const revalidate = 1800;
+export const dynamic = "force-dynamic";
 
 const TOOLS_PER_PAGE = 12;
 
