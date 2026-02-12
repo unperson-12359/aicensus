@@ -16,9 +16,9 @@ export function SectionHeading({
   gradient = false,
 }: SectionHeadingProps) {
   const sizeClasses = {
-    default: "text-3xl sm:text-4xl",
-    lg: "text-4xl sm:text-5xl",
-    xl: "text-5xl sm:text-6xl lg:text-7xl",
+    default: "text-2xl sm:text-3xl md:text-4xl",
+    lg: "text-3xl sm:text-4xl md:text-5xl",
+    xl: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl",
   };
 
   return (
@@ -33,7 +33,7 @@ export function SectionHeading({
         {title}
       </h2>
       {description && (
-        <p className="max-w-2xl text-lg text-muted-foreground">{description}</p>
+        <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">{description}</p>
       )}
     </div>
   );

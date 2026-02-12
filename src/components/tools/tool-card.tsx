@@ -13,16 +13,16 @@ interface ToolCardProps {
 export function ToolCard({ tool }: ToolCardProps) {
   return (
     <Link href={`/tools/${tool.slug}`}>
-      <Card className="group relative h-full overflow-hidden border-border/50 bg-card transition-all duration-300 hover:border-primary/30 hover:glow-md hover:-translate-y-1">
-        <CardContent className="flex h-full flex-col gap-3 p-5">
+      <Card className="group relative h-full overflow-hidden border-border/50 bg-card py-0 gap-0 transition-all duration-300 hover:border-primary/30 hover:glow-md hover:-translate-y-1">
+        <CardContent className="flex h-full flex-col gap-2 p-3 sm:gap-3 sm:p-4">
           {/* Header: Logo + Name */}
-          <div className="flex items-start gap-3">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted text-lg font-bold text-primary">
+          <div className="flex items-start gap-2 sm:gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-base font-bold text-primary sm:h-11 sm:w-11 sm:text-lg">
               {tool.logo_url ? (
                 <img
                   src={tool.logo_url}
                   alt={tool.name}
-                  className="h-11 w-11 rounded-lg object-cover"
+                  className="h-9 w-9 rounded-lg object-cover sm:h-11 sm:w-11"
                 />
               ) : (
                 tool.name.charAt(0)
@@ -30,21 +30,21 @@ export function ToolCard({ tool }: ToolCardProps) {
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <h3 className="truncate font-semibold text-foreground group-hover:text-primary transition-colors">
+                <h3 className="truncate text-sm font-semibold text-foreground group-hover:text-primary transition-colors sm:text-base">
                   {tool.name}
                 </h3>
                 {tool.is_verified && <VerifiedBadge showLabel={false} size="sm" />}
               </div>
-              <p className="truncate text-sm text-muted-foreground">
+              <p className="truncate text-xs text-muted-foreground sm:text-sm">
                 {tool.tagline}
               </p>
             </div>
           </div>
 
           {/* Category + Pricing */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
             {tool.categories && (
-              <span className="text-xs text-muted-foreground">
+              <span className="hidden text-xs text-muted-foreground sm:inline">
                 {tool.categories.name}
               </span>
             )}
@@ -52,7 +52,7 @@ export function ToolCard({ tool }: ToolCardProps) {
           </div>
 
           {/* Rating */}
-          <div className="mt-auto flex items-center justify-between pt-2">
+          <div className="mt-auto flex items-center justify-between pt-1 sm:pt-2">
             <RatingStars rating={tool.editor_rating} />
             <ExternalLink className="h-3.5 w-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
           </div>

@@ -54,11 +54,11 @@ export default async function HomePage() {
           <div className="absolute left-0 top-1/3 h-[300px] w-[400px] rounded-full bg-neon/3 blur-3xl animate-float" />
         </div>
 
-        <div className="mx-auto max-w-7xl px-4 pb-20 pt-24 sm:px-6 sm:pb-32 sm:pt-40 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pb-32 sm:pt-40 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             {/* Badge with pulse glow */}
             <FadeIn delay={0.1}>
-              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-border/50 bg-card px-4 py-1.5 text-sm text-muted-foreground animate-pulse-glow">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/50 bg-card px-3 py-1.5 text-xs text-muted-foreground animate-pulse-glow sm:mb-8 sm:px-4 sm:text-sm">
                 <Sparkles className="h-4 w-4 text-primary" />
                 The trusted AI tools directory
               </div>
@@ -72,19 +72,19 @@ export default async function HomePage() {
             </RevealText>
 
             <RevealText delay={0.35}>
-              <h1 className="font-display text-6xl font-bold tracking-hero text-gradient-primary sm:text-7xl lg:text-8xl xl:text-9xl text-glow">
+              <h1 className="font-display text-5xl font-bold tracking-hero text-gradient-primary sm:text-7xl lg:text-8xl xl:text-9xl text-glow">
                 best AI tools
               </h1>
             </RevealText>
 
             <RevealText delay={0.5}>
-              <p className="font-display text-3xl font-light tracking-display text-foreground/80 sm:text-4xl lg:text-5xl">
+              <p className="font-display text-2xl font-light tracking-display text-foreground/80 sm:text-4xl lg:text-5xl">
                 for your workflow
               </p>
             </RevealText>
 
             <FadeIn delay={0.7} direction="up">
-              <p className="mx-auto mt-8 max-w-2xl text-lg text-muted-foreground sm:text-xl">
+              <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:mt-8 sm:text-xl">
                 Curated, verified, and compared. Find the right AI tools without
                 the noise. Expert reviews, pricing breakdowns, and honest
                 pros & cons.
@@ -93,7 +93,7 @@ export default async function HomePage() {
 
             {/* Search Bar */}
             <FadeIn delay={0.9} direction="up">
-              <div className="mx-auto mt-10 max-w-xl">
+              <div className="mx-auto mt-8 max-w-xl sm:mt-10">
                 <form action="/tools" method="GET" className="relative">
                   <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
                   <Input
@@ -125,7 +125,7 @@ export default async function HomePage() {
 
       {/* Featured Tools */}
       {featuredTools.tools.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
           <FadeIn>
             <div className="flex items-end justify-between">
               <SectionHeading
@@ -148,14 +148,14 @@ export default async function HomePage() {
 
       {/* Categories */}
       {categories.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
           <FadeIn>
             <SectionHeading
               title="Browse by Category"
               description="Find AI tools for every use case"
             />
           </FadeIn>
-          <StaggerChildren className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <StaggerChildren className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
             {categories.map((category) => (
               <StaggerItem key={category.id}>
                 <CategoryCard category={category} />
@@ -167,7 +167,7 @@ export default async function HomePage() {
 
       {/* Recently Added */}
       {recentTools.tools.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
           <FadeIn>
             <div className="flex items-end justify-between">
               <SectionHeading
@@ -189,7 +189,7 @@ export default async function HomePage() {
       )}
 
       {/* CTA Section */}
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
         <FadeIn>
           <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-card p-8 text-center sm:p-12">
             <div className="absolute inset-0 -z-10">
