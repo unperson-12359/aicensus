@@ -67,7 +67,7 @@ export function FilterBar({ categories }: FilterBarProps) {
           <Input
             placeholder="Search tools..."
             defaultValue={currentQ}
-            className="pl-9"
+            className="pl-9 focus:glow-sm transition-shadow duration-300"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 updateParams("q", (e.target as HTMLInputElement).value);

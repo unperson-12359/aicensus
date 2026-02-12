@@ -40,7 +40,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
 
   return (
     <Link href={`/categories/${category.slug}`}>
-      <Card className="group h-full border-border/50 bg-card transition-all duration-300 hover:border-primary/30 hover:glow-sm">
+      <Card className="group h-full border-border/50 bg-card transition-all duration-300 hover:border-primary/30 hover:glow-sm hover:-translate-y-1">
         <CardContent className="flex items-center gap-4 p-5">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
             <Icon className="h-5 w-5" />

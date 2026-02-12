@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { CategoryCard } from "@/components/categories/category-card";
+import { PageTransition, StaggerChildren, StaggerItem } from "@/components/motion";
 import { getCategoriesWithToolCount, type CategoryWithCount } from "@/lib/queries/categories";
 
 export const revalidate = 86400;
@@ -21,17 +22,20 @@ export default async function CategoriesPage() {
   }
 
   return (
+    <PageTransition>
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <SectionHeading
         title="Categories"
         description="Browse AI tools by category and find the perfect tool for your needs"
       />
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <StaggerChildren className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {categories.map((category) => (
-          <CategoryCard key={category.id} category={category} />
+          <StaggerItem key={category.id}>
+            <CategoryCard category={category} />
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerChildren>
 
       {categories.length === 0 && (
         <p className="mt-12 text-center text-muted-foreground">
@@ -39,5 +43,6 @@ export default async function CategoriesPage() {
         </p>
       )}
     </div>
+    </PageTransition>
   );
 }

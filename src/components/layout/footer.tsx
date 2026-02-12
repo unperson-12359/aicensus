@@ -19,8 +19,8 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {/* Brand */}
           <div className="col-span-2 md:col-span-2">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+            <Link href="/" className="group flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 transition-shadow duration-300 group-hover:glow-sm">
                 <Zap className="h-5 w-5 text-primary" />
               </div>
               <span className="text-xl font-bold tracking-tight">

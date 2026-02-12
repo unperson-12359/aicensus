@@ -59,10 +59,11 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               className={cn(
-                "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                "after:absolute after:bottom-1 after:left-3 after:right-3 after:h-[2px] after:rounded-full after:bg-primary after:transition-transform after:duration-300",
                 isActive(link.href)
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-foreground after:scale-x-100"
+                  : "text-muted-foreground hover:text-foreground after:scale-x-0 hover:after:scale-x-100 after:origin-left"
               )}
             >
               {link.label}

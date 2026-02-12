@@ -13,7 +13,7 @@ interface ToolCardProps {
 export function ToolCard({ tool }: ToolCardProps) {
   return (
     <Link href={`/tools/${tool.slug}`}>
-      <Card className="group relative h-full overflow-hidden border-border/50 bg-card transition-all duration-300 hover:border-primary/30 hover:glow-sm">
+      <Card className="group relative h-full overflow-hidden border-border/50 bg-card transition-all duration-300 hover:border-primary/30 hover:glow-md hover:-translate-y-1">
         <CardContent className="flex h-full flex-col gap-3 p-5">
           {/* Header: Logo + Name */}
           <div className="flex items-start gap-3">

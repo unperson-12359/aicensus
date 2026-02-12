@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { PageTransition } from "@/components/motion";
 import { createClient } from "@/lib/supabase/client";
 import type { Database, PricingModel } from "@/lib/types/database";
 
@@ -71,6 +72,7 @@ export default function SubmitPage() {
 
   if (submitted) {
     return (
+      <PageTransition>
       <div className="mx-auto max-w-xl px-4 py-24 text-center sm:px-6">
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
           <CheckCircle2 className="h-8 w-8 text-green-500" />
@@ -81,10 +83,12 @@ export default function SubmitPage() {
           criteria. You&apos;ll hear from us soon.
         </p>
       </div>
+      </PageTransition>
     );
   }
 
   return (
+    <PageTransition>
     <div className="mx-auto max-w-xl px-4 py-12 sm:px-6">
       <div className="text-center">
         <h1 className="text-3xl font-bold">Submit an AI Tool</h1>
@@ -200,5 +204,6 @@ export default function SubmitPage() {
         </CardContent>
       </Card>
     </div>
+    </PageTransition>
   );
 }

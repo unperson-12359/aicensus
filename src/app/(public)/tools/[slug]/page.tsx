@@ -18,9 +18,10 @@ import { Separator } from "@/components/ui/separator";
 import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { VerifiedBadge } from "@/components/shared/verified-badge";
-import { ToolGrid } from "@/components/tools/tool-grid";
+import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
+import { FadeIn, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
 import {
   getToolBySlug,
   getToolAlternatives,
@@ -135,7 +136,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
   };
 
   return (
-    <>
+    <PageTransition>
       <JsonLd data={jsonLd} />
       <JsonLd data={breadcrumbLd} />
 
@@ -151,6 +152,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
         />
 
         {/* Header */}
+        <FadeIn>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
           {/* Logo */}
           <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-muted text-3xl font-bold text-primary">
@@ -167,7 +169,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
 
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-3">
-              <h1 className="text-3xl font-bold">{tool.name}</h1>
+              <h1 className="font-display text-4xl font-bold tracking-display sm:text-5xl">{tool.name}</h1>
               {tool.is_verified && <VerifiedBadge size="md" />}
             </div>
             <p className="mt-2 text-lg text-muted-foreground">{tool.tagline}</p>
@@ -195,6 +197,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
             </div>
           </div>
         </div>
+        </FadeIn>
 
         <Separator className="my-10" />
 
@@ -204,7 +207,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
           <div className="space-y-8 lg:col-span-2">
             {/* Description */}
             <section>
-              <h2 className="text-xl font-semibold">About {tool.name}</h2>
+              <h2 className="font-display text-xl font-semibold">About {tool.name}</h2>
               <div className="mt-4 prose prose-invert max-w-none text-muted-foreground leading-relaxed whitespace-pre-wrap">
                 {tool.description}
               </div>
@@ -213,7 +216,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
             {/* Key Features */}
             {tool.key_features.length > 0 && (
               <section>
-                <h2 className="flex items-center gap-2 text-xl font-semibold">
+                <h2 className="font-display flex items-center gap-2 text-xl font-semibold">
                   <Sparkles className="h-5 w-5 text-primary" />
                   Key Features
                 </h2>
@@ -234,7 +237,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
             {/* Pros & Cons */}
             {(tool.pros.length > 0 || tool.cons.length > 0) && (
               <section>
-                <h2 className="text-xl font-semibold">Pros & Cons</h2>
+                <h2 className="font-display text-xl font-semibold">Pros & Cons</h2>
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
                   {tool.pros.length > 0 && (
                     <Card className="border-green-500/20 bg-green-500/5">
@@ -277,7 +280,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
             {/* Use Cases */}
             {tool.use_cases.length > 0 && (
               <section>
-                <h2 className="flex items-center gap-2 text-xl font-semibold">
+                <h2 className="font-display flex items-center gap-2 text-xl font-semibold">
                   <Target className="h-5 w-5 text-primary" />
                   Use Cases
                 </h2>
@@ -293,93 +296,99 @@ export default async function ToolDetailPage({ params }: PageProps) {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <StaggerChildren className="space-y-6">
             {/* Pricing Card */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-base">
-                  <DollarSign className="h-4 w-4 text-primary" />
-                  Pricing
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <PricingBadge pricing={tool.pricing_model} />
-                {tool.pricing_details && (
-                  <p className="mt-3 text-sm text-muted-foreground whitespace-pre-wrap">
-                    {tool.pricing_details}
-                  </p>
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Who It's For */}
-            {tool.who_its_for.length > 0 && (
+            <StaggerItem>
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-base">
-                    <Users className="h-4 w-4 text-primary" />
-                    Who It&apos;s For
+                  <CardTitle className="font-display flex items-center gap-2 text-base">
+                    <DollarSign className="h-4 w-4 text-primary" />
+                    Pricing
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {tool.who_its_for.map((who, i) => (
-                      <Badge key={i} variant="outline" className="text-xs">
-                        {who}
-                      </Badge>
-                    ))}
-                  </div>
+                  <PricingBadge pricing={tool.pricing_model} />
+                  {tool.pricing_details && (
+                    <p className="mt-3 text-sm text-muted-foreground whitespace-pre-wrap">
+                      {tool.pricing_details}
+                    </p>
+                  )}
                 </CardContent>
               </Card>
+            </StaggerItem>
+
+            {/* Who It's For */}
+            {tool.who_its_for.length > 0 && (
+              <StaggerItem>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="font-display flex items-center gap-2 text-base">
+                      <Users className="h-4 w-4 text-primary" />
+                      Who It&apos;s For
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {tool.who_its_for.map((who, i) => (
+                        <Badge key={i} variant="outline" className="text-xs">
+                          {who}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </StaggerItem>
             )}
 
             {/* Tool Info */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">Details</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm">
-                {tool.company_name && (
+            <StaggerItem>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="font-display text-base">Details</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 text-sm">
+                  {tool.company_name && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Company</span>
+                      <span>{tool.company_name}</span>
+                    </div>
+                  )}
+                  {tool.founded_year && (
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Founded</span>
+                      <span>{tool.founded_year}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Company</span>
-                    <span>{tool.company_name}</span>
+                    <span className="text-muted-foreground">Website</span>
+                    <a
+                      href={tool.website_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-primary hover:underline"
+                    >
+                      Visit <ExternalLink className="h-3 w-3" />
+                    </a>
                   </div>
-                )}
-                {tool.founded_year && (
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Founded</span>
-                    <span>{tool.founded_year}</span>
-                  </div>
-                )}
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Website</span>
-                  <a
-                    href={tool.website_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-primary hover:underline"
-                  >
-                    Visit <ExternalLink className="h-3 w-3" />
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                </CardContent>
+              </Card>
+            </StaggerItem>
+          </StaggerChildren>
         </div>
 
         {/* Alternatives */}
         {alternatives && alternatives.length > 0 && (
-          <section className="mt-16">
+          <FadeIn className="mt-16">
             <SectionHeading
               title={`Alternatives to ${tool.name}`}
               description="Similar tools you might want to consider"
             />
             <div className="mt-8">
-              <ToolGrid tools={alternatives} />
+              <AnimatedToolGrid tools={alternatives} />
             </div>
-          </section>
+          </FadeIn>
         )}
       </div>
-    </>
+    </PageTransition>
   );
 }

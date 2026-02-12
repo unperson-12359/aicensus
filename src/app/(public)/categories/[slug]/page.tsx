@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { Pagination } from "@/components/shared/pagination";
 import { PaginationInfo } from "@/components/shared/pagination-info";
+import { PageTransition } from "@/components/motion";
 import { getToolsByCategory } from "@/lib/queries/tools";
 import { getCategoryBySlug, getAllCategorySlugs } from "@/lib/queries/categories";
 
@@ -91,7 +92,7 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
   };
 
   return (
-    <>
+    <PageTransition>
       <JsonLd data={jsonLd} />
 
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -130,6 +131,6 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
           </div>
         )}
       </div>
-    </>
+    </PageTransition>
   );
 }

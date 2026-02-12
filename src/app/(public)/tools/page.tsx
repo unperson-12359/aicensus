@@ -6,6 +6,7 @@ import { getCategories } from "@/lib/queries/categories";
 import { FilterBar } from "@/components/filters/filter-bar";
 import { Pagination } from "@/components/shared/pagination";
 import { PaginationInfo } from "@/components/shared/pagination-info";
+import { PageTransition } from "@/components/motion";
 import type { PricingModel, ToolWithCategory, Category } from "@/lib/types/database";
 
 export const revalidate = 1800;
@@ -57,6 +58,7 @@ export default async function ToolsPage({ searchParams }: PageProps) {
   const totalPages = Math.ceil(tools.count / TOOLS_PER_PAGE);
 
   return (
+    <PageTransition>
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <SectionHeading
         title={params.q ? `Results for "${params.q}"` : "Browse AI Tools"}
@@ -97,5 +99,6 @@ export default async function ToolsPage({ searchParams }: PageProps) {
         </div>
       )}
     </div>
+    </PageTransition>
   );
 }
