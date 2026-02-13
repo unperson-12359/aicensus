@@ -242,3 +242,54 @@ html {
     animation: none;
   }
 }
+
+/* ===== Bauhaus Geometric Utilities ===== */
+
+/* Geometric shape base */
+.geo-shape {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Geometric divider (footer / section breaks) */
+.geo-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.geo-divider-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: oklch(0.65 0.2 250 / 30%);
+}
+.geo-divider-line {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(0.65 0.2 250 / 15%),
+    oklch(0.55 0.2 290 / 15%),
+    transparent
+  );
+}
+
+/* Slow rotation for geometric accents */
+@keyframes rotate-slow {
+  to { transform: rotate(360deg); }
+}
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .geo-shape {
+    transform: none !important;
+  }
+  .animate-rotate-slow {
+    animation: none;
+  }
+}

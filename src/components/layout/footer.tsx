@@ -53,7 +53,15 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 border-t border-border/50 pt-8">
+        <div className="mt-12 pt-8">
+          {/* Bauhaus geometric divider */}
+          <div className="geo-divider mb-8">
+            <span className="geo-divider-line" />
+            <span className="geo-divider-dot" />
+            <span className="geo-divider-dot" style={{ background: "oklch(0.55 0.2 290 / 30%)" }} />
+            <span className="geo-divider-dot" />
+            <span className="geo-divider-line" />
+          </div>
           <p className="text-center text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} AiCensus. All rights reserved.
           </p>

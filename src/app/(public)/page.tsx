@@ -2,10 +2,17 @@ import Link from "next/link";
 import { ArrowRight, Search, Sparkles, ShieldCheck, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { BentoToolGrid } from "@/components/tools/bento-tool-grid";
 import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
 import { CategoryCard } from "@/components/categories/category-card";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
+import {
+  GeometricDecor,
+  heroShapes,
+  sectionShapes,
+  ctaShapes,
+} from "@/components/shared/geometric-decor";
 import { FadeIn, RevealText, StaggerChildren, StaggerItem } from "@/components/motion";
 import { getFeaturedTools, getRecentTools } from "@/lib/queries/tools";
 import { getCategoriesWithToolCount, type CategoryWithCount } from "@/lib/queries/categories";
@@ -53,6 +60,8 @@ export default async function HomePage() {
           <div className="absolute right-0 top-1/4 h-[400px] w-[500px] rounded-full bg-accent/5 blur-3xl animate-float-delayed" />
           <div className="absolute left-0 top-1/3 h-[300px] w-[400px] rounded-full bg-neon/3 blur-3xl animate-float" />
         </div>
+        {/* Bauhaus geometric shapes with parallax */}
+        <GeometricDecor shapes={heroShapes} />
 
         <div className="mx-auto max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pb-32 sm:pt-40 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
@@ -123,14 +132,16 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Featured Tools */}
+      {/* Featured Tools — Bento Grid */}
       {featuredTools.tools.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <section className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+          <GeometricDecor shapes={sectionShapes} />
           <FadeIn>
             <div className="flex items-end justify-between">
               <SectionHeading
                 title="Featured Tools"
                 description="Hand-picked and verified by our team"
+                accent
               />
               <Link
                 href="/tools"
@@ -141,23 +152,34 @@ export default async function HomePage() {
             </div>
           </FadeIn>
           <div className="mt-8">
-            <AnimatedToolGrid tools={featuredTools.tools} />
+            <BentoToolGrid tools={featuredTools.tools} featuredCount={2} />
           </div>
         </section>
       )}
 
-      {/* Categories */}
+      {/* Categories — Bento with first 2 highlighted */}
       {categories.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <section className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+          <GeometricDecor shapes={sectionShapes} />
           <FadeIn>
             <SectionHeading
               title="Browse by Category"
               description="Find AI tools for every use case"
+              accent
             />
           </FadeIn>
           <StaggerChildren className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
-            {categories.map((category) => (
-              <StaggerItem key={category.id}>
+            {categories.map((category, index) => (
+              <StaggerItem
+                key={category.id}
+                className={
+                  index === 0
+                    ? "col-span-2"
+                    : index === 1
+                      ? "xl:col-span-2"
+                      : undefined
+                }
+              >
                 <CategoryCard category={category} />
               </StaggerItem>
             ))}
@@ -165,14 +187,16 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Recently Added */}
+      {/* Recently Added — Standard grid */}
       {recentTools.tools.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <section className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+          <GeometricDecor shapes={sectionShapes} />
           <FadeIn>
             <div className="flex items-end justify-between">
               <SectionHeading
                 title="Recently Added"
                 description="Fresh tools added to the directory"
+                accent
               />
               <Link
                 href="/tools?sort=newest"
@@ -189,12 +213,13 @@ export default async function HomePage() {
       )}
 
       {/* CTA Section */}
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+      <section className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
         <FadeIn>
           <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-card p-8 text-center sm:p-12">
             <div className="absolute inset-0 -z-10">
               <div className="absolute left-1/2 top-1/2 h-[200px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl animate-float" />
             </div>
+            <GeometricDecor shapes={ctaShapes} />
             <h2 className="font-display text-3xl font-bold tracking-display sm:text-4xl lg:text-5xl">
               Know a great{" "}
               <span className="text-gradient-primary">AI tool?</span>

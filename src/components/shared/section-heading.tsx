@@ -6,6 +6,7 @@ interface SectionHeadingProps {
   className?: string;
   size?: "default" | "lg" | "xl";
   gradient?: boolean;
+  accent?: boolean;
 }
 
 export function SectionHeading({
@@ -14,6 +15,7 @@ export function SectionHeading({
   className,
   size = "default",
   gradient = false,
+  accent = false,
 }: SectionHeadingProps) {
   const sizeClasses = {
     default: "text-2xl sm:text-3xl md:text-4xl",
@@ -23,6 +25,12 @@ export function SectionHeading({
 
   return (
     <div className={cn("space-y-2", className)}>
+      {accent && (
+        <div className="flex items-center gap-2 mb-1">
+          <div className="h-0.5 w-8 rounded-full bg-primary" />
+          <div className="h-0.5 w-3 rounded-full bg-accent" />
+        </div>
+      )}
       <h2
         className={cn(
           "font-display font-bold tracking-display",

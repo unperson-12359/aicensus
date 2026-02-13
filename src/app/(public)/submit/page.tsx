@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PageTransition } from "@/components/motion";
+import { GeometricDecor, pageHeaderShapes } from "@/components/shared/geometric-decor";
 import { createClient } from "@/lib/supabase/client";
 import type { Database, PricingModel } from "@/lib/types/database";
 
@@ -89,7 +90,8 @@ export default function SubmitPage() {
 
   return (
     <PageTransition>
-    <div className="mx-auto max-w-xl px-4 py-12 sm:px-6">
+    <div className="relative mx-auto max-w-xl px-4 py-12 sm:px-6">
+      <GeometricDecor shapes={pageHeaderShapes} />
       <div className="text-center">
         <h1 className="text-3xl font-bold">Submit an AI Tool</h1>
         <p className="mt-3 text-muted-foreground">

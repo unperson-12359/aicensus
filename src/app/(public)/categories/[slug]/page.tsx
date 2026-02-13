@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { Pagination } from "@/components/shared/pagination";
 import { PaginationInfo } from "@/components/shared/pagination-info";
 import { PageTransition } from "@/components/motion";
+import { GeometricDecor, pageHeaderShapes } from "@/components/shared/geometric-decor";
 import { getToolsByCategory } from "@/lib/queries/tools";
 import { getCategoryBySlug, getAllCategorySlugs } from "@/lib/queries/categories";
 
@@ -96,7 +97,8 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
       <JsonLd data={jsonLd} />
 
       <PageTransition>
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <GeometricDecor shapes={pageHeaderShapes} />
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },

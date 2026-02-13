@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ShieldCheck, Search, BarChart3, Layers } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { FadeIn, RevealText, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
+import { GeometricDecor, aboutHeroShapes, sectionShapes } from "@/components/shared/geometric-decor";
 
 export const metadata: Metadata = {
   title: "About AiCensus — Our Mission",
@@ -41,7 +42,8 @@ export default function AboutPage() {
     <PageTransition>
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         {/* Hero */}
-        <div className="text-center">
+        <div className="relative text-center">
+          <GeometricDecor shapes={aboutHeroShapes} />
           <RevealText>
             <p className="font-display text-sm font-medium uppercase tracking-widest text-muted-foreground">
               Our Mission
@@ -73,6 +75,8 @@ export default function AboutPage() {
         </div>
 
         {/* Pillars */}
+        <div className="relative">
+        <GeometricDecor shapes={sectionShapes} />
         <StaggerChildren className="mt-16 grid gap-6 sm:grid-cols-2">
           {pillars.map((pillar) => (
             <StaggerItem key={pillar.title}>
@@ -90,6 +94,7 @@ export default function AboutPage() {
             </StaggerItem>
           ))}
         </StaggerChildren>
+        </div>
 
         {/* Roadmap teaser */}
         <FadeIn className="mt-16">

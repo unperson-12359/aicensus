@@ -22,6 +22,7 @@ import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
 import { FadeIn, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
+import { GeometricDecor, pageHeaderShapes } from "@/components/shared/geometric-decor";
 import { getLogoUrl } from "@/lib/utils";
 import {
   getToolBySlug,
@@ -144,7 +145,8 @@ export default async function ToolDetailPage({ params }: PageProps) {
       <JsonLd data={breadcrumbLd} />
 
       <PageTransition>
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <GeometricDecor shapes={pageHeaderShapes} />
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },

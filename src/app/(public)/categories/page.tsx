@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { CategoryCard } from "@/components/categories/category-card";
 import { PageTransition, StaggerChildren, StaggerItem } from "@/components/motion";
+import { GeometricDecor, pageHeaderShapes } from "@/components/shared/geometric-decor";
 import { getCategoriesWithToolCount, type CategoryWithCount } from "@/lib/queries/categories";
 
 export const revalidate = 86400;
@@ -23,15 +24,26 @@ export default async function CategoriesPage() {
 
   return (
     <PageTransition>
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <GeometricDecor shapes={pageHeaderShapes} />
       <SectionHeading
         title="Categories"
         description="Browse AI tools by category and find the perfect tool for your needs"
+        accent
       />
 
       <StaggerChildren className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
-        {categories.map((category) => (
-          <StaggerItem key={category.id}>
+        {categories.map((category, index) => (
+          <StaggerItem
+            key={category.id}
+            className={
+              index === 0
+                ? "col-span-2"
+                : index === 1
+                  ? "xl:col-span-2"
+                  : undefined
+            }
+          >
             <CategoryCard category={category} />
           </StaggerItem>
         ))}
