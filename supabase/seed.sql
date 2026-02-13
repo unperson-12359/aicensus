@@ -17,7 +17,13 @@ INSERT INTO categories (name, slug, description, icon, display_order) VALUES
   ('Design & Creative', 'design-creative', 'AI-enhanced design tools for graphic design, presentations, and creative projects.', 'paintbrush', 6),
   ('Productivity', 'productivity', 'AI tools that boost your workflow with smart note-taking, task management, and automation.', 'brain', 7),
   ('AI Agents', 'ai-agents', 'Autonomous AI agents that can take actions, browse the web, and complete complex multi-step tasks.', 'bot', 8),
-  ('Data & Analytics', 'data-analytics', 'AI tools for data analysis, visualization, and business intelligence.', 'bar-chart-3', 9);
+  ('Data & Analytics', 'data-analytics', 'AI tools for data analysis, visualization, and business intelligence.', 'bar-chart-3', 9),
+  ('LLM Providers & APIs', 'llm-providers', 'Foundation model companies and API platforms powering the AI ecosystem — from frontier models to inference endpoints.', 'cpu', 10),
+  ('Local & Open Source AI', 'local-open-source', 'Run AI models locally on your hardware. Privacy-first, offline-capable, open-source tools for self-hosted inference.', 'hard-drive', 11),
+  ('MCP & Skills Platforms', 'mcp-skills-platforms', 'Platforms that aggregate AI skills, tools, and integrations — orchestration layers, MCP servers, and agent marketplaces.', 'puzzle', 12),
+  ('AI Education', 'ai-education', 'AI-powered learning tools, tutors, and educational platforms that personalize education at scale.', 'graduation-cap', 13),
+  ('AI Science & Healthcare', 'ai-science-healthcare', 'AI tools advancing scientific research, drug discovery, medical diagnostics, and academic literature analysis.', 'flask-conical', 14),
+  ('AI 3D & Game Dev', 'ai-3d-game-dev', 'AI tools for 3D model generation, game asset creation, and interactive content development.', 'box', 15);
 
 -- ============================================================
 -- TOOLS
