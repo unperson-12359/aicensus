@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ToolGrid } from "@/components/tools/tool-grid";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { JsonLd } from "@/components/shared/json-ld";
 import { getTools } from "@/lib/queries/tools";
 import { getCategories } from "@/lib/queries/categories";
 import { FilterBar } from "@/components/filters/filter-bar";
@@ -18,6 +19,21 @@ export const metadata: Metadata = {
   title: "Browse AI Tools — Find the Best AI Apps & Agents",
   description:
     "Explore our curated directory of AI tools. Filter by category, pricing, and more. Find verified AI apps, agents, and software for every use case.",
+  openGraph: {
+    title: "Browse AI Tools — Find the Best AI Apps & Agents",
+    description:
+      "Explore our curated directory of AI tools. Filter by category, pricing, and more.",
+    url: "/tools",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Browse AI Tools — Find the Best AI Apps & Agents",
+    description:
+      "Explore our curated directory of AI tools. Filter by category, pricing, and more.",
+  },
+  alternates: {
+    canonical: "/tools",
+  },
 };
 
 interface PageProps {
@@ -58,7 +74,32 @@ export default async function ToolsPage({ searchParams }: PageProps) {
 
   const totalPages = Math.ceil(tools.count / TOOLS_PER_PAGE);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Browse AI Tools",
+    description: "Curated directory of verified AI tools.",
+    url: `${siteUrl}/tools`,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: tools.count,
+      itemListElement: tools.tools.map((tool, i) => ({
+        "@type": "ListItem",
+        position: offset + i + 1,
+        item: {
+          "@type": "SoftwareApplication",
+          name: tool.name,
+          url: `${siteUrl}/tools/${tool.slug}`,
+          applicationCategory: "Artificial Intelligence",
+        },
+      })),
+    },
+  };
+
   return (
+    <>
+    <JsonLd data={itemListJsonLd} />
     <PageTransition>
     <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <GeometricDecor shapes={pageHeaderShapes} />
@@ -102,5 +143,6 @@ export default async function ToolsPage({ searchParams }: PageProps) {
       )}
     </div>
     </PageTransition>
+    </>
   );
 }

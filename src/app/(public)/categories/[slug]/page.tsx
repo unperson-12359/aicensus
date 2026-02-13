@@ -37,11 +37,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Category Not Found" };
   }
 
+  const description =
+    category.meta_description ||
+    `Discover the best ${category.name.toLowerCase()} AI tools. Curated and verified reviews with pricing, pros & cons.`;
+
   return {
     title: `${category.name} AI Tools — Best ${category.name} Apps & Agents`,
-    description:
-      category.meta_description ||
-      `Discover the best ${category.name.toLowerCase()} AI tools. Curated and verified reviews with pricing, pros & cons.`,
+    description,
+    openGraph: {
+      title: `${category.name} AI Tools — Best ${category.name} Apps & Agents`,
+      description,
+      url: `/categories/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${category.name} AI Tools | AiCensus`,
+      description,
+    },
+    alternates: {
+      canonical: `/categories/${slug}`,
+    },
   };
 }
 
@@ -72,29 +87,44 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
 
   const totalPages = Math.ceil(result.count / TOOLS_PER_PAGE);
 
-  const jsonLd = {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+
+  const collectionJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: `${category.name} AI Tools`,
     description: category.description,
+    url: `${siteUrl}/categories/${slug}`,
     mainEntity: {
       "@type": "ItemList",
+      numberOfItems: result.count,
       itemListElement: result.tools.map((tool, i) => ({
         "@type": "ListItem",
-        position: i + 1,
+        position: offset + i + 1,
         item: {
           "@type": "SoftwareApplication",
           name: tool.name,
-          url: `${process.env.NEXT_PUBLIC_SITE_URL || ""}/tools/${tool.slug}`,
+          url: `${siteUrl}/tools/${tool.slug}`,
           image: tool.logo_url,
         },
       })),
     },
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+      { "@type": "ListItem", position: 2, name: "Categories", item: `${siteUrl}/categories` },
+      { "@type": "ListItem", position: 3, name: category.name },
+    ],
+  };
+
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd data={collectionJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
 
       <PageTransition>
       <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

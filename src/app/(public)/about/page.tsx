@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ShieldCheck, Search, BarChart3, Layers } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { JsonLd } from "@/components/shared/json-ld";
 import { FadeIn, RevealText, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
 import { GeometricDecor, aboutHeroShapes, sectionShapes } from "@/components/shared/geometric-decor";
 
@@ -8,6 +9,21 @@ export const metadata: Metadata = {
   title: "About AiCensus — Our Mission",
   description:
     "AiCensus is the trusted directory of AI tools. We verify, review, and compare AI products so you can make informed decisions.",
+  openGraph: {
+    title: "About AiCensus — Our Mission",
+    description:
+      "AiCensus is the trusted directory of AI tools. We verify, review, and compare AI products so you can make informed decisions.",
+    url: "/about",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About AiCensus — Our Mission",
+    description:
+      "We verify, review, and compare AI products so you can make informed decisions.",
+  },
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 const pillars = [
@@ -38,7 +54,28 @@ const pillars = [
 ];
 
 export default function AboutPage() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "AiCensus",
+    url: siteUrl,
+    logo: `${siteUrl}/opengraph-image`,
+    description:
+      "AiCensus is the trusted directory of AI tools. We verify, review, and compare AI products so you can make informed decisions.",
+    foundingDate: "2026",
+    knowsAbout: [
+      "Artificial Intelligence",
+      "AI Tools",
+      "AI Software Reviews",
+      "Machine Learning",
+    ],
+  };
+
   return (
+    <>
+    <JsonLd data={organizationJsonLd} />
     <PageTransition>
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         {/* Hero */}
@@ -139,5 +176,6 @@ export default function AboutPage() {
         </FadeIn>
       </div>
     </PageTransition>
+    </>
   );
 }

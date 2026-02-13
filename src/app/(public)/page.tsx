@@ -35,22 +35,34 @@ export default async function HomePage() {
     // Supabase not configured yet
   }
 
-  const jsonLd = {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+
+  const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "AiCensus",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.com",
-    description: "The curated directory of verified AI tools.",
+    url: siteUrl,
+    description: "The curated directory of verified AI tools. Find, compare, and choose the right AI tools for your workflow.",
     potentialAction: {
       "@type": "SearchAction",
-      target: `${process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.com"}/tools?q={search_term_string}`,
+      target: `${siteUrl}/tools?q={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };
 
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "AiCensus",
+    url: siteUrl,
+    logo: `${siteUrl}/opengraph-image`,
+    description: "The curated directory of verified AI tools. Expert reviews, pricing breakdowns, and honest comparisons.",
+  };
+
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd data={websiteJsonLd} />
+      <JsonLd data={organizationJsonLd} />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden">

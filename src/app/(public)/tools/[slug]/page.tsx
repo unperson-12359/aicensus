@@ -53,16 +53,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Tool Not Found" };
   }
 
+  const description = `${tool.tagline}. Read our review of ${tool.name}: pricing, pros & cons, use cases, and alternatives.`;
+
   return {
     title: `${tool.name} — AI Tool Review & Pricing`,
-    description: `${tool.tagline}. Read our review of ${tool.name}: pricing, pros & cons, use cases, and alternatives.`,
+    description,
     openGraph: {
       title: `${tool.name} — Review & Pricing | AiCensus`,
       description: tool.tagline,
       url: `/tools/${tool.slug}`,
       images: tool.screenshot_url
         ? [{ url: tool.screenshot_url }]
-        : [{ url: "/og-default.png" }],
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${tool.name} — AI Tool Review & Pricing`,
+      description: tool.tagline,
     },
     alternates: {
       canonical: `/tools/${tool.slug}`,
@@ -100,9 +107,10 @@ export default async function ToolDetailPage({ params }: PageProps) {
     operatingSystem: "Web",
     offers: {
       "@type": "Offer",
-      price: tool.pricing_model === "free" ? "0" : undefined,
-      priceCurrency: "USD",
-      description: tool.pricing_details,
+      ...(tool.pricing_model === "free" || tool.pricing_model === "open_source"
+        ? { price: "0", priceCurrency: "USD" }
+        : {}),
+      description: tool.pricing_details || `${tool.pricing_model} pricing`,
     },
     ...(tool.editor_rating && {
       aggregateRating: {
