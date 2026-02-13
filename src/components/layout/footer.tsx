@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Zap } from "lucide-react";
 
 const footerLinks = {
   Directory: [
@@ -20,9 +19,11 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="group flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 transition-shadow duration-300 group-hover:glow-sm">
-                <Zap className="h-5 w-5 text-primary" />
-              </div>
+              <svg className="h-8 w-8 text-primary transition-shadow duration-300 group-hover:drop-shadow-[0_0_8px_oklch(0.65_0.2_250)]" viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="13" stroke="currentColor" strokeWidth="1.5" />
+                <rect x="9.5" y="9.5" width="13" height="13" rx="1" transform="rotate(45 16 16)" stroke="currentColor" strokeWidth="1.5" />
+                <circle cx="16" cy="16" r="2.5" fill="currentColor" />
+              </svg>
               <span className="text-xl font-bold tracking-tight">
                 Ai<span className="text-primary">Census</span>
               </span>
