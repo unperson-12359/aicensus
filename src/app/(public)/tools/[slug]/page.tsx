@@ -22,6 +22,7 @@ import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
 import { FadeIn, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
+import { getLogoUrl } from "@/lib/utils";
 import {
   getToolBySlug,
   getToolAlternatives,
@@ -135,6 +136,8 @@ export default async function ToolDetailPage({ params }: PageProps) {
     ],
   };
 
+  const logoSrc = getLogoUrl(tool.logo_url, tool.website_url);
+
   return (
     <>
       <JsonLd data={jsonLd} />
@@ -157,9 +160,9 @@ export default async function ToolDetailPage({ params }: PageProps) {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
           {/* Logo */}
           <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-muted text-3xl font-bold text-primary">
-            {tool.logo_url ? (
+            {logoSrc ? (
               <img
-                src={tool.logo_url}
+                src={logoSrc}
                 alt={tool.name}
                 className="h-20 w-20 rounded-2xl object-cover"
               />

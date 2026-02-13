@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { VerifiedBadge } from "@/components/shared/verified-badge";
+import { getLogoUrl } from "@/lib/utils";
 import type { ToolWithCategory } from "@/lib/types/database";
 
 interface ToolCardProps {
@@ -11,6 +12,8 @@ interface ToolCardProps {
 }
 
 export function ToolCard({ tool }: ToolCardProps) {
+  const logoSrc = getLogoUrl(tool.logo_url, tool.website_url);
+
   return (
     <Link href={`/tools/${tool.slug}`}>
       <Card className="group relative h-full overflow-hidden border-border/50 bg-card py-0 gap-0 transition-all duration-300 hover:border-primary/30 hover:glow-md hover:-translate-y-1">
@@ -18,9 +21,9 @@ export function ToolCard({ tool }: ToolCardProps) {
           {/* Header: Logo + Name */}
           <div className="flex items-start gap-2 sm:gap-3">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-base font-bold text-primary sm:h-11 sm:w-11 sm:text-lg">
-              {tool.logo_url ? (
+              {logoSrc ? (
                 <img
-                  src={tool.logo_url}
+                  src={logoSrc}
                   alt={tool.name}
                   className="h-9 w-9 rounded-lg object-cover sm:h-11 sm:w-11"
                 />
