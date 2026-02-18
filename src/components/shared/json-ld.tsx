@@ -1,13 +1,18 @@
 interface JsonLdProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: Record<string, any>;
+  data: Record<string, unknown>;
+}
+
+function serializeJsonLd(data: Record<string, unknown>) {
+  return JSON.stringify(data)
+    .replace(/</g, "\\u003c")
+    .replace(/<\/script/gi, "<\\/script");
 }
 
 export function JsonLd({ data }: JsonLdProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
 }

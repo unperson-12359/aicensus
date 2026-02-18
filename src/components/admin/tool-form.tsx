@@ -38,6 +38,12 @@ export function ToolForm({ tool, categories }: ToolFormProps) {
   const isEditing = !!tool;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedCategoryId, setSelectedCategoryId] = useState(
+    (tool?.category_id as string) || "none"
+  );
+  const [selectedPricingModel, setSelectedPricingModel] = useState(
+    (tool?.pricing_model as string) || "freemium"
+  );
 
   // Array field state
   const [useCases, setUseCases] = useState<string[]>(
@@ -120,6 +126,12 @@ export function ToolForm({ tool, categories }: ToolFormProps) {
       "data-status"
     ) || "draft";
 
+    if (!selectedPricingModel) {
+      setError("Pricing model is required.");
+      setLoading(false);
+      return;
+    }
+
     const name = formData.get("name") as string;
     const toolData = {
       name,
@@ -129,8 +141,8 @@ export function ToolForm({ tool, categories }: ToolFormProps) {
       website_url: formData.get("website_url") as string,
       logo_url: (formData.get("logo_url") as string) || null,
       screenshot_url: (formData.get("screenshot_url") as string) || null,
-      category_id: (formData.get("category_id") as string) || null,
-      pricing_model: formData.get("pricing_model") as string,
+      category_id: selectedCategoryId === "none" ? null : selectedCategoryId,
+      pricing_model: selectedPricingModel,
       pricing_details: (formData.get("pricing_details") as string) || null,
       editor_rating: formData.get("editor_rating")
         ? parseFloat(formData.get("editor_rating") as string)
@@ -159,14 +171,14 @@ export function ToolForm({ tool, categories }: ToolFormProps) {
       const supabase = createClient();
 
       if (isEditing) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const { error: dbError } = await (supabase.from("tools") as any)
+        const { error: dbError } = await supabase
+          .from("tools")
           .update(toolData)
-          .eq("id", tool.id);
+          .eq("id", tool.id as string);
         if (dbError) throw dbError;
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const { error: dbError } = await (supabase.from("tools") as any)
+        const { error: dbError } = await supabase
+          .from("tools")
           .insert(toolData);
         if (dbError) throw dbError;
       }
@@ -188,8 +200,11 @@ export function ToolForm({ tool, categories }: ToolFormProps) {
 
     try {
       const supabase = createClient();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (supabase.from("tools") as any).delete().eq("id", tool.id);
+      const { error: deleteError } = await supabase
+        .from("tools")
+        .delete()
+        .eq("id", tool.id as string);
+      if (deleteError) throw deleteError;
       router.push("/admin/tools");
       router.refresh();
     } catch {
@@ -261,13 +276,14 @@ export function ToolForm({ tool, categories }: ToolFormProps) {
                 <div className="space-y-2">
                   <Label htmlFor="category_id">Category</Label>
                   <Select
-                    name="category_id"
-                    defaultValue={(tool?.category_id as string) || ""}
+                    value={selectedCategoryId}
+                    onValueChange={setSelectedCategoryId}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
+                      <SelectItem value="none">No category</SelectItem>
                       {categories.map((cat) => (
                         <SelectItem key={cat.id} value={cat.id}>
                           {cat.name}
@@ -279,8 +295,8 @@ export function ToolForm({ tool, categories }: ToolFormProps) {
                 <div className="space-y-2">
                   <Label htmlFor="pricing_model">Pricing Model *</Label>
                   <Select
-                    name="pricing_model"
-                    defaultValue={(tool?.pricing_model as string) || "freemium"}
+                    value={selectedPricingModel}
+                    onValueChange={setSelectedPricingModel}
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -502,6 +518,17 @@ export function ToolForm({ tool, categories }: ToolFormProps) {
           </Card>
         </TabsContent>
       </Tabs>
+
+      <input
+        type="hidden"
+        name="category_id"
+        value={selectedCategoryId === "none" ? "" : selectedCategoryId}
+      />
+      <input
+        type="hidden"
+        name="pricing_model"
+        value={selectedPricingModel}
+      />
 
       {/* Error */}
       {error && (

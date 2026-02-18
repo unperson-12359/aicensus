@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { DeleteToolButton } from "@/components/admin/delete-tool-button";
 import {
   Table,
   TableBody,
@@ -107,11 +108,17 @@ export default async function AdminToolsPage() {
                     {new Date(tool.updated_at as string).toLocaleDateString()}
                   </TableCell>
                   <TableCell className="text-right">
-                    <Link href={`/admin/tools/${tool.id}/edit`}>
-                      <Button variant="ghost" size="sm">
-                        Edit
-                      </Button>
-                    </Link>
+                    <div className="flex items-center justify-end gap-1">
+                      <Link href={`/admin/tools/${tool.id}/edit`}>
+                        <Button variant="ghost" size="sm">
+                          Edit
+                        </Button>
+                      </Link>
+                      <DeleteToolButton
+                        toolId={tool.id as string}
+                        toolName={tool.name as string}
+                      />
+                    </div>
                   </TableCell>
                 </TableRow>
               ))

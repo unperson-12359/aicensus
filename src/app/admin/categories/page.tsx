@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, Save, Trash2 } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -42,26 +42,36 @@ export default function AdminCategoriesPage() {
   const [newIcon, setNewIcon] = useState("");
   const [newDescription, setNewDescription] = useState("");
 
-  useEffect(() => {
-    loadCategories();
-  }, []);
-
-  async function loadCategories() {
+  const loadCategories = useCallback(async () => {
     const supabase = createClient();
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("categories")
       .select("*")
       .order("display_order", { ascending: true });
+
+    if (error) {
+      setCategories([]);
+      setLoading(false);
+      return;
+    }
+
     setCategories((data as Category[]) || []);
     setLoading(false);
-  }
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      void loadCategories();
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [loadCategories]);
 
   async function addCategory() {
     if (!newName.trim()) return;
 
     const supabase = createClient();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await (supabase.from("categories") as any).insert({
+    await supabase.from("categories").insert({
       name: newName.trim(),
       slug: slugify(newName),
       description: newDescription || null,
@@ -80,8 +90,7 @@ export default function AdminCategoriesPage() {
     if (!confirm("Delete this category? Tools in it will become uncategorized.")) return;
 
     const supabase = createClient();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await (supabase.from("categories") as any).delete().eq("id", id);
+    await supabase.from("categories").delete().eq("id", id);
     await loadCategories();
     router.refresh();
   }

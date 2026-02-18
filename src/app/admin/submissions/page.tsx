@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, X, ExternalLink } from "lucide-react";
+import { Check, ExternalLink, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -33,54 +33,82 @@ export default function AdminSubmissionsPage() {
   const router = useRouter();
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [processingId, setProcessingId] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadSubmissions();
-  }, []);
+  const loadSubmissions = useCallback(async () => {
+    setLoading(true);
+    setError("");
 
-  async function loadSubmissions() {
     const supabase = createClient();
-    const { data } = await supabase
+    const { data, error: loadError } = await supabase
       .from("submissions")
       .select("*")
       .order("created_at", { ascending: false });
-    setSubmissions((data as Submission[]) || []);
-    setLoading(false);
-  }
 
-  async function updateStatus(id: string, status: string, notes?: string) {
-    const supabase = createClient();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await (supabase.from("submissions") as any)
-      .update({
-        status,
-        admin_notes: notes || null,
-        reviewed_at: new Date().toISOString(),
-      })
-      .eq("id", id);
-
-    if (status === "approved") {
-      const submission = submissions.find((s) => s.id === id);
-      if (submission) {
-        // Create a draft tool from the submission
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        await (supabase.from("tools") as any).insert({
-          name: submission.tool_name,
-          slug: submission.tool_name
-            .toLowerCase()
-            .replace(/[^\w\s-]/g, "")
-            .replace(/\s+/g, "-"),
-          tagline: submission.tool_tagline || "AI Tool",
-          description: submission.tool_description || "",
-          website_url: submission.tool_website,
-          pricing_model: submission.tool_pricing_model || "freemium",
-          status: "draft",
-        });
-      }
+    if (loadError) {
+      setError(loadError.message || "Failed to load submissions.");
+      setSubmissions([]);
+    } else {
+      setSubmissions((data as Submission[]) || []);
     }
 
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      void loadSubmissions();
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [loadSubmissions]);
+
+  async function approveSubmission(id: string, notes?: string) {
+    setProcessingId(id);
+    setError("");
+    setSuccess("");
+
+    const supabase = createClient();
+    const { error: approveError } = await supabase.rpc("approve_submission", {
+      p_submission_id: id,
+      p_notes: notes?.trim() || null,
+    });
+
+    if (approveError) {
+      setError(approveError.message || "Failed to approve submission.");
+      setProcessingId(null);
+      return;
+    }
+
+    setSuccess("Submission approved and draft tool created.");
     await loadSubmissions();
     router.refresh();
+    setProcessingId(null);
+  }
+
+  async function rejectSubmission(id: string, notes?: string) {
+    setProcessingId(id);
+    setError("");
+    setSuccess("");
+
+    const supabase = createClient();
+    const { error: rejectError } = await supabase.rpc("reject_submission", {
+      p_submission_id: id,
+      p_notes: notes?.trim() || null,
+    });
+
+    if (rejectError) {
+      setError(rejectError.message || "Failed to reject submission.");
+      setProcessingId(null);
+      return;
+    }
+
+    setSuccess("Submission rejected.");
+    await loadSubmissions();
+    router.refresh();
+    setProcessingId(null);
   }
 
   if (loading) {
@@ -102,7 +130,17 @@ export default function AdminSubmissionsPage() {
         Review community tool submissions ({pending.length} pending)
       </p>
 
-      {/* Pending */}
+      {error && (
+        <p className="mt-4 rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+          {error}
+        </p>
+      )}
+      {success && (
+        <p className="mt-4 rounded-md border border-green-500/40 bg-green-500/10 px-3 py-2 text-sm text-green-400">
+          {success}
+        </p>
+      )}
+
       {pending.length > 0 && (
         <div className="mt-8 space-y-4">
           <h2 className="text-lg font-semibold">Pending Review</h2>
@@ -110,12 +148,9 @@ export default function AdminSubmissionsPage() {
             <SubmissionCard
               key={submission.id}
               submission={submission}
-              onApprove={(notes) =>
-                updateStatus(submission.id, "approved", notes)
-              }
-              onReject={(notes) =>
-                updateStatus(submission.id, "rejected", notes)
-              }
+              processing={processingId === submission.id}
+              onApprove={(notes) => approveSubmission(submission.id, notes)}
+              onReject={(notes) => rejectSubmission(submission.id, notes)}
             />
           ))}
         </div>
@@ -129,7 +164,6 @@ export default function AdminSubmissionsPage() {
         </div>
       )}
 
-      {/* Reviewed */}
       {reviewed.length > 0 && (
         <div className="mt-8 space-y-4">
           <h2 className="text-lg font-semibold">Reviewed</h2>
@@ -143,7 +177,10 @@ export default function AdminSubmissionsPage() {
                     {new Date(submission.created_at).toLocaleDateString()}
                   </p>
                 </div>
-                <Badge variant="outline" className={statusColors[submission.status]}>
+                <Badge
+                  variant="outline"
+                  className={statusColors[submission.status]}
+                >
                   {submission.status}
                 </Badge>
               </CardContent>
@@ -157,10 +194,12 @@ export default function AdminSubmissionsPage() {
 
 function SubmissionCard({
   submission,
+  processing,
   onApprove,
   onReject,
 }: {
   submission: Submission;
+  processing: boolean;
   onApprove: (notes?: string) => void;
   onReject: (notes?: string) => void;
 }) {
@@ -217,7 +256,7 @@ function SubmissionCard({
           {submission.tool_description && (
             <div>
               <p className="text-xs font-medium text-muted-foreground">Description</p>
-              <p className="text-sm text-muted-foreground whitespace-pre-wrap">
+              <p className="whitespace-pre-wrap text-sm text-muted-foreground">
                 {submission.tool_description}
               </p>
             </div>
@@ -230,23 +269,30 @@ function SubmissionCard({
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Optional notes..."
               rows={2}
+              disabled={processing}
             />
           </div>
 
           <div className="flex gap-2">
-            <Button
-              size="sm"
-              onClick={() => onApprove(notes)}
-            >
-              <Check className="mr-1 h-4 w-4" />
+            <Button size="sm" onClick={() => onApprove(notes)} disabled={processing}>
+              {processing ? (
+                <Loader2 className="mr-1 h-4 w-4 animate-spin" />
+              ) : (
+                <Check className="mr-1 h-4 w-4" />
+              )}
               Approve & Create Draft
             </Button>
             <Button
               size="sm"
               variant="destructive"
               onClick={() => onReject(notes)}
+              disabled={processing}
             >
-              <X className="mr-1 h-4 w-4" />
+              {processing ? (
+                <Loader2 className="mr-1 h-4 w-4 animate-spin" />
+              ) : (
+                <X className="mr-1 h-4 w-4" />
+              )}
               Reject
             </Button>
           </div>

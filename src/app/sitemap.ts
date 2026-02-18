@@ -35,11 +35,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.4,
     },
+    {
+      url: `${baseUrl}/portfolio`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.8,
+    },
   ];
 
   // Dynamic tool pages
   let toolPages: MetadataRoute.Sitemap = [];
   let categoryPages: MetadataRoute.Sitemap = [];
+  let portfolioPages: MetadataRoute.Sitemap = [];
 
   try {
     const { createClient } = await import("@/lib/supabase/server");
@@ -67,9 +74,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.7,
     }));
+
+    // Portfolio pages
+    const { data: userProfiles } = await supabase
+      .from("user_profiles")
+      .select("username, updated_at")
+      .eq("is_public", true) as { data: { username: string; updated_at: string }[] | null };
+
+    portfolioPages = (userProfiles || []).map((user) => ({
+      url: `${baseUrl}/portfolio/${user.username}`,
+      lastModified: new Date(user.updated_at),
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    }));
   } catch {
     // Supabase not configured
   }
 
-  return [...staticPages, ...toolPages, ...categoryPages];
+  return [...staticPages, ...toolPages, ...categoryPages, ...portfolioPages];
 }

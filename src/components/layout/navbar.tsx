@@ -2,15 +2,18 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
-import { Menu, X, Search } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Menu, X, Search, User, LogOut, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/client";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 const navLinks = [
   { href: "/tools", label: "Browse Tools" },
   { href: "/categories", label: "Categories" },
+  { href: "/portfolio", label: "Portfolio" },
   { href: "/submit", label: "Submit Tool" },
   { href: "/about", label: "About" },
 ];
@@ -18,7 +21,12 @@ const navLinks = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+
+  const supabase = createClient();
 
   useEffect(() => {
     function onScroll() {
@@ -27,6 +35,25 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase.auth]);
+
+  async function handleSignOut() {
+    await supabase.auth.signOut();
+    setUserMenuOpen(false);
+    router.push("/");
+    router.refresh();
+  }
 
   function isActive(href: string) {
     return pathname === href || pathname.startsWith(href + "/");
@@ -80,6 +107,49 @@ export function Navbar() {
               <Search className="h-4 w-4" />
             </Button>
           </Link>
+          {user ? (
+            <div className="relative">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full"
+                onClick={() => setUserMenuOpen(!userMenuOpen)}
+              >
+                <User className="h-4 w-4" />
+              </Button>
+              {userMenuOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setUserMenuOpen(false)}
+                  />
+                  <div className="absolute right-0 z-50 mt-2 w-48 rounded-md border border-border bg-popover p-1 shadow-lg">
+                    <Link
+                      href="/dashboard"
+                      onClick={() => setUserMenuOpen(false)}
+                      className="flex items-center gap-2 rounded-sm px-3 py-2 text-sm hover:bg-accent"
+                    >
+                      <LayoutDashboard className="h-4 w-4" />
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={handleSignOut}
+                      className="flex w-full items-center gap-2 rounded-sm px-3 py-2 text-sm text-destructive hover:bg-accent"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Sign Out
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          ) : (
+            <Link href="/login">
+              <Button size="sm" variant="outline">
+                Sign In
+              </Button>
+            </Link>
+          )}
           <Link href="/submit">
             <Button size="sm" className="glow-sm">
               Submit Tool
@@ -112,6 +182,33 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="mt-4 border-t border-border pt-4">
+                {user ? (
+                  <>
+                    <Link href="/dashboard" onClick={() => setOpen(false)}>
+                      <Button variant="outline" className="mb-2 w-full">
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        Dashboard
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="ghost"
+                      className="w-full text-destructive"
+                      onClick={() => {
+                        handleSignOut();
+                        setOpen(false);
+                      }}
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Sign Out
+                    </Button>
+                  </>
+                ) : (
+                  <Link href="/login" onClick={() => setOpen(false)}>
+                    <Button variant="outline" className="mb-2 w-full">
+                      Sign In
+                    </Button>
+                  </Link>
+                )}
                 <Link href="/submit" onClick={() => setOpen(false)}>
                   <Button className="w-full glow-sm">Submit Tool</Button>
                 </Link>

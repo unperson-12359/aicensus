@@ -1,5 +1,6 @@
 export type ToolStatus = "draft" | "published" | "archived";
 export type SubmissionStatus = "pending" | "approved" | "rejected";
+export type ProjectStatus = "draft" | "pending_review" | "published" | "rejected";
 export type PricingModel =
   | "free"
   | "freemium"
@@ -269,17 +270,181 @@ export interface Database {
           created_at?: string;
         };
       };
+      user_profiles: {
+        Row: {
+          id: string;
+          username: string;
+          display_name: string;
+          bio: string | null;
+          about_md: string | null;
+          avatar_url: string | null;
+          header_image_url: string | null;
+          github_url: string | null;
+          twitter_url: string | null;
+          linkedin_url: string | null;
+          website_url: string | null;
+          contact_email: string | null;
+          featured_project_id: string | null;
+          is_public: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          username: string;
+          display_name: string;
+          bio?: string | null;
+          about_md?: string | null;
+          avatar_url?: string | null;
+          header_image_url?: string | null;
+          github_url?: string | null;
+          twitter_url?: string | null;
+          linkedin_url?: string | null;
+          website_url?: string | null;
+          contact_email?: string | null;
+          featured_project_id?: string | null;
+          is_public?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          username?: string;
+          display_name?: string;
+          bio?: string | null;
+          about_md?: string | null;
+          avatar_url?: string | null;
+          header_image_url?: string | null;
+          github_url?: string | null;
+          twitter_url?: string | null;
+          linkedin_url?: string | null;
+          website_url?: string | null;
+          contact_email?: string | null;
+          featured_project_id?: string | null;
+          is_public?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
+      portfolio_projects: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          slug: string;
+          description: string;
+          live_url: string;
+          thumbnail_url: string | null;
+          screenshots: string[];
+          tech_stack: string[];
+          ai_tools_used: string[];
+          status: ProjectStatus;
+          admin_notes: string | null;
+          reviewed_at: string | null;
+          reviewed_by: string | null;
+          created_at: string;
+          updated_at: string;
+          published_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          slug: string;
+          description: string;
+          live_url: string;
+          thumbnail_url?: string | null;
+          screenshots?: string[];
+          tech_stack?: string[];
+          ai_tools_used?: string[];
+          status?: ProjectStatus;
+          admin_notes?: string | null;
+          reviewed_at?: string | null;
+          reviewed_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+          published_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          slug?: string;
+          description?: string;
+          live_url?: string;
+          thumbnail_url?: string | null;
+          screenshots?: string[];
+          tech_stack?: string[];
+          ai_tools_used?: string[];
+          status?: ProjectStatus;
+          admin_notes?: string | null;
+          reviewed_at?: string | null;
+          reviewed_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+          published_at?: string | null;
+        };
+      };
+      project_messages: {
+        Row: {
+          id: string;
+          recipient_user_id: string;
+          project_id: string | null;
+          sender_name: string;
+          sender_email: string;
+          message: string;
+          is_read: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          recipient_user_id: string;
+          project_id?: string | null;
+          sender_name: string;
+          sender_email: string;
+          message: string;
+          is_read?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          recipient_user_id?: string;
+          project_id?: string | null;
+          sender_name?: string;
+          sender_email?: string;
+          message?: string;
+          is_read?: boolean;
+          created_at?: string;
+        };
+      };
     };
     Views: Record<string, never>;
     Functions: {
+      approve_submission: {
+        Args: { p_submission_id: string; p_notes?: string | null };
+        Returns: string;
+      };
+      reject_submission: {
+        Args: { p_submission_id: string; p_notes?: string | null };
+        Returns: undefined;
+      };
       search_tools: {
         Args: { search_query: string };
         Returns: Database["public"]["Tables"]["tools"]["Row"][];
+      };
+      approve_project: {
+        Args: { p_project_id: string; p_notes?: string | null };
+        Returns: undefined;
+      };
+      reject_project: {
+        Args: { p_project_id: string; p_notes?: string | null };
+        Returns: undefined;
       };
     };
     Enums: {
       tool_status: ToolStatus;
       submission_status: SubmissionStatus;
+      project_status: ProjectStatus;
       pricing_model: PricingModel;
       user_role: UserRole;
     };
@@ -292,7 +457,14 @@ export type Tool = Database["public"]["Tables"]["tools"]["Row"];
 export type Tag = Database["public"]["Tables"]["tags"]["Row"];
 export type Submission = Database["public"]["Tables"]["submissions"]["Row"];
 export type AdminProfile = Database["public"]["Tables"]["admin_profiles"]["Row"];
+export type UserProfile = Database["public"]["Tables"]["user_profiles"]["Row"];
+export type PortfolioProject = Database["public"]["Tables"]["portfolio_projects"]["Row"];
+export type ProjectMessage = Database["public"]["Tables"]["project_messages"]["Row"];
 
 export type ToolWithCategory = Tool & {
   categories: Category | null;
+};
+
+export type ProjectWithUser = PortfolioProject & {
+  user_profiles: UserProfile;
 };

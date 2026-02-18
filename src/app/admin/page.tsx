@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Wrench, Inbox, FolderOpen, Plus } from "lucide-react";
+import { Wrench, Inbox, FolderOpen, Plus, Briefcase } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/server";
@@ -14,12 +14,14 @@ async function getStats() {
       { count: draftTools },
       { count: pendingSubmissions },
       { count: totalCategories },
+      { count: pendingPortfolios },
     ] = await Promise.all([
       supabase.from("tools").select("*", { count: "exact", head: true }),
       supabase.from("tools").select("*", { count: "exact", head: true }).eq("status", "published"),
       supabase.from("tools").select("*", { count: "exact", head: true }).eq("status", "draft"),
       supabase.from("submissions").select("*", { count: "exact", head: true }).eq("status", "pending"),
       supabase.from("categories").select("*", { count: "exact", head: true }),
+      supabase.from("portfolio_projects").select("*", { count: "exact", head: true }).eq("status", "pending_review"),
     ]);
 
     return {
@@ -28,6 +30,7 @@ async function getStats() {
       draftTools: draftTools || 0,
       pendingSubmissions: pendingSubmissions || 0,
       totalCategories: totalCategories || 0,
+      pendingPortfolios: pendingPortfolios || 0,
     };
   } catch {
     return {
@@ -36,6 +39,7 @@ async function getStats() {
       draftTools: 0,
       pendingSubmissions: 0,
       totalCategories: 0,
+      pendingPortfolios: 0,
     };
   }
 }
@@ -76,6 +80,13 @@ export default async function AdminDashboard() {
       value: stats.totalCategories,
       icon: FolderOpen,
       href: "/admin/categories",
+    },
+    {
+      label: "Pending Portfolios",
+      value: stats.pendingPortfolios,
+      icon: Briefcase,
+      href: "/admin/portfolios",
+      color: stats.pendingPortfolios > 0 ? "text-primary" : undefined,
     },
   ];
 
@@ -139,6 +150,17 @@ export default async function AdminDashboard() {
             <Button variant="outline">
               <FolderOpen className="mr-2 h-4 w-4" />
               Manage Categories
+            </Button>
+          </Link>
+          <Link href="/admin/portfolios">
+            <Button variant="outline">
+              <Briefcase className="mr-2 h-4 w-4" />
+              Review Portfolios
+              {stats.pendingPortfolios > 0 && (
+                <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground">
+                  {stats.pendingPortfolios}
+                </span>
+              )}
             </Button>
           </Link>
         </div>
