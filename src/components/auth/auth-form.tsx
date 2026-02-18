@@ -24,6 +24,8 @@ export function AuthForm({ mode }: AuthFormProps) {
   const [usernameAvailable, setUsernameAvailable] = useState<boolean | null>(null);
   const [checkingUsername, setCheckingUsername] = useState(false);
 
+  const [authUser, setAuthUser] = useState<{ id: string } | null>(null);
+
   const supabase = createClient();
 
   async function checkUsername(username: string) {
@@ -101,13 +103,24 @@ export function AuthForm({ mode }: AuthFormProps) {
         return;
       }
 
-      const { error: authError } = await supabase.auth.signUp({
+      const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
       });
 
       if (authError) {
         setError(authError.message);
+        setLoading(false);
+        return;
+      }
+
+      if (data.user) {
+        setAuthUser({ id: data.user.id });
+      }
+
+      // If email confirmation is required and no session, inform the user
+      if (!data.session) {
+        setError("Please check your email to confirm your account, then come back and log in.");
         setLoading(false);
         return;
       }
@@ -127,9 +140,14 @@ export function AuthForm({ mode }: AuthFormProps) {
       return;
     }
 
-    const { data: { user } } = await supabase.auth.getUser();
+    // Use stored user from signup, or fallback to getUser
+    let userId = authUser?.id;
+    if (!userId) {
+      const { data: { user } } = await supabase.auth.getUser();
+      userId = user?.id;
+    }
 
-    if (!user) {
+    if (!userId) {
       setError("Authentication failed. Please try again.");
       setLoading(false);
       return;
@@ -138,7 +156,7 @@ export function AuthForm({ mode }: AuthFormProps) {
     const { error: profileError } = await supabase
       .from("user_profiles")
       .insert({
-        id: user.id,
+        id: userId,
         username: username.toLowerCase(),
         display_name: displayName,
       });
