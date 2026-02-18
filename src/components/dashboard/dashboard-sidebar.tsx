@@ -36,13 +36,8 @@ export function DashboardSidebar() {
       {/* Logo */}
       <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-6">
         <Link href="/" className="flex items-center gap-2">
-          <svg className="h-7 w-7 text-primary" viewBox="0 0 32 32" fill="none">
-            <circle cx="16" cy="16" r="13" stroke="currentColor" strokeWidth="1.5" />
-            <rect x="9.5" y="9.5" width="13" height="13" rx="1" transform="rotate(45 16 16)" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="16" cy="16" r="2.5" fill="currentColor" />
-          </svg>
-          <span className="font-bold">
-            Ai<span className="text-primary">Census</span>
+          <span className="font-display text-lg font-bold tracking-tight">
+            <span className="text-primary">Ai</span>Census
           </span>
         </Link>
         <span className="ml-auto rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">

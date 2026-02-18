@@ -57,7 +57,7 @@ export function ForToolMakers() {
 
       <FadeIn delay={0.3}>
         <div className="mt-10 text-center">
-          <Link href="/submit">
+          <Link href="/features/submit">
             <Button variant="outline" size="lg">
               Submit Your Tool <ArrowRight className="ml-2 h-4 w-4" />
             </Button>

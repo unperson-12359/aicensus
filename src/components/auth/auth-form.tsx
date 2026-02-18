@@ -179,14 +179,12 @@ export function AuthForm({ mode }: AuthFormProps) {
     return (
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-            <svg className="h-6 w-6 text-primary" viewBox="0 0 32 32" fill="none">
-              <circle cx="16" cy="16" r="13" stroke="currentColor" strokeWidth="1.5" />
-              <rect x="9.5" y="9.5" width="13" height="13" rx="1" transform="rotate(45 16 16)" stroke="currentColor" strokeWidth="1.5" />
-              <circle cx="16" cy="16" r="2.5" fill="currentColor" />
-            </svg>
+          <div className="mx-auto">
+            <span className="font-display text-2xl font-bold tracking-tight">
+              <span className="text-primary">Ai</span>Census
+            </span>
           </div>
-          <CardTitle className="mt-4">Welcome back</CardTitle>
+          <CardTitle className="mt-2">Welcome back</CardTitle>
           <CardDescription>Sign in to your AiCensus account</CardDescription>
         </CardHeader>
         <CardContent>
@@ -221,14 +219,12 @@ export function AuthForm({ mode }: AuthFormProps) {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader className="text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-          <svg className="h-6 w-6 text-primary" viewBox="0 0 32 32" fill="none">
-            <circle cx="16" cy="16" r="13" stroke="currentColor" strokeWidth="1.5" />
-            <rect x="9.5" y="9.5" width="13" height="13" rx="1" transform="rotate(45 16 16)" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="16" cy="16" r="2.5" fill="currentColor" />
-          </svg>
+        <div className="mx-auto">
+          <span className="font-display text-2xl font-bold tracking-tight">
+            <span className="text-primary">Ai</span>Census
+          </span>
         </div>
-        <CardTitle className="mt-4">
+        <CardTitle className="mt-2">
           {step === "credentials" ? "Create your account" : "Set up your profile"}
         </CardTitle>
         <CardDescription>

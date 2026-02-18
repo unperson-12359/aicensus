@@ -72,31 +72,6 @@ export default function OgImage() {
           }}
         />
 
-        {/* Logo mark */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: 32,
-          }}
-        >
-          <svg width="80" height="80" viewBox="0 0 32 32" fill="none">
-            <circle cx="16" cy="16" r="13" stroke="#818cf8" strokeWidth="1.5" />
-            <rect
-              x="9.5"
-              y="9.5"
-              width="13"
-              height="13"
-              rx="1"
-              transform="rotate(45 16 16)"
-              stroke="#818cf8"
-              strokeWidth="1.5"
-            />
-            <circle cx="16" cy="16" r="2.5" fill="#818cf8" />
-          </svg>
-        </div>
-
         {/* Site name */}
         <div
           style={{
@@ -108,8 +83,8 @@ export default function OgImage() {
             letterSpacing: "-0.02em",
           }}
         >
-          <span style={{ color: "#f1f5f9" }}>Ai</span>
-          <span style={{ color: "#818cf8" }}>Census</span>
+          <span style={{ color: "#818cf8" }}>Ai</span>
+          <span style={{ color: "#f1f5f9" }}>Census</span>
         </div>
 
         {/* Tagline */}

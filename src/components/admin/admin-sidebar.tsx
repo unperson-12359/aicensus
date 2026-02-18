@@ -9,7 +9,6 @@ import {
   Inbox,
   FolderOpen,
   LogOut,
-  Zap,
   Briefcase,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -40,11 +39,8 @@ export function AdminSidebar() {
     <aside className="flex h-screen w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar">
       {/* Logo */}
       <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-6">
-        <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary/10">
-          <Zap className="h-4 w-4 text-primary" />
-        </div>
-        <span className="font-bold">
-          Ai<span className="text-primary">Census</span>
+        <span className="font-display text-lg font-bold tracking-tight">
+          <span className="text-primary">Ai</span>Census
         </span>
         <span className="ml-auto rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">
           Admin

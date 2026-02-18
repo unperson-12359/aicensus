@@ -19,13 +19,8 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-2">
             <Link href="/" className="group flex items-center gap-2">
-              <svg className="h-8 w-8 text-primary transition-shadow duration-300 group-hover:drop-shadow-[0_0_8px_oklch(0.65_0.2_250)]" viewBox="0 0 32 32" fill="none">
-                <circle cx="16" cy="16" r="13" stroke="currentColor" strokeWidth="1.5" />
-                <rect x="9.5" y="9.5" width="13" height="13" rx="1" transform="rotate(45 16 16)" stroke="currentColor" strokeWidth="1.5" />
-                <circle cx="16" cy="16" r="2.5" fill="currentColor" />
-              </svg>
-              <span className="text-xl font-bold tracking-tight">
-                Ai<span className="text-primary">Census</span>
+              <span className="font-display text-xl font-bold tracking-tight">
+                <span className="text-primary">Ai</span>Census
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
@@ -55,14 +50,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8">
-          {/* Bauhaus geometric divider */}
-          <div className="geo-divider mb-8">
-            <span className="geo-divider-line" />
-            <span className="geo-divider-dot" />
-            <span className="geo-divider-dot" style={{ background: "oklch(0.55 0.2 290 / 30%)" }} />
-            <span className="geo-divider-dot" />
-            <span className="geo-divider-line" />
-          </div>
+          <div className="mb-8 h-px bg-border/50" />
           <p className="text-center text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} AiCensus. All rights reserved.
           </p>

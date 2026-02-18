@@ -71,13 +71,8 @@ export function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <svg className="h-8 w-8 text-primary" viewBox="0 0 32 32" fill="none">
-            <circle cx="16" cy="16" r="13" stroke="currentColor" strokeWidth="1.5" />
-            <rect x="9.5" y="9.5" width="13" height="13" rx="1" transform="rotate(45 16 16)" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="16" cy="16" r="2.5" fill="currentColor" />
-          </svg>
-          <span className="text-xl font-bold tracking-tight">
-            Ai<span className="text-primary">Census</span>
+          <span className="font-display text-xl font-bold tracking-tight">
+            <span className="text-primary">Ai</span>Census
           </span>
         </Link>
 

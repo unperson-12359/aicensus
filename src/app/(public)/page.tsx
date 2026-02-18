@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Search, Sparkles, Layers, Briefcase, FolderOpen } from "lucide-react";
+import { ArrowRight, Search, Layers, Briefcase, FolderOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BentoToolGrid } from "@/components/tools/bento-tool-grid";
@@ -100,7 +100,7 @@ export default async function HomePage() {
           <div className="mx-auto max-w-4xl text-center">
             <FadeIn delay={0.1}>
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/50 bg-card px-3 py-1.5 text-xs text-muted-foreground animate-pulse-glow sm:mb-8 sm:px-4 sm:text-sm">
-                <Sparkles className="h-4 w-4 text-primary" />
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 156+ curated AI tools & growing
               </div>
             </FadeIn>
@@ -153,7 +153,7 @@ export default async function HomePage() {
                     Explore AI Tools <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="/signup">
+                <Link href="/features/portfolio">
                   <Button variant="outline" size="lg">
                     Showcase Your Work <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -273,7 +273,7 @@ export default async function HomePage() {
                   Browse Tools <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/signup">
+              <Link href="/features/portfolio">
                 <Button variant="outline" size="lg">
                   Create Portfolio <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
