@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Wrench, Inbox, FolderOpen, Plus, Briefcase } from "lucide-react";
+import { Wrench, Inbox, FolderOpen, Plus, Briefcase, CreditCard } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/server";
@@ -15,6 +15,7 @@ async function getStats() {
       { count: pendingSubmissions },
       { count: totalCategories },
       { count: pendingPortfolios },
+      { count: activeSubscriptions },
     ] = await Promise.all([
       supabase.from("tools").select("*", { count: "exact", head: true }),
       supabase.from("tools").select("*", { count: "exact", head: true }).eq("status", "published"),
@@ -22,6 +23,7 @@ async function getStats() {
       supabase.from("submissions").select("*", { count: "exact", head: true }).eq("status", "pending"),
       supabase.from("categories").select("*", { count: "exact", head: true }),
       supabase.from("portfolio_projects").select("*", { count: "exact", head: true }).eq("status", "pending_review"),
+      supabase.from("featured_subscriptions").select("*", { count: "exact", head: true }).eq("status", "active"),
     ]);
 
     return {
@@ -31,6 +33,7 @@ async function getStats() {
       pendingSubmissions: pendingSubmissions || 0,
       totalCategories: totalCategories || 0,
       pendingPortfolios: pendingPortfolios || 0,
+      activeSubscriptions: activeSubscriptions || 0,
     };
   } catch {
     return {
@@ -40,6 +43,7 @@ async function getStats() {
       pendingSubmissions: 0,
       totalCategories: 0,
       pendingPortfolios: 0,
+      activeSubscriptions: 0,
     };
   }
 }
@@ -87,6 +91,13 @@ export default async function AdminDashboard() {
       icon: Briefcase,
       href: "/admin/portfolios",
       color: stats.pendingPortfolios > 0 ? "text-primary" : undefined,
+    },
+    {
+      label: "Active Subscriptions",
+      value: stats.activeSubscriptions,
+      icon: CreditCard,
+      href: "/admin/subscriptions",
+      color: stats.activeSubscriptions > 0 ? "text-green-400" : undefined,
     },
   ];
 
@@ -161,6 +172,12 @@ export default async function AdminDashboard() {
                   {stats.pendingPortfolios}
                 </span>
               )}
+            </Button>
+          </Link>
+          <Link href="/admin/subscriptions">
+            <Button variant="outline">
+              <CreditCard className="mr-2 h-4 w-4" />
+              Manage Subscriptions
             </Button>
           </Link>
         </div>

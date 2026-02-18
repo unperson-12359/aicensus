@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BarChart3, FolderOpen, Globe } from "lucide-react";
+import { ArrowRight, BarChart3, FolderOpen, Globe, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn, StaggerChildren, StaggerItem } from "@/components/motion";
 
@@ -56,10 +56,16 @@ export function ForToolMakers() {
       </StaggerChildren>
 
       <FadeIn delay={0.3}>
-        <div className="mt-10 text-center">
+        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link href="/features/submit">
             <Button variant="outline" size="lg">
               Submit Your Tool <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+          <Link href="/get-featured">
+            <Button size="lg" className="glow-sm">
+              <Star className="mr-2 h-4 w-4" />
+              Get Featured
             </Button>
           </Link>
         </div>

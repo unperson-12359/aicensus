@@ -9,6 +9,12 @@ export type PricingModel =
   | "enterprise"
   | "contact";
 export type UserRole = "admin" | "editor" | "viewer";
+export type FeaturedSubscriptionStatus =
+  | "pending"
+  | "active"
+  | "past_due"
+  | "cancelled"
+  | "expired";
 
 export interface Database {
   public: {
@@ -417,6 +423,68 @@ export interface Database {
           created_at?: string;
         };
       };
+      featured_subscriptions: {
+        Row: {
+          id: string;
+          stripe_customer_id: string;
+          stripe_subscription_id: string | null;
+          stripe_checkout_session_id: string | null;
+          tool_id: string | null;
+          tool_name: string;
+          tool_website: string;
+          tool_tagline: string | null;
+          tool_description: string | null;
+          tool_pricing_model: PricingModel | null;
+          submitter_name: string;
+          submitter_email: string;
+          status: FeaturedSubscriptionStatus;
+          current_period_start: string | null;
+          current_period_end: string | null;
+          admin_notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          stripe_customer_id: string;
+          stripe_subscription_id?: string | null;
+          stripe_checkout_session_id?: string | null;
+          tool_id?: string | null;
+          tool_name: string;
+          tool_website: string;
+          tool_tagline?: string | null;
+          tool_description?: string | null;
+          tool_pricing_model?: PricingModel | null;
+          submitter_name: string;
+          submitter_email: string;
+          status?: FeaturedSubscriptionStatus;
+          current_period_start?: string | null;
+          current_period_end?: string | null;
+          admin_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          stripe_customer_id?: string;
+          stripe_subscription_id?: string | null;
+          stripe_checkout_session_id?: string | null;
+          tool_id?: string | null;
+          tool_name?: string;
+          tool_website?: string;
+          tool_tagline?: string | null;
+          tool_description?: string | null;
+          tool_pricing_model?: PricingModel | null;
+          submitter_name?: string;
+          submitter_email?: string;
+          status?: FeaturedSubscriptionStatus;
+          current_period_start?: string | null;
+          current_period_end?: string | null;
+          admin_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+      };
     };
     Views: Record<string, never>;
     Functions: {
@@ -447,6 +515,7 @@ export interface Database {
       project_status: ProjectStatus;
       pricing_model: PricingModel;
       user_role: UserRole;
+      featured_subscription_status: FeaturedSubscriptionStatus;
     };
   };
 }
@@ -468,3 +537,6 @@ export type ToolWithCategory = Tool & {
 export type ProjectWithUser = PortfolioProject & {
   user_profiles: UserProfile;
 };
+
+export type FeaturedSubscription =
+  Database["public"]["Tables"]["featured_subscriptions"]["Row"];
