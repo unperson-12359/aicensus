@@ -28,6 +28,8 @@ export default function DashboardPage() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [projects, setProjects] = useState<PortfolioProject[]>([]);
   const [unreadMessages, setUnreadMessages] = useState(0);
+  const [authEmail, setAuthEmail] = useState("");
+  const [memberSince, setMemberSince] = useState("");
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const supabase = createClient();
@@ -36,6 +38,9 @@ export default function DashboardPage() {
     async function loadData() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
+
+      setAuthEmail(user.email || "");
+      setMemberSince(user.created_at || "");
 
       const [profileRes, projectsRes, messagesRes] = await Promise.all([
         supabase.from("user_profiles").select("*").eq("id", user.id).single(),
@@ -92,6 +97,25 @@ export default function DashboardPage() {
   const draftCount = projects.filter((p) => p.status === "draft").length;
   const pendingCount = projects.filter((p) => p.status === "pending_review").length;
 
+  // Profile completeness
+  const profileChecks = profile
+    ? [
+        { done: !!profile.avatar_url, tip: "Add a profile photo" },
+        { done: !!profile.bio, tip: "Write a short bio" },
+        { done: !!profile.about_md, tip: "Write an about section" },
+        { done: !!profile.header_image_url, tip: "Upload a header image" },
+        {
+          done: !!(profile.github_url || profile.twitter_url || profile.linkedin_url || profile.website_url),
+          tip: "Add at least one social link",
+        },
+        { done: !!profile.contact_email, tip: "Add a public contact email" },
+      ]
+    : [];
+  const profileCompleteness = profileChecks.length > 0
+    ? Math.round((profileChecks.filter((c) => c.done).length / profileChecks.length) * 100)
+    : 0;
+  const nextProfileStep = profileChecks.find((c) => !c.done)?.tip || null;
+
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -109,8 +133,89 @@ export default function DashboardPage() {
         </Link>
       </div>
 
+      {/* Account Info */}
+      <Card className="mt-8 transition-colors hover:border-primary/30">
+        <CardContent className="p-6">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Email
+              </p>
+              <p className="mt-1 truncate text-sm">{authEmail}</p>
+            </div>
+            {profile && (
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  Portfolio URL
+                </p>
+                <Link
+                  href={`/portfolio/${profile.username}`}
+                  className="mt-1 inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+                >
+                  <ExternalLink className="h-3 w-3" />
+                  aicensus.xyz/portfolio/{profile.username}
+                </Link>
+              </div>
+            )}
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Member Since
+              </p>
+              <p className="mt-1 text-sm">
+                {memberSince
+                  ? new Date(memberSince).toLocaleDateString("en-US", {
+                      month: "long",
+                      year: "numeric",
+                    })
+                  : "\u2014"}
+              </p>
+            </div>
+            {profile && (
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  Profile Visibility
+                </p>
+                <Badge
+                  variant="secondary"
+                  className={`mt-1 ${
+                    profile.is_public
+                      ? "bg-green-500/10 text-green-500"
+                      : "bg-muted text-muted-foreground"
+                  }`}
+                >
+                  {profile.is_public ? "Public" : "Private"}
+                </Badge>
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Profile Completeness */}
+      {profile && (
+        <Card className="mt-4 transition-colors hover:border-primary/30">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-medium">Profile Completeness</p>
+              <p className="text-sm font-bold text-primary">{profileCompleteness}%</p>
+            </div>
+            <div className="mt-3 h-2 rounded-full bg-muted">
+              <div
+                className="h-2 rounded-full bg-primary transition-all"
+                style={{ width: `${profileCompleteness}%` }}
+              />
+            </div>
+            {nextProfileStep && (
+              <p className="mt-3 text-xs text-muted-foreground">
+                <span className="text-primary">Tip:</span> {nextProfileStep}
+              </p>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
       {/* Stats */}
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { label: "Published", value: publishedCount, icon: Eye, color: "text-green-400" },
           { label: "Drafts", value: draftCount, icon: FolderOpen, color: "text-yellow-400" },
@@ -130,19 +235,6 @@ export default function DashboardPage() {
           </Card>
         ))}
       </div>
-
-      {/* Portfolio link */}
-      {profile && (
-        <div className="mt-6">
-          <Link
-            href={`/portfolio/${profile.username}`}
-            className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
-          >
-            <ExternalLink className="h-3.5 w-3.5" />
-            View your public portfolio: aicensus.com/portfolio/{profile.username}
-          </Link>
-        </div>
-      )}
 
       {/* Projects List */}
       <div className="mt-8">
