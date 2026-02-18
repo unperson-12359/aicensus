@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, Search, Sparkles, ShieldCheck, Layers } from "lucide-react";
+import { ArrowRight, Search, Sparkles, Layers, Briefcase, FolderOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BentoToolGrid } from "@/components/tools/bento-tool-grid";
-import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
 import { CategoryCard } from "@/components/categories/category-card";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -14,25 +13,47 @@ import {
   ctaShapes,
 } from "@/components/shared/geometric-decor";
 import { FadeIn, RevealText, StaggerChildren, StaggerItem } from "@/components/motion";
-import { getFeaturedTools, getRecentTools } from "@/lib/queries/tools";
+import { HowItWorks } from "@/components/home/how-it-works";
+import { PortfolioShowcase } from "@/components/home/portfolio-showcase";
+import { TrustStrip } from "@/components/home/trust-strip";
+import { ForToolMakers } from "@/components/home/for-tool-makers";
+import { getFeaturedTools } from "@/lib/queries/tools";
 import { getCategoriesWithToolCount, type CategoryWithCount } from "@/lib/queries/categories";
-import type { ToolWithCategory } from "@/lib/types/database";
+import { getPortfolioUsers } from "@/lib/queries/portfolios";
+import type { ToolWithCategory, UserProfile } from "@/lib/types/database";
 
 export const revalidate = 3600;
 
+export const metadata = {
+  title: "AiCensus — Discover AI Tools & Showcase What You Build",
+  description:
+    "The curated directory of 156+ AI tools with honest reviews. Plus a free portfolio to showcase your AI-built projects. Find tools. Build. Get noticed.",
+  openGraph: {
+    title: "AiCensus — Discover AI Tools & Showcase What You Build",
+    description:
+      "The curated directory of 156+ AI tools with honest reviews. Plus a free portfolio to showcase your AI-built projects.",
+  },
+};
+
 export default async function HomePage() {
   let featuredTools: { tools: ToolWithCategory[]; count: number } = { tools: [], count: 0 };
-  let recentTools: { tools: ToolWithCategory[]; count: number } = { tools: [], count: 0 };
   let categories: CategoryWithCount[] = [];
+  let portfolioUsers: UserProfile[] = [];
 
   try {
-    [featuredTools, recentTools, categories] = await Promise.all([
+    [featuredTools, categories] = await Promise.all([
       getFeaturedTools(6),
-      getRecentTools(6),
       getCategoriesWithToolCount(),
     ]);
   } catch {
     // Supabase not configured yet
+  }
+
+  try {
+    const result = await getPortfolioUsers({ limit: 4 });
+    portfolioUsers = result.users;
+  } catch {
+    // No portfolio users yet
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
@@ -42,7 +63,8 @@ export default async function HomePage() {
     "@type": "WebSite",
     name: "AiCensus",
     url: siteUrl,
-    description: "The curated directory of verified AI tools. Find, compare, and choose the right AI tools for your workflow.",
+    description:
+      "The curated directory of AI tools — plus a portfolio to showcase what you build with them.",
     potentialAction: {
       "@type": "SearchAction",
       target: `${siteUrl}/tools?q={search_term_string}`,
@@ -56,7 +78,8 @@ export default async function HomePage() {
     name: "AiCensus",
     url: siteUrl,
     logo: `${siteUrl}/opengraph-image`,
-    description: "The curated directory of verified AI tools. Expert reviews, pricing breakdowns, and honest comparisons.",
+    description:
+      "The curated directory of AI tools. Discover, build, and showcase your work.",
   };
 
   return (
@@ -64,51 +87,46 @@ export default async function HomePage() {
       <JsonLd data={websiteJsonLd} />
       <JsonLd data={organizationJsonLd} />
 
-      {/* Hero Section */}
+      {/* ───── HERO ───── */}
       <section className="relative overflow-hidden">
-        {/* Animated background gradient blobs */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl animate-float" />
           <div className="absolute right-0 top-1/4 h-[400px] w-[500px] rounded-full bg-accent/5 blur-3xl animate-float-delayed" />
           <div className="absolute left-0 top-1/3 h-[300px] w-[400px] rounded-full bg-neon/3 blur-3xl animate-float" />
         </div>
-        {/* Bauhaus geometric shapes with parallax */}
         <GeometricDecor shapes={heroShapes} />
 
-        <div className="mx-auto max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pb-32 sm:pt-40 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pb-28 sm:pt-36 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
-            {/* Badge with pulse glow */}
             <FadeIn delay={0.1}>
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/50 bg-card px-3 py-1.5 text-xs text-muted-foreground animate-pulse-glow sm:mb-8 sm:px-4 sm:text-sm">
                 <Sparkles className="h-4 w-4 text-primary" />
-                The trusted AI tools directory
+                156+ curated AI tools & growing
               </div>
             </FadeIn>
 
-            {/* BOLD HERO TYPOGRAPHY */}
             <RevealText delay={0.2}>
               <p className="font-display text-lg font-medium uppercase tracking-widest text-muted-foreground sm:text-xl">
-                Discover the
+                Where AI builders
               </p>
             </RevealText>
 
             <RevealText delay={0.35}>
               <h1 className="font-display text-5xl font-bold tracking-hero text-gradient-primary sm:text-7xl lg:text-8xl xl:text-9xl text-glow">
-                best AI tools
+                discover, create
               </h1>
             </RevealText>
 
             <RevealText delay={0.5}>
               <p className="font-display text-2xl font-light tracking-display text-foreground/80 sm:text-4xl lg:text-5xl">
-                for your workflow
+                and get noticed.
               </p>
             </RevealText>
 
             <FadeIn delay={0.7} direction="up">
               <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:mt-8 sm:text-xl">
-                Curated, verified, and compared. Find the right AI tools without
-                the noise. Expert reviews, pricing breakdowns, and honest
-                pros & cons.
+                The curated directory of AI tools — plus a portfolio to showcase
+                what you build with them. No domain needed. No audience required.
               </p>
             </FadeIn>
 
@@ -127,16 +145,36 @@ export default async function HomePage() {
               </div>
             </FadeIn>
 
+            {/* Dual CTAs */}
+            <FadeIn delay={1.0} direction="up">
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+                <Link href="/tools">
+                  <Button size="lg" className="glow-sm">
+                    Explore AI Tools <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/signup">
+                  <Button variant="outline" size="lg">
+                    Showcase Your Work <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+            </FadeIn>
+
             {/* Stats */}
             <FadeIn delay={1.1} direction="up">
-              <div className="mt-10 flex items-center justify-center gap-8 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-accent" />
-                  Verified Reviews
-                </div>
+              <div className="mt-10 flex items-center justify-center gap-6 text-sm text-muted-foreground sm:gap-8">
                 <div className="flex items-center gap-2">
                   <Layers className="h-4 w-4 text-primary" />
-                  {featuredTools.count + recentTools.count || "10+"} Tools
+                  156+ Tools
+                </div>
+                <div className="flex items-center gap-2">
+                  <FolderOpen className="h-4 w-4 text-accent" />
+                  16 Categories
+                </div>
+                <div className="flex items-center gap-2">
+                  <Briefcase className="h-4 w-4 text-neon" />
+                  Free Portfolio
                 </div>
               </div>
             </FadeIn>
@@ -144,7 +182,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Featured Tools — Bento Grid */}
+      {/* ───── HOW IT WORKS ───── */}
+      <HowItWorks />
+
+      {/* ───── FEATURED TOOLS ───── */}
       {featuredTools.tools.length > 0 && (
         <section className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
           <GeometricDecor shapes={sectionShapes} />
@@ -152,7 +193,7 @@ export default async function HomePage() {
             <div className="flex items-end justify-between">
               <SectionHeading
                 title="Featured Tools"
-                description="Hand-picked and verified by our team"
+                description="Trusted by builders. Updated weekly."
                 accent
               />
               <Link
@@ -169,7 +210,10 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Categories — Bento with first 2 highlighted */}
+      {/* ───── PORTFOLIO SHOWCASE ───── */}
+      <PortfolioShowcase users={portfolioUsers} />
+
+      {/* ───── CATEGORIES ───── */}
       {categories.length > 0 && (
         <section className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
           <GeometricDecor shapes={sectionShapes} />
@@ -199,32 +243,13 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Recently Added — Standard grid */}
-      {recentTools.tools.length > 0 && (
-        <section className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
-          <GeometricDecor shapes={sectionShapes} />
-          <FadeIn>
-            <div className="flex items-end justify-between">
-              <SectionHeading
-                title="Recently Added"
-                description="Fresh tools added to the directory"
-                accent
-              />
-              <Link
-                href="/tools?sort=newest"
-                className="hidden items-center gap-1 text-sm font-medium text-primary hover:underline sm:flex"
-              >
-                View all <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </FadeIn>
-          <div className="mt-8">
-            <AnimatedToolGrid tools={recentTools.tools} />
-          </div>
-        </section>
-      )}
+      {/* ───── TRUST STRIP ───── */}
+      <TrustStrip />
 
-      {/* CTA Section */}
+      {/* ───── FOR TOOL MAKERS ───── */}
+      <ForToolMakers />
+
+      {/* ───── FINAL CTA ───── */}
       <section className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
         <FadeIn>
           <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-card p-8 text-center sm:p-12">
@@ -233,17 +258,24 @@ export default async function HomePage() {
             </div>
             <GeometricDecor shapes={ctaShapes} />
             <h2 className="font-display text-3xl font-bold tracking-display sm:text-4xl lg:text-5xl">
-              Know a great{" "}
-              <span className="text-gradient-primary">AI tool?</span>
+              The future is built with{" "}
+              <span className="text-gradient-primary">AI.</span>
+              <br />
+              Show yours.
             </h2>
-            <p className="mt-4 text-muted-foreground">
-              Help us build the most comprehensive AI directory. Submit a tool and
-              we&apos;ll review it.
+            <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
+              Join the growing community of AI builders. Find tools. Showcase
+              projects. Get noticed.
             </p>
-            <div className="mt-8">
-              <Link href="/submit">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Link href="/tools">
                 <Button size="lg" className="glow-sm">
-                  Submit a Tool <ArrowRight className="ml-2 h-4 w-4" />
+                  Browse Tools <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button variant="outline" size="lg">
+                  Create Portfolio <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
             </div>
