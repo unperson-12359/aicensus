@@ -268,7 +268,7 @@ export function AuthForm({ mode }: AuthFormProps) {
                   }}
                 />
                 <p className="text-xs text-muted-foreground">
-                  aicensus.com/portfolio/<span className="text-primary">your-username</span>
+                  aicensus.xyz/portfolio/<span className="text-primary">your-username</span>
                 </p>
                 {checkingUsername && (
                   <p className="text-xs text-muted-foreground">Checking availability...</p>

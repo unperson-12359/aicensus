@@ -30,8 +30,6 @@ import {
   getAllToolSlugs,
 } from "@/lib/queries/tools";
 
-export const dynamic = "force-dynamic";
-
 interface PageProps {
   params: Promise<{ slug: string }>;
 }

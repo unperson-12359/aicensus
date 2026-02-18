@@ -14,6 +14,14 @@ const bodySchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  const priceId = process.env.STRIPE_FEATURED_PRICE_ID;
+  if (!priceId) {
+    return NextResponse.json(
+      { error: "Featured pricing not configured" },
+      { status: 500 }
+    );
+  }
+
   try {
     const body = await request.json();
     const data = bodySchema.parse(body);
@@ -39,7 +47,7 @@ export async function POST(request: NextRequest) {
       customer: customer.id,
       mode: "subscription",
       line_items: [
-        { price: process.env.STRIPE_FEATURED_PRICE_ID!, quantity: 1 },
+        { price: priceId, quantity: 1 },
       ],
       success_url: `${siteUrl}/get-featured/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/get-featured?cancelled=true`,

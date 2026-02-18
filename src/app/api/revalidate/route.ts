@@ -16,8 +16,7 @@ function jsonError(message: string, status: number) {
 }
 
 export async function POST(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const secret = searchParams.get("secret");
+  const secret = request.headers.get("x-revalidation-secret");
   const expectedSecret = process.env.REVALIDATION_SECRET;
 
   if (!expectedSecret) {
