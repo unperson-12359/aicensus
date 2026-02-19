@@ -15,7 +15,7 @@ const navLinks = [
   { href: "/categories", label: "Categories" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/submit", label: "Submit Tool" },
-  { href: "/get-featured", label: "Get Featured" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
 ];
 

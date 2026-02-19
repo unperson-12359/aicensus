@@ -423,6 +423,35 @@ export interface Database {
           created_at?: string;
         };
       };
+      contact_messages: {
+        Row: {
+          id: string;
+          name: string;
+          email: string;
+          subject: string;
+          message: string;
+          is_read: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          email: string;
+          subject: string;
+          message: string;
+          is_read?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          email?: string;
+          subject?: string;
+          message?: string;
+          is_read?: boolean;
+          created_at?: string;
+        };
+      };
       featured_subscriptions: {
         Row: {
           id: string;
@@ -529,6 +558,7 @@ export type AdminProfile = Database["public"]["Tables"]["admin_profiles"]["Row"]
 export type UserProfile = Database["public"]["Tables"]["user_profiles"]["Row"];
 export type PortfolioProject = Database["public"]["Tables"]["portfolio_projects"]["Row"];
 export type ProjectMessage = Database["public"]["Tables"]["project_messages"]["Row"];
+export type ContactMessage = Database["public"]["Tables"]["contact_messages"]["Row"];
 
 export type ToolWithCategory = Tool & {
   categories: Category | null;
