@@ -19,7 +19,6 @@ const footerLinks = {
   Legal: [
     { href: "/privacy", label: "Privacy Policy" },
     { href: "/terms", label: "Terms of Service" },
-    { href: "/cookies", label: "Cookie Policy" },
   ],
 };
 
@@ -80,12 +79,6 @@ export function Footer() {
                 className="text-xs text-muted-foreground transition-colors hover:text-foreground"
               >
                 Terms
-              </Link>
-              <Link
-                href="/cookies"
-                className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Cookies
               </Link>
             </div>
           </div>

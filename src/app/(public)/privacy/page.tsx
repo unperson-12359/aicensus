@@ -112,11 +112,7 @@ export default function PrivacyPage() {
               </h2>
               <p className="mt-3 leading-relaxed">
                 We use cookies for authentication (keeping you logged in) and
-                analytics (understanding how the site is used). See our{" "}
-                <a href="/cookies" className="text-primary hover:underline">
-                  Cookie Policy
-                </a>{" "}
-                for more details.
+                analytics (understanding how the site is used).
               </p>
             </section>
 
