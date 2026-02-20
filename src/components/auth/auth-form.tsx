@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -28,6 +29,8 @@ export function AuthForm({ mode }: AuthFormProps) {
   const [checkingUsername, setCheckingUsername] = useState(false);
 
   const [authUser, setAuthUser] = useState<{ id: string } | null>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   const supabase = createClient();
 
@@ -67,13 +70,22 @@ export function AuthForm({ mode }: AuthFormProps) {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
+    if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && !captchaToken) {
+      setError("Please complete the verification.");
+      setLoading(false);
+      return;
+    }
+
     const { error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
+      ...(captchaToken ? { options: { captchaToken } } : {}),
     });
 
     if (authError) {
       setError("Invalid credentials. Please try again.");
+      setCaptchaToken(null);
+      turnstileRef.current?.reset();
       setLoading(false);
       return;
     }
@@ -106,13 +118,22 @@ export function AuthForm({ mode }: AuthFormProps) {
         return;
       }
 
+      if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && !captchaToken) {
+        setError("Please complete the verification.");
+        setLoading(false);
+        return;
+      }
+
       const { data, error: authError } = await supabase.auth.signUp({
         email,
         password,
+        ...(captchaToken ? { options: { captchaToken } } : {}),
       });
 
       if (authError) {
         setError(authError.message);
+        setCaptchaToken(null);
+        turnstileRef.current?.reset();
         setLoading(false);
         return;
       }
@@ -200,6 +221,15 @@ export function AuthForm({ mode }: AuthFormProps) {
               <Label htmlFor="password">Password</Label>
               <Input id="password" name="password" type="password" required placeholder="Enter your password" />
             </div>
+            {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+              <Turnstile
+                ref={turnstileRef}
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                onSuccess={(token) => setCaptchaToken(token)}
+                onExpire={() => setCaptchaToken(null)}
+                options={{ theme: "dark", size: "flexible" }}
+              />
+            )}
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Signing in..." : "Sign In"}
@@ -252,6 +282,15 @@ export function AuthForm({ mode }: AuthFormProps) {
                 <Label htmlFor="confirmPassword">Confirm Password</Label>
                 <Input id="confirmPassword" name="confirmPassword" type="password" required placeholder="Confirm your password" />
               </div>
+              {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+                <Turnstile
+                  ref={turnstileRef}
+                  siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => setCaptchaToken(token)}
+                  onExpire={() => setCaptchaToken(null)}
+                  options={{ theme: "dark", size: "flexible" }}
+                />
+              )}
             </>
           ) : (
             <>
