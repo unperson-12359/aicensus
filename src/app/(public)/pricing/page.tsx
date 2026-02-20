@@ -34,7 +34,7 @@ const freePlan = {
 const featuredPlan = {
   name: "Featured",
   description: "For AI tool makers who want visibility",
-  price: "$29",
+  price: "$9.99",
   period: "/month",
   features: [
     "Everything in Free",

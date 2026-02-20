@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { UserHeader } from "@/components/portfolio/user-header";
 import { ProjectGallery } from "@/components/portfolio/project-gallery";
 import { ContactForm } from "@/components/portfolio/contact-form";
+import { ShareButton } from "@/components/portfolio/share-button";
 import {
   getUserProfileByUsername,
   getPublishedProjects,
@@ -21,12 +22,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!profile) return { title: "Not Found - AiCensus" };
 
+  const description = profile.bio || `Check out ${profile.display_name}'s AI-built projects on AiCensus.`;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const profileUrl = `${siteUrl}/portfolio/${username}`;
+
+  // Extract Twitter handle from URL if available
+  const twitterHandle = profile.twitter_url
+    ? profile.twitter_url.replace(/.*twitter\.com\/|.*x\.com\//, "").replace(/\/.*/, "")
+    : undefined;
+
   return {
     title: `${profile.display_name} - Portfolio | AiCensus`,
-    description: profile.bio || `Check out ${profile.display_name}'s AI-built projects on AiCensus.`,
+    description,
     openGraph: {
       title: `${profile.display_name} - Portfolio | AiCensus`,
-      description: profile.bio || `Check out ${profile.display_name}'s AI-built projects on AiCensus.`,
+      description,
+      url: profileUrl,
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${profile.display_name} - Portfolio | AiCensus`,
+      description,
+      ...(twitterHandle ? { creator: `@${twitterHandle}` } : {}),
     },
   };
 }
@@ -44,6 +62,14 @@ export default async function UserPortfolioPage({ params }: Props) {
       <div className="mx-auto max-w-5xl">
         {/* Header */}
         <UserHeader profile={profile} projectCount={projects.length} />
+        <div className="mt-4">
+          <ShareButton
+            type="profile"
+            profile={profile}
+            projects={projects}
+            username={username}
+          />
+        </div>
 
         {/* About section */}
         {profile.about_md && (

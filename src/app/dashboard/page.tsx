@@ -7,6 +7,7 @@ import { Plus, FolderOpen, Eye, Clock, Mail, ExternalLink, Pencil, Trash2 } from
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { ShareButton } from "@/components/portfolio/share-button";
 import { createClient } from "@/lib/supabase/client";
 import type { PortfolioProject, UserProfile } from "@/lib/types/database";
 
@@ -148,13 +149,21 @@ export default function DashboardPage() {
                 <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                   Portfolio URL
                 </p>
-                <Link
-                  href={`/portfolio/${profile.username}`}
-                  className="mt-1 inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
-                >
-                  <ExternalLink className="h-3 w-3" />
-                  aicensus.xyz/portfolio/{profile.username}
-                </Link>
+                <div className="mt-1 flex items-center gap-3">
+                  <Link
+                    href={`/portfolio/${profile.username}`}
+                    className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+                  >
+                    <ExternalLink className="h-3 w-3" />
+                    aicensus.xyz/portfolio/{profile.username}
+                  </Link>
+                  <ShareButton
+                    type="profile"
+                    profile={profile}
+                    projects={projects.filter((p) => p.status === "published")}
+                    username={profile.username}
+                  />
+                </div>
               </div>
             )}
             <div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ProjectIframe } from "@/components/portfolio/project-iframe";
+import { ShareButton } from "@/components/portfolio/share-button";
 import {
   getUserProfileByUsername,
   getProjectBySlug,
@@ -23,10 +24,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = await getProjectBySlug(profile.id, projectSlug);
   if (!project) return { title: "Not Found - AiCensus" };
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const projectUrl = `${siteUrl}/portfolio/${username}/${projectSlug}`;
+
   return {
     title: `${project.name} by ${profile.display_name} | AiCensus`,
     description: project.description,
     openGraph: {
+      title: `${project.name} by ${profile.display_name} | AiCensus`,
+      description: project.description,
+      url: projectUrl,
+    },
+    twitter: {
+      card: "summary_large_image",
       title: `${project.name} by ${profile.display_name} | AiCensus`,
       description: project.description,
     },
@@ -58,10 +68,20 @@ export default async function ProjectDetailPage({ params }: Props) {
         </nav>
 
         {/* Title */}
-        <h1 className="text-3xl font-bold">{project.name}</h1>
-        <p className="mt-3 max-w-3xl text-muted-foreground">
-          {project.description}
-        </p>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold">{project.name}</h1>
+            <p className="mt-3 max-w-3xl text-muted-foreground">
+              {project.description}
+            </p>
+          </div>
+          <ShareButton
+            type="project"
+            profile={profile}
+            project={project}
+            username={username}
+          />
+        </div>
 
         {/* Tags */}
         <div className="mt-4 flex flex-wrap gap-2">
