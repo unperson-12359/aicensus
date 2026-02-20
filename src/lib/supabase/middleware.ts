@@ -5,6 +5,8 @@ function isWriteOrReviewAdminPath(pathname: string) {
   return (
     pathname.startsWith("/admin/submissions") ||
     pathname.startsWith("/admin/categories") ||
+    pathname.startsWith("/admin/portfolios") ||
+    pathname.startsWith("/admin/subscriptions") ||
     pathname === "/admin/tools/new" ||
     /^\/admin\/tools\/[^/]+\/edit$/.test(pathname)
   );

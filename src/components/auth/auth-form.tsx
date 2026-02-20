@@ -17,7 +17,10 @@ interface AuthFormProps {
 export function AuthForm({ mode }: AuthFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/dashboard";
+  const rawRedirect = searchParams.get("redirect") || "/dashboard";
+  const redirect = rawRedirect.startsWith("/") && !rawRedirect.startsWith("//")
+    ? rawRedirect
+    : "/dashboard";
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [step, setStep] = useState<"credentials" | "profile">("credentials");
@@ -97,8 +100,8 @@ export function AuthForm({ mode }: AuthFormProps) {
         return;
       }
 
-      if (password.length < 6) {
-        setError("Password must be at least 6 characters.");
+      if (password.length < 8) {
+        setError("Password must be at least 8 characters.");
         setLoading(false);
         return;
       }
@@ -243,7 +246,7 @@ export function AuthForm({ mode }: AuthFormProps) {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" name="password" type="password" required placeholder="At least 6 characters" />
+                <Input id="password" name="password" type="password" required placeholder="At least 8 characters" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword">Confirm Password</Label>
