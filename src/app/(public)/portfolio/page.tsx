@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
-import { SectionHeading } from "@/components/shared/section-heading";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { GeometricDecor, pageHeaderShapes } from "@/components/shared/geometric-decor";
+import { FadeIn } from "@/components/motion";
 import { PortfolioCard } from "@/components/portfolio/portfolio-card";
 import { getPortfolioUsers } from "@/lib/queries/portfolios";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Portfolio Showcase - AiCensus",
+  title: "Portfolio Showcase — Projects Built with AI Tools | AiCensus",
   description:
-    "Discover websites and projects built with AI tools. Browse portfolios from developers who code with AI.",
+    "Discover websites and projects built with AI tools like Cursor, Bolt, Lovable, and more. Create your free portfolio page, showcase your projects with live previews, and get discovered.",
   openGraph: {
-    title: "Portfolio Showcase - AiCensus",
+    title: "Portfolio Showcase — Projects Built with AI Tools | AiCensus",
     description:
-      "Discover websites and projects built with AI tools. Browse portfolios from developers who code with AI.",
+      "Discover websites and projects built with AI tools. Create your free portfolio and showcase your work.",
   },
 };
 
@@ -26,15 +29,34 @@ export default async function PortfolioPage() {
 
       {/* Hero */}
       <section className="relative px-4 pb-8 pt-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl text-center">
-          <SectionHeading
-            title="Portfolio Showcase"
-            description="Websites and projects built with AI. No domain needed — just deploy and share."
-            size="lg"
-            gradient
-            accent
-            className="mx-auto items-center"
-          />
+        <div className="mx-auto max-w-4xl text-center">
+          <FadeIn>
+            <p className="text-sm font-medium uppercase tracking-widest text-primary">
+              For Builders
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <h1 className="mt-4 font-display text-4xl font-bold tracking-display sm:text-5xl">
+              Websites and projects{" "}
+              <span className="text-gradient-primary">built with AI</span>
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground sm:text-lg">
+              Create a free portfolio page, showcase your projects with live
+              previews, and let visitors message you directly. No domain needed.
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.3}>
+            <div className="mt-6">
+              <Link href="/signup">
+                <Button size="lg" className="glow-sm">
+                  Create Your Portfolio — Free
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
 

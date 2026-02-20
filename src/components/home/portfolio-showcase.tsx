@@ -33,7 +33,7 @@ export function PortfolioShowcase({ users }: PortfolioShowcaseProps) {
               gatekeepers.
             </p>
             <div className="mt-8">
-              <Link href="/features/portfolio">
+              <Link href="/signup">
                 <Button size="lg" className="glow-sm">
                   Create Your Portfolio — Free
                   <ArrowRight className="ml-2 h-4 w-4" />

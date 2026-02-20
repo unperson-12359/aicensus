@@ -153,7 +153,7 @@ export default async function HomePage() {
                     Explore AI Tools <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="/features/portfolio">
+                <Link href="/signup">
                   <Button variant="outline" size="lg">
                     Showcase Your Work <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -273,7 +273,7 @@ export default async function HomePage() {
                   Browse Tools <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/features/portfolio">
+              <Link href="/portfolio">
                 <Button variant="outline" size="lg">
                   Create Portfolio <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>

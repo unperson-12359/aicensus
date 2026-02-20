@@ -16,20 +16,20 @@ export const revalidate = 1800;
 const TOOLS_PER_PAGE = 12;
 
 export const metadata: Metadata = {
-  title: "Browse AI Tools — Find the Best AI Apps & Agents",
+  title: "Browse AI Tools — Curated Directory with Honest Reviews | AiCensus",
   description:
-    "Explore our curated directory of AI tools. Filter by category, pricing, and more. Find verified AI apps, agents, and software for every use case.",
+    "Curated by humans, not scraped by bots. Browse AI tools with honest pricing, real pros & cons, and no sponsored rankings. Filter by category, pricing, and more.",
   openGraph: {
-    title: "Browse AI Tools — Find the Best AI Apps & Agents",
+    title: "Browse AI Tools — Curated Directory with Honest Reviews | AiCensus",
     description:
-      "Explore our curated directory of AI tools. Filter by category, pricing, and more.",
+      "Curated by humans, not scraped by bots. Honest pricing, real pros & cons, and no sponsored rankings.",
     url: "/tools",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Browse AI Tools — Find the Best AI Apps & Agents",
+    title: "Browse AI Tools — Curated Directory with Honest Reviews | AiCensus",
     description:
-      "Explore our curated directory of AI tools. Filter by category, pricing, and more.",
+      "Curated by humans, not scraped by bots. Honest pricing, real pros & cons, and no sponsored rankings.",
   },
   alternates: {
     canonical: "/tools",
@@ -108,7 +108,7 @@ export default async function ToolsPage({ searchParams }: PageProps) {
         description={
           params.q
             ? `${tools.count} tools found`
-            : "Explore our curated directory of verified AI tools"
+            : "Curated by humans, not scraped by bots. Honest pricing, real pros & cons, and no sponsored rankings."
         }
       />
 
