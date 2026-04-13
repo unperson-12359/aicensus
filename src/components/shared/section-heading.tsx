@@ -18,21 +18,17 @@ export function SectionHeading({
   accent = false,
 }: SectionHeadingProps) {
   const sizeClasses = {
-    default: "text-xl sm:text-2xl md:text-3xl",
-    lg: "text-2xl sm:text-3xl md:text-4xl",
-    xl: "text-3xl sm:text-4xl md:text-5xl",
+    default: "text-2xl sm:text-3xl md:text-4xl",
+    lg: "text-3xl sm:text-4xl md:text-5xl",
+    xl: "text-4xl sm:text-5xl md:text-6xl",
   };
 
   return (
     <div className={cn("space-y-2", className)}>
-      {accent && (
-        <div className="mb-1">
-          <div className="h-px w-8 bg-primary" />
-        </div>
-      )}
+      {accent && null}
       <h2
         className={cn(
-          "font-display font-semibold tracking-display",
+          "font-display font-bold tracking-[-0.03em]",
           sizeClasses[size],
           gradient && "text-gradient-primary"
         )}

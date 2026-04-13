@@ -1,73 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BarChart3, FolderOpen, Globe, Star } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { FadeIn, StaggerChildren, StaggerItem } from "@/components/motion";
-
-const benefits = [
-  {
-    icon: FolderOpen,
-    title: "Detailed listing",
-    description: "Full profile with description, pros & cons, and pricing",
-  },
-  {
-    icon: BarChart3,
-    title: "Category placement",
-    description: "Show up where builders are browsing by use case",
-  },
-  {
-    icon: Globe,
-    title: "Organic traffic",
-    description: "Get discovered through search and directory browsing",
-  },
-];
+import { FadeIn } from "@/components/motion";
 
 export function ForToolMakers() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       <FadeIn>
-        <div className="text-center">
-          <h2 className="font-display text-xl font-semibold tracking-display sm:text-2xl">
+        <div className="max-w-2xl">
+          <h2 className="font-display text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
             Built an AI tool?{" "}
-            <span className="text-gradient-primary">Get listed.</span>
+            <span className="text-gradient-primary uppercase">Get listed.</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-muted-foreground sm:text-lg">
-            AiCensus is where builders look for tools. Submit yours for free and
-            get in front of the right audience.
+          <p className="mt-3 text-sm text-muted-foreground sm:text-base">
+            AiCensus is where builders look for tools. Submit yours for free — get a detailed listing with description, pros & cons, pricing, and category placement.
           </p>
-        </div>
-      </FadeIn>
-
-      <StaggerChildren className="mt-6 grid gap-4 sm:grid-cols-3">
-        {benefits.map((benefit) => (
-          <StaggerItem key={benefit.title}>
-            <div className="text-center">
-              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <benefit.icon className="h-5 w-5 text-primary" />
-              </div>
-              <h3 className="mt-3 font-medium">{benefit.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {benefit.description}
-              </p>
-            </div>
-          </StaggerItem>
-        ))}
-      </StaggerChildren>
-
-      <FadeIn delay={0.3}>
-        <div className="mt-6 flex flex-col items-center justify-center gap-2 sm:flex-row">
-          <Link href="/submit">
-            <Button variant="outline" size="lg">
-              Submit Your Tool <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-          <Link href="/get-featured">
-            <Button size="lg">
-              <Star className="mr-2 h-4 w-4" />
-              Get Featured
-            </Button>
-          </Link>
+          <div className="mt-6 flex gap-2">
+            <Link href="/submit">
+              <Button variant="outline">
+                Submit Your Tool <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+              </Button>
+            </Link>
+            <Link href="/get-featured">
+              <Button>
+                <Star className="mr-1.5 h-3.5 w-3.5" />
+                Get Featured
+              </Button>
+            </Link>
+          </div>
         </div>
       </FadeIn>
     </section>

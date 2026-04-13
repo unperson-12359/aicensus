@@ -18,10 +18,7 @@ export function PortfolioShowcase({ users }: PortfolioShowcaseProps) {
         {/* Copy side */}
         <FadeIn>
           <div>
-            <div className="mb-2">
-              <div className="h-px w-8 bg-primary" />
-            </div>
-            <h2 className="font-display text-2xl font-semibold tracking-display sm:text-3xl lg:text-4xl">
+            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
               Your work deserves{" "}
               <span className="text-gradient-primary">to be seen.</span>
             </h2>

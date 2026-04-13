@@ -1,28 +1,24 @@
 "use client";
 
-import { ShieldCheck, Layers, Heart, Users } from "lucide-react";
 import { FadeIn } from "@/components/motion";
 
-const trustItems = [
-  { icon: ShieldCheck, text: "Curated by humans" },
-  { icon: Layers, text: "156+ verified tools" },
-  { icon: Heart, text: "Free forever" },
-  { icon: Users, text: "Open to everyone" },
+const stats = [
+  { value: "156+", label: "Verified Tools" },
+  { value: "100%", label: "Human Curated" },
+  { value: "Free", label: "Forever" },
+  { value: "Open", label: "To Everyone" },
 ];
 
 export function TrustStrip() {
   return (
-    <section>
+    <section className="border-y border-border/40">
       <FadeIn>
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            {trustItems.map((item) => (
-              <div
-                key={item.text}
-                className="flex items-center gap-2 text-xs text-muted-foreground"
-              >
-                <item.icon className="h-4 w-4 text-primary/70" />
-                {item.text}
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-border/40">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center sm:px-6">
+                <div className="text-2xl font-bold text-foreground sm:text-3xl">{stat.value}</div>
+                <p className="mt-0.5 text-xs uppercase tracking-widest text-muted-foreground">{stat.label}</p>
               </div>
             ))}
           </div>

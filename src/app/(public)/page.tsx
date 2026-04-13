@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Search, Layers, Briefcase, FolderOpen } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BentoToolGrid } from "@/components/tools/bento-tool-grid";
@@ -82,92 +82,84 @@ export default async function HomePage() {
       <JsonLd data={organizationJsonLd} />
 
       {/* ───── HERO ───── */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background to-primary/5" />
-
-        <div className="mx-auto max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pb-20 sm:pt-24 lg:px-8">
-          <div className="mx-auto max-w-4xl text-center">
-            <FadeIn delay={0.1}>
-              <div className="mb-5 inline-flex items-center gap-2 rounded-md border border-border/50 bg-card px-3 py-1 text-xs text-muted-foreground sm:mb-6 sm:px-3 sm:text-xs">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                156+ curated AI tools & growing
-              </div>
-            </FadeIn>
-
-            <RevealText delay={0.2}>
-              <p className="tracking-accent text-muted-foreground">
-                Where AI builders
-              </p>
-            </RevealText>
-
-            <RevealText delay={0.35}>
-              <h1 className="font-display text-4xl font-semibold tracking-hero text-gradient-primary sm:text-5xl lg:text-6xl xl:text-7xl">
-                discover, create
+      <section className="relative overflow-hidden border-b border-border/50">
+        <div className="mx-auto max-w-7xl px-4 pb-14 pt-16 sm:px-6 sm:pb-20 sm:pt-24 lg:px-8">
+          {/* Massive stacked headline */}
+          <div className="max-w-6xl">
+            <RevealText delay={0.1}>
+              <h1 className="font-display text-6xl font-bold uppercase leading-[0.85] tracking-[-0.04em] sm:text-8xl lg:text-[10rem]">
+                <span className="text-gradient-primary">Discover.</span>
               </h1>
             </RevealText>
-
-            <RevealText delay={0.5}>
-              <p className="font-display text-xl font-medium tracking-display text-foreground/80 sm:text-2xl lg:text-3xl">
-                and get noticed.
-              </p>
+            <RevealText delay={0.25}>
+              <h1 className="font-display text-6xl font-bold uppercase leading-[0.85] tracking-[-0.04em] sm:text-8xl lg:text-[10rem]">
+                Create.
+              </h1>
             </RevealText>
+            <RevealText delay={0.4}>
+              <h1 className="font-display text-6xl font-bold uppercase leading-[0.85] tracking-[-0.04em] text-muted-foreground/60 sm:text-8xl lg:text-[10rem]">
+                Get noticed.
+              </h1>
+            </RevealText>
+          </div>
 
-            <FadeIn delay={0.7} direction="up">
-              <p className="mx-auto mt-5 max-w-2xl text-sm text-muted-foreground sm:mt-6 sm:text-base">
-                The curated directory of AI tools — plus a portfolio to showcase
-                what you build with them. No domain needed. No audience required.
-              </p>
-            </FadeIn>
+          {/* Body text — one line */}
+          <FadeIn delay={0.6} direction="up">
+            <p className="mt-8 max-w-xl text-sm text-muted-foreground sm:text-base">
+              The curated directory of AI tools — plus a free portfolio to showcase what you build. No domain needed. No audience required.
+            </p>
+          </FadeIn>
 
-            {/* Search Bar */}
-            <FadeIn delay={0.9} direction="up">
-              <div className="mx-auto mt-6 max-w-xl sm:mt-8">
-                <form action="/tools" method="GET" className="relative">
-                  <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-                  <Input
-                    name="q"
-                    type="search"
-                    placeholder="Search AI tools... (e.g., ChatGPT, writing, coding)"
-                    className="h-10 rounded-lg bg-card pl-10 pr-4 text-sm border-border/50 focus:border-primary transition-colors duration-150"
-                  />
-                </form>
+          {/* Stats as big visual blocks */}
+          <FadeIn delay={0.7} direction="up">
+            <div className="mt-10 flex items-start gap-8 sm:gap-12">
+              <div>
+                <div className="text-4xl font-bold text-foreground sm:text-5xl">
+                  <AnimatedCounter target={156} suffix="+" />
+                </div>
+                <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">AI Tools</p>
               </div>
-            </FadeIn>
+              <div className="h-12 w-px bg-border" />
+              <div>
+                <div className="text-4xl font-bold text-foreground sm:text-5xl">
+                  <AnimatedCounter target={16} />
+                </div>
+                <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">Categories</p>
+              </div>
+              <div className="h-12 w-px bg-border" />
+              <div>
+                <div className="text-4xl font-bold text-foreground sm:text-5xl">FREE</div>
+                <p className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">Portfolio</p>
+              </div>
+            </div>
+          </FadeIn>
 
-            {/* Dual CTAs */}
-            <FadeIn delay={1.0} direction="up">
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          {/* Search + CTAs */}
+          <FadeIn delay={0.8} direction="up">
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-3">
+              <form action="/tools" method="GET" className="relative flex-1 max-w-md">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  name="q"
+                  type="search"
+                  placeholder="Search AI tools..."
+                  className="h-9 rounded-md bg-card pl-9 pr-4 text-sm border-border/50 focus:border-primary transition-colors duration-150"
+                />
+              </form>
+              <div className="flex gap-2">
                 <Link href="/tools">
-                  <Button size="lg">
-                    Explore AI Tools <ArrowRight className="ml-2 h-4 w-4" />
+                  <Button size="default">
+                    Browse Tools <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                   </Button>
                 </Link>
                 <Link href="/signup">
-                  <Button variant="outline" size="lg">
-                    Showcase Your Work <ArrowRight className="ml-2 h-4 w-4" />
+                  <Button variant="outline" size="default">
+                    Showcase Work <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                   </Button>
                 </Link>
               </div>
-            </FadeIn>
-
-            {/* Stats */}
-            <FadeIn delay={1.1} direction="up">
-              <div className="mt-8 flex items-center justify-center gap-6 text-xs text-muted-foreground sm:gap-8">
-                <div className="flex items-center gap-2">
-                  <Layers className="h-4 w-4 text-primary" />
-                  <AnimatedCounter target={156} suffix="+" className="font-semibold text-foreground" /> Tools
-                </div>
-                <div className="flex items-center gap-2">
-                  <FolderOpen className="h-4 w-4 text-accent" />
-                  <AnimatedCounter target={16} className="font-semibold text-foreground" /> Categories
-                </div>
-                <div className="flex items-center gap-2">
-                  <Briefcase className="h-4 w-4 text-neon" />
-                  Free Portfolio
-                </div>
-              </div>
-            </FadeIn>
-          </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -176,14 +168,10 @@ export default async function HomePage() {
 
       {/* ───── FEATURED TOOLS ───── */}
       {featuredTools.tools.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
           <FadeIn>
             <div className="flex items-end justify-between">
-              <SectionHeading
-                title="Featured Tools"
-                description="Trusted by builders. Updated weekly."
-                accent
-              />
+              <SectionHeading title="Featured Tools" accent />
               <Link
                 href="/tools"
                 className="hidden items-center gap-1 text-sm font-medium text-primary hover:underline sm:flex"
@@ -192,7 +180,7 @@ export default async function HomePage() {
               </Link>
             </div>
           </FadeIn>
-          <div className="mt-8">
+          <div className="mt-6">
             <BentoToolGrid tools={featuredTools.tools} featuredCount={2} />
           </div>
         </section>
@@ -203,15 +191,11 @@ export default async function HomePage() {
 
       {/* ───── CATEGORIES ───── */}
       {categories.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
           <FadeIn>
-            <SectionHeading
-              title="Browse by Category"
-              description="Find AI tools for every use case"
-              accent
-            />
+            <SectionHeading title="Browse by Category" accent />
           </FadeIn>
-          <StaggerChildren className="mt-8 grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">
+          <StaggerChildren className="mt-6 grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">
             {categories.map((category, index) => (
               <StaggerItem
                 key={category.id}
@@ -237,28 +221,27 @@ export default async function HomePage() {
       <ForToolMakers />
 
       {/* ───── FINAL CTA ───── */}
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <FadeIn>
-          <div className="overflow-hidden rounded-lg border border-border/50 bg-card p-8 text-center sm:p-10">
-            <h2 className="font-display text-2xl font-semibold tracking-display sm:text-3xl lg:text-4xl">
-              The future is built with{" "}
+          <div className="overflow-hidden rounded-lg border border-border/50 bg-card p-8 sm:p-12">
+            <h2 className="font-display text-4xl font-bold tracking-[-0.03em] sm:text-5xl lg:text-6xl">
+              The future is{" "}
               <span className="text-gradient-primary">AI.</span>
               <br />
               Show yours.
             </h2>
-            <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
-              Join the growing community of AI builders. Find tools. Showcase
-              projects. Get noticed.
+            <p className="mt-4 max-w-md text-sm text-muted-foreground">
+              Join the growing community of AI builders. Find tools. Showcase projects. Get noticed.
             </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-6 flex flex-wrap gap-2">
               <Link href="/tools">
-                <Button size="lg" className="">
-                  Browse Tools <ArrowRight className="ml-2 h-4 w-4" />
+                <Button>
+                  Browse Tools <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                 </Button>
               </Link>
               <Link href="/portfolio">
-                <Button variant="outline" size="lg" className="">
-                  Create Portfolio <ArrowRight className="ml-2 h-4 w-4" />
+                <Button variant="outline">
+                  Create Portfolio <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                 </Button>
               </Link>
             </div>
