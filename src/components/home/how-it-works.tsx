@@ -32,27 +32,27 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-32 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       <FadeIn>
         <div className="text-center">
           <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
             How it works
           </p>
-          <h2 className="mt-3 font-display text-3xl font-normal tracking-display sm:text-4xl">
+          <h2 className="mt-2 font-display text-xl font-semibold tracking-display sm:text-2xl">
             From discovery to recognition
           </h2>
         </div>
       </FadeIn>
 
-      <StaggerChildren className="mt-12 grid gap-6 sm:gap-8 md:grid-cols-3">
+      <StaggerChildren className="mt-8 grid gap-3 sm:gap-4 md:grid-cols-3">
         {steps.map((step, i) => (
           <StaggerItem key={step.title}>
-            <div className="relative rounded-3xl border border-border/50 bg-card p-6 sm:p-8 transition-shadow duration-300 hover:shadow-md">
-              <div className="mb-5 flex items-center gap-4">
+            <div className="relative rounded-lg border border-border/40 bg-card p-4 sm:p-5">
+              <div className="mb-3 flex items-center gap-3">
                 <div
-                  className={`flex h-12 w-12 items-center justify-center rounded-xl ${step.bg}`}
+                  className={`flex h-9 w-9 items-center justify-center rounded-md ${step.bg}`}
                 >
-                  <step.icon className={`h-6 w-6 ${step.color}`} />
+                  <step.icon className={`h-4 w-4 ${step.color}`} />
                 </div>
                 <span className="text-sm font-mono text-muted-foreground/50">
                   0{i + 1}

@@ -70,25 +70,25 @@ export function Navbar() {
           : "border-transparent bg-background/80"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="group flex items-center gap-2">
-          <span className="font-display text-xl font-bold tracking-tight transition-transform duration-200 group-hover:scale-[1.03]">
+        <Link href="/" className="flex items-center gap-2">
+          <span className="font-display text-lg font-semibold tracking-tight">
             <span className="text-primary">Ai</span>Census
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-0.5 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-300",
+                "rounded-md px-2.5 py-1 text-[13px] font-medium transition-colors duration-150",
                 isActive(link.href)
                   ? "bg-foreground/8 text-foreground"
-                  : "text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
               )}
             >
               {link.label}
@@ -97,7 +97,7 @@ export function Navbar() {
         </nav>
 
         {/* Desktop Actions */}
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-2 md:flex">
           <Link href="/tools?q=">
             <Button variant="ghost" size="icon" className="text-muted-foreground">
               <Search className="h-4 w-4" />
@@ -150,7 +150,7 @@ export function Navbar() {
             </Link>
           )}
           <Link href="/submit">
-            <Button size="sm" className="rounded-full">
+            <Button size="sm">
               Submit Tool
             </Button>
           </Link>
@@ -215,7 +215,7 @@ export function Navbar() {
                   </Link>
                 )}
                 <Link href="/submit" onClick={() => setOpen(false)}>
-                  <Button className="w-full rounded-full">Submit Tool</Button>
+                  <Button className="w-full">Submit Tool</Button>
                 </Link>
               </div>
             </nav>

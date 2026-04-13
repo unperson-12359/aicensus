@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Geist, Geist_Mono, DM_Sans } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
@@ -15,18 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-});
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fdf6ef" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d0c0f" },
+    { media: "(prefers-color-scheme: light)", color: "#fcfcfc" },
+    { media: "(prefers-color-scheme: dark)", color: "#111118" },
   ],
 };
 
@@ -97,7 +91,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${dmSans.variable} font-sans antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-0QBWVXJJQ0"

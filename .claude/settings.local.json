@@ -13,7 +13,11 @@
       "Bash(curl:*)",
       "Bash(git push:*)",
       "Bash(npm run:*)",
-      "WebFetch(domain:www.drinkcollider.com)"
+      "WebFetch(domain:www.drinkcollider.com)",
+      "WebFetch(domain:linear.app)",
+      "WebFetch(domain:vercel.com)",
+      "WebFetch(domain:stripe.com)",
+      "WebFetch(domain:raycast.com)"
     ]
   }
 }

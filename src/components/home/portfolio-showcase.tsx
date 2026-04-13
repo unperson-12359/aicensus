@@ -12,17 +12,16 @@ interface PortfolioShowcaseProps {
 
 export function PortfolioShowcase({ users }: PortfolioShowcaseProps) {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
 
-      <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+      <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
         {/* Copy side */}
         <FadeIn>
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="h-0.5 w-8 rounded-full bg-primary" />
-              <div className="h-0.5 w-3 rounded-full bg-accent" />
+            <div className="mb-2">
+              <div className="h-px w-8 bg-primary" />
             </div>
-            <h2 className="font-display text-3xl font-normal tracking-display sm:text-4xl lg:text-5xl">
+            <h2 className="font-display text-2xl font-semibold tracking-display sm:text-3xl lg:text-4xl">
               Your work deserves{" "}
               <span className="text-gradient-primary">to be seen.</span>
             </h2>
@@ -33,7 +32,7 @@ export function PortfolioShowcase({ users }: PortfolioShowcaseProps) {
             </p>
             <div className="mt-8">
               <Link href="/signup">
-                <Button size="lg" className="rounded-full">
+                <Button size="lg">
                   Create Your Portfolio — Free
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -63,7 +62,7 @@ export function PortfolioShowcase({ users }: PortfolioShowcaseProps) {
               ].map((placeholder) => (
                 <div
                   key={placeholder.name}
-                  className="rounded-xl border border-border/50 bg-card overflow-hidden"
+                  className="rounded-lg border border-border/40 bg-card overflow-hidden"
                 >
                   <div className="h-20 bg-gradient-to-br from-primary/15 to-accent/15" />
                   <div className="px-4 pb-4 pt-0">

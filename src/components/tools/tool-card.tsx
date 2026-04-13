@@ -16,11 +16,11 @@ export function ToolCard({ tool }: ToolCardProps) {
 
   return (
     <Link href={`/tools/${tool.slug}`}>
-      <Card className="group relative h-full overflow-hidden border-border/50 bg-card py-0 gap-0 transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5">
-        <CardContent className="flex h-full flex-col gap-2 p-3 sm:gap-3 sm:p-4">
+      <Card className="group relative h-full overflow-hidden border-border/40 bg-card py-0 gap-0 transition-colors duration-150 hover:border-border">
+        <CardContent className="flex h-full flex-col gap-2 p-3">
           {/* Header: Logo + Name */}
           <div className="flex items-start gap-2 sm:gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-base font-bold text-primary sm:h-11 sm:w-11 sm:text-lg">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-muted text-sm font-bold text-primary sm:h-10 sm:w-10 sm:text-base">
               {logoSrc ? (
                 <img
                   src={logoSrc}

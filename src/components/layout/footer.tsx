@@ -25,7 +25,7 @@ const footerLinks = {
 export function Footer() {
   return (
     <footer className="border-t border-border/50 bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-5">
           {/* Brand */}
           <div className="col-span-2">
@@ -44,7 +44,7 @@ export function Footer() {
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
               <h3 className="text-sm font-semibold text-foreground">{title}</h3>
-              <ul className="mt-4 space-y-4">
+              <ul className="mt-3 space-y-2.5">
                 {links.map((link) => (
                   <li key={link.href}>
                     <Link
@@ -61,8 +61,8 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8">
-          <div className="mb-8 h-px bg-border/50" />
+        <div className="mt-8 pt-6">
+          <div className="mb-6 h-px bg-border/50" />
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <p className="text-sm text-muted-foreground">
               &copy; {new Date().getFullYear()} AiCensus. All rights reserved.

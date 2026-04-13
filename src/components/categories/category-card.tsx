@@ -40,9 +40,9 @@ export function CategoryCard({ category }: CategoryCardProps) {
 
   return (
     <Link href={`/categories/${category.slug}`}>
-      <Card className="group h-full border-border/50 bg-card py-0 gap-0 transition-all duration-300 hover:border-primary/30 hover:shadow-sm hover:-translate-y-0.5">
-        <CardContent className="flex items-center gap-2 p-3 sm:gap-4 sm:p-4 md:p-5">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary/20 sm:h-10 sm:w-10">
+      <Card className="group h-full border-border/40 bg-card py-0 gap-0 transition-colors duration-150 hover:border-border">
+        <CardContent className="flex items-center gap-2.5 p-3">
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
             <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
           </div>
           <div className="min-w-0">

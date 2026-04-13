@@ -25,10 +25,10 @@ const benefits = [
 
 export function ForToolMakers() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       <FadeIn>
         <div className="text-center">
-          <h2 className="font-display text-3xl font-normal tracking-display sm:text-4xl">
+          <h2 className="font-display text-xl font-semibold tracking-display sm:text-2xl">
             Built an AI tool?{" "}
             <span className="text-gradient-primary">Get listed.</span>
           </h2>
@@ -39,7 +39,7 @@ export function ForToolMakers() {
         </div>
       </FadeIn>
 
-      <StaggerChildren className="mt-10 grid gap-6 sm:grid-cols-3">
+      <StaggerChildren className="mt-6 grid gap-4 sm:grid-cols-3">
         {benefits.map((benefit) => (
           <StaggerItem key={benefit.title}>
             <div className="text-center">
@@ -56,14 +56,14 @@ export function ForToolMakers() {
       </StaggerChildren>
 
       <FadeIn delay={0.3}>
-        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="mt-6 flex flex-col items-center justify-center gap-2 sm:flex-row">
           <Link href="/submit">
             <Button variant="outline" size="lg">
               Submit Your Tool <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
           <Link href="/get-featured">
-            <Button size="lg" className="rounded-full">
+            <Button size="lg">
               <Star className="mr-2 h-4 w-4" />
               Get Featured
             </Button>
