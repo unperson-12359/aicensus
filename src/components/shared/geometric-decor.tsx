@@ -29,9 +29,9 @@ interface GeometricDecorProps {
 }
 
 const colorMap: Record<ShapeColor, string> = {
-  primary: "oklch(0.65 0.2 250)",
-  accent: "oklch(0.55 0.2 290)",
-  neon: "oklch(0.75 0.18 175)",
+  primary: "var(--primary)",
+  accent: "var(--accent)",
+  neon: "var(--neon)",
 };
 
 function ShapeElement({

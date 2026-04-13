@@ -50,55 +50,65 @@
   --font-display: var(--font-display);
 }
 
-/* Dark-only futuristic theme */
+/* ===== Light Theme ===== */
 :root {
   --radius: 0.625rem;
-  /* Near-black with blue undertone */
-  --background: oklch(0.098 0.01 260);
-  --foreground: oklch(0.95 0.005 260);
-  /* Cards: slightly lighter than bg */
-  --card: oklch(0.13 0.012 260);
-  --card-foreground: oklch(0.95 0.005 260);
-  --popover: oklch(0.13 0.012 260);
-  --popover-foreground: oklch(0.95 0.005 260);
-  /* Primary: Electric blue */
-  --primary: oklch(0.65 0.2 250);
+  --background: oklch(0.985 0.002 260);
+  --foreground: oklch(0.145 0.015 260);
+  --card: oklch(0.995 0.001 260);
+  --card-foreground: oklch(0.145 0.015 260);
+  --popover: oklch(0.995 0.001 260);
+  --popover-foreground: oklch(0.145 0.015 260);
+  --primary: oklch(0.55 0.22 250);
   --primary-foreground: oklch(0.98 0 0);
-  /* Secondary: Muted blue-gray */
-  --secondary: oklch(0.18 0.015 260);
-  --secondary-foreground: oklch(0.9 0.005 260);
-  /* Muted */
-  --muted: oklch(0.16 0.012 260);
-  --muted-foreground: oklch(0.55 0.02 260);
-  /* Accent: Purple for verified/special elements */
-  --accent: oklch(0.55 0.2 290);
+  --secondary: oklch(0.94 0.01 260);
+  --secondary-foreground: oklch(0.2 0.015 260);
+  --muted: oklch(0.95 0.008 260);
+  --muted-foreground: oklch(0.45 0.02 260);
+  --accent: oklch(0.50 0.22 290);
   --accent-foreground: oklch(0.98 0 0);
-  /* Neon: Cyan-green glow for highlights */
-  --neon: oklch(0.75 0.18 175);
-  --neon-foreground: oklch(0.1 0.01 175);
-  --destructive: oklch(0.65 0.2 25);
-  /* Borders: subtle white */
-  --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.65 0.2 250);
-  /* Charts */
-  --chart-1: oklch(0.65 0.2 250);
-  --chart-2: oklch(0.55 0.2 290);
-  --chart-3: oklch(0.75 0.18 175);
-  --chart-4: oklch(0.75 0.15 60);
-  --chart-5: oklch(0.65 0.2 25);
-  /* Sidebar (admin) */
-  --sidebar: oklch(0.11 0.012 260);
-  --sidebar-foreground: oklch(0.9 0.005 260);
-  --sidebar-primary: oklch(0.65 0.2 250);
+  --neon: oklch(0.55 0.18 175);
+  --neon-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.55 0.22 25);
+  --border: oklch(0 0 0 / 10%);
+  --input: oklch(0 0 0 / 12%);
+  --ring: oklch(0.55 0.22 250);
+  --chart-1: oklch(0.55 0.22 250);
+  --chart-2: oklch(0.50 0.22 290);
+  --chart-3: oklch(0.55 0.18 175);
+  --chart-4: oklch(0.65 0.15 60);
+  --chart-5: oklch(0.55 0.22 25);
+  --sidebar: oklch(0.97 0.005 260);
+  --sidebar-foreground: oklch(0.2 0.015 260);
+  --sidebar-primary: oklch(0.55 0.22 250);
   --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.16 0.015 260);
-  --sidebar-accent-foreground: oklch(0.9 0.005 260);
-  --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.65 0.2 250);
+  --sidebar-accent: oklch(0.93 0.01 260);
+  --sidebar-accent-foreground: oklch(0.2 0.015 260);
+  --sidebar-border: oklch(0 0 0 / 10%);
+  --sidebar-ring: oklch(0.55 0.22 250);
+  /* Utility colors */
+  --glow-color: oklch(0.55 0.22 250 / 12%);
+  --glow-color-md: oklch(0.55 0.22 250 / 16%);
+  --glow-color-lg: oklch(0.55 0.22 250 / 20%);
+  --glow-color-accent: oklch(0.50 0.22 290 / 16%);
+  --text-glow-color: oklch(0.55 0.22 250 / 12%);
+  --scrollbar-thumb: oklch(0.75 0.01 260);
+  --scrollbar-thumb-hover: oklch(0.65 0.01 260);
+  --geo-dot: oklch(0.55 0.22 250 / 25%);
+  --geo-line-start: oklch(0.55 0.22 250 / 12%);
+  --geo-line-end: oklch(0.50 0.22 290 / 12%);
+  --blog-body: oklch(0.35 0.01 260);
+  --blog-heading: oklch(0.15 0.01 260);
+  --blog-heading-alt: oklch(0.18 0.01 260);
+  --blog-strong: oklch(0.18 0.01 260);
+  --blog-code-bg: oklch(0.94 0.005 260);
+  --blog-pre-bg: oklch(0.96 0.005 260);
+  --blog-pre-border: oklch(0.88 0.005 260);
+  --blog-hr: oklch(0.88 0.005 260);
+  --blog-blockquote: oklch(0.40 0.01 260);
 }
 
-/* Keep .dark class the same for next-themes compatibility */
+/* ===== Dark Theme ===== */
 .dark {
   --background: oklch(0.098 0.01 260);
   --foreground: oklch(0.95 0.005 260);
@@ -133,6 +143,26 @@
   --sidebar-accent-foreground: oklch(0.9 0.005 260);
   --sidebar-border: oklch(1 0 0 / 8%);
   --sidebar-ring: oklch(0.65 0.2 250);
+  /* Utility colors */
+  --glow-color: oklch(0.65 0.2 250 / 15%);
+  --glow-color-md: oklch(0.65 0.2 250 / 20%);
+  --glow-color-lg: oklch(0.65 0.2 250 / 25%);
+  --glow-color-accent: oklch(0.55 0.2 290 / 25%);
+  --text-glow-color: oklch(0.65 0.2 250 / 20%);
+  --scrollbar-thumb: oklch(0.3 0.01 260);
+  --scrollbar-thumb-hover: oklch(0.4 0.01 260);
+  --geo-dot: oklch(0.65 0.2 250 / 30%);
+  --geo-line-start: oklch(0.65 0.2 250 / 15%);
+  --geo-line-end: oklch(0.55 0.2 290 / 15%);
+  --blog-body: oklch(0.75 0.01 260);
+  --blog-heading: oklch(0.95 0.01 260);
+  --blog-heading-alt: oklch(0.92 0.01 260);
+  --blog-strong: oklch(0.92 0.01 260);
+  --blog-code-bg: oklch(0.2 0.01 260);
+  --blog-pre-bg: oklch(0.15 0.01 260);
+  --blog-pre-border: oklch(0.25 0.01 260);
+  --blog-hr: oklch(0.25 0.01 260);
+  --blog-blockquote: oklch(0.65 0.01 260);
 }
 
 @layer base {
@@ -142,6 +172,16 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* Smooth theme transition (toggled via JS class) */
+  html.transitioning,
+  html.transitioning *,
+  html.transitioning *::before,
+  html.transitioning *::after {
+    transition: color 0.3s ease, background-color 0.3s ease,
+      border-color 0.3s ease, box-shadow 0.3s ease, fill 0.3s ease,
+      stroke 0.3s ease !important;
+    transition-delay: 0s !important;
+  }
 }
 
 /* Smooth scrolling */
@@ -149,7 +189,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar for dark theme */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -158,47 +198,45 @@ html {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.3 0.01 260);
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.4 0.01 260);
+  background: var(--scrollbar-thumb-hover);
 }
 
-/* Glow effect utility */
+/* ===== Glow Effects ===== */
 .glow-sm {
-  box-shadow: 0 0 15px -3px oklch(0.65 0.2 250 / 15%);
+  box-shadow: 0 0 15px -3px var(--glow-color);
 }
 .glow-md {
-  box-shadow: 0 0 25px -5px oklch(0.65 0.2 250 / 20%);
+  box-shadow: 0 0 25px -5px var(--glow-color-md);
 }
 .glow-accent {
-  box-shadow: 0 0 20px -5px oklch(0.55 0.2 290 / 25%);
+  box-shadow: 0 0 20px -5px var(--glow-color-accent);
 }
 .glow-lg {
-  box-shadow: 0 0 40px -5px oklch(0.65 0.2 250 / 25%);
+  box-shadow: 0 0 40px -5px var(--glow-color-lg);
 }
 
-/* Display font */
+/* ===== Typography ===== */
 .font-display {
   font-family: var(--font-display), var(--font-geist-sans), sans-serif;
 }
 
-/* Gradient text presets */
 .text-gradient-primary {
-  background: linear-gradient(135deg, oklch(0.65 0.2 250), oklch(0.55 0.2 290));
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .text-gradient-neon {
-  background: linear-gradient(135deg, oklch(0.65 0.2 250), oklch(0.75 0.18 175));
+  background: linear-gradient(135deg, var(--primary), var(--neon));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Display tracking */
 .tracking-display {
   letter-spacing: -0.03em;
 }
@@ -206,12 +244,11 @@ html {
   letter-spacing: -0.04em;
 }
 
-/* Text glow for oversized type */
 .text-glow {
-  text-shadow: 0 0 80px oklch(0.65 0.2 250 / 20%);
+  text-shadow: 0 0 80px var(--text-glow-color);
 }
 
-/* Floating blob keyframes */
+/* ===== Animations ===== */
 @keyframes float {
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-20px) scale(1.05); }
@@ -221,8 +258,8 @@ html {
   50% { transform: translateY(-15px) scale(1); }
 }
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 oklch(0.65 0.2 250 / 10%); }
-  50% { box-shadow: 0 0 20px 4px oklch(0.65 0.2 250 / 15%); }
+  0%, 100% { box-shadow: 0 0 0 0 var(--glow-color); }
+  50% { box-shadow: 0 0 20px 4px var(--glow-color); }
 }
 
 .animate-float {
@@ -244,15 +281,12 @@ html {
 }
 
 /* ===== Bauhaus Geometric Utilities ===== */
-
-/* Geometric shape base */
 .geo-shape {
   position: absolute;
   pointer-events: none;
   will-change: transform;
 }
 
-/* Geometric divider (footer / section breaks) */
 .geo-divider {
   display: flex;
   align-items: center;
@@ -263,7 +297,7 @@ html {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: oklch(0.65 0.2 250 / 30%);
+  background: var(--geo-dot);
 }
 .geo-divider-line {
   height: 1px;
@@ -271,13 +305,12 @@ html {
   background: linear-gradient(
     90deg,
     transparent,
-    oklch(0.65 0.2 250 / 15%),
-    oklch(0.55 0.2 290 / 15%),
+    var(--geo-line-start),
+    var(--geo-line-end),
     transparent
   );
 }
 
-/* Slow rotation for geometric accents */
 @keyframes rotate-slow {
   to { transform: rotate(360deg); }
 }
@@ -294,9 +327,66 @@ html {
   }
 }
 
+/* ===== Card Shine Effect ===== */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    oklch(1 0 0 / 3%) 45%,
+    oklch(1 0 0 / 5%) 50%,
+    oklch(1 0 0 / 3%) 55%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform;
+}
+.card-shine:hover::after {
+  transform: translateX(100%);
+}
+
+/* ===== Icon Bounce ===== */
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.group:hover .group-hover\:animate-icon-bounce {
+  animation: icon-bounce 0.4s ease-out;
+}
+
+/* ===== Button Arrow Animation ===== */
+[data-slot="button"] svg:last-child {
+  transition: transform 0.2s ease;
+}
+[data-slot="button"]:hover svg:last-child {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-shine::after { display: none; }
+  .group:hover .group-hover\:animate-icon-bounce { animation: none; }
+  [data-slot="button"]:hover svg:last-child { transform: none; }
+}
+
+/* ===== Prose & Content Overflow Protection ===== */
+.prose,
+.blog-content {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 /* ===== Blog Content Styles ===== */
 .blog-content {
-  color: oklch(0.75 0.01 260);
+  color: var(--blog-body);
   line-height: 1.8;
 }
 .blog-content h2 {
@@ -304,7 +394,7 @@ html {
   margin-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: 700;
-  color: oklch(0.95 0.01 260);
+  color: var(--blog-heading);
   letter-spacing: -0.02em;
 }
 .blog-content h3 {
@@ -312,19 +402,19 @@ html {
   margin-bottom: 0.75rem;
   font-size: 1.25rem;
   font-weight: 600;
-  color: oklch(0.92 0.01 260);
+  color: var(--blog-heading-alt);
 }
 .blog-content p {
   margin-bottom: 1.25rem;
 }
 .blog-content a {
-  color: oklch(0.65 0.2 250);
+  color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color 0.15s;
 }
 .blog-content a:hover {
-  color: oklch(0.75 0.2 250);
+  color: var(--ring);
 }
 .blog-content ul,
 .blog-content ol {
@@ -341,18 +431,18 @@ html {
   margin-bottom: 0.5rem;
 }
 .blog-content strong {
-  color: oklch(0.92 0.01 260);
+  color: var(--blog-strong);
   font-weight: 600;
 }
 .blog-content code {
-  background: oklch(0.2 0.01 260);
+  background: var(--blog-code-bg);
   padding: 0.15rem 0.4rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
 }
 .blog-content pre {
-  background: oklch(0.15 0.01 260);
-  border: 1px solid oklch(0.25 0.01 260);
+  background: var(--blog-pre-bg);
+  border: 1px solid var(--blog-pre-border);
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1.25rem;
@@ -366,12 +456,12 @@ html {
   margin: 2.5rem 0;
   border: none;
   height: 1px;
-  background: oklch(0.25 0.01 260);
+  background: var(--blog-hr);
 }
 .blog-content blockquote {
-  border-left: 3px solid oklch(0.65 0.2 250);
+  border-left: 3px solid var(--primary);
   padding-left: 1rem;
   margin-bottom: 1.25rem;
-  color: oklch(0.65 0.01 260);
+  color: var(--blog-blockquote);
   font-style: italic;
 }

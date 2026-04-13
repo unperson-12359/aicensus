@@ -16,9 +16,9 @@ export function ToolCardFeatured({ tool }: ToolCardFeaturedProps) {
 
   return (
     <Link href={`/tools/${tool.slug}`}>
-      <Card className="group relative h-full overflow-hidden border-border/50 bg-card py-0 gap-0 transition-all duration-300 hover:border-primary/30 hover:glow-md hover:-translate-y-1">
+      <Card className="card-shine group relative h-full overflow-hidden border-border/50 bg-card py-0 gap-0 transition-all duration-300 hover:border-primary/30 hover:glow-md hover:-translate-y-1">
         {/* Bauhaus geometric accent */}
-        <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full border-2 border-primary/[0.06] pointer-events-none" />
+        <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full border-2 border-primary/[0.06] pointer-events-none transition-transform duration-500 group-hover:rotate-45" />
         <div className="absolute -right-3 -top-3 h-12 w-12 rounded-full border border-accent/[0.08] pointer-events-none" />
 
         <CardContent className="relative flex h-full flex-col gap-3 p-4 sm:p-5">

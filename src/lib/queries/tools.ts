@@ -35,9 +35,13 @@ export async function getTools(options?: {
   }
 
   if (options?.search) {
-    query = query.or(
-      `name.ilike.%${options.search}%,tagline.ilike.%${options.search}%,description.ilike.%${options.search}%`
-    );
+    // Escape special PostgREST filter characters to prevent filter injection
+    const sanitized = options.search.replace(/[,.()"\\]/g, "");
+    if (sanitized) {
+      query = query.or(
+        `name.ilike.%${sanitized}%,tagline.ilike.%${sanitized}%,description.ilike.%${sanitized}%`
+      );
+    }
   }
 
   switch (options?.sort) {

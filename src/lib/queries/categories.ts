@@ -39,24 +39,29 @@ export type CategoryWithCount = Category & { tool_count: number };
 export async function getCategoriesWithToolCount(): Promise<CategoryWithCount[]> {
   const supabase = await createClient();
 
-  const { data: categories } = await supabase
-    .from("categories")
-    .select("*")
-    .order("display_order", { ascending: true });
+  // Two parallel queries instead of N+1 (one per category)
+  const [categoriesResult, countsResult] = await Promise.all([
+    supabase
+      .from("categories")
+      .select("*")
+      .order("display_order", { ascending: true }),
+    supabase
+      .from("tools")
+      .select("category_id")
+      .eq("status", "published"),
+  ]);
 
-  if (!categories) return [];
+  if (!categoriesResult.data) return [];
 
-  const categoriesWithCount = await Promise.all(
-    categories.map(async (category) => {
-      const { count } = await supabase
-        .from("tools")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "published")
-        .eq("category_id", category.id);
+  // Build a count map from the tools query
+  const countMap = new Map<string, number>();
+  for (const tool of countsResult.data || []) {
+    const id = tool.category_id as string;
+    countMap.set(id, (countMap.get(id) || 0) + 1);
+  }
 
-      return { ...category, tool_count: count || 0 };
-    })
-  );
-
-  return categoriesWithCount;
+  return categoriesResult.data.map((category) => ({
+    ...(category as Category),
+    tool_count: countMap.get(category.id as string) || 0,
+  }));
 }

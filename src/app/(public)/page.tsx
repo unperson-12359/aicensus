@@ -12,7 +12,8 @@ import {
   sectionShapes,
   ctaShapes,
 } from "@/components/shared/geometric-decor";
-import { FadeIn, RevealText, StaggerChildren, StaggerItem } from "@/components/motion";
+import { FadeIn, RevealText, StaggerChildren, StaggerItem, ParallaxSection, MagneticButton, AnimatedCounter } from "@/components/motion";
+import { SectionDivider } from "@/components/shared/section-divider";
 import { HowItWorks } from "@/components/home/how-it-works";
 import { PortfolioShowcase } from "@/components/home/portfolio-showcase";
 import { TrustStrip } from "@/components/home/trust-strip";
@@ -90,9 +91,15 @@ export default async function HomePage() {
       {/* ───── HERO ───── */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <div className="absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl animate-float" />
-          <div className="absolute right-0 top-1/4 h-[400px] w-[500px] rounded-full bg-accent/5 blur-3xl animate-float-delayed" />
-          <div className="absolute left-0 top-1/3 h-[300px] w-[400px] rounded-full bg-neon/3 blur-3xl animate-float" />
+          <ParallaxSection speed={0.05}>
+            <div className="absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl animate-float" />
+          </ParallaxSection>
+          <ParallaxSection speed={0.15}>
+            <div className="absolute right-0 top-1/4 h-[400px] w-[500px] rounded-full bg-accent/5 blur-3xl animate-float-delayed" />
+          </ParallaxSection>
+          <ParallaxSection speed={0.25}>
+            <div className="absolute left-0 top-1/3 h-[300px] w-[400px] rounded-full bg-neon/3 blur-3xl animate-float" />
+          </ParallaxSection>
         </div>
         <GeometricDecor shapes={heroShapes} />
 
@@ -148,16 +155,20 @@ export default async function HomePage() {
             {/* Dual CTAs */}
             <FadeIn delay={1.0} direction="up">
               <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-                <Link href="/tools">
-                  <Button size="lg" className="glow-sm">
-                    Explore AI Tools <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link href="/signup">
-                  <Button variant="outline" size="lg">
-                    Showcase Your Work <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
+                <MagneticButton>
+                  <Link href="/tools">
+                    <Button size="lg" className="glow-sm">
+                      Explore AI Tools <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </MagneticButton>
+                <MagneticButton>
+                  <Link href="/signup">
+                    <Button variant="outline" size="lg">
+                      Showcase Your Work <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </MagneticButton>
               </div>
             </FadeIn>
 
@@ -166,11 +177,11 @@ export default async function HomePage() {
               <div className="mt-10 flex items-center justify-center gap-6 text-sm text-muted-foreground sm:gap-8">
                 <div className="flex items-center gap-2">
                   <Layers className="h-4 w-4 text-primary" />
-                  156+ Tools
+                  <AnimatedCounter target={156} suffix="+" className="font-semibold text-foreground" /> Tools
                 </div>
                 <div className="flex items-center gap-2">
                   <FolderOpen className="h-4 w-4 text-accent" />
-                  16 Categories
+                  <AnimatedCounter target={16} className="font-semibold text-foreground" /> Categories
                 </div>
                 <div className="flex items-center gap-2">
                   <Briefcase className="h-4 w-4 text-neon" />
@@ -182,8 +193,12 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* ───── HOW IT WORKS ───── */}
       <HowItWorks />
+
+      <SectionDivider />
 
       {/* ───── FEATURED TOOLS ───── */}
       {featuredTools.tools.length > 0 && (
@@ -209,6 +224,8 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      <SectionDivider />
 
       {/* ───── PORTFOLIO SHOWCASE ───── */}
       <PortfolioShowcase users={portfolioUsers} />
@@ -268,16 +285,20 @@ export default async function HomePage() {
               projects. Get noticed.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Link href="/tools">
-                <Button size="lg" className="glow-sm">
-                  Browse Tools <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <Link href="/portfolio">
-                <Button variant="outline" size="lg">
-                  Create Portfolio <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
+              <MagneticButton>
+                <Link href="/tools">
+                  <Button size="lg" className="glow-sm">
+                    Browse Tools <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </MagneticButton>
+              <MagneticButton>
+                <Link href="/portfolio">
+                  <Button variant="outline" size="lg">
+                    Create Portfolio <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </MagneticButton>
             </div>
           </div>
         </FadeIn>

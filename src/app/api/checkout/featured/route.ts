@@ -4,13 +4,13 @@ import { getStripe } from "@/lib/stripe";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 const bodySchema = z.object({
-  submitterName: z.string().min(1),
-  submitterEmail: z.string().email(),
-  toolName: z.string().min(1),
-  toolWebsite: z.string().url(),
-  toolTagline: z.string().optional(),
-  toolDescription: z.string().optional(),
-  toolPricingModel: z.string().optional(),
+  submitterName: z.string().min(1).max(255),
+  submitterEmail: z.string().email().max(255),
+  toolName: z.string().min(1).max(255),
+  toolWebsite: z.string().url().max(2048),
+  toolTagline: z.string().max(500).optional(),
+  toolDescription: z.string().max(5000).optional(),
+  toolPricingModel: z.enum(["free", "freemium", "paid", "open_source", "enterprise", "contact"]).optional(),
 });
 
 export async function POST(request: NextRequest) {

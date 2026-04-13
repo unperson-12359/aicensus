@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 export function ScrollToTop() {
   const [visible, setVisible] = useState(false);
+  const shouldReduce = useReducedMotion();
 
   useEffect(() => {
     function onScroll() {
@@ -16,18 +17,22 @@ export function ScrollToTop() {
   }, []);
 
   return (
-    <Button
-      variant="outline"
-      size="icon"
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      aria-label="Back to top"
-      className={`fixed bottom-6 right-6 z-40 h-10 w-10 rounded-full backdrop-blur-sm bg-card/80 border-border/50 shadow-lg transition-all duration-300 ${
-        visible
-          ? "translate-y-0 opacity-100"
-          : "translate-y-4 opacity-0 pointer-events-none"
-      }`}
-    >
-      <ArrowUp className="h-4 w-4" />
-    </Button>
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          initial={shouldReduce ? { opacity: 1 } : { opacity: 0, y: 20, scale: 0.8 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={shouldReduce ? { opacity: 0 } : { opacity: 0, y: 20, scale: 0.8 }}
+          transition={{ duration: 0.2 }}
+          whileHover={shouldReduce ? {} : { scale: 1.1 }}
+          whileTap={shouldReduce ? {} : { scale: 0.9 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="Back to top"
+          className="fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-border/50 bg-card/80 shadow-lg backdrop-blur-sm"
+        >
+          <ArrowUp className="h-4 w-4" />
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 }

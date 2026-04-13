@@ -136,7 +136,7 @@ export function FilterBar({ categories }: FilterBarProps) {
           {currentQ && (
             <Badge variant="secondary" className="gap-1">
               &quot;{currentQ}&quot;
-              <button onClick={() => updateParams("q", "")}>
+              <button onClick={() => updateParams("q", "")} aria-label="Clear search filter">
                 <X className="h-3 w-3" />
               </button>
             </Badge>
@@ -144,7 +144,7 @@ export function FilterBar({ categories }: FilterBarProps) {
           {currentCategory && (
             <Badge variant="secondary" className="gap-1">
               {categories.find((c) => c.slug === currentCategory)?.name || currentCategory}
-              <button onClick={() => updateParams("category", "")}>
+              <button onClick={() => updateParams("category", "")} aria-label="Clear category filter">
                 <X className="h-3 w-3" />
               </button>
             </Badge>
@@ -152,7 +152,7 @@ export function FilterBar({ categories }: FilterBarProps) {
           {currentPricing && (
             <Badge variant="secondary" className="gap-1">
               {pricingOptions.find((p) => p.value === currentPricing)?.label || currentPricing}
-              <button onClick={() => updateParams("pricing", "")}>
+              <button onClick={() => updateParams("pricing", "")} aria-label="Clear pricing filter">
                 <X className="h-3 w-3" />
               </button>
             </Badge>

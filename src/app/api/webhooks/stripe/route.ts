@@ -108,7 +108,11 @@ export async function POST(request: NextRequest) {
           canceled: "expired",
           unpaid: "past_due",
         };
-        let newStatus = statusMap[subscription.status] || "expired";
+        let newStatus = statusMap[subscription.status];
+        if (!newStatus) {
+          console.warn(`Unknown Stripe subscription status: "${subscription.status}", defaulting to "expired"`);
+          newStatus = "expired";
+        }
 
         // If cancel_at_period_end, mark as cancelled (still featured until period end)
         if (subscription.cancel_at_period_end && subscription.status === "active") {

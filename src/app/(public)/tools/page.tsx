@@ -68,11 +68,12 @@ export default async function ToolsPage({ searchParams }: PageProps) {
       }),
       getCategories(),
     ]);
-  } catch {
-    // Supabase not configured yet
+  } catch (err) {
+    console.error("Failed to fetch tools/categories:", err);
   }
 
-  const totalPages = Math.ceil(tools.count / TOOLS_PER_PAGE);
+  const totalPages = Math.max(1, Math.ceil(tools.count / TOOLS_PER_PAGE));
+  const clampedPage = Math.min(currentPage, totalPages);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
   const itemListJsonLd = {
@@ -117,18 +118,29 @@ export default async function ToolsPage({ searchParams }: PageProps) {
       </div>
 
       <div className="mt-8">
-        <ToolGrid tools={tools.tools} />
+        {tools.tools.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-16 text-center">
+            <p className="text-lg font-medium">No tools found</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {params.q
+                ? `No tools match "${params.q}". Try a different search term.`
+                : "No tools match your current filters. Try adjusting or clearing them."}
+            </p>
+          </div>
+        ) : (
+          <ToolGrid tools={tools.tools} />
+        )}
       </div>
 
       {tools.count > 0 && (
         <div className="mt-8 flex flex-col items-center gap-4">
           <PaginationInfo
-            currentPage={currentPage}
+            currentPage={clampedPage}
             perPage={TOOLS_PER_PAGE}
             total={tools.count}
           />
           <Pagination
-            currentPage={currentPage}
+            currentPage={clampedPage}
             totalPages={totalPages}
             basePath="/tools"
             searchParams={{

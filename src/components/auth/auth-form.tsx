@@ -19,9 +19,15 @@ export function AuthForm({ mode }: AuthFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const rawRedirect = searchParams.get("redirect") || "/dashboard";
-  const redirect = rawRedirect.startsWith("/") && !rawRedirect.startsWith("//")
-    ? rawRedirect
-    : "/dashboard";
+  const ALLOWED_PREFIXES = ["/dashboard", "/admin", "/portfolio", "/tools", "/categories"];
+  const decoded = (() => { try { return decodeURIComponent(rawRedirect); } catch { return ""; } })();
+  const redirect =
+    decoded.startsWith("/") &&
+    !decoded.startsWith("//") &&
+    !decoded.includes("\\") &&
+    ALLOWED_PREFIXES.some((p) => decoded.startsWith(p))
+      ? decoded
+      : "/dashboard";
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [step, setStep] = useState<"credentials" | "profile">("credentials");
@@ -34,7 +40,11 @@ export function AuthForm({ mode }: AuthFormProps) {
 
   const supabase = createClient();
 
-  async function checkUsername(username: string) {
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
+
+  function checkUsername(username: string) {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
     if (username.length < 3) {
       setUsernameAvailable(null);
       return;
@@ -51,14 +61,16 @@ export function AuthForm({ mode }: AuthFormProps) {
     }
 
     setCheckingUsername(true);
-    const { data } = await supabase
-      .from("user_profiles")
-      .select("username")
-      .eq("username", username)
-      .single();
+    debounceRef.current = setTimeout(async () => {
+      const { data } = await supabase
+        .from("user_profiles")
+        .select("username")
+        .eq("username", username)
+        .single();
 
-    setUsernameAvailable(!data);
-    setCheckingUsername(false);
+      setUsernameAvailable(!data);
+      setCheckingUsername(false);
+    }, 300);
   }
 
   async function handleLogin(e: React.FormEvent<HTMLFormElement>) {

@@ -76,7 +76,7 @@ export default async function UserPortfolioPage({ params }: Props) {
           <section className="mt-12">
             <h2 className="mb-4 text-xl font-semibold">About</h2>
             <div className="prose prose-invert max-w-none prose-a:text-primary">
-              <ReactMarkdown>{profile.about_md}</ReactMarkdown>
+              <ReactMarkdown skipHtml>{profile.about_md}</ReactMarkdown>
             </div>
           </section>
         )}

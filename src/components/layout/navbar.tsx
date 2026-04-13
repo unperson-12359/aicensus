@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 const navLinks = [
@@ -65,15 +66,15 @@ export function Navbar() {
       className={cn(
         "sticky top-0 z-50 w-full border-b backdrop-blur-xl transition-all duration-300",
         scrolled
-          ? "border-border/50 bg-background/95 shadow-sm"
+          ? "border-border/50 bg-background/95 shadow-sm shadow-primary/5"
           : "border-transparent bg-background/80"
       )}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-display text-xl font-bold tracking-tight">
-            <span className="text-primary">Ai</span>Census
+        <Link href="/" className="group flex items-center gap-2">
+          <span className="font-display text-xl font-bold tracking-tight transition-transform duration-200 group-hover:scale-[1.03]">
+            <span className="text-primary transition-all duration-300 group-hover:text-glow">Ai</span>Census
           </span>
         </Link>
 
@@ -103,6 +104,7 @@ export function Navbar() {
               <Search className="h-4 w-4" />
             </Button>
           </Link>
+          <ThemeToggle />
           {user ? (
             <div className="relative">
               <Button
@@ -110,6 +112,8 @@ export function Navbar() {
                 size="icon"
                 className="rounded-full"
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
+                aria-label="User menu"
+                aria-expanded={userMenuOpen}
               >
                 <User className="h-4 w-4" />
               </Button>
@@ -178,6 +182,12 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="mt-4 border-t border-border pt-4">
+                <div className="mb-3 flex items-center justify-between px-3">
+                  <span className="text-sm text-muted-foreground">Theme</span>
+                  <ThemeToggle />
+                </div>
+              </div>
+              <div className="border-t border-border pt-4">
                 {user ? (
                   <>
                     <Link href="/dashboard" onClick={() => setOpen(false)}>

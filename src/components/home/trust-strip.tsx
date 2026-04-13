@@ -19,9 +19,9 @@ export function TrustStrip() {
             {trustItems.map((item) => (
               <div
                 key={item.text}
-                className="flex items-center gap-2.5 text-sm text-muted-foreground"
+                className="group flex items-center gap-2.5 text-sm text-muted-foreground cursor-default"
               >
-                <item.icon className="h-4 w-4 text-primary/70" />
+                <item.icon className="h-4 w-4 text-primary/70 transition-transform group-hover:animate-icon-bounce" />
                 {item.text}
               </div>
             ))}
