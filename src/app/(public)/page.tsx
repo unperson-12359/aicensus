@@ -103,10 +103,10 @@ export default async function HomePage() {
             </RevealText>
           </div>
 
-          {/* Body text — one line */}
+          {/* Accent tagline in serif italic */}
           <FadeIn delay={0.6} direction="up">
-            <p className="mt-8 max-w-xl text-sm text-muted-foreground sm:text-base">
-              The curated directory of AI tools — plus a free portfolio to showcase what you build. No domain needed. No audience required.
+            <p className="mt-8 max-w-xl font-serif text-lg italic text-muted-foreground sm:text-xl">
+              The curated directory of AI tools — plus a free portfolio to showcase what you build.
             </p>
           </FadeIn>
 

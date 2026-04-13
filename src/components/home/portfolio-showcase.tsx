@@ -22,7 +22,7 @@ export function PortfolioShowcase({ users }: PortfolioShowcaseProps) {
               Your work deserves{" "}
               <span className="text-gradient-primary">to be seen.</span>
             </h2>
-            <p className="mt-4 max-w-lg text-muted-foreground sm:text-lg">
+            <p className="mt-4 max-w-lg font-serif text-lg italic text-muted-foreground sm:text-xl">
               Built a site with Cursor? Shipped an app with v0? Show the world.
               Create your free AI builder portfolio — no domain, no following, no
               gatekeepers.
