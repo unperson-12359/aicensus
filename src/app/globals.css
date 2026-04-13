@@ -109,15 +109,15 @@
   --popover: oklch(0.20 0.02 55);
   --popover-foreground: oklch(0.93 0.015 65);
   --primary: oklch(0.65 0.15 48);
-  --primary-foreground: oklch(0.15 0.015 55);
+  --primary-foreground: oklch(0.98 0.01 65);
   --secondary: oklch(0.22 0.018 55);
   --secondary-foreground: oklch(0.88 0.012 65);
   --muted: oklch(0.20 0.015 55);
   --muted-foreground: oklch(0.60 0.02 60);
   --accent: oklch(0.60 0.05 145);
-  --accent-foreground: oklch(0.15 0.015 55);
+  --accent-foreground: oklch(0.98 0.01 65);
   --neon: oklch(0.74 0.11 80);
-  --neon-foreground: oklch(0.15 0.015 55);
+  --neon-foreground: oklch(0.98 0.01 65);
   --destructive: oklch(0.65 0.2 25);
   --border: oklch(0.93 0.015 65 / 10%);
   --input: oklch(0.93 0.015 65 / 12%);
@@ -201,7 +201,7 @@ html {
 }
 
 .text-gradient-primary {
-  background: linear-gradient(135deg, var(--primary), oklch(0.50 0.13 42));
+  background: linear-gradient(135deg, var(--primary), var(--neon));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
