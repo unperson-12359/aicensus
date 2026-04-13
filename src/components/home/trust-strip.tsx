@@ -12,16 +12,16 @@ const trustItems = [
 
 export function TrustStrip() {
   return (
-    <section className="border-y border-border/30 bg-card/50">
+    <section>
       <FadeIn>
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
             {trustItems.map((item) => (
               <div
                 key={item.text}
                 className="group flex items-center gap-2.5 text-sm text-muted-foreground cursor-default"
               >
-                <item.icon className="h-4 w-4 text-primary/70 transition-transform group-hover:animate-icon-bounce" />
+                <item.icon className="h-4 w-4 text-primary/70" />
                 {item.text}
               </div>
             ))}

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit:*)",
+      "Bash(gh api:*)",
+      "Bash(npx vercel inspect:*)",
+      "Bash(npx vercel:*)",
+      "WebFetch(domain:aicensus.vercel.app)",
+      "Bash(npm run build:*)",
+      "Bash(grep:*)",
+      "Bash(cat:*)",
+      "WebFetch(domain:aicensus.xyz)",
+      "Bash(curl:*)",
+      "Bash(git push:*)",
+      "Bash(npm run:*)",
+      "WebFetch(domain:www.drinkcollider.com)"
+    ]
+  }
+}

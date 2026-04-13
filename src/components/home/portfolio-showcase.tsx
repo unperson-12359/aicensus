@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PortfolioCard } from "@/components/portfolio/portfolio-card";
 import { FadeIn, StaggerChildren, StaggerItem } from "@/components/motion";
-import { GeometricDecor, sectionShapes } from "@/components/shared/geometric-decor";
+// Geometric decor removed for cleaner aesthetic
 import type { UserProfile } from "@/lib/types/database";
 
 interface PortfolioShowcaseProps {
@@ -12,8 +12,7 @@ interface PortfolioShowcaseProps {
 
 export function PortfolioShowcase({ users }: PortfolioShowcaseProps) {
   return (
-    <section className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-      <GeometricDecor shapes={sectionShapes} />
+    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
 
       <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
         {/* Copy side */}
@@ -23,7 +22,7 @@ export function PortfolioShowcase({ users }: PortfolioShowcaseProps) {
               <div className="h-0.5 w-8 rounded-full bg-primary" />
               <div className="h-0.5 w-3 rounded-full bg-accent" />
             </div>
-            <h2 className="font-display text-3xl font-bold tracking-display sm:text-4xl lg:text-5xl">
+            <h2 className="font-display text-3xl font-normal tracking-display sm:text-4xl lg:text-5xl">
               Your work deserves{" "}
               <span className="text-gradient-primary">to be seen.</span>
             </h2>
@@ -34,7 +33,7 @@ export function PortfolioShowcase({ users }: PortfolioShowcaseProps) {
             </p>
             <div className="mt-8">
               <Link href="/signup">
-                <Button size="lg" className="glow-sm">
+                <Button size="lg" className="rounded-full">
                   Create Your Portfolio — Free
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>

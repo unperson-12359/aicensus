@@ -27,13 +27,13 @@ export function SectionHeading({
     <div className={cn("space-y-2", className)}>
       {accent && (
         <div className="flex items-center gap-2 mb-1">
-          <div className="h-0.5 w-8 rounded-full bg-primary" />
-          <div className="h-0.5 w-3 rounded-full bg-accent" />
+          <div className="h-0.5 w-12 rounded-full bg-primary" />
+          <div className="h-0.5 w-5 rounded-full bg-accent" />
         </div>
       )}
       <h2
         className={cn(
-          "font-display font-bold tracking-display",
+          "font-display font-normal tracking-display",
           sizeClasses[size],
           gradient && "text-gradient-primary"
         )}

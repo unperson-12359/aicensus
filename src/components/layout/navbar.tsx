@@ -66,7 +66,7 @@ export function Navbar() {
       className={cn(
         "sticky top-0 z-50 w-full border-b backdrop-blur-xl transition-all duration-300",
         scrolled
-          ? "border-border/50 bg-background/95 shadow-sm shadow-primary/5"
+          ? "border-border/50 bg-background/95 shadow-sm"
           : "border-transparent bg-background/80"
       )}
     >
@@ -74,7 +74,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-2">
           <span className="font-display text-xl font-bold tracking-tight transition-transform duration-200 group-hover:scale-[1.03]">
-            <span className="text-primary transition-all duration-300 group-hover:text-glow">Ai</span>Census
+            <span className="text-primary">Ai</span>Census
           </span>
         </Link>
 
@@ -85,11 +85,10 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               className={cn(
-                "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                "after:absolute after:bottom-1 after:left-3 after:right-3 after:h-[2px] after:rounded-full after:bg-primary after:transition-transform after:duration-300",
+                "rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-300",
                 isActive(link.href)
-                  ? "text-foreground after:scale-x-100"
-                  : "text-muted-foreground hover:text-foreground after:scale-x-0 hover:after:scale-x-100 after:origin-left"
+                  ? "bg-foreground/8 text-foreground"
+                  : "text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
               )}
             >
               {link.label}
@@ -151,7 +150,7 @@ export function Navbar() {
             </Link>
           )}
           <Link href="/submit">
-            <Button size="sm" className="glow-sm">
+            <Button size="sm" className="rounded-full">
               Submit Tool
             </Button>
           </Link>
@@ -216,7 +215,7 @@ export function Navbar() {
                   </Link>
                 )}
                 <Link href="/submit" onClick={() => setOpen(false)}>
-                  <Button className="w-full glow-sm">Submit Tool</Button>
+                  <Button className="w-full rounded-full">Submit Tool</Button>
                 </Link>
               </div>
             </nav>

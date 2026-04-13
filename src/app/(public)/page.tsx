@@ -6,14 +6,7 @@ import { BentoToolGrid } from "@/components/tools/bento-tool-grid";
 import { CategoryCard } from "@/components/categories/category-card";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
-import {
-  GeometricDecor,
-  heroShapes,
-  sectionShapes,
-  ctaShapes,
-} from "@/components/shared/geometric-decor";
-import { FadeIn, RevealText, StaggerChildren, StaggerItem, ParallaxSection, MagneticButton, AnimatedCounter } from "@/components/motion";
-import { SectionDivider } from "@/components/shared/section-divider";
+import { FadeIn, RevealText, StaggerChildren, StaggerItem, AnimatedCounter } from "@/components/motion";
 import { HowItWorks } from "@/components/home/how-it-works";
 import { PortfolioShowcase } from "@/components/home/portfolio-showcase";
 import { TrustStrip } from "@/components/home/trust-strip";
@@ -90,36 +83,25 @@ export default async function HomePage() {
 
       {/* ───── HERO ───── */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <ParallaxSection speed={0.05}>
-            <div className="absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl animate-float" />
-          </ParallaxSection>
-          <ParallaxSection speed={0.15}>
-            <div className="absolute right-0 top-1/4 h-[400px] w-[500px] rounded-full bg-accent/5 blur-3xl animate-float-delayed" />
-          </ParallaxSection>
-          <ParallaxSection speed={0.25}>
-            <div className="absolute left-0 top-1/3 h-[300px] w-[400px] rounded-full bg-neon/3 blur-3xl animate-float" />
-          </ParallaxSection>
-        </div>
-        <GeometricDecor shapes={heroShapes} />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-background to-primary/5" />
 
-        <div className="mx-auto max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pb-28 sm:pt-36 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 pb-20 pt-24 sm:px-6 sm:pb-40 sm:pt-44 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <FadeIn delay={0.1}>
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/50 bg-card px-3 py-1.5 text-xs text-muted-foreground animate-pulse-glow sm:mb-8 sm:px-4 sm:text-sm">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/50 bg-card px-3 py-1.5 text-xs text-muted-foreground sm:mb-8 sm:px-4 sm:text-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 156+ curated AI tools & growing
               </div>
             </FadeIn>
 
             <RevealText delay={0.2}>
-              <p className="font-display text-lg font-medium uppercase tracking-widest text-muted-foreground sm:text-xl">
+              <p className="font-display text-sm font-medium uppercase tracking-widest text-muted-foreground sm:text-base">
                 Where AI builders
               </p>
             </RevealText>
 
             <RevealText delay={0.35}>
-              <h1 className="font-display text-5xl font-bold tracking-hero text-gradient-primary sm:text-7xl lg:text-8xl xl:text-9xl text-glow">
+              <h1 className="font-display text-5xl font-light tracking-hero text-gradient-primary sm:text-7xl lg:text-8xl xl:text-9xl">
                 discover, create
               </h1>
             </RevealText>
@@ -131,7 +113,7 @@ export default async function HomePage() {
             </RevealText>
 
             <FadeIn delay={0.7} direction="up">
-              <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground sm:mt-8 sm:text-xl">
+              <p className="mx-auto mt-8 max-w-2xl text-base text-muted-foreground sm:mt-10 sm:text-lg">
                 The curated directory of AI tools — plus a portfolio to showcase
                 what you build with them. No domain needed. No audience required.
               </p>
@@ -146,7 +128,7 @@ export default async function HomePage() {
                     name="q"
                     type="search"
                     placeholder="Search AI tools... (e.g., ChatGPT, writing, coding)"
-                    className="h-14 rounded-xl bg-card pl-12 pr-4 text-base border-border/50 focus:border-primary focus:glow-sm transition-shadow duration-300"
+                    className="h-14 rounded-full bg-card pl-12 pr-4 text-base border-border/50 focus:border-primary transition-colors duration-300"
                   />
                 </form>
               </div>
@@ -154,27 +136,23 @@ export default async function HomePage() {
 
             {/* Dual CTAs */}
             <FadeIn delay={1.0} direction="up">
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-                <MagneticButton>
-                  <Link href="/tools">
-                    <Button size="lg" className="glow-sm">
-                      Explore AI Tools <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
-                </MagneticButton>
-                <MagneticButton>
-                  <Link href="/signup">
-                    <Button variant="outline" size="lg">
-                      Showcase Your Work <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
-                </MagneticButton>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+                <Link href="/tools">
+                  <Button size="lg" className="rounded-full">
+                    Explore AI Tools <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/signup">
+                  <Button variant="outline" size="lg" className="rounded-full">
+                    Showcase Your Work <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             </FadeIn>
 
             {/* Stats */}
             <FadeIn delay={1.1} direction="up">
-              <div className="mt-10 flex items-center justify-center gap-6 text-sm text-muted-foreground sm:gap-8">
+              <div className="mt-12 flex items-center justify-center gap-6 text-sm text-muted-foreground sm:gap-8">
                 <div className="flex items-center gap-2">
                   <Layers className="h-4 w-4 text-primary" />
                   <AnimatedCounter target={156} suffix="+" className="font-semibold text-foreground" /> Tools
@@ -193,17 +171,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* ───── HOW IT WORKS ───── */}
       <HowItWorks />
 
-      <SectionDivider />
-
       {/* ───── FEATURED TOOLS ───── */}
       {featuredTools.tools.length > 0 && (
-        <section className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
-          <GeometricDecor shapes={sectionShapes} />
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
           <FadeIn>
             <div className="flex items-end justify-between">
               <SectionHeading
@@ -225,15 +198,12 @@ export default async function HomePage() {
         </section>
       )}
 
-      <SectionDivider />
-
       {/* ───── PORTFOLIO SHOWCASE ───── */}
       <PortfolioShowcase users={portfolioUsers} />
 
       {/* ───── CATEGORIES ───── */}
       {categories.length > 0 && (
-        <section className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
-          <GeometricDecor shapes={sectionShapes} />
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
           <FadeIn>
             <SectionHeading
               title="Browse by Category"
@@ -267,14 +237,10 @@ export default async function HomePage() {
       <ForToolMakers />
 
       {/* ───── FINAL CTA ───── */}
-      <section className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <FadeIn>
-          <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-card p-8 text-center sm:p-12">
-            <div className="absolute inset-0 -z-10">
-              <div className="absolute left-1/2 top-1/2 h-[200px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/5 blur-3xl animate-float" />
-            </div>
-            <GeometricDecor shapes={ctaShapes} />
-            <h2 className="font-display text-3xl font-bold tracking-display sm:text-4xl lg:text-5xl">
+          <div className="overflow-hidden rounded-3xl border border-border/50 bg-card p-10 text-center sm:p-16">
+            <h2 className="font-display text-3xl font-normal tracking-display sm:text-4xl lg:text-5xl">
               The future is built with{" "}
               <span className="text-gradient-primary">AI.</span>
               <br />
@@ -285,20 +251,16 @@ export default async function HomePage() {
               projects. Get noticed.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <MagneticButton>
-                <Link href="/tools">
-                  <Button size="lg" className="glow-sm">
-                    Browse Tools <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </MagneticButton>
-              <MagneticButton>
-                <Link href="/portfolio">
-                  <Button variant="outline" size="lg">
-                    Create Portfolio <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </MagneticButton>
+              <Link href="/tools">
+                <Button size="lg" className="rounded-full">
+                  Browse Tools <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/portfolio">
+                <Button variant="outline" size="lg" className="rounded-full">
+                  Create Portfolio <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </FadeIn>

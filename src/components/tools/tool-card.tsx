@@ -16,8 +16,7 @@ export function ToolCard({ tool }: ToolCardProps) {
 
   return (
     <Link href={`/tools/${tool.slug}`}>
-      <Card className="card-shine group relative h-full overflow-hidden border-border/50 bg-card py-0 gap-0 transition-all duration-300 hover:border-primary/30 hover:glow-md hover:-translate-y-1">
-        <div className="absolute -right-2 -top-2 h-8 w-8 rounded-full border border-primary/[0.08] opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" />
+      <Card className="group relative h-full overflow-hidden border-border/50 bg-card py-0 gap-0 transition-all duration-300 hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5">
         <CardContent className="flex h-full flex-col gap-2 p-3 sm:gap-3 sm:p-4">
           {/* Header: Logo + Name */}
           <div className="flex items-start gap-2 sm:gap-3">

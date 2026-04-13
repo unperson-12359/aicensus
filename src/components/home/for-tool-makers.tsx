@@ -28,7 +28,7 @@ export function ForToolMakers() {
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <FadeIn>
         <div className="text-center">
-          <h2 className="font-display text-3xl font-bold tracking-display sm:text-4xl">
+          <h2 className="font-display text-3xl font-normal tracking-display sm:text-4xl">
             Built an AI tool?{" "}
             <span className="text-gradient-primary">Get listed.</span>
           </h2>
@@ -63,7 +63,7 @@ export function ForToolMakers() {
             </Button>
           </Link>
           <Link href="/get-featured">
-            <Button size="lg" className="glow-sm">
+            <Button size="lg" className="rounded-full">
               <Star className="mr-2 h-4 w-4" />
               Get Featured
             </Button>

@@ -32,13 +32,13 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-32 lg:px-8">
       <FadeIn>
         <div className="text-center">
           <p className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
             How it works
           </p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-display sm:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-normal tracking-display sm:text-4xl">
             From discovery to recognition
           </h2>
         </div>
@@ -47,7 +47,7 @@ export function HowItWorks() {
       <StaggerChildren className="mt-12 grid gap-6 sm:gap-8 md:grid-cols-3">
         {steps.map((step, i) => (
           <StaggerItem key={step.title}>
-            <div className="relative rounded-2xl border border-border/50 bg-card p-6 sm:p-8 transition-colors hover:border-primary/20">
+            <div className="relative rounded-3xl border border-border/50 bg-card p-6 sm:p-8 transition-shadow duration-300 hover:shadow-md">
               <div className="mb-5 flex items-center gap-4">
                 <div
                   className={`flex h-12 w-12 items-center justify-center rounded-xl ${step.bg}`}
