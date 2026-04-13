@@ -199,7 +199,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
                   Visit {tool.name} <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
               </a>
-              <Link href={`/compare/${tool.slug}`}>
+              <Link href="/compare">
                 <Button variant="outline" size="lg">Compare</Button>
               </Link>
             </div>
