@@ -17,7 +17,8 @@
       "WebFetch(domain:linear.app)",
       "WebFetch(domain:vercel.com)",
       "WebFetch(domain:stripe.com)",
-      "WebFetch(domain:raycast.com)"
+      "WebFetch(domain:raycast.com)",
+      "Bash(npx next:*)"
     ]
   }
 }

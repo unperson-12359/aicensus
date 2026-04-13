@@ -6,21 +6,12 @@ import { Button } from "@/components/ui/button";
 import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
 import { JsonLd } from "@/components/shared/json-ld";
 import { FadeIn } from "@/components/motion";
-import { getToolBySlug, getToolAlternativesBidirectional, getAllToolSlugs } from "@/lib/queries/tools";
+import { getToolBySlug, getToolAlternativesBidirectional } from "@/lib/queries/tools";
 
 export const revalidate = 3600;
 
 interface Props {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  try {
-    const slugs = await getAllToolSlugs();
-    return slugs.map((slug) => ({ slug }));
-  } catch {
-    return [];
-  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
