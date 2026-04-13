@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
 import { getAllPosts } from "@/lib/blog";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Blog — AiCensus",
@@ -13,8 +14,17 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag?: string }>;
+}) {
+  const { tag: activeTag } = await searchParams;
+  const allPosts = getAllPosts();
+  const allTags = [...new Set(allPosts.flatMap((p) => p.tags))].sort();
+  const posts = activeTag
+    ? allPosts.filter((p) => p.tags.includes(activeTag))
+    : allPosts;
 
   return (
     <PageTransition>
@@ -32,6 +42,39 @@ export default function BlogPage() {
             </p>
           </div>
         </FadeIn>
+
+        {allTags.length > 0 && (
+          <FadeIn delay={0.1}>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
+              <Link
+                href="/blog"
+                className={cn(
+                  "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+                  !activeTag
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                )}
+              >
+                All
+              </Link>
+              {allTags.map((tag) => (
+                <Link
+                  key={tag}
+                  href={`/blog?tag=${encodeURIComponent(tag)}`}
+                  className={cn(
+                    "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+                    activeTag === tag
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                  )}
+                >
+                  <Tag className="mr-1 h-2.5 w-2.5" />
+                  {tag}
+                </Link>
+              ))}
+            </div>
+          </FadeIn>
+        )}
 
         {posts.length === 0 ? (
           <FadeIn delay={0.15}>

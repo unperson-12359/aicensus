@@ -16,8 +16,8 @@ const navLinks = [
   { href: "/categories", label: "Categories" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/submit", label: "Submit Tool" },
+  { href: "/blog", label: "Blog" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/about", label: "About" },
 ];
 
 export function Navbar() {
