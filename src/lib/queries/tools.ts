@@ -108,6 +108,30 @@ export async function getToolAlternatives(toolId: string) {
   return (data as ToolWithCategory[]) || [];
 }
 
+export async function getToolAlternativesBidirectional(toolId: string) {
+  const supabase = await createClient();
+
+  const [{ data: forward }, { data: reverse }] = await Promise.all([
+    supabase.from("tool_alternatives").select("alternative_id").eq("tool_id", toolId),
+    supabase.from("tool_alternatives").select("tool_id").eq("alternative_id", toolId),
+  ]);
+
+  const ids = new Set<string>();
+  for (const r of forward || []) ids.add(r.alternative_id);
+  for (const r of reverse || []) ids.add(r.tool_id);
+  ids.delete(toolId);
+
+  if (ids.size === 0) return [];
+
+  const { data } = await supabase
+    .from("tools")
+    .select("*, categories(*)")
+    .in("id", Array.from(ids))
+    .eq("status", "published");
+
+  return (data as ToolWithCategory[]) || [];
+}
+
 export async function getAllToolSlugs() {
   const supabase = await createClient();
 

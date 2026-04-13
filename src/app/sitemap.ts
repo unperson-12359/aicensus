@@ -48,6 +48,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     },
     {
+      url: `${baseUrl}/compare`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    {
       url: `${baseUrl}/portfolio`,
       lastModified: new Date(),
       changeFrequency: "daily",
@@ -93,6 +99,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.8,
     }));
+
+    const alternativePages: MetadataRoute.Sitemap = (tools || []).map((tool) => ({
+      url: `${baseUrl}/tools/${tool.slug}/alternatives`,
+      lastModified: new Date(tool.updated_at),
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    }));
+
+    toolPages = [...toolPages, ...alternativePages];
 
     categoryPages = (categories || []).map((cat) => ({
       url: `${baseUrl}/categories/${cat.slug}`,

@@ -202,10 +202,13 @@ export default async function ToolDetailPage({ params }: PageProps) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="glow-sm">
+                <Button size="lg">
                   Visit {tool.name} <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
               </a>
+              <Link href={`/compare/${tool.slug}`}>
+                <Button variant="outline" size="lg">Compare</Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -397,6 +400,11 @@ export default async function ToolDetailPage({ params }: PageProps) {
             />
             <div className="mt-8">
               <AnimatedToolGrid tools={alternatives} />
+            </div>
+            <div className="mt-4">
+              <Link href={`/tools/${tool.slug}/alternatives`} className="text-sm font-medium text-primary hover:underline">
+                View all alternatives →
+              </Link>
             </div>
           </FadeIn>
         )}
