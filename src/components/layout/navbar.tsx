@@ -3,16 +3,17 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
   { num: "01", href: "/tools", label: "Tools" },
-  { num: "02", href: "/categories", label: "Categories" },
-  { num: "03", href: "/blog", label: "Blog" },
-  { num: "04", href: "/pricing", label: "Pricing" },
+  { num: "02", href: "/stacks", label: "Stacks" },
+  { num: "03", href: "/categories", label: "Categories" },
+  { num: "04", href: "/blog", label: "Blog" },
+  { num: "05", href: "/pricing", label: "Pricing" },
 ];
 
 export function Navbar() {
@@ -77,8 +78,11 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Link href="/tools">
-            <Button size="sm">Browse tools</Button>
+          <Link href="/ask">
+            <Button size="sm">
+              <Sparkles className="mr-1 h-3 w-3" />
+              Ask AiCensus
+            </Button>
           </Link>
         </div>
 
@@ -107,8 +111,11 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="mt-6 border-t border-white/10 pt-6">
-                <Link href="/tools" onClick={() => setOpen(false)}>
-                  <Button className="w-full">Browse tools</Button>
+                <Link href="/ask" onClick={() => setOpen(false)}>
+                  <Button className="w-full">
+                    <Sparkles className="mr-1.5 h-3.5 w-3.5" />
+                    Ask AiCensus
+                  </Button>
                 </Link>
               </div>
             </nav>

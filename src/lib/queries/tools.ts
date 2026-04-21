@@ -143,12 +143,193 @@ export async function getAllToolSlugs() {
   return data?.map((t) => t.slug) || [];
 }
 
+export async function getToolsBySlugs(
+  slugs: string[]
+): Promise<ToolWithCategory[]> {
+  if (!slugs || slugs.length === 0) return [];
+
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("tools")
+    .select("*, categories(*)")
+    .in("slug", slugs)
+    .eq("status", "published");
+
+  if (error || !data) return [];
+
+  const rows = data as ToolWithCategory[];
+  // Preserve input slug order
+  const order = new Map<string, number>();
+  slugs.forEach((slug, i) => order.set(slug, i));
+  rows.sort(
+    (a, b) =>
+      (order.get(a.slug) ?? Number.MAX_SAFE_INTEGER) -
+      (order.get(b.slug) ?? Number.MAX_SAFE_INTEGER)
+  );
+  return rows;
+}
+
 export async function getFeaturedTools(limit = 6) {
   return getTools({ featured: true, limit, sort: "rating" });
 }
 
 export async function getRecentTools(limit = 6) {
   return getTools({ limit, sort: "newest" });
+}
+
+/**
+ * Lightweight tool shape used by the RAG retrieval path.
+ * Only includes fields needed to fit many rows into the LLM context window.
+ */
+export interface RagTool {
+  slug: string;
+  name: string;
+  tagline: string;
+  pricing_model: string;
+  category: string | null;
+  editor_rating: number | null;
+  key_features: string[];
+  use_cases: string[];
+}
+
+/**
+ * RAG retrieval: fetch published tools whose text fields loosely match the
+ * user's natural-language query. Falls back to top-rated tools if no matches.
+ */
+export async function getToolsForRAG(
+  query: string,
+  limit = 20
+): Promise<RagTool[]> {
+  const supabase = await createClient();
+
+  const sanitized = query.replace(/[,.()"\\%]/g, " ").trim();
+  const terms = sanitized
+    .split(/\s+/)
+    .filter((t) => t.length >= 3)
+    .slice(0, 6);
+
+  let q = supabase
+    .from("tools")
+    .select(
+      "slug, name, tagline, description, pricing_model, key_features, use_cases, editor_rating, categories(name, slug)"
+    )
+    .eq("status", "published");
+
+  if (terms.length > 0) {
+    const filters: string[] = [];
+    for (const term of terms) {
+      const safe = term.replace(/%/g, "");
+      filters.push(
+        `name.ilike.%${safe}%`,
+        `tagline.ilike.%${safe}%`,
+        `description.ilike.%${safe}%`
+      );
+    }
+    q = q.or(filters.join(","));
+  }
+
+  q = q
+    .order("editor_rating", { ascending: false, nullsFirst: false })
+    .limit(limit);
+
+  const { data, error } = await q;
+
+  type RagRow = {
+    slug: string;
+    name: string;
+    tagline: string;
+    description: string | null;
+    pricing_model: string;
+    key_features: string[] | null;
+    use_cases: string[] | null;
+    editor_rating: number | null;
+    categories: { name: string; slug: string } | null;
+  };
+
+  let rows = (data as RagRow[] | null) ?? [];
+
+  // If the search returned nothing, fall back to top-rated tools so the LLM
+  // always has some context to recommend from.
+  if ((error || rows.length === 0) && terms.length > 0) {
+    const { data: fallback } = await supabase
+      .from("tools")
+      .select(
+        "slug, name, tagline, description, pricing_model, key_features, use_cases, editor_rating, categories(name, slug)"
+      )
+      .eq("status", "published")
+      .order("editor_rating", { ascending: false, nullsFirst: false })
+      .limit(limit);
+    rows = (fallback as RagRow[] | null) ?? [];
+  }
+
+  return rows.map((r) => ({
+    slug: r.slug,
+    name: r.name,
+    tagline: r.tagline,
+    pricing_model: r.pricing_model,
+    category: r.categories?.name ?? null,
+    editor_rating: r.editor_rating,
+    key_features: Array.isArray(r.key_features) ? r.key_features.slice(0, 4) : [],
+    use_cases: Array.isArray(r.use_cases) ? r.use_cases.slice(0, 3) : [],
+  }));
+}
+
+/**
+ * Lightweight public-facing tool shape used when the frontend needs to render
+ * "mentioned" tool cards after a chat response.
+ */
+export interface MentionedTool {
+  slug: string;
+  name: string;
+  tagline: string;
+  pricing_model: string;
+  category: string | null;
+  website_url: string;
+  logo_url: string | null;
+}
+
+/**
+ * Fetch a compact set of tools by slug shaped for chat rendering (small
+ * payload, includes website_url and logo_url for the tool-card avatars).
+ * Renamed to avoid colliding with the fuller `getToolsBySlugs` above, which
+ * returns `ToolWithCategory[]`.
+ */
+export async function getToolsForChatMeta(
+  slugs: string[]
+): Promise<MentionedTool[]> {
+  if (slugs.length === 0) return [];
+  const unique = Array.from(new Set(slugs)).slice(0, 25);
+  const supabase = await createClient();
+
+  const { data } = await supabase
+    .from("tools")
+    .select(
+      "slug, name, tagline, pricing_model, website_url, logo_url, categories(name)"
+    )
+    .eq("status", "published")
+    .in("slug", unique);
+
+  type Row = {
+    slug: string;
+    name: string;
+    tagline: string;
+    pricing_model: string;
+    website_url: string;
+    logo_url: string | null;
+    categories: { name: string } | null;
+  };
+
+  const rows = (data as Row[] | null) ?? [];
+  return rows.map((r) => ({
+    slug: r.slug,
+    name: r.name,
+    tagline: r.tagline,
+    pricing_model: r.pricing_model,
+    category: r.categories?.name ?? null,
+    website_url: r.website_url,
+    logo_url: r.logo_url,
+  }));
 }
 
 export async function getToolsByCategory(

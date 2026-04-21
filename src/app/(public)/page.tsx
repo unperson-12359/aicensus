@@ -184,6 +184,22 @@ export default async function HomePage() {
                 </Link>
               </div>
 
+              <Link
+                href="/ask"
+                className="group inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
+              >
+                or try → Ask AiCensus
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+
+              <Link
+                href="/stacks"
+                className="group inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/45 transition-colors hover:text-white sm:text-[11px]"
+              >
+                or build from a → recipe
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+
               <div className="grid grid-cols-3 gap-3 border-t border-white/10 pt-4">
                 <div>
                   <div className="font-serif text-2xl italic sm:text-3xl">

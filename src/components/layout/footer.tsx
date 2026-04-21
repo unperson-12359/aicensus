@@ -3,6 +3,8 @@ import Link from "next/link";
 const footerLinks = {
   Product: [
     { href: "/tools", label: "Browse tools" },
+    { href: "/stacks", label: "Stacks" },
+    { href: "/ask", label: "Ask AiCensus" },
     { href: "/categories", label: "Categories" },
     { href: "/get-featured", label: "Get featured" },
     { href: "/pricing", label: "Pricing" },

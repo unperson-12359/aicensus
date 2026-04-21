@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { stacks } from "@/lib/stacks";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
@@ -7,6 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: baseUrl, lastModified: new Date(), changeFrequency: "daily", priority: 1.0 },
     { url: `${baseUrl}/tools`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
     { url: `${baseUrl}/categories`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${baseUrl}/stacks`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
     { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.4 },
     { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.4 },
     { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
@@ -16,6 +18,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/faq`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.3 },
     { url: `${baseUrl}/changelog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.3 },
   ];
+
+  const stackPages: MetadataRoute.Sitemap = stacks.map((stack) => ({
+    url: `${baseUrl}/stacks/${stack.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
 
   let blogPages: MetadataRoute.Sitemap = [];
   try {
@@ -76,5 +85,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Supabase not configured
   }
 
-  return [...staticPages, ...blogPages, ...toolPages, ...categoryPages];
+  return [
+    ...staticPages,
+    ...stackPages,
+    ...blogPages,
+    ...toolPages,
+    ...categoryPages,
+  ];
 }
