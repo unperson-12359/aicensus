@@ -5,6 +5,7 @@ import {
   ScalableTagFilter,
   type TagItem,
 } from "@/components/filters/scalable-tag-filter";
+import { CollapsibleFilterPanel } from "@/components/filters/collapsible-filter-panel";
 
 type Props = {
   tags: TagItem[];
@@ -28,17 +29,23 @@ export function BlogTagFilter({ tags, activeTag }: Props) {
   }
 
   return (
-    <ScalableTagFilter
-      label="Topics"
-      tags={tags}
-      selected={selected}
-      onToggle={handleToggle}
-      onClearAll={handleClearAll}
-      allLabel="All"
-      inlineLimit={8}
-      singleSelect
-      iconPerChip
-      searchPlaceholder="Search topics..."
-    />
+    <CollapsibleFilterPanel
+      label={activeTag ? `Topic: ${activeTag}` : "Filter by topic"}
+      activeCount={selected.length}
+      defaultOpen={!!activeTag}
+    >
+      <ScalableTagFilter
+        label="Topics"
+        tags={tags}
+        selected={selected}
+        onToggle={handleToggle}
+        onClearAll={handleClearAll}
+        allLabel="All"
+        inlineLimit={8}
+        singleSelect
+        iconPerChip
+        searchPlaceholder="Search topics..."
+      />
+    </CollapsibleFilterPanel>
   );
 }

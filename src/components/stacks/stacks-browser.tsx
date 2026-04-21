@@ -11,6 +11,7 @@ import {
   CONSTRAINT_LABELS,
 } from "@/lib/stacks";
 import { ScalableTagFilter } from "@/components/filters/scalable-tag-filter";
+import { CollapsibleFilterPanel } from "@/components/filters/collapsible-filter-panel";
 
 interface StackLogoMap {
   [slug: string]: {
@@ -150,62 +151,71 @@ export function StacksBrowser({
     <>
       {/* Filter panel */}
       <div className="mt-10 border-t border-white/10 pt-6 sm:mt-12 sm:pt-8">
-        <div className="space-y-5">
-          <div>
-            <div className="flex items-center gap-3">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50">
-                Constraints
-              </p>
-              <span className="h-px flex-1 bg-white/10" />
-            </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {ALL_CONSTRAINTS.map((c) => (
-                <Chip
-                  key={c}
-                  active={activeConstraints.has(c)}
-                  onClick={() => toggleConstraint(c)}
-                >
-                  {CONSTRAINT_LABELS[c]}
-                </Chip>
-              ))}
-            </div>
-          </div>
+        <div className="flex items-center justify-between gap-4">
+          <CollapsibleFilterPanel
+            label="Filters"
+            activeCount={activeConstraints.size + activeUseCases.size}
+            defaultOpen={hasFilters}
+          >
+            <div className="space-y-5">
+              <div>
+                <div className="flex items-center gap-3">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50">
+                    Constraints
+                  </p>
+                  <span className="h-px flex-1 bg-white/10" />
+                </div>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {ALL_CONSTRAINTS.map((c) => (
+                    <Chip
+                      key={c}
+                      active={activeConstraints.has(c)}
+                      onClick={() => toggleConstraint(c)}
+                    >
+                      {CONSTRAINT_LABELS[c]}
+                    </Chip>
+                  ))}
+                </div>
+              </div>
 
-          <div>
-            <div className="flex items-center gap-3">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50">
-                Use case
-              </p>
-              <span className="h-px flex-1 bg-white/10" />
-            </div>
-            <div className="mt-3">
-              <ScalableTagFilter
-                label="Use cases"
-                tags={useCaseItems}
-                selected={Array.from(activeUseCases)}
-                onToggle={toggleUseCase}
-                onClearAll={() => setActiveUseCases(new Set())}
-                inlineLimit={8}
-                variant="mono"
-                searchPlaceholder="Search use cases..."
-              />
-            </div>
-          </div>
-        </div>
+              <div>
+                <div className="flex items-center gap-3">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50">
+                    Use case
+                  </p>
+                  <span className="h-px flex-1 bg-white/10" />
+                </div>
+                <div className="mt-3">
+                  <ScalableTagFilter
+                    label="Use cases"
+                    tags={useCaseItems}
+                    selected={Array.from(activeUseCases)}
+                    onToggle={toggleUseCase}
+                    onClearAll={() => setActiveUseCases(new Set())}
+                    inlineLimit={8}
+                    variant="mono"
+                    searchPlaceholder="Search use cases..."
+                  />
+                </div>
+              </div>
 
-        <div className="mt-5 flex items-center justify-between gap-4">
+              {hasFilters && (
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    onClick={clearAll}
+                    className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 underline-offset-4 transition-colors hover:text-white hover:underline sm:text-[11px]"
+                  >
+                    Clear filters
+                  </button>
+                </div>
+              )}
+            </div>
+          </CollapsibleFilterPanel>
+
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
             {filtered.length} {filtered.length === 1 ? "stack" : "stacks"}
           </p>
-          {hasFilters && (
-            <button
-              type="button"
-              onClick={clearAll}
-              className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 underline-offset-4 transition-colors hover:text-white hover:underline sm:text-[11px]"
-            >
-              Clear filters
-            </button>
-          )}
         </div>
       </div>
 
