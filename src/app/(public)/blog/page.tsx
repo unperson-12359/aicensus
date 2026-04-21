@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Calendar, Clock, Tag } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
 import { Pagination } from "@/components/shared/pagination";
 import { PaginationInfo } from "@/components/shared/pagination-info";
+import { BlogTagFilter } from "@/components/blog/blog-tag-filter";
 import { getAllPosts } from "@/lib/blog";
-import { cn } from "@/lib/utils";
 
 const POSTS_PER_PAGE = 9;
 
@@ -25,7 +25,16 @@ export default async function BlogPage({
 }) {
   const { tag: activeTag, page: pageParam } = await searchParams;
   const allPosts = getAllPosts();
-  const allTags = [...new Set(allPosts.flatMap((p) => p.tags))].sort();
+
+  // Build tag items sorted by popularity (most used first).
+  const tagCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
+    for (const t of p.tags) acc[t] = (acc[t] ?? 0) + 1;
+    return acc;
+  }, {});
+  const tagItems = Object.entries(tagCounts)
+    .map(([value, count]) => ({ value, count }))
+    .sort((a, b) => b.count - a.count || a.value.localeCompare(b.value));
+
   const filtered = activeTag
     ? allPosts.filter((p) => p.tags.includes(activeTag))
     : allPosts;
@@ -54,35 +63,10 @@ export default async function BlogPage({
           </p>
         </FadeIn>
 
-        {allTags.length > 0 && (
+        {tagItems.length > 0 && (
           <FadeIn delay={0.1}>
-            <div className="mt-6 flex flex-wrap items-center gap-2">
-              <Link
-                href="/blog"
-                className={cn(
-                  "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors",
-                  !activeTag
-                    ? "border-white bg-white text-black"
-                    : "border-white/15 text-muted-foreground hover:border-white/40 hover:text-foreground"
-                )}
-              >
-                All
-              </Link>
-              {allTags.map((tag) => (
-                <Link
-                  key={tag}
-                  href={`/blog?tag=${encodeURIComponent(tag)}`}
-                  className={cn(
-                    "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors",
-                    activeTag === tag
-                      ? "border-white bg-white text-black"
-                      : "border-white/15 text-muted-foreground hover:border-white/40 hover:text-foreground"
-                  )}
-                >
-                  <Tag className="mr-1 h-2.5 w-2.5" />
-                  {tag}
-                </Link>
-              ))}
+            <div className="mt-6">
+              <BlogTagFilter tags={tagItems} activeTag={activeTag} />
             </div>
           </FadeIn>
         )}

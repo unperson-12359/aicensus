@@ -100,7 +100,7 @@ export const stacks: Stack[] = [
         why: "Best-in-class text-in-image means you can ship branded hero art — logos, product shots with legible text — without a designer. Midjourney looks prettier; Ideogram ships faster.",
       },
       {
-        toolSlug: "canva",
+        toolSlug: "canva-ai",
         role: "Social assets",
         why: "OG image, Twitter card, LinkedIn share. Canva's Magic Design has you covered — match the landing page, export five sizes, done.",
       },
@@ -336,7 +336,7 @@ export const stacks: Stack[] = [
         why: "For the occasional shot you absolutely can't film — a drone over a canyon, a dream sequence, a product in zero gravity. Used sparingly, it raises the ceiling.",
       },
       {
-        toolSlug: "canva",
+        toolSlug: "canva-ai",
         role: "Thumbnails + end cards",
         why: "Thumbnails are 50% of the CTR fight. Canva's Magic Design nails them in minutes and keeps the whole channel's brand coherent.",
       },
@@ -372,7 +372,7 @@ export const stacks: Stack[] = [
         why: "Brand voice is just vocabulary choices and rhythm. Claude distills it from five sample paragraphs into a usable style guide anyone on the team can follow.",
       },
       {
-        toolSlug: "canva",
+        toolSlug: "canva-ai",
         role: "Asset production",
         why: "Once the brand is set, Canva is where marketing operationalizes it — 50 social posts a month, on-brand, without bothering the founder.",
       },
@@ -449,7 +449,7 @@ export const stacks: Stack[] = [
         why: "Your YouTube video becomes TikToks, Reels, and Shorts automatically. Same hour of shooting, five distribution channels.",
       },
       {
-        toolSlug: "canva",
+        toolSlug: "canva-ai",
         role: "Thumbnails",
         why: "The single biggest CTR lever on YouTube. Canva's thumbnail A/B workflow helps you iterate until the curve points up.",
       },

@@ -373,10 +373,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  let supabase;
-  try {
-    supabase = createAdminClient();
-  } catch {
+  let supabase = createAdminClient();
+  if (!supabase) {
     // Fallback to regular client if no service role key
     const { createClient } = await import("@supabase/supabase-js");
     supabase = createClient(

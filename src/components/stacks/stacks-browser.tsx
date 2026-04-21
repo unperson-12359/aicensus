@@ -10,6 +10,7 @@ import {
   ALL_CONSTRAINTS,
   CONSTRAINT_LABELS,
 } from "@/lib/stacks";
+import { ScalableTagFilter } from "@/components/filters/scalable-tag-filter";
 
 interface StackLogoMap {
   [slug: string]: {
@@ -21,7 +22,21 @@ interface StackLogoMap {
 interface StacksBrowserProps {
   stacks: Stack[];
   logos: StackLogoMap;
-  allUseCases: string[];
+}
+
+// Build use-case tag items sorted by frequency across stacks.
+function buildUseCaseItems(stacks: Stack[]) {
+  const counts: Record<string, number> = {};
+  for (const s of stacks) {
+    for (const u of s.useCases) counts[u] = (counts[u] ?? 0) + 1;
+  }
+  return Object.entries(counts)
+    .map(([value, count]) => ({
+      value,
+      label: humanUseCase(value),
+      count,
+    }))
+    .sort((a, b) => b.count - a.count || a.value.localeCompare(b.value));
 }
 
 // Human-friendly labels for use-case chips
@@ -82,12 +97,13 @@ function Chip({
 export function StacksBrowser({
   stacks,
   logos,
-  allUseCases,
 }: StacksBrowserProps) {
   const [activeConstraints, setActiveConstraints] = useState<
     Set<StackConstraint>
   >(new Set());
   const [activeUseCases, setActiveUseCases] = useState<Set<string>>(new Set());
+
+  const useCaseItems = useMemo(() => buildUseCaseItems(stacks), [stacks]);
 
   const filtered = useMemo(() => {
     return stacks.filter((s) => {
@@ -162,16 +178,17 @@ export function StacksBrowser({
               </p>
               <span className="h-px flex-1 bg-white/10" />
             </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {allUseCases.map((u) => (
-                <Chip
-                  key={u}
-                  active={activeUseCases.has(u)}
-                  onClick={() => toggleUseCase(u)}
-                >
-                  {humanUseCase(u)}
-                </Chip>
-              ))}
+            <div className="mt-3">
+              <ScalableTagFilter
+                label="Use cases"
+                tags={useCaseItems}
+                selected={Array.from(activeUseCases)}
+                onToggle={toggleUseCase}
+                onClearAll={() => setActiveUseCases(new Set())}
+                inlineLimit={8}
+                variant="mono"
+                searchPlaceholder="Search use cases..."
+              />
             </div>
           </div>
         </div>

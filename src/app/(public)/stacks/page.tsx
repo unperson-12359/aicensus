@@ -3,7 +3,7 @@ import { FadeIn, RevealText } from "@/components/motion";
 import { StacksBrowser } from "@/components/stacks/stacks-browser";
 import { getToolsBySlugs } from "@/lib/queries/tools";
 import { getLogoUrl } from "@/lib/utils";
-import { stacks, getAllUseCases } from "@/lib/stacks";
+import { stacks } from "@/lib/stacks";
 
 export const revalidate = 3600;
 
@@ -41,8 +41,6 @@ export default async function StacksIndexPage() {
     };
   }
 
-  const useCases = getAllUseCases();
-
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       <FadeIn>
@@ -67,11 +65,7 @@ export default async function StacksIndexPage() {
         </p>
       </FadeIn>
 
-      <StacksBrowser
-        stacks={stacks}
-        logos={logoMap}
-        allUseCases={useCases}
-      />
+      <StacksBrowser stacks={stacks} logos={logoMap} />
     </div>
   );
 }

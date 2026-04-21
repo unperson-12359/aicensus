@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { streamText } from "ai";
 import { createGroq } from "@ai-sdk/groq";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import {
   getToolsForRAG,
   getToolsForChatMeta,
@@ -43,64 +43,43 @@ function getClientIp(request: NextRequest): string {
 }
 
 /**
- * Attempt to increment and check the per-IP daily counter. Fails open on any
- * error (missing table, permission issue, etc.) so the chatbot works even
- * before the migration is applied.
+ * Atomic per-IP daily rate-limit check via the `chat_rate_limit_hit` RPC.
  *
- * Returns `{ allowed: true }` if the request should proceed, or
- * `{ allowed: false, remaining: 0 }` if the IP has exceeded the limit.
+ * The RPC runs as SECURITY DEFINER and is locked down to service_role, so
+ * we use a service-role client. If the service-role key isn't configured,
+ * we fail open with a loud warning — this is the dev ergonomic path; in
+ * production SUPABASE_SERVICE_ROLE_KEY must be set.
  */
 async function checkRateLimit(
   ip: string
 ): Promise<{ allowed: boolean; limit: number; remaining: number }> {
-  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD, UTC
+  const admin = createAdminClient();
+  if (!admin) {
+    console.warn(
+      "[ask] SUPABASE_SERVICE_ROLE_KEY not set — rate limit DISABLED. Set it in production."
+    );
+    return { allowed: true, limit: DAILY_LIMIT, remaining: DAILY_LIMIT };
+  }
+
   try {
-    const supabase = await createClient();
+    const { data, error } = await admin.rpc("chat_rate_limit_hit", {
+      p_ip: ip,
+      p_daily_limit: DAILY_LIMIT,
+    });
 
-    // Read the current count.
-    const { data: existing, error: readErr } = await supabase
-      .from("chat_rate_limits")
-      .select("count")
-      .eq("ip", ip)
-      .eq("day", today)
-      .maybeSingle();
-
-    if (readErr) {
-      // Table doesn't exist or auth issue — fail open.
-      console.warn("[ask] rate-limit read skipped:", readErr.message);
+    if (error) {
+      console.warn("[ask] rate-limit RPC failed (failing open):", error.message);
       return { allowed: true, limit: DAILY_LIMIT, remaining: DAILY_LIMIT };
     }
 
-    const currentCount = (existing as { count?: number } | null)?.count ?? 0;
-
-    if (currentCount >= DAILY_LIMIT) {
-      return { allowed: false, limit: DAILY_LIMIT, remaining: 0 };
-    }
-
-    // Increment.
-    const { error: writeErr } = await supabase
-      .from("chat_rate_limits")
-      .upsert(
-        {
-          ip,
-          day: today,
-          count: currentCount + 1,
-          updated_at: new Date().toISOString(),
-        },
-        { onConflict: "ip,day" }
-      );
-
-    if (writeErr) {
-      console.warn("[ask] rate-limit write skipped:", writeErr.message);
-      // Fail open if the write fails.
+    const row = Array.isArray(data) ? data[0] : data;
+    if (!row) {
       return { allowed: true, limit: DAILY_LIMIT, remaining: DAILY_LIMIT };
     }
 
-    return {
-      allowed: true,
-      limit: DAILY_LIMIT,
-      remaining: Math.max(0, DAILY_LIMIT - (currentCount + 1)),
-    };
+    const allowed = Boolean((row as { allowed?: boolean }).allowed);
+    const remaining = Number((row as { remaining?: number }).remaining ?? 0);
+    return { allowed, limit: DAILY_LIMIT, remaining };
   } catch (err) {
     console.warn("[ask] rate-limit errored, failing open:", err);
     return { allowed: true, limit: DAILY_LIMIT, remaining: DAILY_LIMIT };
