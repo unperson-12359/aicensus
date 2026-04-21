@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Wrench, Inbox, FolderOpen, Plus, Briefcase, CreditCard } from "lucide-react";
+import { Wrench, Inbox, FolderOpen, Plus, CreditCard } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/server";
@@ -14,7 +14,6 @@ async function getStats() {
       { count: draftTools },
       { count: pendingSubmissions },
       { count: totalCategories },
-      { count: pendingPortfolios },
       { count: activeSubscriptions },
     ] = await Promise.all([
       supabase.from("tools").select("*", { count: "exact", head: true }),
@@ -22,7 +21,6 @@ async function getStats() {
       supabase.from("tools").select("*", { count: "exact", head: true }).eq("status", "draft"),
       supabase.from("submissions").select("*", { count: "exact", head: true }).eq("status", "pending"),
       supabase.from("categories").select("*", { count: "exact", head: true }),
-      supabase.from("portfolio_projects").select("*", { count: "exact", head: true }).eq("status", "pending_review"),
       supabase.from("featured_subscriptions").select("*", { count: "exact", head: true }).eq("status", "active"),
     ]);
 
@@ -32,7 +30,6 @@ async function getStats() {
       draftTools: draftTools || 0,
       pendingSubmissions: pendingSubmissions || 0,
       totalCategories: totalCategories || 0,
-      pendingPortfolios: pendingPortfolios || 0,
       activeSubscriptions: activeSubscriptions || 0,
     };
   } catch {
@@ -42,7 +39,6 @@ async function getStats() {
       draftTools: 0,
       pendingSubmissions: 0,
       totalCategories: 0,
-      pendingPortfolios: 0,
       activeSubscriptions: 0,
     };
   }
@@ -52,53 +48,12 @@ export default async function AdminDashboard() {
   const stats = await getStats();
 
   const statCards = [
-    {
-      label: "Total Tools",
-      value: stats.totalTools,
-      icon: Wrench,
-      href: "/admin/tools",
-    },
-    {
-      label: "Published",
-      value: stats.publishedTools,
-      icon: Wrench,
-      href: "/admin/tools?status=published",
-      color: "text-green-400",
-    },
-    {
-      label: "Drafts",
-      value: stats.draftTools,
-      icon: Wrench,
-      href: "/admin/tools?status=draft",
-      color: "text-yellow-400",
-    },
-    {
-      label: "Pending Submissions",
-      value: stats.pendingSubmissions,
-      icon: Inbox,
-      href: "/admin/submissions",
-      color: stats.pendingSubmissions > 0 ? "text-primary" : undefined,
-    },
-    {
-      label: "Categories",
-      value: stats.totalCategories,
-      icon: FolderOpen,
-      href: "/admin/categories",
-    },
-    {
-      label: "Pending Portfolios",
-      value: stats.pendingPortfolios,
-      icon: Briefcase,
-      href: "/admin/portfolios",
-      color: stats.pendingPortfolios > 0 ? "text-primary" : undefined,
-    },
-    {
-      label: "Active Subscriptions",
-      value: stats.activeSubscriptions,
-      icon: CreditCard,
-      href: "/admin/subscriptions",
-      color: stats.activeSubscriptions > 0 ? "text-green-400" : undefined,
-    },
+    { label: "Total Tools", value: stats.totalTools, icon: Wrench, href: "/admin/tools" },
+    { label: "Published", value: stats.publishedTools, icon: Wrench, href: "/admin/tools?status=published", color: "text-green-400" },
+    { label: "Drafts", value: stats.draftTools, icon: Wrench, href: "/admin/tools?status=draft", color: "text-yellow-400" },
+    { label: "Pending Submissions", value: stats.pendingSubmissions, icon: Inbox, href: "/admin/submissions", color: stats.pendingSubmissions > 0 ? "text-primary" : undefined },
+    { label: "Categories", value: stats.totalCategories, icon: FolderOpen, href: "/admin/categories" },
+    { label: "Active Subscriptions", value: stats.activeSubscriptions, icon: CreditCard, href: "/admin/subscriptions", color: stats.activeSubscriptions > 0 ? "text-green-400" : undefined },
   ];
 
   return (
@@ -136,7 +91,6 @@ export default async function AdminDashboard() {
         ))}
       </div>
 
-      {/* Quick Actions */}
       <div className="mt-8">
         <h2 className="text-lg font-semibold">Quick Actions</h2>
         <div className="mt-4 flex flex-wrap gap-3">
@@ -161,17 +115,6 @@ export default async function AdminDashboard() {
             <Button variant="outline">
               <FolderOpen className="mr-2 h-4 w-4" />
               Manage Categories
-            </Button>
-          </Link>
-          <Link href="/admin/portfolios">
-            <Button variant="outline">
-              <Briefcase className="mr-2 h-4 w-4" />
-              Review Portfolios
-              {stats.pendingPortfolios > 0 && (
-                <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground">
-                  {stats.pendingPortfolios}
-                </span>
-              )}
             </Button>
           </Link>
           <Link href="/admin/subscriptions">

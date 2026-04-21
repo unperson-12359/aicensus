@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Wrench,
@@ -9,13 +9,11 @@ import {
   Inbox,
   FolderOpen,
   LogOut,
-  Briefcase,
   CreditCard,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -23,7 +21,6 @@ const navItems = [
   { href: "/admin/tools/new", label: "Add Tool", icon: Plus },
   { href: "/admin/submissions", label: "Submissions", icon: Inbox },
   { href: "/admin/categories", label: "Categories", icon: FolderOpen },
-  { href: "/admin/portfolios", label: "Portfolios", icon: Briefcase },
   { href: "/admin/subscriptions", label: "Subscriptions", icon: CreditCard },
 ];
 
@@ -39,17 +36,15 @@ export function AdminSidebar() {
 
   return (
     <aside className="flex h-screen w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar">
-      {/* Logo */}
       <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-6">
         <span className="font-display text-lg font-bold tracking-tight">
-          <span className="text-primary">Ai</span>Census
+          AiCensus<span className="text-white/40">.</span>
         </span>
         <span className="ml-auto rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground">
           Admin
         </span>
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 space-y-1 px-3 py-4">
         {navItems.map((item) => {
           const isActive =
@@ -75,7 +70,6 @@ export function AdminSidebar() {
         })}
       </nav>
 
-      {/* Footer */}
       <div className="border-t border-sidebar-border p-3">
         <Link
           href="/"

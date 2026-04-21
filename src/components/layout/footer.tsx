@@ -2,45 +2,43 @@ import Link from "next/link";
 
 const footerLinks = {
   Product: [
-    { href: "/tools", label: "Browse Tools" },
+    { href: "/tools", label: "Browse tools" },
     { href: "/categories", label: "Categories" },
-    { href: "/portfolio", label: "Portfolios" },
-    { href: "/submit", label: "Submit a Tool" },
-    { href: "/get-featured", label: "Get Featured" },
+    { href: "/submit", label: "Submit a tool" },
+    { href: "/get-featured", label: "Get featured" },
     { href: "/pricing", label: "Pricing" },
   ],
   Resources: [
     { href: "/blog", label: "Blog" },
     { href: "/faq", label: "FAQ" },
-    { href: "/changelog", label: "What's New" },
-    { href: "/contact", label: "Contact" },
+    { href: "/changelog", label: "What's new" },
     { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
   ],
   Legal: [
-    { href: "/privacy", label: "Privacy Policy" },
-    { href: "/terms", label: "Terms of Service" },
+    { href: "/privacy", label: "Privacy" },
+    { href: "/terms", label: "Terms" },
   ],
 };
 
 export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-2 md:grid-cols-5">
-          {/* Brand */}
           <div className="col-span-2">
             <Link href="/" className="group inline-flex items-center gap-2">
+              <span aria-hidden className="h-2 w-2 rounded-full bg-white" />
               <span className="font-display text-xl font-bold tracking-tight">
                 AiCensus<span className="text-white/40">.</span>
               </span>
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              The trusted directory of AI tools and a free portfolio for builders.
-              Discover tools, showcase your work, and connect with the community.
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
+              The curated directory of AI tools. Handpicked, reviewed, priced —
+              no noise.
             </p>
           </div>
 
-          {/* Link Groups */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
               <h3 className="tracking-accent text-white/60">{title}</h3>
@@ -60,26 +58,14 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-10 border-t border-white/10 pt-6">
+        <div className="mt-12 border-t border-white/10 pt-6">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <p className="text-xs text-muted-foreground">
               &copy; {new Date().getFullYear()} AiCensus. All rights reserved.
             </p>
-            <div className="flex items-center gap-6">
-              <Link
-                href="/privacy"
-                className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Privacy
-              </Link>
-              <Link
-                href="/terms"
-                className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Terms
-              </Link>
-            </div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              est. 2026 · built in the open
+            </p>
           </div>
         </div>
       </div>

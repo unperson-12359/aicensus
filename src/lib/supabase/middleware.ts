@@ -5,7 +5,6 @@ function isWriteOrReviewAdminPath(pathname: string) {
   return (
     pathname.startsWith("/admin/submissions") ||
     pathname.startsWith("/admin/categories") ||
-    pathname.startsWith("/admin/portfolios") ||
     pathname.startsWith("/admin/subscriptions") ||
     pathname === "/admin/tools/new" ||
     /^\/admin\/tools\/[^/]+\/edit$/.test(pathname)
@@ -40,39 +39,12 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  // Refresh the session
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   const pathname = request.nextUrl.pathname;
 
-  // Protect dashboard routes — any authenticated user
-  if (pathname.startsWith("/dashboard")) {
-    if (!user) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      url.searchParams.set("redirect", pathname);
-      return NextResponse.redirect(url);
-    }
-  }
-
-  // Redirect logged-in users away from auth pages
-  if (pathname === "/login" || pathname === "/signup" || pathname === "/forgot-password") {
-    if (user) {
-      const { data: profile } = await supabase
-        .from("user_profiles")
-        .select("username")
-        .eq("id", user.id)
-        .single();
-
-      if (profile) {
-        return NextResponse.redirect(new URL("/dashboard", request.url));
-      }
-    }
-  }
-
-  // Protect admin routes
   if (
     pathname.startsWith("/admin") &&
     !pathname.startsWith("/admin/login")
@@ -83,7 +55,6 @@ export async function updateSession(request: NextRequest) {
       return NextResponse.redirect(url);
     }
 
-    // Require a valid admin profile for admin routes
     const { data: profile } = await supabase
       .from("admin_profiles")
       .select("role")
@@ -96,7 +67,6 @@ export async function updateSession(request: NextRequest) {
       return NextResponse.redirect(url);
     }
 
-    // Optionally redirect non-admin roles away from write/review pages.
     if (profile.role !== "admin" && isWriteOrReviewAdminPath(request.nextUrl.pathname)) {
       const url = request.nextUrl.clone();
       url.pathname = "/admin";
