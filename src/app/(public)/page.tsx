@@ -14,7 +14,6 @@ import {
   AnimatedCounter,
 } from "@/components/motion";
 import { HowItWorks } from "@/components/home/how-it-works";
-import { ForToolMakers } from "@/components/home/for-tool-makers";
 import { TopTicker } from "@/components/home/top-ticker";
 import { SectionRail } from "@/components/home/section-rail";
 import { ChapterHeading } from "@/components/home/chapter-heading";
@@ -44,8 +43,7 @@ const sections = [
   { id: "ch-02", label: "Picks" },
   { id: "ch-03", label: "Map" },
   { id: "ch-04", label: "Flow" },
-  { id: "ch-05", label: "Makers" },
-  { id: "ch-06", label: "Join" },
+  { id: "ch-05", label: "Join" },
 ];
 
 const tickerItems = [
@@ -412,56 +410,41 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ─────────── § 05 — FOR MAKERS ─────────── */}
+      {/* ─────────── § 05 — FINAL CTA ─────────── */}
       <section
         id="ch-05"
         className="relative border-t border-white/10 py-10 sm:py-14"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <ChapterHeading num="05" label="For tool makers" />
-          </FadeIn>
-          <div className="mt-5 sm:mt-6">
-            <ForToolMakers />
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────── § 06 — JOIN / FINAL CTA ─────────── */}
-      <section
-        id="ch-06"
-        className="relative border-t border-white/10 py-10 sm:py-14"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <ChapterHeading num="06" label="Join" />
+            <ChapterHeading num="05" label="Start" />
           </FadeIn>
 
           <div className="mt-6 grid gap-6 sm:mt-8 lg:grid-cols-12 lg:items-end lg:gap-8">
             <div className="lg:col-span-8">
               <RevealText>
                 <h2 className="font-serif text-[clamp(2rem,5.5vw,4.25rem)] font-normal leading-[0.98] tracking-[-0.035em]">
-                  Build. Ship.{" "}
-                  <em className="italic text-white/50">Get listed.</em>
+                  Find your{" "}
+                  <em className="italic text-white/50">stack</em>.
                 </h2>
               </RevealText>
               <FadeIn delay={0.15}>
                 <p className="mt-4 max-w-xl font-serif text-base italic leading-relaxed text-white/70">
-                  Browse the index. Find what you need. It&apos;s free.
+                  Browse the index. Ask the bot. Build from a recipe. All free.
                 </p>
               </FadeIn>
             </div>
             <FadeIn delay={0.25} className="lg:col-span-4">
               <div className="flex flex-col gap-2 sm:flex-row lg:flex-col">
-                <Link href="/tools" className="flex-1">
+                <Link href="/ask" className="flex-1">
                   <Button size="default" className="w-full">
-                    Browse tools
+                    Ask AiCensus
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="/categories" className="flex-1">
+                <Link href="/stacks" className="flex-1">
                   <Button size="default" variant="outline" className="w-full">
-                    Explore categories
+                    Browse stacks
                   </Button>
                 </Link>
               </div>

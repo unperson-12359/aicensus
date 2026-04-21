@@ -12,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: "Frequently Asked Questions — AiCensus",
   description:
-    "Common questions about the AiCensus AI tools directory and featured listings.",
+    "Common questions about the AiCensus AI tools directory.",
   alternates: { canonical: "/faq" },
 };
 
@@ -38,12 +38,12 @@ const faqCategories: FaqCategory[] = [
       {
         question: "Is AiCensus free to use?",
         answer:
-          "Yes. Browsing the directory, comparing tools, and reading reviews are completely free. We offer a paid Featured listing for tool makers who want priority placement.",
+          "Yes — browsing the directory, comparing tools, asking the bot, and browsing stack recipes are all free. No account required.",
       },
       {
         question: "Who is AiCensus for?",
         answer:
-          "Anyone looking for the right AI tool for a project — builders, founders, researchers, students — and tool makers who want to be discovered.",
+          "Anyone looking for the right AI tool for a project — builders, founders, researchers, students — and anyone curious about the AI ecosystem.",
       },
     ],
   },
@@ -64,26 +64,6 @@ const faqCategories: FaqCategory[] = [
         question: "Do you accept tool submissions?",
         answer:
           "We review new tools on an ongoing basis. Reach out through the contact page if you'd like us to consider yours.",
-      },
-    ],
-  },
-  {
-    title: "Pricing & featured listings",
-    items: [
-      {
-        question: "What does a Featured listing include?",
-        answer:
-          "Featured tools get priority placement on the homepage, a featured badge, and higher visibility in search and category pages. Designed for tool makers who want real exposure.",
-      },
-      {
-        question: "How much does a Featured listing cost?",
-        answer:
-          "Visit the pricing page for current rates. Featured listings are subscription-based and you can cancel anytime.",
-      },
-      {
-        question: "Can I cancel my Featured subscription?",
-        answer:
-          "Yes. Cancel anytime — your featured placement stays active until the end of your current billing period.",
       },
     ],
   },
@@ -132,8 +112,7 @@ export default function FaqPage() {
             Frequently asked <em className="italic text-white/60">questions</em>.
           </h1>
           <p className="mt-3 max-w-lg text-sm text-muted-foreground sm:text-base">
-            Quick answers about the directory, featured listings, and how the
-            platform works.
+            Quick answers about the directory and how the platform works.
           </p>
         </FadeIn>
 

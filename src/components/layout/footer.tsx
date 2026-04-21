@@ -6,8 +6,6 @@ const footerLinks = {
     { href: "/stacks", label: "Stacks" },
     { href: "/ask", label: "Ask AiCensus" },
     { href: "/categories", label: "Categories" },
-    { href: "/get-featured", label: "Get featured" },
-    { href: "/pricing", label: "Pricing" },
   ],
   Resources: [
     { href: "/blog", label: "Blog" },

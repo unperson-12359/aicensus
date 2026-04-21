@@ -13,7 +13,6 @@ const navLinks = [
   { num: "02", href: "/stacks", label: "Stacks" },
   { num: "03", href: "/categories", label: "Categories" },
   { num: "04", href: "/blog", label: "Blog" },
-  { num: "05", href: "/pricing", label: "Pricing" },
 ];
 
 export function Navbar() {

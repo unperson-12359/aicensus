@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Wrench, Inbox, FolderOpen, Plus, CreditCard } from "lucide-react";
+import { Wrench, Inbox, FolderOpen, Plus } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/server";
@@ -14,14 +14,12 @@ async function getStats() {
       { count: draftTools },
       { count: pendingSubmissions },
       { count: totalCategories },
-      { count: activeSubscriptions },
     ] = await Promise.all([
       supabase.from("tools").select("*", { count: "exact", head: true }),
       supabase.from("tools").select("*", { count: "exact", head: true }).eq("status", "published"),
       supabase.from("tools").select("*", { count: "exact", head: true }).eq("status", "draft"),
       supabase.from("submissions").select("*", { count: "exact", head: true }).eq("status", "pending"),
       supabase.from("categories").select("*", { count: "exact", head: true }),
-      supabase.from("featured_subscriptions").select("*", { count: "exact", head: true }).eq("status", "active"),
     ]);
 
     return {
@@ -30,7 +28,6 @@ async function getStats() {
       draftTools: draftTools || 0,
       pendingSubmissions: pendingSubmissions || 0,
       totalCategories: totalCategories || 0,
-      activeSubscriptions: activeSubscriptions || 0,
     };
   } catch {
     return {
@@ -39,7 +36,6 @@ async function getStats() {
       draftTools: 0,
       pendingSubmissions: 0,
       totalCategories: 0,
-      activeSubscriptions: 0,
     };
   }
 }
@@ -53,7 +49,6 @@ export default async function AdminDashboard() {
     { label: "Drafts", value: stats.draftTools, icon: Wrench, href: "/admin/tools?status=draft", color: "text-yellow-400" },
     { label: "Pending Submissions", value: stats.pendingSubmissions, icon: Inbox, href: "/admin/submissions", color: stats.pendingSubmissions > 0 ? "text-primary" : undefined },
     { label: "Categories", value: stats.totalCategories, icon: FolderOpen, href: "/admin/categories" },
-    { label: "Active Subscriptions", value: stats.activeSubscriptions, icon: CreditCard, href: "/admin/subscriptions", color: stats.activeSubscriptions > 0 ? "text-green-400" : undefined },
   ];
 
   return (
@@ -115,12 +110,6 @@ export default async function AdminDashboard() {
             <Button variant="outline">
               <FolderOpen className="mr-2 h-4 w-4" />
               Manage Categories
-            </Button>
-          </Link>
-          <Link href="/admin/subscriptions">
-            <Button variant="outline">
-              <CreditCard className="mr-2 h-4 w-4" />
-              Manage Subscriptions
             </Button>
           </Link>
         </div>

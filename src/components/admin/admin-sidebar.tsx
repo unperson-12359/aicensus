@@ -9,7 +9,6 @@ import {
   Inbox,
   FolderOpen,
   LogOut,
-  CreditCard,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -21,7 +20,6 @@ const navItems = [
   { href: "/admin/tools/new", label: "Add Tool", icon: Plus },
   { href: "/admin/submissions", label: "Submissions", icon: Inbox },
   { href: "/admin/categories", label: "Categories", icon: FolderOpen },
-  { href: "/admin/subscriptions", label: "Subscriptions", icon: CreditCard },
 ];
 
 export function AdminSidebar() {
