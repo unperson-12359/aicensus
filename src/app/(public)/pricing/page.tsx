@@ -15,20 +15,20 @@ export const metadata: Metadata = {
 
 const freePlan = {
   name: "Free",
-  description: "For builders and tool browsers",
+  description: "For builders browsing the directory",
   price: "$0",
   period: "forever",
   features: [
     "Browse the full AI tools directory",
-    "Create your portfolio page",
-    "Add unlimited projects",
-    "Live project previews",
-    "Contact form on your profile",
-    "Appear in the portfolio gallery",
-    "Submit tools for listing",
+    "Compare tools side-by-side",
+    "Honest reviews, pros & cons",
+    "Transparent pricing breakdowns",
+    "Filter by category, pricing, keyword",
+    "Submit your own tool for listing",
+    "No account required",
   ],
-  cta: "Get Started",
-  href: "/signup",
+  cta: "Browse tools",
+  href: "/tools",
 };
 
 const featuredPlan = {
