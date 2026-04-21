@@ -248,9 +248,9 @@ export default async function ToolDetailPage({ params }: PageProps) {
                 <h2 className="font-display text-xl font-semibold">Pros & Cons</h2>
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
                   {tool.pros.length > 0 && (
-                    <Card className="border-green-500/20 bg-green-500/5">
+                    <Card className="border-white/15 bg-white/[0.03]">
                       <CardHeader className="pb-3">
-                        <CardTitle className="flex items-center gap-2 text-base text-green-400">
+                        <CardTitle className="flex items-center gap-2 text-base text-foreground">
                           <ThumbsUp className="h-4 w-4" />
                           Pros
                         </CardTitle>
@@ -265,9 +265,9 @@ export default async function ToolDetailPage({ params }: PageProps) {
                     </Card>
                   )}
                   {tool.cons.length > 0 && (
-                    <Card className="border-red-500/20 bg-red-500/5">
+                    <Card className="border-destructive/25 bg-destructive/[0.04]">
                       <CardHeader className="pb-3">
-                        <CardTitle className="flex items-center gap-2 text-base text-red-400">
+                        <CardTitle className="flex items-center gap-2 text-base text-destructive">
                           <ThumbsDown className="h-4 w-4" />
                           Cons
                         </CardTitle>

@@ -92,7 +92,7 @@ export default function AboutPage() {
             </h1>
           </RevealText>
           <RevealText delay={0.3}>
-            <h1 className="font-display text-5xl font-bold tracking-hero text-gradient-primary sm:text-6xl lg:text-7xl">
+            <h1 className="font-display text-5xl font-bold tracking-hero text-white/45 sm:text-6xl lg:text-7xl">
               intelligence layer
             </h1>
           </RevealText>
@@ -117,10 +117,10 @@ export default function AboutPage() {
         <StaggerChildren className="mt-16 grid gap-6 sm:grid-cols-2">
           {pillars.map((pillar) => (
             <StaggerItem key={pillar.title}>
-              <Card className="border-border/50 transition-all duration-300 hover:-translate-y-1 hover:glow-sm">
+              <Card className="bento-tile transition-all duration-300 hover:-translate-y-0.5">
                 <CardContent className="p-6">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                    <pillar.icon className="h-5 w-5 text-primary" />
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                    <pillar.icon className="h-5 w-5 text-foreground" />
                   </div>
                   <h3 className="mt-4 font-display text-lg font-semibold">{pillar.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">
@@ -135,37 +135,37 @@ export default function AboutPage() {
 
         {/* Roadmap teaser */}
         <FadeIn className="mt-16">
-          <div className="rounded-2xl border border-border/50 bg-card p-8 text-center">
+          <div className="bento-tile p-8 text-center">
             <h2 className="font-display text-3xl font-bold tracking-display sm:text-4xl">
               What&apos;s coming{" "}
-              <span className="text-gradient-neon">next</span>
+              <span className="text-white/45">next</span>
             </h2>
             <p className="mt-3 text-muted-foreground">
               AiCensus is evolving into a full AI ecosystem intelligence platform.
             </p>
             <StaggerChildren className="mt-8 grid gap-4 text-left sm:grid-cols-3" staggerDelay={0.15}>
               <StaggerItem>
-                <div className="rounded-lg bg-muted/50 p-4">
-                  <p className="font-display font-semibold text-primary">Phase 2</p>
-                  <p className="mt-1 text-sm text-muted-foreground">
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+                  <p className="tracking-accent text-white/50">Phase 2</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     AI Product Verification Lab — standardized benchmarks and
                     performance testing
                   </p>
                 </div>
               </StaggerItem>
               <StaggerItem>
-                <div className="rounded-lg bg-muted/50 p-4">
-                  <p className="font-display font-semibold text-accent">Phase 3</p>
-                  <p className="mt-1 text-sm text-muted-foreground">
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+                  <p className="tracking-accent text-white/50">Phase 3</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     AI Ecosystem Map — visualize how AI tools, agents, and models
                     connect
                   </p>
                 </div>
               </StaggerItem>
               <StaggerItem>
-                <div className="rounded-lg bg-muted/50 p-4">
-                  <p className="font-display font-semibold text-neon">Phase 4</p>
-                  <p className="mt-1 text-sm text-muted-foreground">
+                <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
+                  <p className="tracking-accent text-white/50">Phase 4</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                     AI Stack Builder — find the optimal AI tool combination for your
                     goals
                   </p>

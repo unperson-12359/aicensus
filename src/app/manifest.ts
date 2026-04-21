@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "The curated directory of verified AI tools. Find, compare, and choose the right AI tools for your workflow.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0a0a0f",
-    theme_color: "#818cf8",
+    background_color: "#000000",
+    theme_color: "#000000",
     icons: [
       {
         src: "/favicon.ico",

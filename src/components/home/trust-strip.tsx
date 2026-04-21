@@ -3,22 +3,26 @@
 import { FadeIn } from "@/components/motion";
 
 const stats = [
-  { value: "156+", label: "Verified Tools" },
-  { value: "100%", label: "Human Curated" },
+  { value: "156+", label: "Verified tools" },
+  { value: "100%", label: "Human curated" },
   { value: "Free", label: "Forever" },
-  { value: "Open", label: "To Everyone" },
+  { value: "Open", label: "To everyone" },
 ];
 
 export function TrustStrip() {
   return (
-    <section className="border-y border-border/40">
+    <section className="border-y border-white/10 bg-background">
       <FadeIn>
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-border/40">
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-white/10">
             {stats.map((stat) => (
               <div key={stat.label} className="text-center sm:px-6">
-                <div className="text-2xl font-bold text-foreground sm:text-3xl">{stat.value}</div>
-                <p className="mt-0.5 text-xs uppercase tracking-widest text-muted-foreground">{stat.label}</p>
+                <div className="font-display text-3xl font-bold tracking-hero sm:text-4xl">
+                  {stat.value}
+                </div>
+                <p className="mt-1.5 tracking-accent text-muted-foreground">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>

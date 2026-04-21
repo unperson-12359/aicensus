@@ -328,7 +328,7 @@ export function AuthForm({ mode }: AuthFormProps) {
                   <p className="text-xs text-muted-foreground">Checking availability...</p>
                 )}
                 {usernameAvailable === true && (
-                  <p className="text-xs text-green-400">Username is available!</p>
+                  <p className="text-xs text-foreground">Username is available.</p>
                 )}
                 {usernameAvailable === false && (
                   <p className="text-xs text-destructive">Username is not available.</p>

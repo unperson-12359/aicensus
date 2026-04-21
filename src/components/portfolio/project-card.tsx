@@ -12,7 +12,7 @@ interface ProjectCardProps {
 export function ProjectCard({ project, username }: ProjectCardProps) {
   return (
     <Link href={`/portfolio/${username}/${project.slug}`}>
-      <Card className="group overflow-hidden transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
+      <Card className="group overflow-hidden border-white/10 bg-card transition-all hover:border-white/30">
         {/* Thumbnail */}
         <div className="relative aspect-video overflow-hidden bg-muted">
           {project.thumbnail_url ? (
@@ -29,7 +29,7 @@ export function ProjectCard({ project, username }: ProjectCardProps) {
         </div>
 
         <CardContent className="p-4">
-          <h3 className="font-semibold group-hover:text-primary">{project.name}</h3>
+          <h3 className="font-semibold text-foreground">{project.name}</h3>
           <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
             {project.description}
           </p>
@@ -57,7 +57,7 @@ export function ProjectCard({ project, username }: ProjectCardProps) {
                 <Badge
                   key={tool}
                   variant="outline"
-                  className="border-primary/30 text-xs text-primary"
+                  className="border-white/20 bg-white/5 text-xs text-white/80"
                 >
                   {tool}
                 </Badge>

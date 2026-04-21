@@ -2,10 +2,22 @@ import { Badge } from "@/components/ui/badge";
 import type { ProjectStatus } from "@/lib/types/database";
 
 const statusConfig: Record<ProjectStatus, { label: string; className: string }> = {
-  draft: { label: "Draft", className: "bg-muted text-muted-foreground" },
-  pending_review: { label: "Pending Review", className: "bg-yellow-500/10 text-yellow-500" },
-  published: { label: "Published", className: "bg-green-500/10 text-green-500" },
-  rejected: { label: "Rejected", className: "bg-destructive/10 text-destructive" },
+  draft: {
+    label: "Draft",
+    className: "bg-white/5 text-white/60 border-white/10",
+  },
+  pending_review: {
+    label: "Pending review",
+    className: "bg-white/10 text-white/80 border-white/20",
+  },
+  published: {
+    label: "Published",
+    className: "bg-white text-black border-white",
+  },
+  rejected: {
+    label: "Rejected",
+    className: "bg-destructive/10 text-destructive border-destructive/25",
+  },
 };
 
 interface ProjectStatusBadgeProps {

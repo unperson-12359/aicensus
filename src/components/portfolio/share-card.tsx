@@ -14,17 +14,22 @@ interface ProjectShareCardProps {
   tagline: string;
 }
 
+const BG = "#000000";
+const TEXT = "#ffffff";
+const MUTED = "rgba(255,255,255,0.6)";
+const SUBTLE = "rgba(255,255,255,0.4)";
+const BORDER = "rgba(255,255,255,0.12)";
+const FAINT = "rgba(255,255,255,0.04)";
+
 function AiCensusLogo() {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-      {/* Bauhaus geometric mark */}
+    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="14" stroke="#818cf8" strokeWidth="2.5" />
-        <rect x="11" y="11" width="10" height="10" rx="2" fill="#818cf8" />
+        <rect x="3" y="3" width="26" height="26" rx="6" stroke={TEXT} strokeWidth="2" />
+        <rect x="11" y="11" width="10" height="10" rx="1.5" fill={TEXT} />
       </svg>
-      <span style={{ fontSize: 20, fontWeight: 700, letterSpacing: "-0.02em" }}>
-        <span style={{ color: "#818cf8" }}>Ai</span>
-        <span style={{ color: "#f1f5f9" }}>Census</span>
+      <span style={{ fontSize: 22, fontWeight: 700, letterSpacing: "-0.025em", color: TEXT }}>
+        AiCensus<span style={{ color: SUBTLE }}>.</span>
       </span>
     </div>
   );
@@ -43,7 +48,7 @@ function AvatarDisplay({ profile, size = 100 }: { profile: UserProfile; size?: n
           height: size,
           borderRadius: 16,
           objectFit: "cover",
-          border: "2px solid rgba(129, 140, 248, 0.3)",
+          border: `2px solid ${BORDER}`,
         }}
         crossOrigin="anonymous"
       />
@@ -56,14 +61,14 @@ function AvatarDisplay({ profile, size = 100 }: { profile: UserProfile; size?: n
         width: size,
         height: size,
         borderRadius: 16,
-        background: "linear-gradient(135deg, #1e1b4b, #312e81)",
-        border: "2px solid rgba(129, 140, 248, 0.3)",
+        background: FAINT,
+        border: `2px solid ${BORDER}`,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         fontSize: size * 0.4,
         fontWeight: 700,
-        color: "#818cf8",
+        color: TEXT,
       }}
     >
       {profile.display_name.charAt(0).toUpperCase()}
@@ -72,22 +77,24 @@ function AvatarDisplay({ profile, size = 100 }: { profile: UserProfile; size?: n
 }
 
 function BadgePill({ label, variant }: { label: string; variant: "tech" | "ai" }) {
-  const bg = variant === "ai" ? "rgba(129, 140, 248, 0.15)" : "rgba(255, 255, 255, 0.08)";
-  const color = variant === "ai" ? "#818cf8" : "#94a3b8";
-  const border = variant === "ai" ? "1px solid rgba(129, 140, 248, 0.3)" : "1px solid rgba(255, 255, 255, 0.1)";
+  const isAi = variant === "ai";
+  const bg = isAi ? TEXT : FAINT;
+  const color = isAi ? BG : TEXT;
+  const border = isAi ? TEXT : BORDER;
 
   return (
     <span
       style={{
         display: "inline-flex",
         padding: "4px 12px",
-        borderRadius: 6,
+        borderRadius: 999,
         fontSize: 13,
-        fontWeight: 500,
+        fontWeight: 600,
         background: bg,
         color,
-        border,
+        border: `1px solid ${border}`,
         whiteSpace: "nowrap",
+        letterSpacing: "-0.005em",
       }}
     >
       {label}
@@ -95,63 +102,22 @@ function BadgePill({ label, variant }: { label: string; variant: "tech" | "ai" }
   );
 }
 
-function GradientAccentLine() {
+function GridBackdrop() {
   return (
     <div
       style={{
         position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: 4,
-        background: "linear-gradient(90deg, transparent, #818cf8, #a78bfa, #818cf8, transparent)",
+        inset: 0,
+        backgroundImage:
+          "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)",
+        backgroundSize: "48px 48px",
+        display: "flex",
       }}
     />
   );
 }
 
-function BackgroundShapes() {
-  return (
-    <>
-      <div
-        style={{
-          position: "absolute",
-          top: 40,
-          right: 60,
-          width: 140,
-          height: 140,
-          borderRadius: "50%",
-          border: "1.5px solid rgba(99, 102, 241, 0.08)",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          bottom: 60,
-          left: 40,
-          width: 100,
-          height: 100,
-          borderRadius: "50%",
-          border: "1.5px solid rgba(139, 92, 246, 0.06)",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          top: 180,
-          left: 80,
-          width: 50,
-          height: 50,
-          border: "1.5px solid rgba(139, 92, 246, 0.06)",
-          transform: "rotate(45deg)",
-        }}
-      />
-    </>
-  );
-}
-
 export function ProfileShareCard({ profile, projects, tagline }: ProfileShareCardProps) {
-  // Aggregate tech stack and AI tools from published projects
   const allTech = new Set<string>();
   const allAiTools = new Set<string>();
   for (const p of projects) {
@@ -166,7 +132,7 @@ export function ProfileShareCard({ profile, projects, tagline }: ProfileShareCar
       style={{
         width: 1200,
         height: 630,
-        background: "linear-gradient(135deg, #0a0a0f 0%, #0d1117 40%, #111827 100%)",
+        background: BG,
         position: "relative",
         overflow: "hidden",
         fontFamily: "system-ui, -apple-system, sans-serif",
@@ -174,24 +140,22 @@ export function ProfileShareCard({ profile, projects, tagline }: ProfileShareCar
         flexDirection: "column",
       }}
     >
-      <BackgroundShapes />
+      <GridBackdrop />
 
-      {/* Header row */}
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "32px 48px 0",
+          padding: "36px 56px 0",
         }}
       >
         <AiCensusLogo />
-        <span style={{ fontSize: 15, color: "#64748b", letterSpacing: "0.02em" }}>
+        <span style={{ fontSize: 15, color: MUTED, letterSpacing: "0.02em" }}>
           aicensus.xyz
         </span>
       </div>
 
-      {/* Main content — centered */}
       <div
         style={{
           flex: 1,
@@ -199,38 +163,44 @@ export function ProfileShareCard({ profile, projects, tagline }: ProfileShareCar
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "0 48px",
-          gap: 16,
+          padding: "0 56px",
+          gap: 18,
         }}
       >
-        <AvatarDisplay profile={profile} size={100} />
+        <AvatarDisplay profile={profile} size={110} />
 
-        <div style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div
+          style={{
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <h2
             style={{
-              fontSize: 36,
+              fontSize: 44,
               fontWeight: 700,
-              color: "#f1f5f9",
-              letterSpacing: "-0.02em",
+              color: TEXT,
+              letterSpacing: "-0.035em",
               margin: 0,
             }}
           >
             {profile.display_name}
           </h2>
-          <p style={{ fontSize: 18, color: "#64748b", margin: "4px 0 0" }}>
+          <p style={{ fontSize: 20, color: MUTED, margin: "6px 0 0" }}>
             @{profile.username}
           </p>
         </div>
 
-        {/* Tagline */}
         {tagline && (
           <p
             style={{
-              fontSize: 18,
-              color: "#94a3b8",
-              maxWidth: 700,
+              fontSize: 20,
+              color: MUTED,
+              maxWidth: 780,
               textAlign: "center",
-              lineHeight: 1.5,
+              lineHeight: 1.45,
               margin: 0,
               fontStyle: "italic",
             }}
@@ -239,13 +209,12 @@ export function ProfileShareCard({ profile, projects, tagline }: ProfileShareCar
           </p>
         )}
 
-        {/* Stats + badges row */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 12,
-            marginTop: 8,
+            gap: 10,
+            marginTop: 10,
             flexWrap: "wrap",
             justifyContent: "center",
           }}
@@ -253,13 +222,12 @@ export function ProfileShareCard({ profile, projects, tagline }: ProfileShareCar
           <span
             style={{
               display: "inline-flex",
-              padding: "6px 16px",
-              borderRadius: 8,
+              padding: "6px 14px",
+              borderRadius: 999,
               fontSize: 14,
               fontWeight: 600,
-              background: "rgba(129, 140, 248, 0.1)",
-              color: "#818cf8",
-              border: "1px solid rgba(129, 140, 248, 0.2)",
+              background: TEXT,
+              color: BG,
             }}
           >
             {projects.length} {projects.length === 1 ? "project" : "projects"}
@@ -273,7 +241,17 @@ export function ProfileShareCard({ profile, projects, tagline }: ProfileShareCar
         </div>
       </div>
 
-      <GradientAccentLine />
+      {/* Bottom hairline */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 56,
+          right: 56,
+          height: 1,
+          background: BORDER,
+        }}
+      />
     </div>
   );
 }
@@ -284,7 +262,7 @@ export function ProjectShareCard({ profile, project, tagline }: ProjectShareCard
       style={{
         width: 1200,
         height: 630,
-        background: "linear-gradient(135deg, #0a0a0f 0%, #0d1117 40%, #111827 100%)",
+        background: BG,
         position: "relative",
         overflow: "hidden",
         fontFamily: "system-ui, -apple-system, sans-serif",
@@ -292,41 +270,38 @@ export function ProjectShareCard({ profile, project, tagline }: ProjectShareCard
         flexDirection: "column",
       }}
     >
-      <BackgroundShapes />
+      <GridBackdrop />
 
-      {/* Header row */}
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "32px 48px 0",
+          padding: "36px 56px 0",
         }}
       >
         <AiCensusLogo />
-        <span style={{ fontSize: 15, color: "#64748b", letterSpacing: "0.02em" }}>
+        <span style={{ fontSize: 15, color: MUTED, letterSpacing: "0.02em" }}>
           aicensus.xyz
         </span>
       </div>
 
-      {/* Main content — side by side */}
       <div
         style={{
           flex: 1,
           display: "flex",
           alignItems: "center",
-          padding: "0 48px",
-          gap: 48,
+          padding: "0 56px",
+          gap: 52,
         }}
       >
-        {/* Thumbnail */}
         <div
           style={{
             width: 440,
             height: 280,
-            borderRadius: 16,
+            borderRadius: 20,
             overflow: "hidden",
-            border: "1px solid rgba(255, 255, 255, 0.08)",
+            border: `1px solid ${BORDER}`,
             flexShrink: 0,
           }}
         >
@@ -344,12 +319,13 @@ export function ProjectShareCard({ profile, project, tagline }: ProjectShareCard
               style={{
                 width: "100%",
                 height: "100%",
-                background: "linear-gradient(135deg, #1e1b4b, #312e81, #1e1b4b)",
+                background: FAINT,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: 48,
-                color: "rgba(129, 140, 248, 0.3)",
+                fontSize: 56,
+                fontWeight: 700,
+                color: SUBTLE,
               }}
             >
               {project.name.charAt(0).toUpperCase()}
@@ -357,35 +333,33 @@ export function ProjectShareCard({ profile, project, tagline }: ProjectShareCard
           )}
         </div>
 
-        {/* Project info */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 14 }}>
           <h2
             style={{
-              fontSize: 32,
+              fontSize: 40,
               fontWeight: 700,
-              color: "#f1f5f9",
-              letterSpacing: "-0.02em",
+              color: TEXT,
+              letterSpacing: "-0.035em",
               margin: 0,
-              lineHeight: 1.2,
+              lineHeight: 1.1,
             }}
           >
             {project.name}
           </h2>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <AvatarDisplay profile={profile} size={32} />
-            <span style={{ fontSize: 16, color: "#94a3b8" }}>
-              by <span style={{ color: "#c4b5fd" }}>@{profile.username}</span>
+            <span style={{ fontSize: 17, color: MUTED }}>
+              by <span style={{ color: TEXT }}>@{profile.username}</span>
             </span>
           </div>
 
-          {/* Tagline */}
           {tagline && (
             <p
               style={{
-                fontSize: 16,
-                color: "#94a3b8",
-                lineHeight: 1.5,
+                fontSize: 17,
+                color: MUTED,
+                lineHeight: 1.45,
                 margin: 0,
                 fontStyle: "italic",
               }}
@@ -394,8 +368,7 @@ export function ProjectShareCard({ profile, project, tagline }: ProjectShareCard
             </p>
           )}
 
-          {/* Badges */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 6 }}>
             {project.tech_stack.slice(0, 4).map((t) => (
               <BadgePill key={t} label={t} variant="tech" />
             ))}
@@ -406,7 +379,16 @@ export function ProjectShareCard({ profile, project, tagline }: ProjectShareCard
         </div>
       </div>
 
-      <GradientAccentLine />
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 56,
+          right: 56,
+          height: 1,
+          background: BORDER,
+        }}
+      />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { VerifiedBadge } from "@/components/shared/verified-badge";
@@ -15,53 +14,57 @@ export function ToolCardFeatured({ tool }: ToolCardFeaturedProps) {
   const logoSrc = getLogoUrl(tool.logo_url, tool.website_url);
 
   return (
-    <Link href={`/tools/${tool.slug}`}>
-      <Card className="group relative h-full overflow-hidden border-border/40 bg-card py-0 gap-0 transition-colors duration-150 hover:border-border">
+    <Link
+      href={`/tools/${tool.slug}`}
+      className="bento-tile group relative flex h-full flex-col overflow-hidden p-6 sm:p-8 hover:border-white/30"
+    >
+      {/* Subtle grid backdrop */}
+      <div className="absolute inset-0 bento-grid-pattern opacity-30 pointer-events-none" />
 
-        <CardContent className="relative flex h-full flex-col gap-2.5 p-3 sm:p-4">
-          {/* Header: Logo + Name + Tagline */}
-          <div className="flex items-start gap-3 sm:gap-4">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted text-lg font-bold text-primary sm:h-12 sm:w-12 sm:text-xl">
-              {logoSrc ? (
-                <img
-                  src={logoSrc}
-                  alt={tool.name}
-                  className="h-14 w-14 rounded-xl object-cover sm:h-16 sm:w-16"
-                />
-              ) : (
-                tool.name.charAt(0)
-              )}
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <h3 className="truncate text-base font-semibold text-foreground group-hover:text-primary transition-colors sm:text-lg">
-                  {tool.name}
-                </h3>
-                {tool.is_verified && <VerifiedBadge showLabel={false} size="sm" />}
-              </div>
-              <p className="mt-0.5 text-sm text-muted-foreground line-clamp-2">
-                {tool.tagline}
-              </p>
-            </div>
-          </div>
+      <div className="relative flex items-start justify-between">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 text-xl font-bold text-white sm:h-20 sm:w-20 sm:text-2xl">
+          {logoSrc ? (
+            <img
+              src={logoSrc}
+              alt={tool.name}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <span>{tool.name.charAt(0)}</span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-[10px] font-medium uppercase tracking-widest text-white/70">
+            <Sparkles className="h-3 w-3" />
+            Featured
+          </span>
+          <ArrowUpRight className="h-5 w-5 text-white/40 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+        </div>
+      </div>
 
-          {/* Category + Pricing */}
-          <div className="flex flex-wrap items-center gap-2">
-            {tool.categories && (
-              <span className="text-xs text-muted-foreground">
-                {tool.categories.name}
-              </span>
-            )}
-            <PricingBadge pricing={tool.pricing_model} />
-          </div>
+      <div className="relative mt-6 flex-1">
+        <div className="flex items-center gap-2">
+          <h3 className="truncate text-2xl font-semibold tracking-hero text-foreground sm:text-3xl">
+            {tool.name}
+          </h3>
+          {tool.is_verified && <VerifiedBadge showLabel={false} size="sm" />}
+        </div>
+        <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground line-clamp-3">
+          {tool.tagline}
+        </p>
+      </div>
 
-          {/* Rating */}
-          <div className="mt-auto flex items-center justify-between pt-2">
-            <RatingStars rating={tool.editor_rating} />
-            <ExternalLink className="h-4 w-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-          </div>
-        </CardContent>
-      </Card>
+      <div className="relative mt-6 flex flex-wrap items-center gap-3 border-t border-white/10 pt-5">
+        {tool.categories && (
+          <span className="tracking-accent text-muted-foreground">
+            {tool.categories.name}
+          </span>
+        )}
+        <PricingBadge pricing={tool.pricing_model} />
+        <div className="ml-auto">
+          <RatingStars rating={tool.editor_rating} />
+        </div>
+      </div>
     </Link>
   );
 }

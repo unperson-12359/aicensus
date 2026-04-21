@@ -189,7 +189,7 @@ export function ShareModal({
           >
             {copied ? (
               <>
-                <Check className="mr-2 h-4 w-4 text-green-400" />
+                <Check className="mr-2 h-4 w-4 text-foreground" />
                 Copied!
               </>
             ) : (

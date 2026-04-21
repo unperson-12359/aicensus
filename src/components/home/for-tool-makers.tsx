@@ -7,26 +7,33 @@ import { FadeIn } from "@/components/motion";
 
 export function ForToolMakers() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
       <FadeIn>
-        <div className="max-w-2xl">
-          <h2 className="font-display text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-            Built an AI tool?{" "}
-            <span className="text-gradient-primary uppercase">Get listed.</span>
-          </h2>
-          <p className="mt-3 text-sm text-muted-foreground sm:text-base">
-            AiCensus is where builders look for tools. Submit yours for free — get a detailed listing with description, pros & cons, pricing, and category placement.
-          </p>
-          <div className="mt-6 flex gap-2">
-            <Link href="/submit">
-              <Button variant="outline">
-                Submit Your Tool <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+        <div className="bento-tile grid gap-6 p-8 sm:p-12 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-8">
+            <p className="tracking-accent text-white/50">For tool makers</p>
+            <h2 className="mt-3 font-display text-4xl font-bold tracking-hero leading-[0.95] sm:text-5xl lg:text-6xl">
+              Built an AI tool?
+              <br />
+              <span className="text-white/50">Get listed.</span>
+            </h2>
+            <p className="mt-5 max-w-xl text-base text-muted-foreground sm:text-lg">
+              AiCensus is where builders look for tools. Submit yours for free —
+              get a detailed listing with description, pros &amp; cons, pricing,
+              and category placement.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:col-span-4 lg:flex-col lg:items-end">
+            <Link href="/submit" className="w-full sm:w-auto lg:w-full">
+              <Button variant="outline" size="lg" className="w-full">
+                Submit your tool
+                <ArrowRight className="ml-1.5 h-4 w-4" />
               </Button>
             </Link>
-            <Link href="/get-featured">
-              <Button>
-                <Star className="mr-1.5 h-3.5 w-3.5" />
-                Get Featured
+            <Link href="/get-featured" className="w-full sm:w-auto lg:w-full">
+              <Button size="lg" className="w-full">
+                <Star className="mr-1.5 h-4 w-4" />
+                Get featured
               </Button>
             </Link>
           </div>

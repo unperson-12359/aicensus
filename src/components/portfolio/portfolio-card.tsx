@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/card";
+import { ArrowUpRight } from "lucide-react";
 import type { UserProfile } from "@/lib/types/database";
 
 interface PortfolioCardProps {
@@ -8,46 +8,55 @@ interface PortfolioCardProps {
 
 export function PortfolioCard({ user }: PortfolioCardProps) {
   return (
-    <Link href={`/portfolio/${user.username}`}>
-      <Card className="group overflow-hidden transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-        {/* Header image or gradient */}
-        <div className="relative h-24 overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20">
-          {user.header_image_url && (
+    <Link
+      href={`/portfolio/${user.username}`}
+      className="bento-tile group relative flex h-full flex-col overflow-hidden hover:border-white/30"
+    >
+      {/* Header strip (image or subtle dotted pattern) */}
+      <div className="relative h-28 overflow-hidden bg-white/[0.02]">
+        {user.header_image_url ? (
+          <img
+            src={user.header_image_url}
+            alt=""
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div className="absolute inset-0 bento-grid-pattern opacity-60" />
+        )}
+      </div>
+
+      <div className="relative flex-1 px-5 pb-5 pt-0">
+        {/* Avatar overlapping header */}
+        <div className="-mt-9 mb-4">
+          {user.avatar_url ? (
             <img
-              src={user.header_image_url}
-              alt=""
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              src={user.avatar_url}
+              alt={user.display_name}
+              className="h-16 w-16 rounded-xl border-2 border-black object-cover"
             />
+          ) : (
+            <div className="flex h-16 w-16 items-center justify-center rounded-xl border-2 border-black bg-white/10 text-xl font-bold text-white">
+              {user.display_name.charAt(0).toUpperCase()}
+            </div>
           )}
         </div>
 
-        <CardContent className="relative px-4 pb-4 pt-0">
-          {/* Avatar */}
-          <div className="-mt-8 mb-3">
-            {user.avatar_url ? (
-              <img
-                src={user.avatar_url}
-                alt={user.display_name}
-                className="h-16 w-16 rounded-xl border-2 border-background object-cover"
-              />
-            ) : (
-              <div className="flex h-16 w-16 items-center justify-center rounded-xl border-2 border-background bg-muted text-xl font-bold text-muted-foreground">
-                {user.display_name.charAt(0).toUpperCase()}
-              </div>
-            )}
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <h3 className="truncate text-base font-semibold tracking-tight text-foreground">
+              {user.display_name}
+            </h3>
+            <p className="text-sm text-muted-foreground">@{user.username}</p>
           </div>
+          <ArrowUpRight className="h-4 w-4 shrink-0 text-white/30 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+        </div>
 
-          <h3 className="font-semibold group-hover:text-primary">
-            {user.display_name}
-          </h3>
-          <p className="text-sm text-muted-foreground">@{user.username}</p>
-          {user.bio && (
-            <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-              {user.bio}
-            </p>
-          )}
-        </CardContent>
-      </Card>
+        {user.bio && (
+          <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">
+            {user.bio}
+          </p>
+        )}
+      </div>
     </Link>
   );
 }

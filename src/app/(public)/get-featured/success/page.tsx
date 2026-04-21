@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 export default function GetFeaturedSuccessPage() {
   return (
     <div className="mx-auto max-w-xl px-4 py-24 text-center sm:px-6">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
-        <CheckCircle2 className="h-8 w-8 text-green-500" />
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-white/15 bg-white/5">
+        <CheckCircle2 className="h-8 w-8 text-foreground" />
       </div>
       <h1 className="mt-6 font-display text-3xl font-bold">
         Payment received!

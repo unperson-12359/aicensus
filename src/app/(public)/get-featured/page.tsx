@@ -47,9 +47,9 @@ export default function GetFeaturedPage() {
         <p className="text-sm font-medium uppercase tracking-widest text-primary">
           Featured Placement
         </p>
-        <h1 className="mt-4 font-display text-4xl font-bold tracking-display sm:text-5xl">
+        <h1 className="mt-4 font-display text-4xl font-bold tracking-hero sm:text-5xl lg:text-6xl">
           Get your tool in front of{" "}
-          <span className="text-gradient-primary">every visitor.</span>
+          <span className="text-white/45">every visitor.</span>
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
           Featured tools appear on the AiCensus homepage — the first thing
@@ -64,13 +64,13 @@ export default function GetFeaturedPage() {
           {benefits.map((benefit) => (
             <div
               key={benefit.title}
-              className="rounded-xl border border-border/50 bg-card p-5 text-center"
+              className="bento-tile p-6 text-center"
             >
-              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <benefit.icon className="h-5 w-5 text-primary" />
+              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                <benefit.icon className="h-5 w-5 text-foreground" />
               </div>
-              <h3 className="mt-3 font-semibold">{benefit.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <h3 className="mt-4 font-semibold">{benefit.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                 {benefit.description}
               </p>
             </div>
@@ -79,7 +79,7 @@ export default function GetFeaturedPage() {
       </div>
 
       {/* CTA Card */}
-      <div className="mt-12 rounded-2xl border border-border/50 bg-card p-8 text-center sm:p-12">
+      <div className="bento-tile mt-12 p-8 text-center sm:p-12">
         <h2 className="font-display text-2xl font-bold sm:text-3xl">
           Ready to get featured?
         </h2>
@@ -91,7 +91,7 @@ export default function GetFeaturedPage() {
         <ul className="mx-auto mt-6 max-w-sm space-y-2 text-left text-sm">
           {included.map((item) => (
             <li key={item} className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 shrink-0 text-green-500" />
+              <CheckCircle2 className="h-4 w-4 shrink-0 text-foreground" />
               <span>{item}</span>
             </li>
           ))}
@@ -99,8 +99,8 @@ export default function GetFeaturedPage() {
 
         <div className="mt-8">
           <a href={STRIPE_PAYMENT_LINK} target="_blank" rel="noopener noreferrer">
-            <Button size="lg" className="glow-sm text-base">
-              Subscribe Now <ArrowRight className="ml-2 h-4 w-4" />
+            <Button size="lg" className="text-base">
+              Subscribe now <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </a>
         </div>
@@ -115,26 +115,26 @@ export default function GetFeaturedPage() {
         <h2 className="font-display text-xl font-bold">How it works</h2>
         <div className="mx-auto mt-6 grid max-w-2xl gap-6 sm:grid-cols-3">
           <div>
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-sm font-bold text-foreground">
               1
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-3 text-sm text-muted-foreground">
               Subscribe via our secure Stripe payment page
             </p>
           </div>
           <div>
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-sm font-bold text-foreground">
               2
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-3 text-sm text-muted-foreground">
               We set up your featured listing within 24–48 hours
             </p>
           </div>
           <div>
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
+            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-sm font-bold text-foreground">
               3
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-3 text-sm text-muted-foreground">
               Your tool appears on the homepage for all visitors to see
             </p>
           </div>

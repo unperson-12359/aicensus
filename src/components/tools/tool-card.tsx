@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { ArrowUpRight } from "lucide-react";
 import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { VerifiedBadge } from "@/components/shared/verified-badge";
@@ -15,52 +14,54 @@ export function ToolCard({ tool }: ToolCardProps) {
   const logoSrc = getLogoUrl(tool.logo_url, tool.website_url);
 
   return (
-    <Link href={`/tools/${tool.slug}`}>
-      <Card className="group relative h-full overflow-hidden border-border/40 bg-card py-0 gap-0 transition-colors duration-150 hover:border-border">
-        <CardContent className="flex h-full flex-col gap-2 p-3">
-          {/* Header: Logo + Name */}
-          <div className="flex items-start gap-2 sm:gap-3">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-muted text-sm font-bold text-primary sm:h-10 sm:w-10 sm:text-base">
-              {logoSrc ? (
-                <img
-                  src={logoSrc}
-                  alt={tool.name}
-                  className="h-9 w-9 rounded-lg object-cover sm:h-11 sm:w-11"
-                />
-              ) : (
-                tool.name.charAt(0)
-              )}
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <h3 className="truncate text-sm font-semibold text-foreground group-hover:text-primary transition-colors sm:text-base">
-                  {tool.name}
-                </h3>
-                {tool.is_verified && <VerifiedBadge showLabel={false} size="sm" />}
-              </div>
-              <p className="truncate text-xs text-muted-foreground sm:text-sm">
-                {tool.tagline}
-              </p>
-            </div>
-          </div>
+    <Link
+      href={`/tools/${tool.slug}`}
+      className="bento-tile group relative flex h-full flex-col p-5 sm:p-6 hover:border-white/30"
+    >
+      {/* Top row: logo + external arrow */}
+      <div className="flex items-start justify-between">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/5 text-base font-bold text-white">
+          {logoSrc ? (
+            <img
+              src={logoSrc}
+              alt={tool.name}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <span>{tool.name.charAt(0)}</span>
+          )}
+        </div>
+        <ArrowUpRight className="h-4 w-4 text-white/40 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+      </div>
 
-          {/* Category + Pricing */}
-          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-            {tool.categories && (
-              <span className="hidden text-xs text-muted-foreground sm:inline">
-                {tool.categories.name}
-              </span>
-            )}
-            <PricingBadge pricing={tool.pricing_model} />
-          </div>
+      {/* Middle: name + tagline */}
+      <div className="mt-5 flex-1">
+        <div className="flex items-center gap-1.5">
+          <h3 className="truncate text-base font-semibold tracking-tight text-foreground sm:text-lg">
+            {tool.name}
+          </h3>
+          {tool.is_verified && <VerifiedBadge showLabel={false} size="sm" />}
+        </div>
+        <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+          {tool.tagline}
+        </p>
+      </div>
 
-          {/* Rating */}
-          <div className="mt-auto flex items-center justify-between pt-1 sm:pt-2">
-            <RatingStars rating={tool.editor_rating} />
-            <ExternalLink className="h-3.5 w-3.5 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-          </div>
-        </CardContent>
-      </Card>
+      {/* Bottom: meta row */}
+      <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4">
+        <div className="flex items-center gap-2">
+          {tool.categories && (
+            <span className="tracking-accent text-muted-foreground">
+              {tool.categories.name}
+            </span>
+          )}
+        </div>
+        <PricingBadge pricing={tool.pricing_model} />
+      </div>
+
+      <div className="mt-3 flex items-center justify-between">
+        <RatingStars rating={tool.editor_rating} />
+      </div>
     </Link>
   );
 }

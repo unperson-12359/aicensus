@@ -21,8 +21,8 @@ export function RatingStars({ rating, size = "sm", showValue = true }: RatingSta
             className={cn(
               starSize,
               star <= Math.round(rating)
-                ? "fill-yellow-400 text-yellow-400"
-                : "fill-muted text-muted"
+                ? "fill-foreground text-foreground"
+                : "fill-white/10 text-white/10"
             )}
           />
         ))}

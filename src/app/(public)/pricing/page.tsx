@@ -95,7 +95,7 @@ export default function PricingPage() {
                 <ul className="mt-6 flex-1 space-y-3">
                   {freePlan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2 text-sm">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-foreground" />
                       <span className="text-muted-foreground">{feature}</span>
                     </li>
                   ))}
@@ -115,7 +115,7 @@ export default function PricingPage() {
 
           {/* Featured plan */}
           <StaggerItem>
-            <Card className="relative flex h-full flex-col border-primary/50 shadow-lg shadow-primary/5">
+            <Card className="relative flex h-full flex-col border-white/40 bg-white/[0.03]">
               <div className="absolute -top-3 left-4">
                 <Badge className="bg-primary text-primary-foreground">
                   <Sparkles className="mr-1 h-3 w-3" />
@@ -143,7 +143,7 @@ export default function PricingPage() {
                 <ul className="mt-6 flex-1 space-y-3">
                   {featuredPlan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2 text-sm">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-foreground" />
                       <span className="text-muted-foreground">{feature}</span>
                     </li>
                   ))}
@@ -151,7 +151,7 @@ export default function PricingPage() {
 
                 <div className="mt-8">
                   <Link href={featuredPlan.href}>
-                    <Button className="w-full glow-sm">
+                    <Button className="w-full">
                       {featuredPlan.cta}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>

@@ -93,8 +93,8 @@ export default function ContactPage() {
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
           <FadeIn>
             <div className="flex flex-col items-center text-center">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
-                <CheckCircle2 className="h-8 w-8 text-green-500" />
+              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/15 bg-white/5">
+                <CheckCircle2 className="h-8 w-8 text-foreground" />
               </div>
               <h1 className="mt-6 font-display text-3xl font-bold">
                 Message Sent

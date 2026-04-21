@@ -12,8 +12,8 @@ import {
   Bot,
   Paintbrush,
   Globe,
+  ArrowUpRight,
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import type { Category } from "@/lib/types/database";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -39,22 +39,26 @@ export function CategoryCard({ category }: CategoryCardProps) {
   const Icon = iconMap[category.icon || "brain"] || Brain;
 
   return (
-    <Link href={`/categories/${category.slug}`}>
-      <Card className="group h-full border-border/40 bg-card py-0 gap-0 transition-colors duration-150 hover:border-border">
-        <CardContent className="flex items-center gap-2.5 p-3">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
-            <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
-          </div>
-          <div className="min-w-0">
-            <h3 className="text-sm font-semibold text-foreground sm:text-base">{category.name}</h3>
-            {category.tool_count !== undefined && (
-              <p className="text-xs text-muted-foreground sm:text-sm">
-                {category.tool_count} {category.tool_count === 1 ? "tool" : "tools"}
-              </p>
-            )}
-          </div>
-        </CardContent>
-      </Card>
+    <Link
+      href={`/categories/${category.slug}`}
+      className="bento-tile group flex h-full items-center justify-between gap-4 p-5 hover:border-white/30"
+    >
+      <div className="flex min-w-0 items-center gap-4">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white transition-colors group-hover:border-white/30 group-hover:bg-white group-hover:text-black">
+          <Icon className="h-5 w-5" />
+        </div>
+        <div className="min-w-0">
+          <h3 className="truncate text-base font-semibold tracking-tight text-foreground">
+            {category.name}
+          </h3>
+          {category.tool_count !== undefined && (
+            <p className="text-xs text-muted-foreground">
+              {category.tool_count} {category.tool_count === 1 ? "tool" : "tools"}
+            </p>
+          )}
+        </div>
+      </div>
+      <ArrowUpRight className="h-4 w-4 shrink-0 text-white/30 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
     </Link>
   );
 }

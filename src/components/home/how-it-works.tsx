@@ -16,28 +16,34 @@ const steps = [
   {
     num: "03",
     title: "Get discovered",
-    description: "Add your project to the AiCensus portfolio. Get a public profile and direct messages.",
+    description:
+      "Add your project to the AiCensus portfolio. Get a public profile and direct messages.",
   },
 ];
 
 export function HowItWorks() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
       <FadeIn>
-        <h2 className="font-display text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-          How it works
-        </h2>
+        <div>
+          <p className="tracking-accent text-white/50">The flow</p>
+          <h2 className="mt-3 font-display text-4xl font-bold tracking-hero sm:text-5xl lg:text-6xl">
+            How it works
+          </h2>
+        </div>
       </FadeIn>
 
-      <StaggerChildren className="mt-8 grid gap-px overflow-hidden rounded-lg border border-border/40 md:grid-cols-3">
+      <StaggerChildren className="mt-10 grid gap-3 sm:gap-4 md:grid-cols-3">
         {steps.map((step) => (
           <StaggerItem key={step.num}>
-            <div className="bg-card p-5 sm:p-6 h-full">
-              <span className="font-display text-3xl font-bold text-primary sm:text-4xl">
+            <div className="bento-tile h-full p-6 sm:p-7">
+              <span className="font-display text-5xl font-bold tracking-hero text-white/25 sm:text-6xl">
                 {step.num}
               </span>
-              <h3 className="mt-3 text-base font-semibold">{step.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+              <h3 className="mt-4 text-lg font-semibold tracking-tight">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {step.description}
               </p>
             </div>

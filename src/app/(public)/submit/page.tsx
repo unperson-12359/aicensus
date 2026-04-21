@@ -75,8 +75,8 @@ export default function SubmitPage() {
     return (
       <PageTransition>
       <div className="mx-auto max-w-xl px-4 py-24 text-center sm:px-6">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
-          <CheckCircle2 className="h-8 w-8 text-green-500" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-white/15 bg-white/5">
+          <CheckCircle2 className="h-8 w-8 text-foreground" />
         </div>
         <h1 className="mt-6 text-2xl font-bold">Thanks for your submission!</h1>
         <p className="mt-3 text-muted-foreground">

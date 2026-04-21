@@ -21,15 +21,15 @@ interface ChangelogEntry {
 const typeStyles: Record<EntryType, { label: string; className: string }> = {
   feature: {
     label: "New",
-    className: "bg-green-500/10 text-green-500",
+    className: "bg-white text-black border-white",
   },
   improvement: {
     label: "Improved",
-    className: "bg-primary/10 text-primary",
+    className: "bg-white/10 text-white border-white/20",
   },
   fix: {
     label: "Fixed",
-    className: "bg-yellow-500/10 text-yellow-500",
+    className: "bg-white/5 text-white/60 border-white/10",
   },
 };
 
@@ -84,11 +84,9 @@ export default function ChangelogPage() {
       <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <FadeIn>
           <div className="text-center">
-            <p className="text-sm font-medium uppercase tracking-widest text-primary">
-              Changelog
-            </p>
-            <h1 className="mt-4 font-display text-4xl font-bold tracking-display sm:text-5xl">
-              What&apos;s New
+            <p className="tracking-accent text-white/50">Changelog</p>
+            <h1 className="mt-3 font-display text-5xl font-bold tracking-hero sm:text-6xl">
+              What&apos;s new
             </h1>
             <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
               The latest features, improvements, and fixes on AiCensus.

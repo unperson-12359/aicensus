@@ -31,14 +31,13 @@ export default async function PortfolioPage() {
       <section className="relative px-4 pb-8 pt-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           <FadeIn>
-            <p className="text-sm font-medium uppercase tracking-widest text-primary">
-              For Builders
-            </p>
+            <p className="tracking-accent text-white/50">For builders</p>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="mt-4 font-display text-4xl font-bold tracking-display sm:text-5xl">
-              Websites and projects{" "}
-              <span className="text-gradient-primary">built with AI</span>
+            <h1 className="mt-4 font-display text-4xl font-bold tracking-hero sm:text-6xl lg:text-7xl">
+              Websites and projects
+              <br />
+              <span className="text-white/45">built with AI</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -48,10 +47,10 @@ export default async function PortfolioPage() {
             </p>
           </FadeIn>
           <FadeIn delay={0.3}>
-            <div className="mt-6">
+            <div className="mt-8">
               <Link href="/signup">
-                <Button size="lg" className="glow-sm">
-                  Create Your Portfolio — Free
+                <Button size="lg">
+                  Create your portfolio — free
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
@@ -70,7 +69,7 @@ export default async function PortfolioPage() {
               </p>
               <a
                 href="/signup"
-                className="mt-4 text-primary hover:underline"
+                className="mt-4 text-foreground underline underline-offset-4 hover:no-underline"
               >
                 Create your portfolio
               </a>

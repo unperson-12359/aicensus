@@ -24,14 +24,14 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/50 bg-background">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-5">
+    <footer className="border-t border-white/10 bg-background">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-2 md:grid-cols-5">
           {/* Brand */}
           <div className="col-span-2">
-            <Link href="/" className="group flex items-center gap-2">
+            <Link href="/" className="group inline-flex items-center gap-2">
               <span className="font-display text-xl font-bold tracking-tight">
-                <span className="text-primary">Ai</span>Census
+                AiCensus<span className="text-white/40">.</span>
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -43,8 +43,8 @@ export function Footer() {
           {/* Link Groups */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h3 className="text-sm font-semibold text-foreground">{title}</h3>
-              <ul className="mt-3 space-y-2.5">
+              <h3 className="tracking-accent text-white/60">{title}</h3>
+              <ul className="mt-4 space-y-2.5">
                 {links.map((link) => (
                   <li key={link.href}>
                     <Link
@@ -61,10 +61,9 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-8 pt-6">
-          <div className="mb-6 h-px bg-border/50" />
+        <div className="mt-10 border-t border-white/10 pt-6">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs text-muted-foreground">
               &copy; {new Date().getFullYear()} AiCensus. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
