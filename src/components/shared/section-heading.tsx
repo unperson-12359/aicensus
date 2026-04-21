@@ -5,11 +5,8 @@ interface SectionHeadingProps {
   description?: string;
   className?: string;
   size?: "default" | "lg" | "xl";
-  /**
-   * @deprecated B&W theme has no gradient. Kept for API compatibility.
-   */
+  /** @deprecated No-op in B&W theme */
   gradient?: boolean;
-  /** Renders an uppercase eyebrow above the heading */
   accent?: boolean;
   eyebrow?: string;
 }
@@ -23,26 +20,28 @@ export function SectionHeading({
   eyebrow,
 }: SectionHeadingProps) {
   const sizeClasses = {
-    default: "text-3xl sm:text-4xl md:text-5xl",
-    lg: "text-4xl sm:text-5xl md:text-6xl",
-    xl: "text-5xl sm:text-6xl md:text-7xl",
+    default: "text-2xl sm:text-3xl md:text-[2.25rem]",
+    lg: "text-3xl sm:text-4xl md:text-5xl",
+    xl: "text-4xl sm:text-5xl md:text-6xl",
   };
 
   return (
-    <div className={cn("space-y-3", className)}>
+    <div className={cn("space-y-2", className)}>
       {(eyebrow || accent) && (
-        <p className="tracking-accent text-white/50">{eyebrow ?? "Section"}</p>
+        <p className="tracking-accent text-white/50">
+          {eyebrow ?? "Section"}
+        </p>
       )}
       <h2
         className={cn(
-          "font-display font-bold tracking-hero leading-[0.95]",
+          "font-display font-bold tracking-hero leading-[1]",
           sizeClasses[size]
         )}
       >
         {title}
       </h2>
       {description && (
-        <p className="max-w-2xl text-sm text-muted-foreground sm:text-base">
+        <p className="mt-1 max-w-2xl text-sm text-muted-foreground sm:text-base">
           {description}
         </p>
       )}

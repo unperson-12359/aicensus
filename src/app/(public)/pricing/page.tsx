@@ -52,25 +52,23 @@ const featuredPlan = {
 export default function PricingPage() {
   return (
     <PageTransition>
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         {/* Header */}
         <FadeIn>
-          <div className="text-center">
-            <p className="text-sm font-medium uppercase tracking-widest text-primary">
-              Pricing
-            </p>
-            <h1 className="mt-4 font-display text-4xl font-bold tracking-display sm:text-5xl">
-              Simple, transparent pricing
-            </h1>
-            <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
-              AiCensus is free for everyone. Tool makers can get featured
-              placement with a monthly subscription.
-            </p>
-          </div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
+            Pricing
+          </p>
+          <h1 className="mt-2 font-serif text-3xl font-normal tracking-[-0.03em] sm:text-4xl">
+            Simple, <em className="italic text-white/60">transparent</em> pricing.
+          </h1>
+          <p className="mt-3 max-w-lg text-sm text-muted-foreground sm:text-base">
+            AiCensus is free for everyone. Tool makers can get featured
+            placement with a monthly subscription.
+          </p>
         </FadeIn>
 
         {/* Pricing cards */}
-        <StaggerChildren className="mx-auto mt-14 grid max-w-3xl gap-6 sm:grid-cols-2">
+        <StaggerChildren className="mx-auto mt-8 grid max-w-3xl gap-4 sm:grid-cols-2 sm:gap-6">
           {/* Free plan */}
           <StaggerItem>
             <Card className="flex h-full flex-col border-border/50">
@@ -164,9 +162,9 @@ export default function PricingPage() {
 
         {/* FAQ section */}
         <FadeIn delay={0.3}>
-          <div className="mx-auto mt-20 max-w-2xl">
-            <h2 className="text-center font-display text-2xl font-bold">
-              Pricing FAQ
+          <div className="mx-auto mt-12 max-w-2xl">
+            <h2 className="text-center font-serif text-2xl font-normal tracking-[-0.02em]">
+              Pricing <em className="italic text-white/60">FAQ</em>.
             </h2>
             <div className="mt-8 space-y-6">
               {[

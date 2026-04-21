@@ -144,7 +144,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
       <JsonLd data={breadcrumbLd} />
 
       <PageTransition>
-      <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <GeometricDecor shapes={pageHeaderShapes} />
         <Breadcrumbs
           items={[
@@ -158,14 +158,14 @@ export default async function ToolDetailPage({ params }: PageProps) {
 
         {/* Header */}
         <FadeIn>
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+        <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6">
           {/* Logo */}
-          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-muted text-3xl font-bold text-primary">
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/5 text-xl font-bold text-foreground sm:h-16 sm:w-16 sm:text-2xl">
             {logoSrc ? (
               <img
                 src={logoSrc}
                 alt={tool.name}
-                className="h-20 w-20 rounded-2xl object-cover"
+                className="h-full w-full object-cover"
               />
             ) : (
               tool.name.charAt(0)
@@ -173,14 +173,18 @@ export default async function ToolDetailPage({ params }: PageProps) {
           </div>
 
           <div className="flex-1">
-            <div className="flex flex-wrap items-center gap-3">
-              <h1 className="font-display text-4xl font-bold tracking-display sm:text-5xl">{tool.name}</h1>
-              {tool.is_verified && <VerifiedBadge size="md" />}
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 className="font-serif text-3xl font-normal tracking-[-0.03em] sm:text-4xl">
+                {tool.name}
+              </h1>
+              {tool.is_verified && <VerifiedBadge size="sm" />}
             </div>
-            <p className="mt-2 text-lg text-muted-foreground">{tool.tagline}</p>
+            <p className="mt-1.5 text-base text-muted-foreground sm:text-lg">
+              {tool.tagline}
+            </p>
 
-            <div className="mt-4 flex flex-wrap items-center gap-4">
-              <RatingStars rating={tool.editor_rating} size="md" />
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <RatingStars rating={tool.editor_rating} size="sm" />
               <PricingBadge pricing={tool.pricing_model} />
               {tool.categories && (
                 <Link href={`/categories/${tool.categories.slug}`}>
@@ -189,25 +193,25 @@ export default async function ToolDetailPage({ params }: PageProps) {
               )}
             </div>
 
-            <div className="mt-6">
+            <div className="mt-4 flex flex-wrap gap-2">
               <a
                 href={tool.affiliate_url || tool.website_url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg">
+                <Button>
                   Visit {tool.name} <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
               </a>
               <Link href="/compare">
-                <Button variant="outline" size="lg">Compare</Button>
+                <Button variant="outline">Compare</Button>
               </Link>
             </div>
           </div>
         </div>
         </FadeIn>
 
-        <Separator className="my-10" />
+        <Separator className="my-6 sm:my-8" />
 
         {/* Content Grid */}
         <div className="grid gap-8 lg:grid-cols-3">

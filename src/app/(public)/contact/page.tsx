@@ -19,11 +19,10 @@ import { PageTransition, FadeIn, StaggerChildren, StaggerItem } from "@/componen
 import { createClient } from "@/lib/supabase/client";
 
 const subjects = [
-  { value: "general", label: "General Inquiry" },
-  { value: "bug", label: "Bug Report" },
-  { value: "submission", label: "Tool Submission Question" },
-  { value: "portfolio", label: "Portfolio Help" },
+  { value: "general", label: "General inquiry" },
+  { value: "bug", label: "Bug report" },
   { value: "partnership", label: "Partnership" },
+  { value: "feedback", label: "Feedback" },
   { value: "other", label: "Other" },
 ];
 
@@ -118,34 +117,31 @@ export default function ContactPage() {
 
   return (
     <PageTransition>
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <FadeIn>
-          <div className="text-center">
-            <p className="text-sm font-medium uppercase tracking-widest text-primary">
-              Get in Touch
-            </p>
-            <h1 className="mt-4 font-display text-4xl font-bold tracking-display sm:text-5xl">
-              Contact Us
-            </h1>
-            <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
-              Have a question, found a bug, or want to partner up? We&apos;d love to
-              hear from you.
-            </p>
-          </div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
+            Get in touch
+          </p>
+          <h1 className="mt-2 font-serif text-3xl font-normal tracking-[-0.03em] sm:text-4xl">
+            Contact <em className="italic text-white/60">us</em>.
+          </h1>
+          <p className="mt-3 max-w-lg text-sm text-muted-foreground sm:text-base">
+            Question, bug, or partnership — we&apos;d love to hear from you.
+          </p>
         </FadeIn>
 
         {/* Info cards */}
-        <StaggerChildren className="mt-12 grid gap-4 sm:grid-cols-3">
+        <StaggerChildren className="mt-6 grid gap-3 sm:grid-cols-3">
           {infoCards.map((card) => (
             <StaggerItem key={card.title}>
-              <Card className="border-border/50">
-                <CardContent className="flex items-start gap-3 p-5">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                    <card.icon className="h-4 w-4 text-primary" />
+              <Card className="border-white/10 bg-card">
+                <CardContent className="flex items-start gap-3 p-4">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5">
+                    <card.icon className="h-4 w-4 text-foreground" />
                   </div>
                   <div>
                     <p className="text-sm font-medium">{card.title}</p>
-                    <p className="mt-0.5 text-sm text-muted-foreground">
+                    <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
                       {card.description}
                     </p>
                   </div>
@@ -157,7 +153,7 @@ export default function ContactPage() {
 
         {/* Form */}
         <FadeIn delay={0.2}>
-          <Card className="mx-auto mt-10 max-w-2xl border-border/50">
+          <Card className="mx-auto mt-6 max-w-2xl border-white/10">
             <CardContent className="p-6 sm:p-8">
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Honeypot */}

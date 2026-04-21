@@ -16,24 +16,19 @@ export function ForToolMakers() {
           <h2 className="mt-3 font-serif text-[clamp(1.875rem,5.5vw,3.75rem)] font-normal leading-[0.95] tracking-[-0.035em]">
             Built an AI tool?
             <br />
-            <em className="italic text-white/50">Get listed.</em>
+            <em className="italic text-white/50">Get featured.</em>
           </h2>
           <p className="mt-4 max-w-xl font-serif text-base italic leading-relaxed text-white/70 sm:text-lg">
-            Free listing with full description, pros &amp; cons, pricing, and
-            category placement. Get featured for priority homepage spots.
+            Priority homepage placement, featured badge, higher search ranking,
+            category prominence — cancel anytime.
           </p>
         </div>
-        <div className="flex flex-col gap-2 sm:flex-row lg:col-span-4 lg:flex-col">
-          <Link href="/submit" className="flex-1">
-            <Button variant="outline" size="lg" className="w-full">
-              Submit your tool
-              <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Button>
-          </Link>
-          <Link href="/get-featured" className="flex-1">
+        <div className="flex lg:col-span-4 lg:justify-end">
+          <Link href="/get-featured" className="w-full">
             <Button size="lg" className="w-full">
               <Star className="mr-1.5 h-4 w-4" />
               Get featured
+              <ArrowRight className="ml-1.5 h-4 w-4" />
             </Button>
           </Link>
         </div>

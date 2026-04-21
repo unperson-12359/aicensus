@@ -3,7 +3,6 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { CategoryCard } from "@/components/categories/category-card";
 import { JsonLd } from "@/components/shared/json-ld";
 import { PageTransition, StaggerChildren, StaggerItem } from "@/components/motion";
-import { GeometricDecor, pageHeaderShapes } from "@/components/shared/geometric-decor";
 import { getCategoriesWithToolCount, type CategoryWithCount } from "@/lib/queries/categories";
 
 export const revalidate = 86400;
@@ -62,40 +61,30 @@ export default async function CategoriesPage() {
 
   return (
     <>
-    <JsonLd data={collectionJsonLd} />
-    <PageTransition>
-    <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <GeometricDecor shapes={pageHeaderShapes} />
-      <SectionHeading
-        title="Categories"
-        description="Browse AI tools by category and find the perfect tool for your needs"
-        accent
-      />
+      <JsonLd data={collectionJsonLd} />
+      <PageTransition>
+        <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+          <SectionHeading
+            title="Categories"
+            description="Browse AI tools by category and find the perfect tool for your needs."
+            eyebrow="The map"
+          />
 
-      <StaggerChildren className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
-        {categories.map((category, index) => (
-          <StaggerItem
-            key={category.id}
-            className={
-              index === 0
-                ? "col-span-2"
-                : index === 1
-                  ? "xl:col-span-2"
-                  : undefined
-            }
-          >
-            <CategoryCard category={category} />
-          </StaggerItem>
-        ))}
-      </StaggerChildren>
+          <StaggerChildren className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">
+            {categories.map((category) => (
+              <StaggerItem key={category.id}>
+                <CategoryCard category={category} />
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
 
-      {categories.length === 0 && (
-        <p className="mt-12 text-center text-muted-foreground">
-          Categories will appear here once the database is configured.
-        </p>
-      )}
-    </div>
-    </PageTransition>
+          {categories.length === 0 && (
+            <p className="mt-12 text-center text-muted-foreground">
+              Categories will appear here once the database is configured.
+            </p>
+          )}
+        </div>
+      </PageTransition>
     </>
   );
 }

@@ -77,36 +77,26 @@ export default function AboutPage() {
     <>
     <JsonLd data={organizationJsonLd} />
     <PageTransition>
-      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         {/* Hero */}
-        <div className="relative text-center">
+        <div className="relative">
           <GeometricDecor shapes={aboutHeroShapes} />
           <RevealText>
-            <p className="font-display text-sm font-medium uppercase tracking-widest text-muted-foreground">
-              Our Mission
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
+              Our mission
             </p>
           </RevealText>
-          <RevealText delay={0.15}>
-            <h1 className="mt-4 font-display text-5xl font-bold tracking-hero sm:text-6xl lg:text-7xl">
-              The trusted
-            </h1>
-          </RevealText>
-          <RevealText delay={0.3}>
-            <h1 className="font-display text-5xl font-bold tracking-hero text-white/45 sm:text-6xl lg:text-7xl">
-              intelligence layer
-            </h1>
-          </RevealText>
-          <RevealText delay={0.45}>
-            <h1 className="font-display text-5xl font-bold tracking-hero sm:text-6xl lg:text-7xl">
-              for AI
+          <RevealText delay={0.1}>
+            <h1 className="mt-2 font-serif text-3xl font-normal tracking-[-0.03em] sm:text-4xl md:text-5xl">
+              The trusted <em className="italic text-white/60">intelligence layer</em> for AI.
             </h1>
           </RevealText>
 
-          <FadeIn delay={0.7}>
-            <p className="mx-auto mt-8 max-w-2xl text-lg text-muted-foreground">
-              Thousands of AI tools launch every month. AiCensus exists to help you
-              find the ones that actually work. We verify, review, and compare AI
-              products so you can make informed decisions without the noise.
+          <FadeIn delay={0.3}>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+              Thousands of AI tools launch every month. AiCensus exists to help
+              you find the ones that actually work — verified, reviewed, and
+              compared without the noise.
             </p>
           </FadeIn>
         </div>
@@ -114,16 +104,16 @@ export default function AboutPage() {
         {/* Pillars */}
         <div className="relative">
         <GeometricDecor shapes={sectionShapes} />
-        <StaggerChildren className="mt-16 grid gap-6 sm:grid-cols-2">
+        <StaggerChildren className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4">
           {pillars.map((pillar) => (
             <StaggerItem key={pillar.title}>
               <Card className="bento-tile transition-all duration-300 hover:-translate-y-0.5">
-                <CardContent className="p-6">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-                    <pillar.icon className="h-5 w-5 text-foreground" />
+                <CardContent className="p-5">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                    <pillar.icon className="h-4 w-4 text-foreground" />
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-semibold">{pillar.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">
+                  <h3 className="mt-3 font-semibold tracking-tight">{pillar.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                     {pillar.description}
                   </p>
                 </CardContent>
@@ -134,16 +124,15 @@ export default function AboutPage() {
         </div>
 
         {/* Roadmap teaser */}
-        <FadeIn className="mt-16">
-          <div className="bento-tile p-8 text-center">
-            <h2 className="font-display text-3xl font-bold tracking-display sm:text-4xl">
-              What&apos;s coming{" "}
-              <span className="text-white/45">next</span>
+        <FadeIn className="mt-10">
+          <div className="bento-tile p-6 sm:p-8">
+            <h2 className="font-serif text-2xl font-normal tracking-[-0.02em] sm:text-3xl">
+              What&apos;s coming <em className="italic text-white/60">next</em>.
             </h2>
-            <p className="mt-3 text-muted-foreground">
+            <p className="mt-2 text-sm text-muted-foreground">
               AiCensus is evolving into a full AI ecosystem intelligence platform.
             </p>
-            <StaggerChildren className="mt-8 grid gap-4 text-left sm:grid-cols-3" staggerDelay={0.15}>
+            <StaggerChildren className="mt-6 grid gap-3 sm:grid-cols-3" staggerDelay={0.12}>
               <StaggerItem>
                 <div className="rounded-xl border border-white/10 bg-white/[0.03] p-5">
                   <p className="tracking-accent text-white/50">Phase 2</p>

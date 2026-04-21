@@ -11,18 +11,21 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <PageTransition>
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <FadeIn>
-          <h1 className="font-display text-4xl font-bold tracking-display sm:text-5xl">
-            Privacy Policy
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
+            Legal
+          </p>
+          <h1 className="mt-2 font-serif text-3xl font-normal tracking-[-0.03em] sm:text-4xl">
+            Privacy <em className="italic text-white/60">policy</em>.
           </h1>
-          <p className="mt-4 text-muted-foreground">
+          <p className="mt-3 text-sm text-muted-foreground">
             Last updated: February 2026
           </p>
         </FadeIn>
 
         <FadeIn delay={0.15}>
-          <div className="prose-custom mt-12 space-y-8 text-muted-foreground">
+          <div className="prose-custom mt-8 space-y-6 text-muted-foreground">
             <section>
               <h2 className="text-xl font-semibold text-foreground">
                 1. Information We Collect

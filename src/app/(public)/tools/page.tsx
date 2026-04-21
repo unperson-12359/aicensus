@@ -102,22 +102,23 @@ export default async function ToolsPage({ searchParams }: PageProps) {
     <>
     <JsonLd data={itemListJsonLd} />
     <PageTransition>
-    <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
       <GeometricDecor shapes={pageHeaderShapes} />
       <SectionHeading
-        title={params.q ? `Results for "${params.q}"` : "Browse AI Tools"}
+        title={params.q ? `Results for "${params.q}"` : "Browse AI tools"}
         description={
           params.q
             ? `${tools.count} tools found`
-            : "Curated by humans, not scraped by bots. Honest pricing, real pros & cons, and no sponsored rankings."
+            : "Curated by humans. Honest pricing, real pros & cons, no sponsored rankings."
         }
+        eyebrow="The directory"
       />
 
-      <div className="mt-8">
+      <div className="mt-6">
         <FilterBar categories={categories} />
       </div>
 
-      <div className="mt-8">
+      <div className="mt-6">
         {tools.tools.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <p className="text-lg font-medium">No tools found</p>

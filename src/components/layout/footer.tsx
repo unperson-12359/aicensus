@@ -4,7 +4,6 @@ const footerLinks = {
   Product: [
     { href: "/tools", label: "Browse tools" },
     { href: "/categories", label: "Categories" },
-    { href: "/submit", label: "Submit a tool" },
     { href: "/get-featured", label: "Get featured" },
     { href: "/pricing", label: "Pricing" },
   ],

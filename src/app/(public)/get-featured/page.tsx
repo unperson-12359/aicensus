@@ -41,17 +41,17 @@ const included = [
 
 export default function GetFeaturedPage() {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       {/* Hero */}
-      <div className="text-center">
-        <p className="text-sm font-medium uppercase tracking-widest text-primary">
-          Featured Placement
+      <div>
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
+          Featured placement
         </p>
-        <h1 className="mt-4 font-display text-4xl font-bold tracking-hero sm:text-5xl lg:text-6xl">
+        <h1 className="mt-2 font-serif text-3xl font-normal tracking-[-0.03em] sm:text-4xl md:text-5xl">
           Get your tool in front of{" "}
-          <span className="text-white/45">every visitor.</span>
+          <em className="italic text-white/60">every visitor</em>.
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+        <p className="mt-3 max-w-2xl text-sm text-muted-foreground sm:text-base">
           Featured tools appear on the AiCensus homepage — the first thing
           builders see. Monthly subscription. Cancel anytime.
         </p>

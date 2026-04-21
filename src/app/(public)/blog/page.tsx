@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Blog — AiCensus",
   description:
-    "Insights, guides, and updates from AiCensus. Learn about AI tools, vibe coding, and building in the AI era.",
+    "Insights, guides, and updates from AiCensus. AI tools, reviews, and how to pick the right stack.",
   alternates: { canonical: "/blog" },
 };
 
@@ -28,31 +28,29 @@ export default async function BlogPage({
 
   return (
     <PageTransition>
-      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <FadeIn>
-          <div className="text-center">
-            <p className="text-sm font-medium uppercase tracking-widest text-primary">
-              Blog
-            </p>
-            <h1 className="mt-4 font-display text-4xl font-bold tracking-display sm:text-5xl">
-              Insights & Updates
-            </h1>
-            <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
-              Guides, tool roundups, and updates from the AiCensus team.
-            </p>
-          </div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
+            Blog
+          </p>
+          <h1 className="mt-2 font-serif text-3xl font-normal tracking-[-0.03em] sm:text-4xl">
+            Insights &amp; <em className="italic text-white/60">updates</em>.
+          </h1>
+          <p className="mt-3 max-w-lg text-sm text-muted-foreground sm:text-base">
+            Guides, tool roundups, and updates from the AiCensus team.
+          </p>
         </FadeIn>
 
         {allTags.length > 0 && (
           <FadeIn delay={0.1}>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
+            <div className="mt-6 flex flex-wrap items-center gap-2">
               <Link
                 href="/blog"
                 className={cn(
                   "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors",
                   !activeTag
-                    ? "border-primary bg-primary/10 text-primary"
-                    : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                    ? "border-white bg-white text-black"
+                    : "border-white/15 text-muted-foreground hover:border-white/40 hover:text-foreground"
                 )}
               >
                 All
@@ -64,8 +62,8 @@ export default async function BlogPage({
                   className={cn(
                     "inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium transition-colors",
                     activeTag === tag
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                      ? "border-white bg-white text-black"
+                      : "border-white/15 text-muted-foreground hover:border-white/40 hover:text-foreground"
                   )}
                 >
                   <Tag className="mr-1 h-2.5 w-2.5" />
@@ -78,48 +76,51 @@ export default async function BlogPage({
 
         {posts.length === 0 ? (
           <FadeIn delay={0.15}>
-            <div className="mt-16 text-center">
+            <div className="mt-12 text-center">
               <p className="text-muted-foreground">
                 No posts yet. Check back soon.
               </p>
             </div>
           </FadeIn>
         ) : (
-          <StaggerChildren className="mt-14 space-y-6">
+          <StaggerChildren className="mt-8 space-y-3 sm:space-y-4">
             {posts.map((post) => (
               <StaggerItem key={post.slug}>
                 <Link href={`/blog/${post.slug}`}>
-                  <Card className="border-border/50 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5">
-                    <CardContent className="p-6">
-                      <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-                        <span className="flex items-center gap-1">
+                  <Card className="border-white/10 bg-card transition-all duration-200 hover:border-white/30">
+                    <CardContent className="p-5 sm:p-6">
+                      <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                        <span className="flex items-center gap-1.5">
                           <Calendar className="h-3 w-3" />
                           {new Date(post.date).toLocaleDateString("en-US", {
-                            month: "long",
+                            month: "short",
                             day: "numeric",
                             year: "numeric",
                           })}
                         </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          {post.readingTime}
-                        </span>
+                        {post.readingTime && (
+                          <span className="flex items-center gap-1.5">
+                            <Clock className="h-3 w-3" />
+                            {post.readingTime}
+                          </span>
+                        )}
                       </div>
-                      <h2 className="mt-3 font-display text-xl font-semibold tracking-tight">
+                      <h2 className="mt-3 font-serif text-xl font-normal tracking-[-0.02em] sm:text-2xl">
                         {post.title}
                       </h2>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                        {post.description}
-                      </p>
+                      {post.description && (
+                        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                          {post.description}
+                        </p>
+                      )}
                       {post.tags.length > 0 && (
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {post.tags.map((tag) => (
+                        <div className="mt-3 flex flex-wrap gap-1.5">
+                          {post.tags.slice(0, 3).map((tag) => (
                             <Badge
                               key={tag}
-                              variant="secondary"
-                              className="text-xs"
+                              variant="outline"
+                              className="border-white/15 bg-white/[0.02] text-[10px] text-white/70"
                             >
-                              <Tag className="mr-1 h-2.5 w-2.5" />
                               {tag}
                             </Badge>
                           ))}
