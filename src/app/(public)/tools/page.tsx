@@ -118,7 +118,7 @@ export default async function ToolsPage({ searchParams }: PageProps) {
         <FilterBar categories={categories} />
       </div>
 
-      <div className="mt-6">
+      <div id="results" className="mt-6 scroll-mt-24">
         {tools.tools.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <p className="text-lg font-medium">No tools found</p>
@@ -133,8 +133,8 @@ export default async function ToolsPage({ searchParams }: PageProps) {
         )}
       </div>
 
-      {tools.count > 0 && (
-        <div className="mt-8 flex flex-col items-center gap-4">
+      {tools.count > 0 && totalPages > 1 && (
+        <div className="mt-10 flex flex-col items-center gap-4 sm:mt-12">
           <PaginationInfo
             currentPage={clampedPage}
             perPage={TOOLS_PER_PAGE}
@@ -144,6 +144,7 @@ export default async function ToolsPage({ searchParams }: PageProps) {
             currentPage={clampedPage}
             totalPages={totalPages}
             basePath="/tools"
+            anchor="results"
             searchParams={{
               q: params.q,
               category: params.category,
@@ -151,6 +152,15 @@ export default async function ToolsPage({ searchParams }: PageProps) {
               verified: params.verified,
               sort: params.sort,
             }}
+          />
+        </div>
+      )}
+      {tools.count > 0 && totalPages <= 1 && (
+        <div className="mt-8 flex justify-center">
+          <PaginationInfo
+            currentPage={clampedPage}
+            perPage={TOOLS_PER_PAGE}
+            total={tools.count}
           />
         </div>
       )}

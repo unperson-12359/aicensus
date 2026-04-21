@@ -5,13 +5,22 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
 import { JsonLd } from "@/components/shared/json-ld";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { Pagination } from "@/components/shared/pagination";
+import { PaginationInfo } from "@/components/shared/pagination-info";
 import { FadeIn } from "@/components/motion";
-import { getToolBySlug, getToolAlternativesBidirectional } from "@/lib/queries/tools";
+import {
+  getToolBySlug,
+  getToolAlternativesBidirectional,
+} from "@/lib/queries/tools";
 
 export const revalidate = 3600;
 
+const ALTERNATIVES_PER_PAGE = 6;
+
 interface Props {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ page?: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -32,8 +41,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function AlternativesPage({ params }: Props) {
-  const { slug } = await params;
+export default async function AlternativesPage({
+  params,
+  searchParams,
+}: Props) {
+  const [{ slug }, sp] = await Promise.all([params, searchParams]);
   const tool = await getToolBySlug(slug);
   if (!tool) notFound();
 
@@ -44,6 +56,13 @@ export default async function AlternativesPage({ params }: Props) {
     alternatives = [];
   }
 
+  const currentPage = Math.max(1, parseInt(sp.page || "1", 10) || 1);
+  const total = alternatives.length;
+  const totalPages = Math.max(1, Math.ceil(total / ALTERNATIVES_PER_PAGE));
+  const clampedPage = Math.min(currentPage, totalPages);
+  const offset = (clampedPage - 1) * ALTERNATIVES_PER_PAGE;
+  const paged = alternatives.slice(offset, offset + ALTERNATIVES_PER_PAGE);
+
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
   const jsonLd = {
     "@context": "https://schema.org",
@@ -51,7 +70,7 @@ export default async function AlternativesPage({ params }: Props) {
     name: `Alternatives to ${tool.name}`,
     description: `AI tools similar to ${tool.name}`,
     url: `${siteUrl}/tools/${slug}/alternatives`,
-    numberOfItems: alternatives.length,
+    numberOfItems: total,
     itemListElement: alternatives.map((alt, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -63,20 +82,31 @@ export default async function AlternativesPage({ params }: Props) {
     })),
   };
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+      { "@type": "ListItem", position: 2, name: "Tools", item: `${siteUrl}/tools` },
+      { "@type": "ListItem", position: 3, name: tool.name, item: `${siteUrl}/tools/${slug}` },
+      { "@type": "ListItem", position: 4, name: "Alternatives" },
+    ],
+  };
+
   return (
     <>
       <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumbLd} />
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <FadeIn>
-          <nav className="mb-6 flex items-center gap-1.5 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
-            <span>/</span>
-            <Link href="/tools" className="hover:text-foreground transition-colors">Tools</Link>
-            <span>/</span>
-            <Link href={`/tools/${slug}`} className="hover:text-foreground transition-colors">{tool.name}</Link>
-            <span>/</span>
-            <span className="text-foreground">Alternatives</span>
-          </nav>
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Tools", href: "/tools" },
+              { label: tool.name, href: `/tools/${slug}` },
+              { label: "Alternatives" },
+            ]}
+          />
         </FadeIn>
 
         <FadeIn>
@@ -100,10 +130,40 @@ export default async function AlternativesPage({ params }: Props) {
           </div>
         </FadeIn>
 
-        {alternatives.length > 0 ? (
-          <FadeIn delay={0.2}>
-            <AnimatedToolGrid tools={alternatives} />
-          </FadeIn>
+        {total > 0 ? (
+          <>
+            <FadeIn delay={0.2}>
+              <div id="results" className="scroll-mt-24">
+                <AnimatedToolGrid tools={paged} />
+              </div>
+            </FadeIn>
+
+            {totalPages > 1 ? (
+              <div className="mt-10 flex flex-col items-center gap-4 sm:mt-12">
+                <PaginationInfo
+                  currentPage={clampedPage}
+                  perPage={ALTERNATIVES_PER_PAGE}
+                  total={total}
+                  label="alternatives"
+                />
+                <Pagination
+                  currentPage={clampedPage}
+                  totalPages={totalPages}
+                  basePath={`/tools/${slug}/alternatives`}
+                  anchor="results"
+                />
+              </div>
+            ) : (
+              <div className="mt-8 flex justify-center">
+                <PaginationInfo
+                  currentPage={clampedPage}
+                  perPage={ALTERNATIVES_PER_PAGE}
+                  total={total}
+                  label="alternatives"
+                />
+              </div>
+            )}
+          </>
         ) : (
           <FadeIn delay={0.2}>
             <div className="py-16 text-center">

@@ -145,12 +145,12 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
           }
         />
 
-        <div className="mt-8">
+        <div id="results" className="mt-8 scroll-mt-24">
           <ToolGrid tools={result.tools} />
         </div>
 
-        {result.count > 0 && (
-          <div className="mt-8 flex flex-col items-center gap-4">
+        {result.count > 0 && totalPages > 1 && (
+          <div className="mt-10 flex flex-col items-center gap-4 sm:mt-12">
             <PaginationInfo
               currentPage={currentPage}
               perPage={TOOLS_PER_PAGE}
@@ -160,6 +160,16 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
               currentPage={currentPage}
               totalPages={totalPages}
               basePath={`/categories/${slug}`}
+              anchor="results"
+            />
+          </div>
+        )}
+        {result.count > 0 && totalPages <= 1 && (
+          <div className="mt-8 flex justify-center">
+            <PaginationInfo
+              currentPage={currentPage}
+              perPage={TOOLS_PER_PAGE}
+              total={result.count}
             />
           </div>
         )}

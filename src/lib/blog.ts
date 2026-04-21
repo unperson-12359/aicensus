@@ -74,3 +74,22 @@ export function getAllPosts(): BlogPostMeta[] {
 
   return posts;
 }
+
+/**
+ * Previous / next post relative to the given slug, using the same date-desc
+ * ordering as `getAllPosts`. "Previous" means the post before this one in
+ * reading order (i.e. newer one), "next" means the one after (older one).
+ * Returns nulls at the edges — no wrapping.
+ */
+export function getAdjacentPosts(slug: string): {
+  prev: BlogPostMeta | null;
+  next: BlogPostMeta | null;
+} {
+  const posts = getAllPosts();
+  const idx = posts.findIndex((p) => p.slug === slug);
+  if (idx === -1) return { prev: null, next: null };
+  return {
+    prev: idx > 0 ? posts[idx - 1] : null,
+    next: idx < posts.length - 1 ? posts[idx + 1] : null,
+  };
+}

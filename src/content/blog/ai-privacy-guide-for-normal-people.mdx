@@ -1,0 +1,117 @@
+---
+title: "AI and Your Data: A Privacy Guide for Normal People"
+description: "Does ChatGPT train on your data? Who actually reads what you type into AI tools? A plain-English privacy guide with opt-outs that actually work."
+date: "2026-04-20"
+author: "AiCensus"
+tags: ["privacy", "guide", "security", "tools"]
+---
+
+I watched a friend paste his entire tax return into ChatGPT last week. Not a redacted version. The real thing. Names, SSN, account numbers, everything. He wanted help understanding why he owed money, which is fair, but he had no idea where that data was going once he hit send.
+
+If you think you are careful and this does not apply to you, answer one question: do you know whether the AI tool you used this morning trains on your input by default? Most people do not. This is the guide I wish existed a year ago.
+
+This is not a scare piece. AI tools are genuinely useful, and being reasonable about privacy is not the same as paranoia. The goal is to understand what is actually happening with your data so you can make real choices instead of just hoping for the best.
+
+## What "Training on Your Data" Actually Means
+
+When people say a company "trains on your data", here is what it means in practice. Anything you send becomes potential input for future versions of the model. Not a direct copy-paste into someone else's chat, but it shapes how the model behaves going forward. In rare cases, trained models have been shown to regurgitate specific chunks of training data when prompted right. This is the source of most of the lawsuits you have read about.
+
+For personal chats about dinner plans, this is fine. For client contracts, proprietary code, medical records, or anything you signed an NDA about, it is very much not fine.
+
+The important thing: "we train on your inputs" is the default on most consumer AI products. You usually have to opt out. Opt out settings are often hidden. Enterprise tiers almost always include stronger guarantees because businesses will not tolerate less.
+
+## The Main AI Tools and What They Actually Do
+
+Let me go through the big ones. Policies change, so always check the current source, but here is the lay of the land as of mid-2026.
+
+**[ChatGPT](/tools/chatgpt) (OpenAI)**. Default for free and Plus users: your chats may be used to train future models. You can turn this off in Settings > Data Controls > "Improve the model for everyone". Turning it off also disables chat history, which is a baffling UX decision. Temporary Chats are not used for training. ChatGPT Team and Enterprise: zero-retention by default, never trained on.
+
+**[Claude](/tools/claude) (Anthropic)**. As of 2026, Anthropic does not train on consumer chats by default. This is the strongest default privacy stance among the big three. API usage has been non-training by default from day one. If you opt into "Help improve Claude", then it is used. For sensitive work, Claude's default is the most forgiving.
+
+**[Gemini](/tools/gemini) (Google)**. By default, Gemini conversations may be reviewed by humans for quality and used to improve services. You can turn this off in Gemini Apps Activity. Even when turned off, Google retains 72 hours of chat for safety. Google Workspace users under a paid plan are contractually excluded from training by default.
+
+**Microsoft Copilot**. Consumer Copilot uses chats for personalization and improvement unless you opt out. Copilot for Microsoft 365 (paid, enterprise) has never trained on your data and is covered by Microsoft's data protection agreements.
+
+**[Perplexity](/tools/perplexity)**. Does not train on your searches by default, and this is one of the reasons it has held up as a privacy-reasonable alternative to Google.
+
+**[Cursor](/tools/cursor)**. Has a Privacy Mode that turns off data collection and prevents code from being used in training. You have to turn it on. If you are working with proprietary code, this is not optional.
+
+**Character.ai, Replika, and other companion-style chatbots**. Assume everything is retained and used. These businesses live on conversational data. Do not put real personal information into them.
+
+## The Five-Minute Privacy Audit
+
+Stop what you are doing and run this once. It takes five minutes.
+
+1. **Open the AI tools you use weekly.** List them. For most people this is three to five.
+2. **For each, find the data setting.** Usually under Settings, Privacy, or Data Controls.
+3. **Turn off training or model improvement.** Even if you do not think your chats are sensitive, turning this off costs you nothing. Hidden assumption in settings is rarely in your favor.
+4. **Delete old history you do not need.** Anything from testing, one-off projects, or throwaway questions. Especially anything where you pasted in real data.
+5. **Check the retention policy.** Know whether your chats are kept 30 days, forever, or never.
+
+That is it. That is the whole audit. You can do it during one coffee.
+
+## What You Should Never Paste Into an AI Tool
+
+A practical list. This is not moralizing, this is actual risk.
+
+- Real Social Security numbers, national ID numbers, or tax IDs.
+- Bank account numbers, routing numbers, or full credit card numbers.
+- Passwords, API keys, private keys, or database credentials. If you have ever pasted an AWS key into ChatGPT to "ask it a question", assume that key is compromised and rotate it.
+- Client data covered by an NDA or a data processing agreement.
+- Protected health information, if you work in healthcare.
+- Any business plan or pre-launch product detail you would not email to a competitor.
+- Children's personal information.
+
+For the first two, just type "[REDACTED]" or "XXXX" instead. The AI does not need the real number to help you understand the concept.
+
+## The "I Need to Use Real Data" Workarounds
+
+Sometimes the task genuinely requires sensitive input. Here are the options, ordered from safest to least safe.
+
+**Run a local model.** This is the only approach where your data genuinely never leaves your machine. A laptop running [Ollama](https://ollama.com) can handle most everyday analysis without an internet connection. If you are interested, our guide to [running AI locally](/blog/run-ai-locally-open-source-models) walks through the setup. For sensitive work, this is the nuclear option.
+
+**Use an enterprise tier with a Data Processing Agreement.** ChatGPT Enterprise, Claude for Work, and Gemini under Workspace are all covered by legally binding commitments to not train on your data. If your employer has these, use them for work stuff. Do not use your personal free ChatGPT for work.
+
+**Anonymize before pasting.** Replace real names with "Client A", real numbers with plausible fakes, real company names with generic placeholders. The AI can still help you draft the email or analyze the spreadsheet. This takes ten seconds and removes 90% of the risk.
+
+**Use zero-retention API access.** If you are a developer, the API almost always has stronger privacy guarantees than the consumer product. Many APIs do not retain inputs at all past the immediate request.
+
+## The Browser Extension Problem
+
+This one catches people. Grammarly, LanguageTool, and dozens of AI "writing helpers" install as browser extensions that can read every page you visit. Grammarly specifically has access to text in nearly every input box on the internet, including your email, bank site, and internal company tools.
+
+This is fine when the extension is sandboxed properly and the data is encrypted in transit. But "fine" depends entirely on the company behind it. Before you install an AI browser extension, ask two questions:
+
+1. What data does it send to the server? (Check the privacy policy.)
+2. Is the company still in business and actively maintained? (A dead extension that stays installed is a security liability.)
+
+Uninstall any AI extension you have not actively used in the last month. You probably have three.
+
+## Free Tools and the "If You Are Not Paying, You Are the Product" Problem
+
+Not always true, but often enough to take seriously. Free AI tools have to make money somehow. Options include:
+
+- Ads.
+- Premium tier upgrades (fine, this is the normal SaaS model).
+- Training data (you paying with your inputs).
+- Selling derived data to third parties (rare with reputable companies, common with smaller ones).
+
+Established names like Anthropic, OpenAI, and Google have enough paying customers to not need to sell your data in the sketchy sense. Smaller tools where you have never heard of the parent company deserve more scrutiny. Scroll the [free AI tools post](/blog/free-ai-tools-no-signup) with this in mind.
+
+## What to Do If You Already Messed Up
+
+You pasted something you should not have. It happens. Here is the cleanup:
+
+1. **Delete the chat** from the tool's history. This does not remove it from backups or training sets that have already been pulled, but it removes it from the active record.
+2. **Check the retention window** for that tool. Most have a window where deleted data is truly gone after 30 to 90 days.
+3. **Change anything actionable.** If you pasted a password, change the password. If you pasted an API key, rotate it. If you pasted financial info, monitor for a few months.
+4. **Do not panic.** The worst-case scenario is usually much less bad than the feeling of having made the mistake. AI companies are not sitting there reading your chats for fun.
+5. **Set a better default.** Opt out of training on all your tools so the next slip is less costly.
+
+## The Actually Important Takeaway
+
+Privacy in AI tools is not solved by any single setting. It is a mindset. Before you paste something into a chat window, pause for two seconds and ask: would I be comfortable if this ended up in a training dataset, a support agent's screen, or a leaked database?
+
+If the answer is no, either redact it, use a local model, or use a paid tier with stronger guarantees. Everything else is noise.
+
+You can browse privacy-friendly AI tools in our [productivity category](/categories/productivity), or compare options in our [tools directory](/tools). The best tool for you is the one whose default behavior matches how carefully you actually want to behave.

@@ -4,8 +4,12 @@ import { Calendar, Clock, Tag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
+import { Pagination } from "@/components/shared/pagination";
+import { PaginationInfo } from "@/components/shared/pagination-info";
 import { getAllPosts } from "@/lib/blog";
 import { cn } from "@/lib/utils";
+
+const POSTS_PER_PAGE = 9;
 
 export const metadata: Metadata = {
   title: "Blog — AiCensus",
@@ -17,14 +21,23 @@ export const metadata: Metadata = {
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: Promise<{ tag?: string }>;
+  searchParams: Promise<{ tag?: string; page?: string }>;
 }) {
-  const { tag: activeTag } = await searchParams;
+  const { tag: activeTag, page: pageParam } = await searchParams;
   const allPosts = getAllPosts();
   const allTags = [...new Set(allPosts.flatMap((p) => p.tags))].sort();
-  const posts = activeTag
+  const filtered = activeTag
     ? allPosts.filter((p) => p.tags.includes(activeTag))
     : allPosts;
+
+  const total = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / POSTS_PER_PAGE));
+  const currentPage = Math.min(
+    totalPages,
+    Math.max(1, parseInt(pageParam || "1", 10) || 1)
+  );
+  const offset = (currentPage - 1) * POSTS_PER_PAGE;
+  const posts = filtered.slice(offset, offset + POSTS_PER_PAGE);
 
   return (
     <PageTransition>
@@ -83,55 +96,86 @@ export default async function BlogPage({
             </div>
           </FadeIn>
         ) : (
-          <StaggerChildren className="mt-8 space-y-3 sm:space-y-4">
-            {posts.map((post) => (
-              <StaggerItem key={post.slug}>
-                <Link href={`/blog/${post.slug}`}>
-                  <Card className="border-white/10 bg-card transition-all duration-200 hover:border-white/30">
-                    <CardContent className="p-5 sm:p-6">
-                      <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                        <span className="flex items-center gap-1.5">
-                          <Calendar className="h-3 w-3" />
-                          {new Date(post.date).toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
-                        </span>
-                        {post.readingTime && (
+          <>
+            <div id="posts" className="scroll-mt-24">
+            <StaggerChildren className="mt-8 space-y-3 sm:space-y-4">
+              {posts.map((post) => (
+                <StaggerItem key={post.slug}>
+                  <Link href={`/blog/${post.slug}`}>
+                    <Card className="border-white/10 bg-card transition-all duration-200 hover:border-white/30">
+                      <CardContent className="p-5 sm:p-6">
+                        <div className="flex flex-wrap items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                           <span className="flex items-center gap-1.5">
-                            <Clock className="h-3 w-3" />
-                            {post.readingTime}
+                            <Calendar className="h-3 w-3" />
+                            {new Date(post.date).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
                           </span>
-                        )}
-                      </div>
-                      <h2 className="mt-3 font-serif text-xl font-normal tracking-[-0.02em] sm:text-2xl">
-                        {post.title}
-                      </h2>
-                      {post.description && (
-                        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                          {post.description}
-                        </p>
-                      )}
-                      {post.tags.length > 0 && (
-                        <div className="mt-3 flex flex-wrap gap-1.5">
-                          {post.tags.slice(0, 3).map((tag) => (
-                            <Badge
-                              key={tag}
-                              variant="outline"
-                              className="border-white/15 bg-white/[0.02] text-[10px] text-white/70"
-                            >
-                              {tag}
-                            </Badge>
-                          ))}
+                          {post.readingTime && (
+                            <span className="flex items-center gap-1.5">
+                              <Clock className="h-3 w-3" />
+                              {post.readingTime}
+                            </span>
+                          )}
                         </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </Link>
-              </StaggerItem>
-            ))}
-          </StaggerChildren>
+                        <h2 className="mt-3 font-serif text-xl font-normal tracking-[-0.02em] sm:text-2xl">
+                          {post.title}
+                        </h2>
+                        {post.description && (
+                          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+                            {post.description}
+                          </p>
+                        )}
+                        {post.tags.length > 0 && (
+                          <div className="mt-3 flex flex-wrap gap-1.5">
+                            {post.tags.slice(0, 3).map((tag) => (
+                              <Badge
+                                key={tag}
+                                variant="outline"
+                                className="border-white/15 bg-white/[0.02] text-[10px] text-white/70"
+                              >
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </StaggerItem>
+              ))}
+            </StaggerChildren>
+            </div>
+
+            {totalPages > 1 ? (
+              <div className="mt-10 flex flex-col items-center gap-4 sm:mt-12">
+                <PaginationInfo
+                  currentPage={currentPage}
+                  perPage={POSTS_PER_PAGE}
+                  total={total}
+                  label="posts"
+                />
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  basePath="/blog"
+                  anchor="posts"
+                  searchParams={{ tag: activeTag }}
+                />
+              </div>
+            ) : (
+              <div className="mt-8 flex justify-center">
+                <PaginationInfo
+                  currentPage={currentPage}
+                  perPage={POSTS_PER_PAGE}
+                  total={total}
+                  label="posts"
+                />
+              </div>
+            )}
+          </>
         )}
       </div>
     </PageTransition>

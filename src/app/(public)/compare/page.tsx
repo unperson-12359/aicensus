@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FadeIn } from "@/components/motion";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { ToolPicker } from "@/components/compare/tool-picker";
 import { getTools } from "@/lib/queries/tools";
 
@@ -28,6 +29,14 @@ export default async function CompareIndexPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+      <FadeIn>
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Compare" },
+          ]}
+        />
+      </FadeIn>
       <FadeIn>
         <h1 className="font-display text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
           Compare AI Tools

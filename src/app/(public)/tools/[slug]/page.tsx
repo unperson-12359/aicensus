@@ -11,6 +11,7 @@ import {
   Target,
 } from "lucide-react";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { PrevNextNav } from "@/components/shared/prev-next-nav";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -27,7 +28,7 @@ import { getLogoUrl } from "@/lib/utils";
 import {
   getToolBySlug,
   getToolAlternatives,
-  getAllToolSlugs,
+  getAdjacentTools,
 } from "@/lib/queries/tools";
 
 export const revalidate = 3600;
@@ -72,6 +73,10 @@ export default async function ToolDetailPage({ params }: PageProps) {
   const { slug } = await params;
   let tool: Awaited<ReturnType<typeof getToolBySlug>>;
   let alternatives: Awaited<ReturnType<typeof getToolAlternatives>> = [];
+  let adjacent: Awaited<ReturnType<typeof getAdjacentTools>> = {
+    prev: null,
+    next: null,
+  };
 
   try {
     tool = await getToolBySlug(slug);
@@ -82,9 +87,13 @@ export default async function ToolDetailPage({ params }: PageProps) {
   if (!tool) notFound();
 
   try {
-    alternatives = await getToolAlternatives(tool.id);
+    [alternatives, adjacent] = await Promise.all([
+      getToolAlternatives(tool.id),
+      getAdjacentTools(tool.name, tool.category_id),
+    ]);
   } catch {
     alternatives = [];
+    adjacent = { prev: null, next: null };
   }
 
   const jsonLd = {
@@ -402,6 +411,37 @@ export default async function ToolDetailPage({ params }: PageProps) {
               <Link href={`/tools/${tool.slug}/alternatives`} className="text-sm font-medium text-primary hover:underline">
                 View all alternatives →
               </Link>
+            </div>
+          </FadeIn>
+        )}
+
+        {/* Prev / Next tool navigation */}
+        {(adjacent.prev || adjacent.next) && (
+          <FadeIn className="mt-16 border-t border-white/10 pt-10 sm:mt-20">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
+              {tool.categories ? `More in ${tool.categories.name}` : "More tools"}
+            </p>
+            <div className="mt-4">
+              <PrevNextNav
+                prev={
+                  adjacent.prev
+                    ? {
+                        href: `/tools/${adjacent.prev.slug}`,
+                        label: adjacent.prev.name,
+                      }
+                    : null
+                }
+                next={
+                  adjacent.next
+                    ? {
+                        href: `/tools/${adjacent.next.slug}`,
+                        label: adjacent.next.name,
+                      }
+                    : null
+                }
+                prevLabel="Previous tool"
+                nextLabel="Next tool"
+              />
             </div>
           </FadeIn>
         )}

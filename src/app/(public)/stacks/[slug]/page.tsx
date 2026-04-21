@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { FadeIn, RevealText } from "@/components/motion";
 import { ToolCard } from "@/components/tools/tool-card";
 import { JsonLd } from "@/components/shared/json-ld";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import {
   stacks,
   getStackBySlug,
@@ -60,6 +61,12 @@ function getNextStack(current: Stack): Stack {
   return next;
 }
 
+function getPrevStack(current: Stack): Stack {
+  const idx = stacks.findIndex((s) => s.slug === current.slug);
+  const prev = stacks[(idx - 1 + stacks.length) % stacks.length];
+  return prev;
+}
+
 export default async function StackDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const stack = getStackBySlug(slug);
@@ -79,7 +86,10 @@ export default async function StackDetailPage({ params }: PageProps) {
   for (const t of tools) toolMap.set(t.slug, t);
 
   const nextStack = getNextStack(stack);
+  const prevStack = getPrevStack(stack);
   const { prefix, emphasis } = splitNameForEmphasis(stack.name);
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -94,19 +104,31 @@ export default async function StackDetailPage({ params }: PageProps) {
     })),
   };
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+      { "@type": "ListItem", position: 2, name: "Stacks", item: `${siteUrl}/stacks` },
+      { "@type": "ListItem", position: 3, name: stack.name },
+    ],
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       <JsonLd data={jsonLd} />
+      <JsonLd data={breadcrumbLd} />
 
       {/* Breadcrumb */}
       <FadeIn>
-        <Link
-          href="/stacks"
-          className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
-        >
-          <ArrowLeft className="h-3 w-3" />
-          Stacks
-        </Link>
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Stacks", href: "/stacks" },
+            { label: stack.name },
+          ]}
+          className="mb-0"
+        />
       </FadeIn>
 
       {/* Hero */}
@@ -218,29 +240,62 @@ export default async function StackDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Next recipe */}
-      <div className="mt-20 border-t border-white/10 pt-10 sm:mt-28">
+      {/* More recipes — prev + next with wrap */}
+      <nav
+        aria-label="More stacks"
+        className="mt-20 border-t border-white/10 pt-10 sm:mt-28"
+      >
         <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
-          Next recipe
+          More recipes
         </p>
-        <Link
-          href={`/stacks/${nextStack.slug}`}
-          className="bento-tile group mt-4 flex flex-col gap-4 p-6 hover:border-white/30 sm:flex-row sm:items-center sm:justify-between sm:p-8"
-        >
-          <div>
-            <h2 className="font-serif text-2xl font-normal leading-tight tracking-[-0.02em] sm:text-3xl">
-              <NextStackName name={nextStack.name} />
-            </h2>
-            <p className="mt-2 font-serif text-sm italic leading-relaxed text-white/65 sm:text-base">
-              {nextStack.tagline}
-            </p>
-          </div>
-          <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-white/60 transition-colors group-hover:text-white sm:text-[11px]">
-            Open
-            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-          </span>
-        </Link>
-      </div>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 sm:gap-4">
+          {prevStack.slug !== stack.slug && (
+            <Link
+              href={`/stacks/${prevStack.slug}`}
+              rel="prev"
+              className="bento-tile group flex flex-col gap-2 p-5 transition-colors hover:border-white/30 sm:p-6"
+            >
+              <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
+                <ArrowRight className="h-3 w-3 rotate-180" />
+                Previous
+              </span>
+              <h2 className="mt-1 font-serif text-xl font-normal leading-tight tracking-[-0.02em] sm:text-2xl">
+                <NextStackName name={prevStack.name} />
+              </h2>
+              <p className="font-serif text-sm italic leading-relaxed text-white/60">
+                {prevStack.tagline}
+              </p>
+            </Link>
+          )}
+          {nextStack.slug !== stack.slug && (
+            <Link
+              href={`/stacks/${nextStack.slug}`}
+              rel="next"
+              className="bento-tile group flex flex-col gap-2 p-5 transition-colors hover:border-white/30 sm:items-end sm:p-6 sm:text-right"
+            >
+              <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
+                Next
+                <ArrowRight className="h-3 w-3" />
+              </span>
+              <h2 className="mt-1 font-serif text-xl font-normal leading-tight tracking-[-0.02em] sm:text-2xl">
+                <NextStackName name={nextStack.name} />
+              </h2>
+              <p className="font-serif text-sm italic leading-relaxed text-white/60">
+                {nextStack.tagline}
+              </p>
+            </Link>
+          )}
+        </div>
+        <div className="mt-6">
+          <Link
+            href="/stacks"
+            className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
+          >
+            <ArrowRight className="h-3 w-3 rotate-180" />
+            All {stacks.length} stacks
+          </Link>
+        </div>
+      </nav>
     </div>
   );
 }

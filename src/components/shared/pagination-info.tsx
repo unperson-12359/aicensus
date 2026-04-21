@@ -11,12 +11,17 @@ export function PaginationInfo({
   total,
   label = "tools",
 }: PaginationInfoProps) {
+  if (total === 0) return null;
+
   const start = (currentPage - 1) * perPage + 1;
   const end = Math.min(currentPage * perPage, total);
 
   return (
-    <p className="text-sm text-muted-foreground">
-      Showing {start}&ndash;{end} of {total} {label}
+    <p
+      className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]"
+      aria-live="polite"
+    >
+      {start}&ndash;{end} of {total} {label}
     </p>
   );
 }

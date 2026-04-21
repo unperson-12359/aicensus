@@ -1,0 +1,119 @@
+---
+title: "Running AI Locally: Open-Source Models Worth Your Laptop"
+description: "Run AI locally on a normal laptop. A no-fluff guide to Ollama, LM Studio, Llama, Mistral, and which open-source LLM to actually install first."
+date: "2026-04-20"
+author: "AiCensus"
+tags: ["local-llm", "open-source", "guide", "tools"]
+---
+
+Here is the weird thing about running AI on your own machine in 2026: most people assume you need a server rack, a PhD, and a power bill the size of a mortgage. You do not. A 3-year-old MacBook Air with 16GB of RAM can run a model that would have been classified as state-of-the-art two years ago. It answers in real time, works offline, and nobody ever sees what you typed.
+
+I have been running local models as a daily driver for about a year. Not because I dislike ChatGPT (I pay for it) but because some tasks are better local. Summarizing private notes. Drafting replies to emails I do not want scanned. Writing in airplane mode. Playing with prompts without burning API credits.
+
+If you have wanted to try this but found every guide either too hand-wavy or too "here is my 40-step CUDA install", this is the practical walkthrough.
+
+## Why Run AI Locally at All
+
+There are three reasons people actually do this, and they stack.
+
+**Privacy.** Your inputs never leave your machine. No terms of service, no "we may use your data to train". For journalists, lawyers, doctors, therapists, or anyone touching NDAs, this is not optional. For everyone else, it is a nice-to-have that becomes addictive.
+
+**Cost.** API bills are sneaky. A rough content workflow using Claude or GPT-4 through the API can run $30 to $200 a month for one person. Local inference is free after the electricity, which on a laptop is basically nothing.
+
+**Latency.** A 7B model on a decent laptop responds instantly. No round trip, no rate limits, no "the model is overloaded, please try again". If you are hammering a model for small repetitive tasks (code completion, classification, quick rewrites), local wins on speed.
+
+The counterweight: frontier models are still smarter. A local 8B model is not GPT-5. It is roughly where GPT-3.5 was. For coding, long-form reasoning, or research, the hosted models (check our [ChatGPT vs Claude vs Gemini comparison](/blog/chatgpt-vs-claude-vs-gemini)) still win. Local is for the 80% of queries where that extra intelligence is wasted anyway.
+
+## What Your Laptop Can Actually Run
+
+Model size is measured in parameters (B = billion). The rough rules:
+
+- **8GB RAM**: Run up to 3B models. Usable but limited. Good for Gemma 2B, Phi-3-mini.
+- **16GB RAM**: Run up to 8B models comfortably. This is the sweet spot. Llama 3.1 8B, Mistral 7B, Qwen 2.5 7B all feel snappy.
+- **32GB RAM**: Run up to 13B, and 30B+ models with quantization. Getting into "this feels like GPT-3.5" territory.
+- **64GB+ RAM (or M-series Mac with unified memory)**: Run 70B models. These start approaching GPT-4 level for many tasks. Slow but usable.
+
+On Apple Silicon, unified memory is a cheat code. An M2 Pro with 32GB runs 13B models faster than most Windows machines with dedicated GPUs. If you are Mac-curious, this is the single best reason to stop delaying.
+
+On Windows or Linux, the bottleneck is usually VRAM on your GPU. A 12GB RTX 4070 handles 13B models well. A 24GB 4090 is overkill for 99% of what you will actually do.
+
+## Ollama: The Easy Path
+
+If you want one tool, it is [Ollama](https://ollama.com). Homebrew for LLMs. Install it, type `ollama run llama3.1`, and a model downloads and starts chatting with you in the terminal.
+
+That is not an exaggeration. The whole setup is two commands:
+
+1. Install Ollama from the official site.
+2. Run `ollama run <model-name>`.
+
+It handles quantization (making big models fit), model management, and a local API on port 11434 that any app can hit. It has become the default local inference runtime that everything else integrates with.
+
+The models I actually use:
+
+- **llama3.1:8b** for general chat, writing drafts, summarizing.
+- **qwen2.5-coder:7b** for code completion and refactoring.
+- **mistral:7b** for fast paraphrasing and quick responses.
+- **nomic-embed-text** for generating embeddings (useful if you want to build a local search).
+
+Ollama's catch is the CLI. If you want a proper chat UI, pair it with Open WebUI or Msty. Both take five minutes to set up and point at Ollama. Suddenly you have a ChatGPT-like interface running entirely on your machine.
+
+Ollama also exposes an OpenAI-compatible API, which means any tool written for the OpenAI SDK can be pointed at it by changing one environment variable. This is how you make [Cursor](/tools/cursor) or your custom scripts talk to a local model instead of OpenAI.
+
+## LM Studio: The Visual Option
+
+[LM Studio](https://lmstudio.ai) is Ollama for people who do not love the terminal. It is a desktop app with a model browser, a chat interface, and a local server all built in. You search for a model, click download, pick a quantization, and hit chat.
+
+Where LM Studio shines is experimentation. You can load three different models, test the same prompt on each, and compare. It has clean visualization of context usage, token speed, and memory load. If you are still figuring out which model fits your hardware, LM Studio is the faster way to feel it out.
+
+The trade-off: it is less scriptable than Ollama. If you want to integrate local AI into a pipeline or another app, Ollama is still the better backend. Many people install both and use them for different things.
+
+## Which Model to Actually Pick
+
+If you are new to this, do not spend a week reading benchmarks. Start with these and swap later if you hit a wall.
+
+**General chat and writing**: Llama 3.1 8B. Meta's release is still the strongest general-purpose open model in the 7 to 8B range. Natural-sounding, follows instructions well, and the community has fine-tuned it to death for specific use cases.
+
+**Coding**: Qwen 2.5 Coder 7B. Alibaba's coder variant is genuinely good. Better than Llama for writing and debugging code on small-to-medium tasks. For bigger context (full files, refactors), bump to 14B if you have the RAM.
+
+**Fast and cheap**: Mistral 7B. Older now, but still a beast for quick responses. Good fallback when you want snappy, and it runs on almost anything.
+
+**Vision (image understanding)**: LLaVA or Llama 3.2 Vision 11B. These can take an image as input. Useful for describing screenshots, reading text from photos, or captioning.
+
+**If you have the hardware for it**: Llama 3.1 70B. Closer to GPT-4 for complex reasoning, but you need 48GB+ of unified memory or a serious GPU to run it at reasonable speed.
+
+Skip the custom uncensored finetunes unless you have a specific reason. They are often worse at the task they claim to be better at, because the people fine-tuning them are optimizing for one edge case at the cost of everything else.
+
+## What Local AI Is Bad At (Be Honest)
+
+A few things where you should just use a hosted model and stop fighting it:
+
+- **Long-context reasoning over huge documents.** Claude's 200K context and Gemini's 1M context are real advantages. Local models nominally support long context but performance degrades fast past 8K tokens.
+- **Deep coding work on large codebases.** [Cursor](/tools/cursor) with a frontier model still beats anything local. The gap is closing, but it is real.
+- **Research that needs the current web.** Local models have no internet. [Perplexity](/tools/perplexity) and similar tools are in a different league here.
+- **Anything multi-step agentic.** Open-source models are getting there, but they still fall apart on complex tool-use tasks faster than frontier models.
+
+Be honest about what you are using it for. A local 8B model is perfect for "help me rephrase this paragraph" and useless for "plan out my entire product launch".
+
+## A Sensible Starter Setup
+
+If you are setting this up today, here is the minimum viable local AI stack:
+
+1. Install Ollama.
+2. Run `ollama pull llama3.1:8b` and `ollama pull qwen2.5-coder:7b`.
+3. Install Open WebUI (or Msty if you want it to feel more like a native app).
+4. Point your code editor at the local Ollama endpoint. In VS Code, the Continue extension does this in one click.
+5. Use it for a week before buying any more models.
+
+Total setup time: maybe 30 minutes, mostly waiting for downloads. Total cost: free.
+
+After a week, you will know exactly which queries go to local vs hosted. A lot of people end up with a three-tier system: local for quick stuff, a mid-tier API (Claude Haiku, GPT-4o mini) for anything slightly more serious, and a frontier model only when they actually need one.
+
+## When Local Becomes Worth It
+
+Running AI locally used to be a nerd project. Not anymore. If you are writing code, doing research with private notes, or just tired of waiting for rate limits to reset, it is worth the 30 minutes of setup.
+
+The gap to frontier models is real, but it is shrinking fast. Llama 4 and whatever Mistral puts out next will close it further. And the hardware is moving in the same direction. A $1,500 laptop in 2027 will probably run what feels like GPT-4 today.
+
+If you want to see what else is worth installing, browse the [productivity category](/categories/productivity) on AiCensus. For a full end-to-end indie builder stack that mixes local and hosted, look at the [indie hacker starter stack](/stacks/indie-hacker-starter).
+
+One last thing. Do not run a local model for a task you would not trust a confused intern with. It is an 8B intern. Treat it like one.

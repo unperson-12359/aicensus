@@ -6,7 +6,9 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn, PageTransition } from "@/components/motion";
 import { JsonLd } from "@/components/shared/json-ld";
-import { getPostBySlug, getPostSlugs } from "@/lib/blog";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { PrevNextNav } from "@/components/shared/prev-next-nav";
+import { getPostBySlug, getPostSlugs, getAdjacentPosts } from "@/lib/blog";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -48,6 +50,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const { prev, next } = getAdjacentPosts(slug);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
 
   const articleJsonLd = {
@@ -68,25 +71,37 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     url: `${siteUrl}/blog/${slug}`,
   };
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${siteUrl}/blog` },
+      { "@type": "ListItem", position: 3, name: post.title },
+    ],
+  };
+
   return (
     <>
       <JsonLd data={articleJsonLd} />
+      <JsonLd data={breadcrumbLd} />
       <PageTransition>
-        <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-          {/* Back link */}
+        <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+          {/* Breadcrumbs */}
           <FadeIn>
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              Back to Blog
-            </Link>
+            <Breadcrumbs
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Blog", href: "/blog" },
+                { label: post.title },
+              ]}
+              className="mb-4"
+            />
           </FadeIn>
 
           {/* Header */}
           <FadeIn delay={0.1}>
-            <header className="mt-8">
+            <header className="mt-4">
               <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1.5">
                   <Calendar className="h-3.5 w-3.5" />
@@ -108,10 +123,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.tags.length > 0 && (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {post.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary" className="text-xs">
-                      <Tag className="mr-1 h-2.5 w-2.5" />
-                      {tag}
-                    </Badge>
+                    <Link
+                      key={tag}
+                      href={`/blog?tag=${encodeURIComponent(tag)}`}
+                      aria-label={`View all posts tagged ${tag}`}
+                    >
+                      <Badge
+                        variant="secondary"
+                        className="text-xs transition-colors hover:bg-white/20"
+                      >
+                        <Tag className="mr-1 h-2.5 w-2.5" />
+                        {tag}
+                      </Badge>
+                    </Link>
                   ))}
                 </div>
               )}
@@ -125,15 +149,50 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           </FadeIn>
 
+          {/* Prev / Next */}
+          {(prev || next) && (
+            <FadeIn delay={0.25}>
+              <div className="mt-16 border-t border-white/10 pt-10">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
+                  Continue reading
+                </p>
+                <div className="mt-4">
+                  <PrevNextNav
+                    prev={
+                      prev
+                        ? {
+                            href: `/blog/${prev.slug}`,
+                            label: prev.title,
+                            sublabel: prev.readingTime,
+                          }
+                        : null
+                    }
+                    next={
+                      next
+                        ? {
+                            href: `/blog/${next.slug}`,
+                            label: next.title,
+                            sublabel: next.readingTime,
+                          }
+                        : null
+                    }
+                    prevLabel="Newer post"
+                    nextLabel="Older post"
+                  />
+                </div>
+              </div>
+            </FadeIn>
+          )}
+
           {/* Footer */}
           <FadeIn delay={0.3}>
-            <div className="mt-16 border-t border-border/50 pt-8">
+            <div className="mt-12 pt-6">
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
               >
-                <ArrowLeft className="h-3.5 w-3.5" />
-                Back to all posts
+                <ArrowLeft className="h-3 w-3" />
+                All posts
               </Link>
             </div>
           </FadeIn>

@@ -332,6 +332,60 @@ export async function getToolsForChatMeta(
   }));
 }
 
+/**
+ * Get the previous and next published tools alphabetically within the same
+ * category. Falls back to global alphabetical ordering if the tool is
+ * uncategorised. Used for prev/next navigation at the bottom of a tool
+ * detail page.
+ */
+export async function getAdjacentTools(
+  toolName: string,
+  categoryId: string | null
+): Promise<{
+  prev: { slug: string; name: string } | null;
+  next: { slug: string; name: string } | null;
+}> {
+  const supabase = await createClient();
+
+  let baseQuery = supabase
+    .from("tools")
+    .select("slug, name")
+    .eq("status", "published");
+
+  if (categoryId) {
+    baseQuery = baseQuery.eq("category_id", categoryId);
+  }
+
+  // Previous: last tool whose name sorts before the current one
+  const { data: prevData } = await baseQuery
+    .lt("name", toolName)
+    .order("name", { ascending: false })
+    .limit(1);
+
+  // Next: first tool whose name sorts after the current one.
+  // Build a fresh query because PostgREST mutations above aren't cloneable.
+  let nextQuery = supabase
+    .from("tools")
+    .select("slug, name")
+    .eq("status", "published");
+  if (categoryId) {
+    nextQuery = nextQuery.eq("category_id", categoryId);
+  }
+  const { data: nextData } = await nextQuery
+    .gt("name", toolName)
+    .order("name", { ascending: true })
+    .limit(1);
+
+  const prev = prevData?.[0]
+    ? { slug: prevData[0].slug as string, name: prevData[0].name as string }
+    : null;
+  const next = nextData?.[0]
+    ? { slug: nextData[0].slug as string, name: nextData[0].name as string }
+    : null;
+
+  return { prev, next };
+}
+
 export async function getToolsByCategory(
   categorySlug: string,
   options?: { limit?: number; offset?: number }

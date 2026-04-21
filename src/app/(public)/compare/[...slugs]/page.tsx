@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ComparisonTable } from "@/components/compare/comparison-table";
 import { JsonLd } from "@/components/shared/json-ld";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { FadeIn } from "@/components/motion";
 import { getToolBySlug } from "@/lib/queries/tools";
 import type { ToolWithCategory } from "@/lib/types/database";
@@ -56,13 +56,13 @@ export default async function ComparePage({ params }: Props) {
       <JsonLd data={jsonLd} />
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <FadeIn>
-          <nav className="mb-6 flex items-center gap-1.5 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
-            <span>/</span>
-            <Link href="/tools" className="hover:text-foreground transition-colors">Tools</Link>
-            <span>/</span>
-            <span className="text-foreground">Compare</span>
-          </nav>
+          <Breadcrumbs
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Compare", href: "/compare" },
+              { label: names.join(" vs ") },
+            ]}
+          />
         </FadeIn>
 
         <FadeIn>
