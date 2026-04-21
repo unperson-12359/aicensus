@@ -58,6 +58,7 @@ export default function AdminPortfoliosPage() {
   }, [supabase, filter]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadProjects();
   }, [loadProjects]);
 
