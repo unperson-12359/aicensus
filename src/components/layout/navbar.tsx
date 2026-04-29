@@ -10,9 +10,11 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { num: "01", href: "/tools", label: "Tools" },
-  { num: "02", href: "/stacks", label: "Stacks" },
-  { num: "03", href: "/categories", label: "Categories" },
-  { num: "04", href: "/blog", label: "Blog" },
+  { num: "02", href: "/compare", label: "Compare" },
+  { num: "03", href: "/stacks", label: "Stacks" },
+  { num: "04", href: "/mcps", label: "MCPs" },
+  { num: "05", href: "/best", label: "Best of" },
+  { num: "06", href: "/blog", label: "Blog" },
 ];
 
 export function Navbar() {

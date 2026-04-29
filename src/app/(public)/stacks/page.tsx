@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { Wand2, ArrowRight } from "lucide-react";
 import { FadeIn, RevealText } from "@/components/motion";
 import { StacksBrowser } from "@/components/stacks/stacks-browser";
 import { getToolsBySlugs } from "@/lib/queries/tools";
@@ -63,6 +65,32 @@ export default async function StacksIndexPage() {
           {stacks.length} opinionated, battle-tested AI tool combos — pick one,
           start building.
         </p>
+      </FadeIn>
+
+      {/* Stack builder CTA */}
+      <FadeIn delay={0.2}>
+        <Link
+          href="/stacks/build"
+          className="bento-tile group mt-8 flex items-center justify-between gap-4 p-5 transition-colors hover:border-white/30 sm:mt-10 sm:p-6"
+        >
+          <div className="flex items-start gap-4">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/[0.04] sm:h-12 sm:w-12">
+              <Wand2 className="h-5 w-5 text-white/75" />
+            </div>
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                New · Stack builder
+              </p>
+              <h2 className="mt-1 font-serif text-xl italic leading-tight tracking-[-0.02em] sm:text-2xl">
+                Build your own stack interactively.
+              </h2>
+              <p className="mt-1 font-serif text-sm italic text-white/65">
+                Pick capabilities, set constraints, share the result.
+              </p>
+            </div>
+          </div>
+          <ArrowRight className="h-5 w-5 shrink-0 text-white/40 transition-colors group-hover:text-white" />
+        </Link>
       </FadeIn>
 
       <StacksBrowser stacks={stacks} logos={logoMap} />

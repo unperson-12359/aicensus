@@ -413,3 +413,27 @@ export async function getToolsByCategory(
 
   return { tools: (data as ToolWithCategory[]) || [], count: count || 0 };
 }
+
+/**
+ * Fetch other tools in the same category, excluding the given tool. Used as a
+ * fallback for the alternatives landing page so every tool has a populated
+ * page even when no explicit `tool_alternatives` rows exist.
+ */
+export async function getRelatedToolsByCategoryId(
+  categoryId: string,
+  excludeToolId: string,
+  limit = 12
+): Promise<ToolWithCategory[]> {
+  const supabase = await createClient();
+
+  const { data } = await supabase
+    .from("tools")
+    .select("*, categories(*)")
+    .eq("status", "published")
+    .eq("category_id", categoryId)
+    .neq("id", excludeToolId)
+    .order("editor_rating", { ascending: false, nullsFirst: false })
+    .limit(limit);
+
+  return (data as ToolWithCategory[]) || [];
+}

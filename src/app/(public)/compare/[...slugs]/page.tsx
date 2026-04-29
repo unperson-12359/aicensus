@@ -1,16 +1,38 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Trophy, Sparkles, ArrowRight } from "lucide-react";
 import { ComparisonTable } from "@/components/compare/comparison-table";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
-import { FadeIn } from "@/components/motion";
+import { FadeIn, RevealText } from "@/components/motion";
+import { Badge } from "@/components/ui/badge";
 import { getToolBySlug } from "@/lib/queries/tools";
+import {
+  buildVerdict,
+  buildBestForCallouts,
+  buildIntroParagraph,
+  buildFaq,
+} from "@/lib/comparison-content";
+import {
+  POPULAR_COMPARISONS,
+  getRelatedComparisons,
+} from "@/lib/popular-comparisons";
 import type { ToolWithCategory } from "@/lib/types/database";
 
 export const revalidate = 3600;
+// Allow on-demand rendering of arbitrary slug combinations beyond the
+// pre-rendered popular pairs.
+export const dynamicParams = true;
 
 interface Props {
   params: Promise<{ slugs: string[] }>;
+}
+
+// Pre-render the curated popular comparison pairs at build time so they ship
+// indexable HTML without a DB round trip at request time.
+export function generateStaticParams() {
+  return POPULAR_COMPARISONS.map((pair) => ({ slugs: pair.slugs as string[] }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -21,10 +43,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const tools = await Promise.all(slugs.map((s) => getToolBySlug(s)));
   const names = tools.filter(Boolean).map((t) => t!.name);
-  const title = `${names.join(" vs ")} — Compare AI Tools | AiCensus`;
-  const description = `Side-by-side comparison of ${names.join(", ")}. Compare pricing, features, pros & cons, and more.`;
+  if (names.length < 2) return { title: "Compare AI Tools | AiCensus" };
 
-  return { title, description, openGraph: { title, description }, twitter: { card: "summary_large_image", title, description } };
+  const title = `${names.join(" vs ")} — Detailed Comparison (2026) | AiCensus`;
+  const description = `${names.join(" vs ")}: side-by-side pricing, features, ratings, pros & cons, plus our verdict on which one wins for which use case.`;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+
+  return {
+    title,
+    description,
+    openGraph: { title, description, url: `/compare/${slugs.join("/")}` },
+    twitter: { card: "summary_large_image", title, description },
+    alternates: { canonical: `${siteUrl}/compare/${slugs.join("/")}` },
+  };
+}
+
+function formatLastUpdated(): string {
+  const now = new Date();
+  return now.toLocaleDateString("en-US", { month: "long", year: "numeric" });
 }
 
 export default async function ComparePage({ params }: Props) {
@@ -37,8 +73,14 @@ export default async function ComparePage({ params }: Props) {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
   const names = tools.map((t) => t.name);
+  const verdicts = buildVerdict(tools);
+  const bestFor = buildBestForCallouts(tools);
+  const intro = buildIntroParagraph(tools);
+  const faqs = buildFaq(tools);
+  const related = getRelatedComparisons(slugs, 6);
+  const lastUpdated = formatLastUpdated();
 
-  const jsonLd = {
+  const itemListLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: `${names.join(" vs ")} Comparison`,
@@ -51,9 +93,29 @@ export default async function ComparePage({ params }: Props) {
     })),
   };
 
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  };
+
+  // Try to look up tool names for related comparison cards. We avoid extra DB
+  // calls — slugs are human-readable enough to render fallback labels.
+  const titleCase = (s: string) =>
+    s
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd data={itemListLd} />
+      {faqs.length > 0 && <JsonLd data={faqLd} />}
+
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <FadeIn>
           <Breadcrumbs
@@ -65,18 +127,193 @@ export default async function ComparePage({ params }: Props) {
           />
         </FadeIn>
 
+        {/* Hero */}
         <FadeIn>
-          <h1 className="font-display text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-            {names.join(" vs ")}
-          </h1>
-          <p className="mt-2 text-sm text-muted-foreground sm:text-base">
-            Side-by-side comparison of {names.length} AI tools — pricing, features, pros & cons.
-          </p>
+          <div className="mt-6 sm:mt-8">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+              § Comparison · Updated {lastUpdated}
+            </p>
+            <div className="mt-4 sm:mt-5">
+              <RevealText>
+                <h1 className="font-serif text-[clamp(1.75rem,5.5vw,3.75rem)] font-normal leading-[0.98] tracking-[-0.035em]">
+                  {names.map((n, i) => (
+                    <span key={i}>
+                      <span className="text-white">{n}</span>
+                      {i < names.length - 1 && (
+                        <em className="font-serif italic text-white/45"> vs </em>
+                      )}
+                    </span>
+                  ))}
+                  <span className="text-white/35">.</span>
+                </h1>
+              </RevealText>
+            </div>
+            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base">
+              {intro}
+            </p>
+          </div>
         </FadeIn>
 
+        {/* Verdict */}
+        {verdicts.length > 0 && (
+          <FadeIn delay={0.15}>
+            <section className="mt-12 sm:mt-16">
+              <div className="flex items-center justify-between gap-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                  § Verdict
+                </p>
+                <span className="h-px flex-1 bg-white/10" />
+              </div>
+              <div className="mt-6 grid gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-4">
+                {verdicts.map((v, i) => (
+                  <div
+                    key={i}
+                    className="bento-tile flex h-full flex-col p-5 sm:p-6"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Trophy className="h-3.5 w-3.5 text-white/60" />
+                      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/60">
+                        {v.label}
+                      </p>
+                    </div>
+                    <p className="mt-3 font-serif text-2xl italic leading-tight tracking-[-0.02em]">
+                      {v.toolName}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-white/65">
+                      {v.reason}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </FadeIn>
+        )}
+
+        {/* Spec table */}
         <FadeIn delay={0.2}>
-          <div className="mt-8">
-            <ComparisonTable tools={tools} />
+          <section className="mt-16 sm:mt-24">
+            <div className="flex items-center justify-between gap-4">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                § Spec sheet
+              </p>
+              <span className="h-px flex-1 bg-white/10" />
+            </div>
+            <div className="mt-6">
+              <ComparisonTable tools={tools} />
+            </div>
+          </section>
+        </FadeIn>
+
+        {/* Best for */}
+        <FadeIn delay={0.2}>
+          <section className="mt-16 sm:mt-24">
+            <div className="flex items-center justify-between gap-4">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                § Best for
+              </p>
+              <span className="h-px flex-1 bg-white/10" />
+            </div>
+            <div className="mt-6 grid gap-3 sm:gap-4 md:grid-cols-2">
+              {bestFor.map((b) => (
+                <Link
+                  key={b.toolSlug}
+                  href={`/tools/${b.toolSlug}`}
+                  className="bento-tile group flex h-full flex-col p-5 transition-colors hover:border-white/30 sm:p-6"
+                >
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="h-3.5 w-3.5 text-white/60" />
+                    <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/60">
+                      Pick {b.toolName} for
+                    </p>
+                  </div>
+                  <p className="mt-3 font-serif text-xl italic leading-snug text-white/85 sm:text-[1.4rem]">
+                    {b.bestFor}
+                  </p>
+                  <span className="mt-auto pt-5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors group-hover:text-white sm:text-[11px]">
+                    Read full review →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </FadeIn>
+
+        {/* FAQ */}
+        {faqs.length > 0 && (
+          <FadeIn delay={0.2}>
+            <section className="mt-16 sm:mt-24">
+              <div className="flex items-center justify-between gap-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                  § Common questions
+                </p>
+                <span className="h-px flex-1 bg-white/10" />
+              </div>
+              <div className="mt-6 grid gap-4 sm:gap-5 lg:grid-cols-2">
+                {faqs.map((faq, i) => (
+                  <div
+                    key={i}
+                    className="border border-white/10 bg-white/[0.02] p-5 sm:p-6"
+                  >
+                    <h3 className="font-display text-base font-semibold sm:text-lg">
+                      {faq.question}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-white/70">
+                      {faq.answer}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </FadeIn>
+        )}
+
+        {/* Related comparisons */}
+        {related.length > 0 && (
+          <FadeIn delay={0.2}>
+            <section className="mt-20 border-t border-white/10 pt-10 sm:mt-28">
+              <div className="flex items-center justify-between gap-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                  § Related comparisons
+                </p>
+                <span className="h-px flex-1 bg-white/10" />
+              </div>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {related.map((p) => (
+                  <Link
+                    key={p.slugs.join("-")}
+                    href={`/compare/${p.slugs.join("/")}`}
+                    className="bento-tile group flex items-center justify-between p-4 transition-colors hover:border-white/30 sm:p-5"
+                  >
+                    <span className="font-serif text-base text-white/85 sm:text-lg">
+                      {p.slugs.map((s) => titleCase(s)).join(" vs ")}
+                    </span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-white/40 transition-colors group-hover:text-white" />
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-6">
+                <Link
+                  href="/compare"
+                  className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
+                >
+                  All comparisons <ArrowRight className="h-3 w-3" />
+                </Link>
+              </div>
+            </section>
+          </FadeIn>
+        )}
+
+        <FadeIn delay={0.2}>
+          <div className="mt-10 flex flex-wrap items-center gap-2 sm:mt-14">
+            <Badge variant="outline" className="text-[11px]">
+              <Sparkles className="mr-1 h-3 w-3" /> Editorial verdicts, not algorithmic
+            </Badge>
+            <Link
+              href="/contact"
+              className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
+            >
+              Disagree? Tell us →
+            </Link>
           </div>
         </FadeIn>
       </div>

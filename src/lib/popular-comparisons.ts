@@ -1,0 +1,135 @@
+// ------------------------------------------------------------
+// Curated popular comparison pairs — used to:
+//   1. Pre-render high-traffic /compare/<a>/<b> pages via generateStaticParams
+//   2. Seed the "Popular comparisons" section on /compare and on each
+//      individual comparison page.
+// Each pair must reference real tool slugs from our seed data. Pairs whose
+// tools are missing in the DB at build time are skipped gracefully — they
+// still render on demand if both tools later exist.
+// ------------------------------------------------------------
+
+export interface ComparisonPair {
+  /** Two slugs (the URL is /compare/<a>/<b>) */
+  slugs: [string, string];
+  /** Optional grouping for the index page */
+  group?:
+    | "llms"
+    | "coding"
+    | "image"
+    | "video"
+    | "music"
+    | "audio"
+    | "frameworks"
+    | "automation"
+    | "writing"
+    | "research"
+    | "design"
+    | "inference";
+}
+
+export const POPULAR_COMPARISONS: ComparisonPair[] = [
+  // LLMs / chat
+  { slugs: ["claude", "chatgpt"], group: "llms" },
+  { slugs: ["claude", "gemini"], group: "llms" },
+  { slugs: ["chatgpt", "gemini"], group: "llms" },
+  { slugs: ["chatgpt", "grok"], group: "llms" },
+  { slugs: ["claude", "grok"], group: "llms" },
+  { slugs: ["chatgpt", "perplexity"], group: "llms" },
+  { slugs: ["gemini", "grok"], group: "llms" },
+  { slugs: ["claude", "perplexity"], group: "llms" },
+
+  // Coding
+  { slugs: ["cursor", "github-copilot"], group: "coding" },
+  { slugs: ["cursor", "windsurf"], group: "coding" },
+  { slugs: ["cursor", "v0"], group: "coding" },
+  { slugs: ["v0", "bolt-new"], group: "coding" },
+  { slugs: ["v0", "lovable"], group: "coding" },
+  { slugs: ["bolt-new", "lovable"], group: "coding" },
+  { slugs: ["cursor", "replit"], group: "coding" },
+  { slugs: ["github-copilot", "windsurf"], group: "coding" },
+  { slugs: ["devin", "cursor"], group: "coding" },
+
+  // Image
+  { slugs: ["midjourney", "dall-e-3"], group: "image" },
+  { slugs: ["midjourney", "flux"], group: "image" },
+  { slugs: ["midjourney", "ideogram"], group: "image" },
+  { slugs: ["ideogram", "dall-e-3"], group: "image" },
+  { slugs: ["midjourney", "leonardo-ai"], group: "image" },
+  { slugs: ["adobe-firefly", "midjourney"], group: "image" },
+
+  // Video
+  { slugs: ["sora", "runway"], group: "video" },
+  { slugs: ["runway", "pika"], group: "video" },
+  { slugs: ["sora", "pika"], group: "video" },
+  { slugs: ["luma-dream-machine", "runway"], group: "video" },
+  { slugs: ["heygen", "synthesia"], group: "video" },
+  { slugs: ["pika", "kling-ai"], group: "video" },
+
+  // Music / audio
+  { slugs: ["suno", "udio"], group: "music" },
+  { slugs: ["mubert", "suno"], group: "music" },
+  { slugs: ["elevenlabs", "deepgram"], group: "audio" },
+  { slugs: ["descript", "otter-ai"], group: "audio" },
+  { slugs: ["opus-clip", "descript"], group: "audio" },
+
+  // Frameworks / agents
+  { slugs: ["langchain", "llamaindex"], group: "frameworks" },
+  { slugs: ["crewai", "langchain"], group: "frameworks" },
+  { slugs: ["composio", "zapier-ai"], group: "frameworks" },
+
+  // Automation
+  { slugs: ["zapier-ai", "make"], group: "automation" },
+  { slugs: ["zapier-ai", "n8n"], group: "automation" },
+  { slugs: ["make", "n8n"], group: "automation" },
+
+  // Writing
+  { slugs: ["jasper", "copy-ai"], group: "writing" },
+  { slugs: ["grammarly", "wordtune"], group: "writing" },
+  { slugs: ["notion-ai", "chatgpt"], group: "writing" },
+
+  // Research
+  { slugs: ["perplexity", "notebooklm"], group: "research" },
+  { slugs: ["elicit", "consensus"], group: "research" },
+
+  // Inference / infra
+  { slugs: ["groq", "anthropic-api"], group: "inference" },
+  { slugs: ["ollama", "groq"], group: "inference" },
+
+  // Design
+  { slugs: ["canva-ai", "adobe-firefly"], group: "design" },
+  { slugs: ["gamma", "canva-ai"], group: "design" },
+  { slugs: ["framer", "figma-ai"], group: "design" },
+];
+
+export const GROUP_LABELS: Record<NonNullable<ComparisonPair["group"]>, string> = {
+  llms: "Chatbots & LLMs",
+  coding: "Coding & IDE",
+  image: "Image generation",
+  video: "Video generation",
+  music: "Music",
+  audio: "Audio & speech",
+  frameworks: "Agent frameworks",
+  automation: "Automation",
+  writing: "Writing",
+  research: "Research",
+  design: "Design",
+  inference: "Inference & infrastructure",
+};
+
+export function getComparisonsForTool(slug: string): ComparisonPair[] {
+  return POPULAR_COMPARISONS.filter((p) => p.slugs.includes(slug));
+}
+
+export function getRelatedComparisons(
+  slugs: string[],
+  limit = 6
+): ComparisonPair[] {
+  // Find pairs that share at least one tool with the current comparison
+  const set = new Set(slugs);
+  const exact = slugs.slice().sort().join("|");
+  return POPULAR_COMPARISONS.filter((p) => {
+    const key = p.slugs.slice().sort().join("|");
+    if (key === exact) return false;
+    return p.slugs.some((s) => set.has(s));
+  }).slice(0, limit);
+}
