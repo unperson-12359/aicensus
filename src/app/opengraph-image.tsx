@@ -47,7 +47,7 @@ export default function OgImage() {
           }}
         >
           <span>AI tools directory · est. 2026</span>
-          <span>aicensus.xyz</span>
+          <span>aicensus.co</span>
         </div>
 
         {/* Huge headline */}

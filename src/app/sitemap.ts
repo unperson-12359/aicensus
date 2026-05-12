@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { stacks } from "@/lib/stacks";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: "daily", priority: 1.0 },

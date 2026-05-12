@@ -30,7 +30,7 @@ const infoCards = [
   {
     icon: Mail,
     title: "Email",
-    description: "hello@aicensus.xyz",
+    description: "hello@aicensus.co",
   },
   {
     icon: MessageSquare,

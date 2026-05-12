@@ -58,7 +58,7 @@ export default function AdminLoginPage() {
                 name="email"
                 type="email"
                 required
-                placeholder="admin@aicensus.xyz"
+                placeholder="admin@aicensus.co"
               />
             </div>
             <div className="space-y-2">

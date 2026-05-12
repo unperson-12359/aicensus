@@ -75,7 +75,7 @@ export default async function ToolsPage({ searchParams }: PageProps) {
   const totalPages = Math.max(1, Math.ceil(tools.count / TOOLS_PER_PAGE));
   const clampedPage = Math.min(currentPage, totalPages);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",

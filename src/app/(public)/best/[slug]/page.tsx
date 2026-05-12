@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = getBestForBySlug(slug);
   if (!page) return { title: "Not Found" };
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
   const description = `${page.tagline} ${page.intro}`.slice(0, 300);
 
   return {
@@ -70,7 +70,7 @@ export default async function BestForPage({ params }: Props) {
 
   const otherPages = BEST_FOR_PAGES.filter((p) => p.slug !== slug).slice(0, 6);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
   const lastUpdated = formatLastUpdated();
 
   const itemListLd = {

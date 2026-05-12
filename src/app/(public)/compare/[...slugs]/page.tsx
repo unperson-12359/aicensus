@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = `${names.join(" vs ")} — Detailed Comparison (2026) | AiCensus`;
   const description = `${names.join(" vs ")}: side-by-side pricing, features, ratings, pros & cons, plus our verdict on which one wins for which use case.`;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
 
   return {
     title,
@@ -71,7 +71,7 @@ export default async function ComparePage({ params }: Props) {
   const tools = toolResults.filter((t): t is ToolWithCategory => t !== null);
   if (tools.length < 2) notFound();
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
   const names = tools.map((t) => t.name);
   const verdicts = buildVerdict(tools);
   const bestFor = buildBestForCallouts(tools);

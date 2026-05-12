@@ -87,7 +87,7 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
 
   const totalPages = Math.ceil(result.count / TOOLS_PER_PAGE);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
 
   const collectionJsonLd = {
     "@context": "https://schema.org",

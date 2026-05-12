@@ -36,7 +36,7 @@ function groupByCategory() {
 
 export default function McpsIndex() {
   const groups = groupByCategory();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
 
   const itemListLd = {
     "@context": "https://schema.org",
