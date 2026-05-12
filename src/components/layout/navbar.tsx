@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -78,15 +78,6 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
-          <Link href="/ask">
-            <Button size="sm">
-              <Sparkles className="mr-1 h-3 w-3" />
-              Ask AiCensus
-            </Button>
-          </Link>
-        </div>
-
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild className="md:hidden">
             <Button variant="ghost" size="icon" className="text-white hover:bg-white/5">
@@ -111,14 +102,6 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <div className="mt-6 border-t border-white/10 pt-6">
-                <Link href="/ask" onClick={() => setOpen(false)}>
-                  <Button className="w-full">
-                    <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-                    Ask AiCensus
-                  </Button>
-                </Link>
-              </div>
             </nav>
           </SheetContent>
         </Sheet>

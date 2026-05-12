@@ -183,14 +183,6 @@ export default async function HomePage() {
               </div>
 
               <Link
-                href="/ask"
-                className="group inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
-              >
-                or try → Ask AiCensus
-                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-
-              <Link
                 href="/stacks"
                 className="group inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/45 transition-colors hover:text-white sm:text-[11px]"
               >
@@ -430,15 +422,15 @@ export default async function HomePage() {
               </RevealText>
               <FadeIn delay={0.15}>
                 <p className="mt-4 max-w-xl font-serif text-base italic leading-relaxed text-white/70">
-                  Browse the index. Ask the bot. Build from a recipe. All free.
+                  Browse the index. Build from a recipe. All free.
                 </p>
               </FadeIn>
             </div>
             <FadeIn delay={0.25} className="lg:col-span-4">
               <div className="flex flex-col gap-2 sm:flex-row lg:flex-col">
-                <Link href="/ask" className="flex-1">
+                <Link href="/tools" className="flex-1">
                   <Button size="default" className="w-full">
-                    Ask AiCensus
+                    Browse tools
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
