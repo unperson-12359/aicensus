@@ -4,7 +4,6 @@ const footerLinks = {
   Product: [
     { href: "/tools", label: "Browse tools" },
     { href: "/stacks", label: "Stacks" },
-    { href: "/ask", label: "Ask AiCensus" },
     { href: "/categories", label: "Categories" },
   ],
   Resources: [

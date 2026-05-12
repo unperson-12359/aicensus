@@ -6,7 +6,7 @@ const bodySchema = z.object({
   path: z.string().trim().optional(),
 });
 
-const ALLOWED_PATH_PREFIXES = ["/", "/tools", "/categories", "/about", "/blog", "/changelog", "/faq", "/contact", "/stacks", "/ask"];
+const ALLOWED_PATH_PREFIXES = ["/", "/tools", "/categories", "/about", "/blog", "/changelog", "/faq", "/contact", "/stacks"];
 
 function jsonError(message: string, status: number) {
   return NextResponse.json(
