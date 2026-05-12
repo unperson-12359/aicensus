@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = `Best ${tool.name} Alternatives in 2026 — Reviewed | AiCensus`;
   const description = `The top alternatives to ${tool.name}, compared side-by-side. Pricing, pros & cons, ratings, and the verdict on which one fits your use case.`;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
 
   return {
     title,
@@ -99,7 +99,7 @@ export default async function AlternativesPage({
   const faqs = buildFaq(tool, alternatives);
   const lastUpdated = formatLastUpdated();
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
   const itemListLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",

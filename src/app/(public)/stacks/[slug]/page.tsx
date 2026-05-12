@@ -89,7 +89,7 @@ export default async function StackDetailPage({ params }: PageProps) {
   const prevStack = getPrevStack(stack);
   const { prefix, emphasis } = splitNameForEmphasis(stack.name);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
 
   const jsonLd = {
     "@context": "https://schema.org",

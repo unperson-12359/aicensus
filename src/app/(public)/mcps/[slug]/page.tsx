@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const server = getMcpBySlug(slug);
   if (!server) return { title: "Not Found" };
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
   const description = `${server.tagline} ${server.description}`.slice(0, 280);
 
   return {
@@ -68,7 +68,7 @@ export default async function McpDetailPage({ params }: Props) {
     related.push(...more);
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
 
   const ld = {
     "@context": "https://schema.org",

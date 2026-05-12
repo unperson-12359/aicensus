@@ -54,7 +54,7 @@ const pillars = [
 ];
 
 export default function AboutPage() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
 
   const organizationJsonLd = {
     "@context": "https://schema.org",

@@ -5,7 +5,7 @@
 -- BEFORE RUNNING THIS MIGRATION:
 -- 1. Go to Supabase Dashboard → Authentication → Users
 -- 2. Click "Add User" and create a user with:
---    Email: demo@aicensus.xyz (or whatever you prefer)
+--    Email: demo@aicensus.co (or whatever you prefer)
 --    Password: (something you'll remember)
 -- 3. Copy the user's UUID from the dashboard
 -- 4. Replace 'REPLACE_WITH_AUTH_USER_UUID' below with that UUID
@@ -44,8 +44,8 @@ INSERT INTO user_profiles (
   'https://github.com/aicensus',
   'https://x.com/aicensus',
   'https://linkedin.com/company/aicensus',
-  'https://aicensus.xyz',
-  'hello@aicensus.xyz',
+  'https://aicensus.co',
+  'hello@aicensus.co',
   true
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -82,7 +82,7 @@ INSERT INTO portfolio_projects (
   'AI Landing Page Builder',
   'ai-landing-page-builder',
   'A drag-and-drop landing page builder that uses AI to generate copy, suggest layouts, and optimize for conversions. Built in a weekend using Claude and v0.',
-  'https://aicensus.xyz',
+  'https://aicensus.co',
   'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop',
   ARRAY[
     'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop',
@@ -115,7 +115,7 @@ INSERT INTO portfolio_projects (
   'Smart Budget Tracker',
   'smart-budget-tracker',
   'A personal finance dashboard that categorizes expenses using AI, generates spending insights, and predicts future costs. The entire frontend was vibe-coded with Cursor.',
-  'https://aicensus.xyz',
+  'https://aicensus.co',
   'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=450&fit=crop',
   ARRAY[
     'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=450&fit=crop'
@@ -147,7 +147,7 @@ INSERT INTO portfolio_projects (
   'AI Recipe Generator',
   'ai-recipe-generator',
   'Take a photo of your fridge contents and get instant recipe suggestions powered by GPT-4 Vision. Includes nutritional info, cooking timers, and step-by-step instructions.',
-  'https://aicensus.xyz',
+  'https://aicensus.co',
   'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&h=450&fit=crop',
   ARRAY[
     'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800&h=450&fit=crop',

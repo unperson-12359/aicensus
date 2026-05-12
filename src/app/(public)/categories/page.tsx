@@ -37,7 +37,7 @@ export default async function CategoriesPage() {
     // Supabase not configured yet
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.xyz";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
   const collectionJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",

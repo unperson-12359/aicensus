@@ -119,13 +119,13 @@ git push -u origin main
 3. Add environment variables:
    - `NEXT_PUBLIC_SUPABASE_URL` = your Supabase project URL
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = your Supabase anon key
-   - `NEXT_PUBLIC_SITE_URL` = your production domain (e.g., `https://aicensus.xyz`)
+   - `NEXT_PUBLIC_SITE_URL` = your production domain (e.g., `https://aicensus.co`)
 4. Click "Deploy"
 
 ### 3. Connect your domain
 
 1. In Vercel, go to your project > Settings > Domains
-2. Add your domain (e.g., `aicensus.xyz`)
+2. Add your domain (e.g., `aicensus.co`)
 3. Follow Vercel's instructions to update your DNS settings at your domain registrar
 4. SSL is automatic
 
