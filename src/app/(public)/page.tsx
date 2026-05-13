@@ -29,11 +29,11 @@ export const revalidate = 3600;
 export const metadata = {
   title: "AiCensus — The curated directory of AI tools",
   description:
-    "156 handpicked AI tools across 16 categories. Verified reviews, honest comparisons, transparent pricing.",
+    "151 handpicked AI tools across 19 categories. Verified reviews, honest comparisons, transparent pricing.",
   openGraph: {
     title: "AiCensus — The curated directory of AI tools",
     description:
-      "156 handpicked AI tools across 16 categories. Verified reviews, honest comparisons, transparent pricing.",
+      "151 handpicked AI tools across 19 categories. Verified reviews, honest comparisons, transparent pricing.",
   },
 };
 
@@ -47,8 +47,8 @@ const sections = [
 ];
 
 const tickerItems = [
-  "156 verified AI tools",
-  "16 categories",
+  "151 verified AI tools",
+  "19 categories",
   "Reviewed by humans",
   "No affiliate noise",
   "Free forever",
@@ -147,7 +147,7 @@ export default async function HomePage() {
 
             <FadeIn delay={0.55} direction="up">
               <p className="mt-5 max-w-xl font-serif text-base italic leading-relaxed text-white/75 sm:mt-6 sm:text-lg">
-                The curated index of 156 AI tools — reviewed, compared, priced.
+                The curated index of 151 AI tools — reviewed, compared, priced.
               </p>
             </FadeIn>
           </div>
@@ -193,7 +193,7 @@ export default async function HomePage() {
               <div className="grid grid-cols-3 gap-3 border-t border-white/10 pt-4">
                 <div>
                   <div className="font-serif text-2xl italic sm:text-3xl">
-                    <AnimatedCounter target={156} suffix="+" />
+                    <AnimatedCounter target={151} />
                   </div>
                   <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-white/45">
                     Tools
@@ -201,7 +201,7 @@ export default async function HomePage() {
                 </div>
                 <div>
                   <div className="font-serif text-2xl italic sm:text-3xl">
-                    <AnimatedCounter target={16} />
+                    <AnimatedCounter target={19} />
                   </div>
                   <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-white/45">
                     Cats
@@ -235,7 +235,7 @@ export default async function HomePage() {
             <div className="lg:col-span-7">
               <RevealText>
                 <h2 className="font-serif text-[clamp(1.75rem,4.5vw,3.25rem)] font-normal leading-[1] tracking-[-0.03em]">
-                  156 tools.{" "}
+                  151 tools.{" "}
                   <em className="italic text-white/50">Handpicked.</em>
                 </h2>
               </RevealText>
