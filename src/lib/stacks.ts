@@ -100,7 +100,7 @@ export const stacks: Stack[] = [
         why: "Best-in-class text-in-image means you can ship branded hero art — logos, product shots with legible text — without a designer. Midjourney looks prettier; Ideogram ships faster.",
       },
       {
-        toolSlug: "canva-ai",
+        toolSlug: "canva",
         role: "Social assets",
         why: "OG image, Twitter card, LinkedIn share. Canva's Magic Design has you covered — match the landing page, export five sizes, done.",
       },
@@ -331,12 +331,12 @@ export const stacks: Stack[] = [
         why: "When the footage you have isn't enough. Runway generates shots that match your scene — landscape, abstract, product renders — faster than searching stock libraries.",
       },
       {
-        toolSlug: "sora",
+        toolSlug: "luma-dream-machine",
         role: "Hero sequences",
         why: "For the occasional shot you absolutely can't film — a drone over a canyon, a dream sequence, a product in zero gravity. Used sparingly, it raises the ceiling.",
       },
       {
-        toolSlug: "canva-ai",
+        toolSlug: "canva",
         role: "Thumbnails + end cards",
         why: "Thumbnails are 50% of the CTR fight. Canva's Magic Design nails them in minutes and keeps the whole channel's brand coherent.",
       },
@@ -372,7 +372,7 @@ export const stacks: Stack[] = [
         why: "Brand voice is just vocabulary choices and rhythm. Claude distills it from five sample paragraphs into a usable style guide anyone on the team can follow.",
       },
       {
-        toolSlug: "canva-ai",
+        toolSlug: "canva",
         role: "Asset production",
         why: "Once the brand is set, Canva is where marketing operationalizes it — 50 social posts a month, on-brand, without bothering the founder.",
       },
@@ -449,7 +449,7 @@ export const stacks: Stack[] = [
         why: "Your YouTube video becomes TikToks, Reels, and Shorts automatically. Same hour of shooting, five distribution channels.",
       },
       {
-        toolSlug: "canva-ai",
+        toolSlug: "canva",
         role: "Thumbnails",
         why: "The single biggest CTR lever on YouTube. Canva's thumbnail A/B workflow helps you iterate until the curve points up.",
       },
@@ -511,9 +511,9 @@ export const stacks: Stack[] = [
         why: "Conversational data analysis for the analyst who wants to skip the syntax wrestling. Upload, ask, get charts and tested statistical interpretations.",
       },
       {
-        toolSlug: "glean",
+        toolSlug: "microsoft-copilot",
         role: "Enterprise search",
-        why: "Before you analyze the data, you have to find it. Glean is permission-aware search across all internal tools — the substrate for any serious enterprise AI work.",
+        why: "Before you analyze the data, you have to find it. Copilot brings Microsoft 365 context into the workflow so analysts can connect docs, spreadsheets, and meetings.",
       },
       {
         toolSlug: "notebooklm",

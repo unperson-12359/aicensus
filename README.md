@@ -34,70 +34,13 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 4. Copy the ENTIRE content and paste it into the SQL editor
 5. Click "Run" - you should see "Success. No rows returned"
 
-### 4. Create your admin account
-
-1. In Supabase dashboard, go to **Authentication > Users**
-2. Click "Add user" > "Create new user"
-3. Enter your email and a strong password
-4. Copy the User UID that appears
-5. Go to **SQL Editor** and run:
-
-```sql
-INSERT INTO admin_profiles (id, display_name, role)
-VALUES ('PASTE-YOUR-USER-UID-HERE', 'Your Name', 'admin');
-```
-
-### 5. Run the development server
+### 4. Run the development server
 
 ```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) - you'll see the AiCensus homepage.
-
-Go to [http://localhost:3000/admin/login](http://localhost:3000/admin/login) and log in with the email/password you created in step 4.
-
----
-
-## How to Use the Admin Panel
-
-### Adding a Tool
-
-1. Go to `/admin` and click "Add Tool"
-2. Fill in the tabs:
-   - **Basic Info**: Name, tagline, website, category, pricing, rating
-   - **Content**: Description, features, use cases, pros/cons, target audience
-   - **Media & Links**: Logo URL, screenshot URL, affiliate URL, company info
-   - **SEO**: Custom meta title and description (optional - auto-generated if blank)
-3. Click "Save as Draft" to save without publishing, or "Publish" to make it live
-
-### Managing Categories
-
-1. Go to `/admin/categories`
-2. Type a category name, choose an icon, add a description
-3. Click "Add"
-
-**Available icons:** brain, code, image, message-square, music, video, file-text, bar-chart-3, search, bot, paintbrush, globe
-
-**Recommended starting categories:**
-- Writing & Content (icon: file-text)
-- Coding & Development (icon: code)
-- Image Generation (icon: image)
-- Chatbots & Assistants (icon: message-square)
-- Data & Analytics (icon: bar-chart-3)
-- Video & Audio (icon: video)
-- Design & Creative (icon: paintbrush)
-- Research & Search (icon: search)
-- AI Agents (icon: bot)
-- Productivity (icon: brain)
-
-### Reviewing Submissions
-
-1. Go to `/admin/submissions`
-2. Click on a pending submission to expand details
-3. Add optional admin notes
-4. Click "Approve & Create Draft" or "Reject"
-5. Approved submissions create a draft tool - go to `/admin/tools` to edit and publish it
 
 ---
 
@@ -149,12 +92,6 @@ src/
       categories/        Category listing & detail pages
       submit/            Community submission form
       about/             About page
-    admin/              Admin panel (password-protected)
-      page.tsx           Dashboard
-      tools/             Tool management (CRUD)
-      submissions/       Review community submissions
-      categories/        Category management
-      login/             Admin login
     api/                API routes
       revalidate/        Cache revalidation endpoint
     sitemap.ts          Dynamic sitemap generation
@@ -167,8 +104,6 @@ src/
     filters/            Search & filter components
     categories/         Category cards
     shared/             Rating stars, badges, empty states
-    admin/              Admin sidebar, tool form
-
   lib/
     supabase/           Supabase client setup
     queries/            Database query functions
@@ -190,7 +125,7 @@ The database has these tables:
 | `tool_tags` | Links tools to tags |
 | `tool_alternatives` | Links tools to their alternatives |
 | `submissions` | Community tool submissions |
-| `admin_profiles` | Admin user access control |
+| `admin_profiles` | Legacy admin access table retained for older migrations |
 
 ---
 

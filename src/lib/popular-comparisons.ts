@@ -58,9 +58,8 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
   { slugs: ["adobe-firefly", "midjourney"], group: "image" },
 
   // Video
-  { slugs: ["sora", "runway"], group: "video" },
   { slugs: ["runway", "pika"], group: "video" },
-  { slugs: ["sora", "pika"], group: "video" },
+  { slugs: ["runway", "kling-ai"], group: "video" },
   { slugs: ["luma-dream-machine", "runway"], group: "video" },
   { slugs: ["heygen", "synthesia"], group: "video" },
   { slugs: ["pika", "kling-ai"], group: "video" },
@@ -75,12 +74,12 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
   // Frameworks / agents
   { slugs: ["langchain", "llamaindex"], group: "frameworks" },
   { slugs: ["crewai", "langchain"], group: "frameworks" },
-  { slugs: ["composio", "zapier-ai"], group: "frameworks" },
+  { slugs: ["composio", "zapier"], group: "frameworks" },
 
   // Automation
-  { slugs: ["zapier-ai", "make"], group: "automation" },
-  { slugs: ["zapier-ai", "n8n"], group: "automation" },
-  { slugs: ["make", "n8n"], group: "automation" },
+  { slugs: ["zapier", "make-com"], group: "automation" },
+  { slugs: ["zapier", "n8n"], group: "automation" },
+  { slugs: ["make-com", "n8n"], group: "automation" },
 
   // Writing
   { slugs: ["jasper", "copy-ai"], group: "writing" },
@@ -96,8 +95,8 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
   { slugs: ["ollama", "groq"], group: "inference" },
 
   // Design
-  { slugs: ["canva-ai", "adobe-firefly"], group: "design" },
-  { slugs: ["gamma", "canva-ai"], group: "design" },
+  { slugs: ["canva", "adobe-firefly"], group: "design" },
+  { slugs: ["gamma", "canva"], group: "design" },
   { slugs: ["framer", "figma-ai"], group: "design" },
 ];
 

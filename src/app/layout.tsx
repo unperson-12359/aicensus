@@ -30,11 +30,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co"
   ),
   title: {
     default: "AiCensus — Discover & Compare the Best AI Tools",
-    template: "%s | AiCensus",
+    template: "%s",
   },
   description:
     "The curated directory of verified AI tools. Find, compare, and choose the right AI tools for your workflow. Expert reviews, pricing breakdowns, pros & cons.",

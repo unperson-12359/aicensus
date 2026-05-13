@@ -41,7 +41,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       { slug: "chatgpt", pitch: "Universal swiss-army assistant; especially good for scripted user research, persona generation, and competitive teardowns." },
       { slug: "perplexity", pitch: "Citation-first research replaces 80% of pre-meeting Googling — pull market data, competitor specs, and pricing in minutes." },
       { slug: "notion-ai", pitch: "Where the spec lives. Generates summaries, action items, and Q&A directly inside your existing PM workspace." },
-      { slug: "granola", pitch: "Notes the meeting in the background; produces clean follow-ups and decision logs without a bot in the call." },
+      { slug: "reclaim-ai", pitch: "Protects focus time and schedules around real work automatically. Useful for PMs juggling interviews, standups, and planning blocks." },
       { slug: "otter-ai", pitch: "Best when you need transcripts your stakeholders can search later — interviews, customer calls, exec recordings." },
     ],
     faq: [
@@ -103,7 +103,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       { slug: "claude", pitch: "The reasoning model behind much of Cursor's magic. Use directly for code review, architecture, and debugging tough bugs." },
       { slug: "github-copilot", pitch: "Tightest GitHub integration; Copilot Chat now ships agent workflows too. The default if you live in VS Code or JetBrains." },
       { slug: "windsurf", pitch: "Cursor's main competitor. Cleaner UI, comparable agent capabilities — worth comparing if Cursor doesn't click." },
-      { slug: "augment-code", pitch: "The codebase-context play. Reads your whole repo and adapts to project conventions — best for large, established codebases." },
+      { slug: "qodo", pitch: "Code quality and review automation for teams that want AI help without skipping test and governance discipline." },
       { slug: "devin", pitch: "Autonomous agent that takes a ticket and ships a PR. Best for boilerplate and migration work; not yet a peer reviewer." },
     ],
     faq: [
@@ -124,7 +124,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       { slug: "jasper", pitch: "Marketing-specific UI with built-in brand voice and templates. Higher learning curve than ChatGPT but tighter to the workflow." },
       { slug: "perplexity", pitch: "The fastest way to do competitive research, find pricing benchmarks, and source quotes — citations included." },
       { slug: "opus-clip", pitch: "Long-form video → 10 short clips ranked by virality. The single biggest leverage tool for marketers in 2026." },
-      { slug: "canva-ai", pitch: "Magic Design generates on-brand visuals across formats. Where the team operationalizes the brand without bothering design." },
+      { slug: "canva", pitch: "Magic Design generates on-brand visuals across formats. Where the team operationalizes the brand without bothering design." },
       { slug: "ideogram", pitch: "Best in class at text-in-image. The tool to use when ad creative needs legible copy baked into the visual." },
     ],
     faq: [
@@ -187,7 +187,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       { slug: "figma-ai", pitch: "AI inside Figma — layout assistance, generation, and template scaling. The path of least resistance if you live in Figma." },
       { slug: "framer", pitch: "AI-generated layouts that publish to a live URL. Useful for landing pages and sites that don't justify a code path." },
       { slug: "looka", pitch: "Logo system generator that exports a full kit. Not for branding-first companies, but more than enough for 90% of startups." },
-      { slug: "canva-ai", pitch: "Magic Design for asset production at scale — social, decks, docs. Where the brand operationalizes." },
+      { slug: "canva", pitch: "Magic Design for asset production at scale — social, decks, docs. Where the brand operationalizes." },
     ],
     faq: [
       { question: "Will AI replace designers?", answer: "It's replacing the production work, not the design work. The taste, judgment, and systems thinking are exactly the things AI doesn't do well — yet. Senior designers are getting more leverage; junior production roles are most at risk." },
@@ -203,8 +203,8 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       "Open-source AI is no longer the consolation prize — it's competitive on capability and decisive on cost, privacy, and control. The tools below are the open-source options that have crossed the production-ready bar.",
     picks: [
       { slug: "ollama", pitch: "Run open-weight models locally with one command. The friendliest entry point to local AI." },
-      { slug: "hugging-face", pitch: "The de facto registry for open models, datasets, and spaces. The starting point for any OSS AI project." },
-      { slug: "mistral", pitch: "Open-weight frontier models from Mistral AI. Competitive quality, permissive licensing, real production deployments." },
+      { slug: "llama-cpp", pitch: "The local inference workhorse behind countless desktop and server deployments. Boring in the best possible way." },
+      { slug: "vllm", pitch: "High-throughput open-source serving for serious inference workloads. The pick once local demos become production traffic." },
       { slug: "llamaindex", pitch: "Open-source RAG framework. The fastest path from documents to a production retrieval pipeline." },
       { slug: "langchain", pitch: "Open-source agent and chain orchestration. Polarizing in the community, but ubiquitous in real codebases." },
       { slug: "flux", pitch: "Open-weight image generation that rivals closed-source quality. The bedrock of community fine-tunes in 2026." },
@@ -263,16 +263,16 @@ export const BEST_FOR_PAGES: BestForPage[] = [
     intro:
       "AI video crossed the usable threshold in 2025-2026 — outputs are now good enough for B-roll, hero shots, and short-form social content. The picks below are ranked by quality per dollar, with notes on where each one fits in a real production pipeline.",
     picks: [
-      { slug: "sora", pitch: "OpenAI's text-to-video. Best aesthetic quality, longest clip lengths, tight ChatGPT integration — but slow and limit-heavy." },
       { slug: "runway", pitch: "The professional pick. Strong control surfaces, image-to-video, motion brush. Where pros do iterative work." },
-      { slug: "pika", pitch: "Fast, fun, social-first. Great for short-form clips and quick experiments — less precise than Runway, faster than Sora." },
+      { slug: "pika", pitch: "Fast, fun, social-first. Great for short-form clips and quick experiments when iteration speed matters." },
       { slug: "luma-dream-machine", pitch: "Strong physics and camera-move quality. The pick for cinematic shots and product renders." },
-      { slug: "kling-ai", pitch: "Quality rival to Sora at a different price point and rate-limit profile. Worth comparing before committing." },
+      { slug: "kling-ai", pitch: "High-quality text-to-video and image-to-video with a strong creative community and competitive pricing profile." },
+      { slug: "hailuo-ai", pitch: "MiniMax's creative video platform, useful for fast social-first video experiments and prompt-to-video workflows." },
       { slug: "heygen", pitch: "Avatar-driven video at production quality. Different category — for talking-head content from a script, not creative video." },
     ],
     faq: [
       { question: "Is AI video ready for client work?", answer: "For B-roll and shorts, yes. For hero ads and brand spots, sometimes — depends on tolerance for the AI \"look.\" Pure-AI video at the high end still struggles with continuity and physics; AI-assisted (mixed with real footage) is the safer play." },
-      { question: "Cheapest option?", answer: "Most have free trial credits. For sustained use, Pika and Runway have the most affordable mid-tier plans. Sora requires ChatGPT Plus minimum." },
+      { question: "Cheapest option?", answer: "Most have free trial credits. For sustained use, Pika, Kling, and Runway have the most affordable mid-tier plans." },
       { question: "Can I generate longer clips?", answer: "Most cap at 5-20 seconds per generation. For longer videos, generate clips and stitch in an editor (Descript, Runway, Premiere). Native long-form generation isn't here yet at quality." },
     ],
   },
