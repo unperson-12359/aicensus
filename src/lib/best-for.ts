@@ -113,6 +113,89 @@ export const BEST_FOR_PAGES: BestForPage[] = [
     ],
   },
   {
+    slug: "best-ai-coding-agents",
+    title: "Best AI Coding Agents in 2026",
+    tagline: "Repo-aware agents for tickets, refactors, and pull requests.",
+    intro:
+      "AI coding agents are moving beyond autocomplete into delegated engineering work: planning changes, editing multiple files, running commands, and opening PRs. The picks below favor tools that operate on real repositories, expose enough control for senior engineers, and fit into the review loop instead of pretending review is optional.",
+    relatedStack: "indie-hacker-starter",
+    picks: [
+      { slug: "claude-code", pitch: "Best terminal-native agent for serious repo work: reads code, edits files, runs commands, and fits the human review loop." },
+      { slug: "openai-codex", pitch: "OpenAI's coding agent for implementation tasks, reviewable diffs, and end-to-end software maintenance workflows." },
+      { slug: "cursor", pitch: "Best daily-driver agent inside an IDE: fast multi-file edits, repo context, and enough manual control to keep senior engineers comfortable." },
+      { slug: "augment-code", pitch: "The large-codebase specialist. Deep context makes it useful when simple chat assistants lose the plot." },
+      { slug: "github-copilot", pitch: "The safest default for GitHub-heavy teams that want agentic coding without leaving existing enterprise workflows." },
+      { slug: "gemini-cli", pitch: "Open-source command-line agent for developers who want Gemini in the terminal and a hackable workflow." },
+    ],
+    faq: [
+      { question: "What makes a coding assistant an agent?", answer: "An agent can plan and execute multi-step work across files, tools, commands, and sometimes pull requests. Autocomplete helps write a line; agents try to complete a task." },
+      { question: "Should agents commit directly to main?", answer: "No. Treat agent output like a junior engineer's PR: review the diff, run tests, and keep ownership with the human maintainer." },
+      { question: "Which coding agent should a small team try first?", answer: "Cursor or GitHub Copilot. Cursor is stronger as a daily AI-native IDE; Copilot is easier to adopt in GitHub-centered teams." },
+    ],
+  },
+  {
+    slug: "ai-browsers",
+    title: "Best AI Browsers in 2026",
+    tagline: "Browsing with summarization, research, and agentic web tasks.",
+    intro:
+      "AI browsers sit between search engines and full agents: they summarize pages, answer questions over open tabs, research across the web, and increasingly take actions for you. This category is still early, so the best stack mixes dedicated AI browsing surfaces with search and web-agent infrastructure.",
+    picks: [
+      { slug: "chatgpt-atlas", pitch: "OpenAI's browser for people who want ChatGPT built directly into reading, research, and page-aware workflows." },
+      { slug: "perplexity-comet", pitch: "Best search-first AI browser: Perplexity's answer engine wrapped around tabs, sources, and web research." },
+      { slug: "dia", pitch: "The Browser Company's AI-first bet for everyday browsing, writing, and tab-context workflows." },
+      { slug: "arc-max", pitch: "Lightweight AI inside Arc Browser: summaries, tab help, and opt-in browsing assistance without switching browsers." },
+      { slug: "perplexity", pitch: "The most reliable AI-native browsing habit today: search, citations, follow-ups, and source trails in one surface." },
+      { slug: "tavily", pitch: "Developer-facing search and extraction API for teams building browser agents or web-aware assistants." },
+    ],
+    faq: [
+      { question: "Are AI browsers different from AI search engines?", answer: "The line is blurry. AI search answers questions over the web; AI browsers also work with tabs, pages, sessions, forms, and eventually actions." },
+      { question: "Can an AI browser replace Chrome?", answer: "Not for most people yet. The practical workflow is to keep your normal browser and add an AI browsing or research layer where it saves time." },
+      { question: "What matters most for AI browsing?", answer: "Source quality, controllability, and privacy. If a tool can read tabs or take actions, you need clear boundaries and a review step." },
+    ],
+  },
+  {
+    slug: "ai-model-leaderboards",
+    title: "Best AI Model Leaderboards and Benchmarks in 2026",
+    tagline: "Track model quality before you pick an API.",
+    intro:
+      "Model choice changes fast, and vendor pages rarely tell the whole story. Leaderboards and benchmark hubs help teams compare reasoning, coding, speed, cost, context, and open-weight options before committing to an API or deployment path.",
+    relatedStack: "production-ai-infrastructure",
+    picks: [
+      { slug: "lmarena", pitch: "The default community signal for side-by-side model preference testing across frontier and open models." },
+      { slug: "artificial-analysis", pitch: "Best for practical API buyers: quality, speed, latency, and price comparisons in one place." },
+      { slug: "swe-bench", pitch: "The coding-agent benchmark everyone watches when claims shift from demo videos to real GitHub issues." },
+      { slug: "stanford-helm", pitch: "Research-grade evaluation framework for teams that need transparent, reproducible model testing." },
+      { slug: "hugging-face", pitch: "The open-model hub where leaderboards, model cards, datasets, and community evaluation all meet." },
+      { slug: "openrouter", pitch: "Useful for comparing real model availability, pricing, and routing before standardizing on one provider." },
+    ],
+    faq: [
+      { question: "Can leaderboards pick a model for me?", answer: "No. They narrow the shortlist. Always test your own prompts, data, latency needs, and failure cases before standardizing." },
+      { question: "Which benchmark matters most?", answer: "For product work, task-specific evals beat generic scores. Use leaderboards for discovery, then build a small eval set from your real workload." },
+      { question: "Why do benchmark rankings change so often?", answer: "Models, prompts, providers, and eval methods all change. Treat rankings as a current signal, not a permanent truth." },
+    ],
+  },
+  {
+    slug: "ai-infrastructure-tools",
+    title: "Best AI Infrastructure Tools in 2026",
+    tagline: "APIs, routing, inference, and model deployment.",
+    intro:
+      "Once an AI feature has users, infrastructure matters more than demos: latency, routing, observability, cost controls, model fallback, and deployment ownership. These picks cover the practical path from calling frontier APIs to serving open models at production scale.",
+    relatedStack: "production-ai-infrastructure",
+    picks: [
+      { slug: "hugging-face", pitch: "The open-model hub: models, datasets, Spaces, inference endpoints, and the community graph that powers discovery." },
+      { slug: "replicate", pitch: "Fastest path from model demo to hosted API for image, video, audio, and open-source model experiments." },
+      { slug: "fal-ai", pitch: "Generative media infrastructure when speed and API ergonomics matter for image and video products." },
+      { slug: "modal", pitch: "Python-native serverless GPUs for batch jobs, inference endpoints, and AI backend work without cloud ceremony." },
+      { slug: "baseten", pitch: "Production inference platform for teams serving custom and open models at scale." },
+      { slug: "openrouter", pitch: "Model router for comparing and switching providers without rewriting your app around every API." },
+    ],
+    faq: [
+      { question: "Should I start with hosted APIs or self-hosting?", answer: "Start hosted unless cost, privacy, latency, or control forces the issue. Self-hosting pays off later, but it adds operational work immediately." },
+      { question: "Why use a router?", answer: "Routers make it easier to compare models, fail over when a provider has issues, and optimize cost by sending easy tasks to cheaper models." },
+      { question: "What is the first infra metric to watch?", answer: "Cost per successful task. Token cost alone misses retries, latency, failures, and the human time spent fixing bad outputs." },
+    ],
+  },
+  {
     slug: "ai-tools-for-marketers",
     title: "Best AI Tools for Marketers in 2026",
     tagline: "Content velocity without the slop.",

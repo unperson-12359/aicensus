@@ -41,6 +41,19 @@ export const CAPABILITIES: CapabilityDef[] = [
     ],
   },
   {
+    slug: "coding-agent",
+    name: "Coding agent",
+    blurb: "Delegate tickets and refactors",
+    toolSlugs: [
+      "claude-code",
+      "openai-codex",
+      "cursor",
+      "augment-code",
+      "github-copilot",
+      "gemini-cli",
+    ],
+  },
+  {
     slug: "ui-scaffolding",
     name: "UI scaffolding",
     blurb: "Generate React from a prompt",
@@ -70,6 +83,32 @@ export const CAPABILITIES: CapabilityDef[] = [
       "consensus",
       "semantic-scholar",
       "connected-papers",
+    ],
+  },
+  {
+    slug: "ai-browser",
+    name: "AI browser",
+    blurb: "Browse, summarize, act",
+    toolSlugs: [
+      "chatgpt-atlas",
+      "perplexity-comet",
+      "dia",
+      "arc-max",
+      "perplexity",
+      "tavily",
+    ],
+  },
+  {
+    slug: "model-benchmarks",
+    name: "Model benchmarks",
+    blurb: "Compare quality and cost",
+    toolSlugs: [
+      "lmarena",
+      "artificial-analysis",
+      "swe-bench",
+      "stanford-helm",
+      "hugging-face",
+      "openrouter",
     ],
   },
   {
@@ -141,16 +180,30 @@ export const CAPABILITIES: CapabilityDef[] = [
     ],
   },
   {
+    slug: "ai-infrastructure",
+    name: "AI infrastructure",
+    blurb: "Route, serve, and monitor models",
+    toolSlugs: [
+      "hugging-face",
+      "replicate",
+      "fal-ai",
+      "modal",
+      "baseten",
+      "openrouter",
+      "fireworks-ai",
+    ],
+  },
+  {
     slug: "meeting-notes",
     name: "Meeting notes",
     blurb: "Transcribe and summarize",
-    toolSlugs: ["otter-ai", "descript"],
+    toolSlugs: ["granola", "otter-ai", "descript"],
   },
   {
     slug: "knowledge",
     name: "Knowledge / docs",
     blurb: "Capture, search, share",
-    toolSlugs: ["notion-ai", "notebooklm", "mem-ai"],
+    toolSlugs: ["glean", "notion-ai", "notebooklm", "mem-ai"],
   },
 ];
 

@@ -148,6 +148,47 @@ export const stacks: Stack[] = [
     ],
   },
   {
+    slug: "production-ai-infrastructure",
+    name: "Production AI infrastructure",
+    tagline: "Ship model-powered features without betting on one provider.",
+    useCases: ["infrastructure", "ai-agents", "developer-tools"],
+    constraints: ["team", "serious-scale", "open-source"],
+    heroTakeaway:
+      "A production AI stack is less about the flashiest model and more about control: routing, evals, fallback paths, open-model options, and cost visibility. This stack keeps you flexible while the model market keeps moving.",
+    steps: [
+      {
+        toolSlug: "artificial-analysis",
+        role: "Model benchmark desk",
+        why: "Start with independent quality, latency, and pricing data before you standardize on a model. It keeps model choice tied to current evidence instead of vendor claims.",
+      },
+      {
+        toolSlug: "openrouter",
+        role: "Model routing",
+        why: "Put a router in front of your app so switching models is a config decision, not a rewrite. It gives you fallback paths, price comparison, and faster evaluation cycles.",
+      },
+      {
+        toolSlug: "hugging-face",
+        role: "Open-model discovery",
+        why: "Use the hub for model cards, datasets, Spaces, and community signal. It is where you find candidates before they enter your production path.",
+      },
+      {
+        toolSlug: "replicate",
+        role: "Prototype model APIs",
+        why: "Turn model demos into API calls quickly, especially for image, video, and audio experiments. It is the fastest way to learn whether a model belongs in the product.",
+      },
+      {
+        toolSlug: "modal",
+        role: "Serverless GPU jobs",
+        why: "Run Python jobs, containers, scheduled work, and GPU endpoints without building cloud plumbing first. It is ideal for batch inference and AI backend work.",
+      },
+      {
+        toolSlug: "baseten",
+        role: "Production inference",
+        why: "When a model becomes a product dependency, Baseten handles serving, scaling, observability, and enterprise deployment patterns around that endpoint.",
+      },
+    ],
+  },
+  {
     slug: "write-a-book-with-ai",
     name: "Write a book with AI",
     tagline: "Co-authorship without losing your voice.",

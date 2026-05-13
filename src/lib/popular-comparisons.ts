@@ -23,6 +23,8 @@ export interface ComparisonPair {
     | "automation"
     | "writing"
     | "research"
+    | "browser"
+    | "benchmarks"
     | "design"
     | "inference";
 }
@@ -48,6 +50,11 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
   { slugs: ["cursor", "replit"], group: "coding" },
   { slugs: ["github-copilot", "windsurf"], group: "coding" },
   { slugs: ["devin", "cursor"], group: "coding" },
+  { slugs: ["claude-code", "openai-codex"], group: "coding" },
+  { slugs: ["claude-code", "cursor"], group: "coding" },
+  { slugs: ["openai-codex", "github-copilot"], group: "coding" },
+  { slugs: ["augment-code", "cursor"], group: "coding" },
+  { slugs: ["gemini-cli", "claude-code"], group: "coding" },
 
   // Image
   { slugs: ["midjourney", "dall-e-3"], group: "image" },
@@ -90,9 +97,27 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
   { slugs: ["perplexity", "notebooklm"], group: "research" },
   { slugs: ["elicit", "consensus"], group: "research" },
 
+  // AI browsers / web agents
+  { slugs: ["chatgpt-atlas", "perplexity-comet"], group: "browser" },
+  { slugs: ["dia", "arc-max"], group: "browser" },
+  { slugs: ["chatgpt-atlas", "dia"], group: "browser" },
+  { slugs: ["perplexity-comet", "perplexity"], group: "browser" },
+
+  // Model leaderboards / benchmarks
+  { slugs: ["lmarena", "artificial-analysis"], group: "benchmarks" },
+  { slugs: ["swe-bench", "stanford-helm"], group: "benchmarks" },
+  { slugs: ["swe-bench", "artificial-analysis"], group: "benchmarks" },
+  { slugs: ["hugging-face", "lmarena"], group: "benchmarks" },
+  { slugs: ["stanford-helm", "lmarena"], group: "benchmarks" },
+
   // Inference / infra
   { slugs: ["groq", "anthropic-api"], group: "inference" },
   { slugs: ["ollama", "groq"], group: "inference" },
+  { slugs: ["openai-api", "anthropic-api"], group: "inference" },
+  { slugs: ["openrouter", "fireworks-ai"], group: "inference" },
+  { slugs: ["fal-ai", "replicate"], group: "inference" },
+  { slugs: ["modal", "baseten"], group: "inference" },
+  { slugs: ["hugging-face", "replicate"], group: "inference" },
 
   // Design
   { slugs: ["canva", "adobe-firefly"], group: "design" },
@@ -111,6 +136,8 @@ export const GROUP_LABELS: Record<NonNullable<ComparisonPair["group"]>, string> 
   automation: "Automation",
   writing: "Writing",
   research: "Research",
+  browser: "AI browsers",
+  benchmarks: "Model benchmarks",
   design: "Design",
   inference: "Inference & infrastructure",
 };

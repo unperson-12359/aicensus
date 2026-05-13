@@ -3,7 +3,7 @@
 import { FadeIn } from "@/components/motion";
 
 const stats = [
-  { value: "151", label: "Verified tools" },
+  { value: "172", label: "Verified tools" },
   { value: "100%", label: "Human curated" },
   { value: "Free", label: "Forever" },
   { value: "Open", label: "To everyone" },
