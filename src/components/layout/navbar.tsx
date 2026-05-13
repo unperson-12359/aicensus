@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { SavedCountBadge } from "@/components/saved/saved-count-badge";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -14,7 +15,8 @@ const navLinks = [
   { num: "03", href: "/stacks", label: "Stacks" },
   { num: "04", href: "/mcps", label: "MCPs" },
   { num: "05", href: "/best", label: "Best of" },
-  { num: "06", href: "/blog", label: "Blog" },
+  { num: "06", href: "/saved", label: "Saved" },
+  { num: "07", href: "/blog", label: "Blog" },
 ];
 
 export function Navbar() {
@@ -74,6 +76,7 @@ export function Navbar() {
                 {link.num}
               </span>
               {link.label}
+              {link.href === "/saved" && <SavedCountBadge active={isActive(link.href)} />}
             </Link>
           ))}
         </nav>
@@ -100,6 +103,7 @@ export function Navbar() {
                 >
                   <span className="font-mono text-xs text-current/50">{link.num}</span>
                   {link.label}
+                  {link.href === "/saved" && <SavedCountBadge active={isActive(link.href)} />}
                 </Link>
               ))}
             </nav>

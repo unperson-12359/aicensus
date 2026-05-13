@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Trophy, Sparkles, ArrowRight } from "lucide-react";
 import { ComparisonTable } from "@/components/compare/comparison-table";
+import { SaveComparisonButton } from "@/components/saved/save-comparison-button";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { FadeIn, RevealText } from "@/components/motion";
@@ -151,6 +152,12 @@ export default async function ComparePage({ params }: Props) {
             <p className="mt-5 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base">
               {intro}
             </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              <SaveComparisonButton
+                slugs={tools.map((tool) => tool.slug)}
+                names={names}
+              />
+            </div>
           </div>
         </FadeIn>
 

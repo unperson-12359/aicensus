@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useMemo, useState, useCallback } from "react";
+import type { ReactNode } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowRight, Check, RotateCw, Share2, X } from "lucide-react";
+import { ArrowRight, Bookmark, BookmarkCheck, Check, RotateCw, Share2, X } from "lucide-react";
 import { cn, getLogoUrl } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { RatingStars } from "@/components/shared/rating-stars";
+import { isStackSaved, useSavedItems } from "@/lib/saved-items";
 import { CAPABILITIES, type CapabilityDef } from "@/lib/stack-explorer";
 
 type PricingModel =
@@ -77,9 +79,29 @@ interface StackExplorerProps {
   tools: ExplorerTool[];
 }
 
+function buildStackQueryString(
+  activeCaps: Set<string>,
+  constraints: Constraints,
+  overrides: Record<string, string>
+): string {
+  const params = new URLSearchParams();
+  if (activeCaps.size > 0) {
+    params.set("caps", Array.from(activeCaps).join(","));
+  }
+  if (constraints.freeOnly) params.set("free", "1");
+  if (constraints.ossOnly) params.set("oss", "1");
+  if (constraints.highRated) params.set("hr", "1");
+  const overrideStr = Object.entries(overrides)
+    .map(([k, v]) => `${k}:${v}`)
+    .join(",");
+  if (overrideStr) params.set("o", overrideStr);
+  return params.toString();
+}
+
 export function StackExplorer({ tools }: StackExplorerProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { state: savedState, toggleStack } = useSavedItems();
 
   const toolMap = useMemo(() => {
     const m = new Map<string, ExplorerTool>();
@@ -117,23 +139,20 @@ export function StackExplorer({ tools }: StackExplorerProps) {
   });
   const [copied, setCopied] = useState(false);
 
+  const stackQueryString = useMemo(
+    () => buildStackQueryString(activeCaps, constraints, overrides),
+    [activeCaps, constraints, overrides]
+  );
+  const currentStackUrl = stackQueryString
+    ? `/stacks/build?${stackQueryString}`
+    : "/stacks/build";
+
   // Sync state to URL whenever it changes (for shareability)
   useEffect(() => {
-    const params = new URLSearchParams();
-    if (activeCaps.size > 0) {
-      params.set("caps", Array.from(activeCaps).join(","));
-    }
-    if (constraints.freeOnly) params.set("free", "1");
-    if (constraints.ossOnly) params.set("oss", "1");
-    if (constraints.highRated) params.set("hr", "1");
-    const overrideStr = Object.entries(overrides)
-      .map(([k, v]) => `${k}:${v}`)
-      .join(",");
-    if (overrideStr) params.set("o", overrideStr);
-
-    const qs = params.toString();
-    router.replace(qs ? `?${qs}` : "?", { scroll: false });
-  }, [activeCaps, constraints, overrides, router]);
+    router.replace(stackQueryString ? `?${stackQueryString}` : "?", {
+      scroll: false,
+    });
+  }, [router, stackQueryString]);
 
   const stack = useMemo(() => {
     const result: { capability: CapabilityDef; tool: ExplorerTool | null }[] = [];
@@ -194,14 +213,20 @@ export function StackExplorer({ tools }: StackExplorerProps) {
 
   const copyShareUrl = useCallback(() => {
     if (typeof window === "undefined") return;
-    const url = window.location.href;
+    const url = `${window.location.origin}${currentStackUrl}`;
     navigator.clipboard?.writeText(url).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     });
-  }, []);
+  }, [currentStackUrl]);
 
   const filledCount = stack.filter((s) => s.tool).length;
+  const stackSaved = isStackSaved(savedState, currentStackUrl);
+
+  const saveStack = useCallback(() => {
+    const title = filledCount === 1 ? "1 tool AI stack" : `${filledCount} tool AI stack`;
+    toggleStack(currentStackUrl, title);
+  }, [currentStackUrl, filledCount, toggleStack]);
 
   return (
     <div className="mt-10 sm:mt-14">
@@ -288,6 +313,21 @@ export function StackExplorer({ tools }: StackExplorerProps) {
                 <RotateCw className="h-3 w-3" /> Reset picks
               </button>
             )}
+            <Button
+              size="sm"
+              variant={stackSaved ? "secondary" : "outline"}
+              onClick={saveStack}
+              disabled={filledCount === 0}
+              aria-label={stackSaved ? "Unsave this AI stack" : "Save this AI stack"}
+              aria-pressed={stackSaved}
+            >
+              {stackSaved ? (
+                <BookmarkCheck className="mr-1.5 h-3.5 w-3.5" />
+              ) : (
+                <Bookmark className="mr-1.5 h-3.5 w-3.5" />
+              )}
+              {stackSaved ? "Saved" : "Save"}
+            </Button>
             <Button size="sm" variant="outline" onClick={copyShareUrl}>
               <Share2 className="mr-1.5 h-3.5 w-3.5" />
               {copied ? "Copied" : "Share"}
@@ -423,7 +463,7 @@ function ConstraintChip({
 }: {
   active: boolean;
   onClick: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <button

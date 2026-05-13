@@ -20,6 +20,7 @@ import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { VerifiedBadge } from "@/components/shared/verified-badge";
 import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
+import { SaveToolButton } from "@/components/saved/save-tool-button";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
 import { FadeIn, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
@@ -212,6 +213,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
                   Visit {tool.name} <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
               </a>
+              <SaveToolButton slug={tool.slug} name={tool.name} />
               <Link href="/compare">
                 <Button variant="outline">Compare</Button>
               </Link>

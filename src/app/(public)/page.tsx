@@ -6,6 +6,7 @@ import { ToolCardFeatured } from "@/components/tools/tool-card-featured";
 import { ToolCard } from "@/components/tools/tool-card";
 import { CategoryCard } from "@/components/categories/category-card";
 import { JsonLd } from "@/components/shared/json-ld";
+import { SavedHomePanel } from "@/components/saved/saved-home-panel";
 import {
   FadeIn,
   StaggerChildren,
@@ -17,7 +18,7 @@ import { HowItWorks } from "@/components/home/how-it-works";
 import { TopTicker } from "@/components/home/top-ticker";
 import { SectionRail } from "@/components/home/section-rail";
 import { ChapterHeading } from "@/components/home/chapter-heading";
-import { getFeaturedTools } from "@/lib/queries/tools";
+import { getFeaturedTools, getRecentTools } from "@/lib/queries/tools";
 import {
   getCategoriesWithToolCount,
   type CategoryWithCount,
@@ -61,11 +62,16 @@ export default async function HomePage() {
     tools: [],
     count: 0,
   };
+  let recentTools: { tools: ToolWithCategory[]; count: number } = {
+    tools: [],
+    count: 0,
+  };
   let categories: CategoryWithCount[] = [];
 
   try {
-    [featuredTools, categories] = await Promise.all([
+    [featuredTools, recentTools, categories] = await Promise.all([
       getFeaturedTools(6),
+      getRecentTools(8),
       getCategoriesWithToolCount(),
     ]);
   } catch {
@@ -221,6 +227,8 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <SavedHomePanel />
+
       {/* ─────────── § 01 — DIRECTORY (tight) ─────────── */}
       <section
         id="ch-01"
@@ -309,6 +317,39 @@ export default async function HomePage() {
               ))}
               {secondaryFeatures.slice(2, 4).map((tool) => (
                 <StaggerItem key={tool.id} className="lg:col-span-6">
+                  <ToolCard tool={tool} />
+                </StaggerItem>
+              ))}
+            </StaggerChildren>
+          </div>
+        </section>
+      )}
+
+      {recentTools.tools.length > 0 && (
+        <section className="relative border-t border-white/10 py-10 sm:py-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <FadeIn>
+              <ChapterHeading num="02B" label="Recently added" />
+            </FadeIn>
+
+            <div className="mt-6 flex items-end justify-between gap-4 sm:mt-8">
+              <RevealText>
+                <h2 className="font-serif text-[clamp(1.75rem,4.5vw,3.25rem)] font-normal leading-[1] tracking-[-0.03em]">
+                  New tools <em className="italic text-white/50">to track</em>.
+                </h2>
+              </RevealText>
+              <Link
+                href="/tools?sort=newest"
+                className="group shrink-0 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/70 transition-colors hover:text-white sm:text-[11px]"
+              >
+                View newest
+                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
+
+            <StaggerChildren className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
+              {recentTools.tools.map((tool) => (
+                <StaggerItem key={tool.id}>
                   <ToolCard tool={tool} />
                 </StaggerItem>
               ))}
