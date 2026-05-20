@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "AiCensus — Discover & Compare the Best AI Tools";
+export const alt = "AiCensus - Discover and Compare the Best AI Tools";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -22,7 +22,6 @@ export default function OgImage() {
           color: "#ffffff",
         }}
       >
-        {/* Subtle grid backdrop */}
         <div
           style={{
             position: "absolute",
@@ -34,7 +33,6 @@ export default function OgImage() {
           }}
         />
 
-        {/* Top row: eyebrow + url */}
         <div
           style={{
             display: "flex",
@@ -46,11 +44,10 @@ export default function OgImage() {
             color: "rgba(255,255,255,0.55)",
           }}
         >
-          <span>AI tools directory · est. 2026</span>
+          <span>AI tools directory - est. 2026</span>
           <span>aicensus.co</span>
         </div>
 
-        {/* Huge headline */}
         <div
           style={{
             marginTop: "auto",
@@ -63,11 +60,10 @@ export default function OgImage() {
           }}
         >
           <span>Find AI tools.</span>
-          <span>Build with them.</span>
-          <span style={{ color: "rgba(255,255,255,0.4)" }}>Get noticed.</span>
+          <span>Compare options.</span>
+          <span style={{ color: "rgba(255,255,255,0.4)" }}>Choose faster.</span>
         </div>
 
-        {/* Footer: brand */}
         <div
           style={{
             marginTop: 48,
@@ -77,8 +73,8 @@ export default function OgImage() {
           }}
         >
           <div style={{ fontSize: 22, color: "rgba(255,255,255,0.7)", maxWidth: 620 }}>
-            The curated directory of 200+ AI tools — plus a free portfolio to showcase
-            what you build.
+            The curated directory of 200+ AI tools, comparisons, stacks, and
+            practical guides.
           </div>
           <div
             style={{

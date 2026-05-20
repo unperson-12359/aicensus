@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { FadeIn, PageTransition } from "@/components/motion";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — AiCensus",
+  title: "Terms of Service - AiCensus",
   description:
-    "Terms and conditions for using the AiCensus platform, including the AI tools directory and portfolio features.",
+    "Terms and conditions for using the AiCensus AI tools directory.",
   alternates: { canonical: "/terms" },
 };
 
@@ -20,7 +20,7 @@ export default function TermsPage() {
             Terms of <em className="italic text-white/60">service</em>.
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            Last updated: February 2026
+            Last updated: May 2026
           </p>
         </FadeIn>
 
@@ -31,9 +31,8 @@ export default function TermsPage() {
                 1. Acceptance of Terms
               </h2>
               <p className="mt-3 leading-relaxed">
-                By accessing or using AiCensus, you agree to be bound by these
-                Terms of Service. If you do not agree, please do not use the
-                platform.
+                By accessing or using AiCensus, you agree to these Terms of
+                Service. If you do not agree, please do not use the site.
               </p>
             </section>
 
@@ -42,51 +41,34 @@ export default function TermsPage() {
                 2. Description of Service
               </h2>
               <p className="mt-3 leading-relaxed">
-                AiCensus is a platform that provides an AI tools directory and a
-                free portfolio feature for builders. Users can browse and discover
-                AI tools, submit tools for listing, create portfolio profiles to
-                showcase projects, and subscribe to featured placement.
+                AiCensus is a public AI tools directory with tool listings,
+                categories, comparisons, stack recipes, a prompt builder, saved
+                browser-local shortlists, and editorial guides.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-foreground">
-                3. Account Terms
+                3. Directory Content
               </h2>
-              <ul className="mt-3 list-disc space-y-2 pl-6 leading-relaxed">
-                <li>
-                  You must provide a valid email address to create an account.
-                </li>
-                <li>
-                  You are responsible for maintaining the security of your
-                  account and password.
-                </li>
-                <li>
-                  You are responsible for all activity that occurs under your
-                  account.
-                </li>
-                <li>You must be at least 13 years old to use this service.</li>
-                <li>
-                  One person may not have more than one account.
-                </li>
-              </ul>
+              <p className="mt-3 leading-relaxed">
+                Tool listings are editorial and informational. We try to keep
+                names, pricing notes, descriptions, and links accurate, but AI
+                products change quickly. You should verify pricing, features,
+                and terms directly with each tool provider before making a
+                purchase or relying on a tool for important work.
+              </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-foreground">
-                4. User Content
+                4. Contact Messages
               </h2>
               <p className="mt-3 leading-relaxed">
-                You retain ownership of any content you submit to AiCensus,
-                including tool submissions, portfolio information, project
-                descriptions, and messages. By making content public (such as
-                your portfolio), you grant AiCensus a non-exclusive license to
-                display that content on the platform.
-              </p>
-              <p className="mt-3 leading-relaxed">
-                You are solely responsible for the content you post. Content must
-                not be illegal, harmful, threatening, abusive, defamatory, or
-                otherwise objectionable.
+                If you send us a message, you are responsible for the content
+                you provide. Do not send spam, unlawful content, confidential
+                third-party information, or anything you do not have permission
+                to share.
               </p>
             </section>
 
@@ -94,106 +76,68 @@ export default function TermsPage() {
               <h2 className="text-xl font-semibold text-foreground">
                 5. Prohibited Use
               </h2>
-              <p className="mt-3 leading-relaxed">
-                You agree not to:
-              </p>
+              <p className="mt-3 leading-relaxed">You agree not to:</p>
               <ul className="mt-3 list-disc space-y-2 pl-6">
-                <li>Submit false, misleading, or spam content</li>
-                <li>Impersonate another person or entity</li>
+                <li>Send false, misleading, abusive, or spam messages</li>
+                <li>Impersonate another person or organization</li>
+                <li>Use the site to distribute malware or harmful content</li>
+                <li>Attempt to access systems you are not authorized to access</li>
                 <li>
-                  Use the platform to distribute malware or harmful software
+                  Scrape, crawl, or collect data from the site in an automated
+                  manner that disrupts the service
                 </li>
-                <li>
-                  Attempt to gain unauthorized access to other accounts or
-                  systems
-                </li>
-                <li>
-                  Scrape, crawl, or collect data from the platform in an
-                  automated manner without permission
-                </li>
-                <li>
-                  Use the platform for any purpose that violates applicable laws
-                </li>
+                <li>Use AiCensus for any purpose that violates applicable law</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-foreground">
-                6. Featured Listings & Payments
+                6. Intellectual Property
               </h2>
               <p className="mt-3 leading-relaxed">
-                Featured tool listings are available through a paid subscription.
-                Payments are processed by Stripe. Subscriptions renew
-                automatically unless cancelled. Refund requests are handled on a
-                case-by-case basis — contact us if you have concerns.
+                The AiCensus site, design, code, and original editorial content
+                belong to AiCensus. Tool names, trademarks, logos, and product
+                information belong to their respective owners.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-foreground">
-                7. Intellectual Property
-              </h2>
-              <p className="mt-3 leading-relaxed">
-                The AiCensus platform, including its design, code, and original
-                content, is the property of AiCensus. Tool listings contain
-                information about third-party products — trademarks and logos
-                belong to their respective owners.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold text-foreground">
-                8. Disclaimers
+                7. Disclaimers
               </h2>
               <p className="mt-3 leading-relaxed">
                 AiCensus is provided &quot;as is&quot; without warranties of any
-                kind. We do our best to keep information accurate, but we cannot
-                guarantee that all tool listings, reviews, or user-submitted
-                content are correct or up to date. We are not responsible for the
-                products or services listed in our directory.
+                kind. We are not responsible for third-party products, services,
+                websites, pricing changes, outages, or claims made by listed
+                tools.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-foreground">
-                9. Limitation of Liability
+                8. Limitation of Liability
               </h2>
               <p className="mt-3 leading-relaxed">
                 To the fullest extent permitted by law, AiCensus shall not be
-                liable for any indirect, incidental, special, or consequential
-                damages arising from your use of the platform.
+                liable for indirect, incidental, special, consequential, or
+                punitive damages arising from your use of the site.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-foreground">
-                10. Termination
+                9. Changes to These Terms
               </h2>
               <p className="mt-3 leading-relaxed">
-                We reserve the right to suspend or terminate accounts that
-                violate these terms. You may delete your account at any time by
-                contacting us through the{" "}
-                <a href="/contact" className="text-primary hover:underline">
-                  contact page
-                </a>
-                .
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold text-foreground">
-                11. Changes to These Terms
-              </h2>
-              <p className="mt-3 leading-relaxed">
-                We may update these terms from time to time. Continued use of the
-                platform after changes are posted constitutes your acceptance of
+                We may update these terms from time to time. Continued use of
+                AiCensus after changes are posted constitutes your acceptance of
                 the updated terms.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold text-foreground">
-                12. Contact
+                10. Contact
               </h2>
               <p className="mt-3 leading-relaxed">
                 Questions about these terms? Reach out through our{" "}

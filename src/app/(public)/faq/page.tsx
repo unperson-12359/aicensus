@@ -10,9 +10,8 @@ import {
 } from "@/components/ui/accordion";
 
 export const metadata: Metadata = {
-  title: "Frequently Asked Questions — AiCensus",
-  description:
-    "Common questions about the AiCensus AI tools directory.",
+  title: "Frequently Asked Questions - AiCensus",
+  description: "Common questions about the AiCensus AI tools directory.",
   alternates: { canonical: "/faq" },
 };
 
@@ -33,17 +32,17 @@ const faqCategories: FaqCategory[] = [
       {
         question: "What is AiCensus?",
         answer:
-          "AiCensus is a curated directory of AI tools. Every tool is reviewed by a human — we compare pricing, use cases, pros and cons, and list the tools that actually deliver.",
+          "AiCensus is a curated directory of AI tools. Every tool is reviewed by a human - we compare pricing, use cases, pros and cons, and list the tools that actually deliver.",
       },
       {
         question: "Is AiCensus free to use?",
         answer:
-          "Yes — browsing the directory, comparing tools, asking the bot, and browsing stack recipes are all free. No account required.",
+          "Yes - browsing the directory, comparing tools, using the prompt builder, and browsing stack recipes are all free. No account required.",
       },
       {
         question: "Who is AiCensus for?",
         answer:
-          "Anyone looking for the right AI tool for a project — builders, founders, researchers, students — and anyone curious about the AI ecosystem.",
+          "Anyone looking for the right AI tool for a workflow - builders, founders, researchers, students, teams, and anyone curious about the AI ecosystem.",
       },
     ],
   },
@@ -53,17 +52,17 @@ const faqCategories: FaqCategory[] = [
       {
         question: "How are tools reviewed and listed?",
         answer:
-          "Every tool on AiCensus is tested by our team. We check that the tool exists, works as described, and provides real value. No scraping, no affiliate-driven ranking.",
+          "Every tool on AiCensus is reviewed by our team. We check that the tool exists, works as described, and provides real value. No scraping, no affiliate-driven ranking.",
       },
       {
         question: "How often is the directory updated?",
         answer:
-          "We add new tools weekly and revisit existing listings to refresh pricing and ratings.",
+          "We add new tools regularly and revisit existing listings to refresh pricing, links, ratings, and descriptions.",
       },
       {
-        question: "Do you accept tool submissions?",
+        question: "Can I suggest a tool or correction?",
         answer:
-          "We review new tools on an ongoing basis. Reach out through the contact page if you'd like us to consider yours.",
+          "Yes. We do not run a public submission portal right now, but you can send suggestions, corrections, and missing-tool notes through the contact page.",
       },
     ],
   },
@@ -73,12 +72,12 @@ const faqCategories: FaqCategory[] = [
       {
         question: "I found a bug or have a suggestion. How do I report it?",
         answer:
-          "Use the contact page to send us a message — pick 'Bug report' as the subject and describe what happened.",
+          "Use the contact page to send us a message - pick 'Bug report' as the subject and describe what happened.",
       },
       {
         question: "Is AiCensus open source?",
         answer:
-          "The directory itself isn't open source, but we publish technical posts and reviews on the blog.",
+          "The directory itself is not open source, but we publish technical posts and reviews on the blog.",
       },
     ],
   },
@@ -112,23 +111,23 @@ export default function FaqPage() {
             Frequently asked <em className="italic text-white/60">questions</em>.
           </h1>
           <p className="mt-3 max-w-lg text-sm text-muted-foreground sm:text-base">
-            Quick answers about the directory and how the platform works.
+            Quick answers about the directory and how AiCensus works.
           </p>
         </FadeIn>
 
         <FadeIn delay={0.15}>
           <div className="mt-8 space-y-8">
-            {faqCategories.map((cat) => (
-              <div key={cat.title}>
-                <h2 className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/60">
-                  {cat.title}
+            {faqCategories.map((category) => (
+              <section key={category.title}>
+                <h2 className="mb-3 font-display text-lg font-semibold">
+                  {category.title}
                 </h2>
-                <Accordion type="single" collapsible className="mt-3">
-                  {cat.items.map((item, i) => (
+                <Accordion type="single" collapsible className="space-y-2">
+                  {category.items.map((item, index) => (
                     <AccordionItem
-                      key={i}
-                      value={`${cat.title}-${i}`}
-                      className="border-white/10"
+                      key={item.question}
+                      value={`${category.title}-${index}`}
+                      className="bento-tile border-white/10 px-4"
                     >
                       <AccordionTrigger className="text-left text-sm font-medium hover:no-underline sm:text-base">
                         {item.question}
@@ -139,21 +138,24 @@ export default function FaqPage() {
                     </AccordionItem>
                   ))}
                 </Accordion>
-              </div>
+              </section>
             ))}
           </div>
         </FadeIn>
 
         <FadeIn delay={0.25}>
-          <div className="mt-12 rounded-xl border border-white/10 bg-white/[0.02] p-6 text-center">
-            <p className="font-serif text-lg italic text-white/80 sm:text-xl">
-              Still have a question?
+          <div className="mt-12 rounded-lg border border-white/10 bg-white/[0.03] p-6 text-center">
+            <h2 className="font-display text-xl font-semibold">
+              Still have questions?
+            </h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Send us a note and we&apos;ll get back to you.
             </p>
             <Link
               href="/contact"
-              className="mt-3 inline-flex text-sm font-medium text-foreground underline underline-offset-4 hover:no-underline"
+              className="mt-4 inline-flex rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
-              Get in touch →
+              Contact us
             </Link>
           </div>
         </FadeIn>

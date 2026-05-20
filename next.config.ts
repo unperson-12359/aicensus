@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/blog/why-every-vibe-coder-needs-a-portfolio",
+        destination: "/blog/welcome-to-aicensus",
+        permanent: true,
+      },
+      {
         source: "/:path*",
         has: [{ type: "host", value: "aicensus.xyz" }],
         destination: "https://aicensus.co/:path*",

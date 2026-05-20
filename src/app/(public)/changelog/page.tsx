@@ -3,9 +3,9 @@ import { FadeIn, PageTransition } from "@/components/motion";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "What's New — AiCensus",
+  title: "What's New - AiCensus",
   description:
-    "See what's new on AiCensus. Latest features, improvements, and updates to the AI tools directory and portfolio platform.",
+    "See what's new on AiCensus. Latest features, improvements, and updates to the AI tools directory.",
   alternates: { canonical: "/changelog" },
 };
 
@@ -35,45 +35,52 @@ const typeStyles: Record<EntryType, { label: string; className: string }> = {
 
 const entries: ChangelogEntry[] = [
   {
-    date: "February 2026",
-    title: "Portfolio Feature Launch",
+    date: "May 2026",
+    title: "Catalog Growth Refresh",
     description:
-      "Create a free portfolio page to showcase your AI-built projects. Add a bio, social links, and unlimited projects with live previews. Visitors can message you directly through your profile.",
+      "Expanded the directory to 200+ published tools and refreshed homepage counts so the site reflects live catalog data.",
+    type: "improvement",
+  },
+  {
+    date: "May 2026",
+    title: "Prompt Builder",
+    description:
+      "Added a practical prompt builder for turning rough tasks into clearer, more useful prompts.",
     type: "feature",
   },
   {
-    date: "February 2026",
-    title: "Featured Listings",
+    date: "May 2026",
+    title: "New Evergreen Guides",
     description:
-      "Tool makers can now get priority homepage placement with a Featured subscription. Includes a featured badge, higher search ranking, and category prominence.",
-    type: "feature",
+      "Published new beginner-friendly guides covering AI agents, meeting notes tools, prompt writing, privacy, and tool selection.",
+    type: "improvement",
   },
   {
     date: "February 2026",
     title: "AI Tools Directory Goes Live",
     description:
-      "Browse 150+ AI tools across 20+ categories. Filter by pricing, category, and verified status. Every tool reviewed by our team with honest descriptions and comparisons.",
+      "Launched the curated AI tools directory with category filters, pricing filters, ratings, pros and cons, and reviewed tool pages.",
     type: "feature",
   },
   {
     date: "February 2026",
-    title: "Contact Page & FAQ",
+    title: "Comparisons and Stack Recipes",
     description:
-      "New dedicated contact page for reaching out to the team, and a comprehensive FAQ covering all aspects of the platform.",
+      "Added side-by-side comparisons and curated stack recipes so readers can understand how tools fit together in real workflows.",
+    type: "feature",
+  },
+  {
+    date: "February 2026",
+    title: "Contact Page and FAQ",
+    description:
+      "Added a contact page for corrections, bug reports, and suggestions, plus a concise FAQ explaining how the directory works.",
     type: "improvement",
   },
   {
     date: "February 2026",
-    title: "Dashboard Improvements",
+    title: "SEO and Performance Optimization",
     description:
-      "Your dashboard now shows account info, profile completeness with tips, and inline profile creation. The sidebar displays your avatar and email.",
-    type: "improvement",
-  },
-  {
-    date: "February 2026",
-    title: "SEO & Performance Optimization",
-    description:
-      "Improved page load times with static generation for tool pages. Added comprehensive meta tags, JSON-LD structured data, and sitemap for better search engine visibility.",
+      "Improved page load times, metadata, JSON-LD structured data, and sitemap generation for better search visibility.",
     type: "improvement",
   },
 ];
@@ -96,20 +103,16 @@ export default function ChangelogPage() {
 
         <FadeIn delay={0.15}>
           <div className="mt-14">
-            {/* Timeline */}
             <div className="relative space-y-0">
               {entries.map((entry, index) => {
                 const style = typeStyles[entry.type];
                 const isLast = index === entries.length - 1;
                 return (
                   <div key={`${entry.title}-${index}`} className="relative flex gap-6 pb-10">
-                    {/* Timeline line */}
                     {!isLast && (
                       <div className="absolute left-[7px] top-3 h-full w-px bg-border/50" />
                     )}
-                    {/* Dot */}
                     <div className="relative mt-1.5 h-[15px] w-[15px] shrink-0 rounded-full border-2 border-border bg-background" />
-                    {/* Content */}
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
                         <p className="text-xs text-muted-foreground">
