@@ -77,7 +77,7 @@ export default function OgImage() {
           }}
         >
           <div style={{ fontSize: 22, color: "rgba(255,255,255,0.7)", maxWidth: 620 }}>
-            The curated directory of 172 AI tools — plus a free portfolio to showcase
+            The curated directory of 200+ AI tools — plus a free portfolio to showcase
             what you build.
           </div>
           <div

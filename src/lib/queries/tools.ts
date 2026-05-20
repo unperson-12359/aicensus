@@ -1,6 +1,29 @@
 import { createClient } from "@/lib/supabase/server";
 import type { ToolWithCategory } from "@/lib/types/database";
 
+export async function getCatalogStats(): Promise<{
+  toolCount: number;
+  categoryCount: number;
+}> {
+  const supabase = await createClient();
+
+  const [toolsResult, categoriesResult] = await Promise.all([
+    supabase
+      .from("tools")
+      .select("id", { count: "exact", head: true })
+      .eq("status", "published"),
+    supabase.from("categories").select("id", { count: "exact", head: true }),
+  ]);
+
+  if (toolsResult.error) throw toolsResult.error;
+  if (categoriesResult.error) throw categoriesResult.error;
+
+  return {
+    toolCount: toolsResult.count || 0,
+    categoryCount: categoriesResult.count || 0,
+  };
+}
+
 export async function getTools(options?: {
   category?: string;
   pricing?: string;

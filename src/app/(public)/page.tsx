@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +19,11 @@ import { HowItWorks } from "@/components/home/how-it-works";
 import { TopTicker } from "@/components/home/top-ticker";
 import { SectionRail } from "@/components/home/section-rail";
 import { ChapterHeading } from "@/components/home/chapter-heading";
-import { getFeaturedTools, getRecentTools } from "@/lib/queries/tools";
+import {
+  getCatalogStats,
+  getFeaturedTools,
+  getRecentTools,
+} from "@/lib/queries/tools";
 import {
   getCategoriesWithToolCount,
   type CategoryWithCount,
@@ -27,16 +32,32 @@ import type { ToolWithCategory } from "@/lib/types/database";
 
 export const revalidate = 3600;
 
-export const metadata = {
-  title: "AiCensus — The curated directory of AI tools",
-  description:
-    "172 handpicked AI tools across 19 categories. Verified reviews, honest comparisons, transparent pricing.",
-  openGraph: {
-    title: "AiCensus — The curated directory of AI tools",
-    description:
-      "172 handpicked AI tools across 19 categories. Verified reviews, honest comparisons, transparent pricing.",
-  },
+const FALLBACK_CATALOG_STATS = {
+  toolCount: 204,
+  categoryCount: 19,
 };
+
+async function getSafeCatalogStats() {
+  try {
+    return await getCatalogStats();
+  } catch {
+    return FALLBACK_CATALOG_STATS;
+  }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { toolCount, categoryCount } = await getSafeCatalogStats();
+  const description = `${toolCount} handpicked AI tools across ${categoryCount} categories. Verified reviews, honest comparisons, transparent pricing.`;
+
+  return {
+    title: "AiCensus - The curated directory of AI tools",
+    description,
+    openGraph: {
+      title: "AiCensus - The curated directory of AI tools",
+      description,
+    },
+  };
+}
 
 const sections = [
   { id: "ch-hero", label: "Top" },
@@ -45,16 +66,6 @@ const sections = [
   { id: "ch-03", label: "Map" },
   { id: "ch-04", label: "Flow" },
   { id: "ch-05", label: "Join" },
-];
-
-const tickerItems = [
-  "172 verified AI tools",
-  "19 categories",
-  "Reviewed by humans",
-  "No affiliate noise",
-  "Free forever",
-  "Updated weekly",
-  "EST. 2026",
 ];
 
 export default async function HomePage() {
@@ -67,18 +78,29 @@ export default async function HomePage() {
     count: 0,
   };
   let categories: CategoryWithCount[] = [];
+  let catalogStats = FALLBACK_CATALOG_STATS;
 
   try {
-    [featuredTools, recentTools, categories] = await Promise.all([
+    [featuredTools, recentTools, categories, catalogStats] = await Promise.all([
       getFeaturedTools(6),
       getRecentTools(8),
       getCategoriesWithToolCount(),
+      getCatalogStats(),
     ]);
   } catch {
     // Supabase not configured yet
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
+  const tickerItems = [
+    `${catalogStats.toolCount} verified AI tools`,
+    `${catalogStats.categoryCount} categories`,
+    "Reviewed by humans",
+    "No affiliate noise",
+    "Free forever",
+    "Updated weekly",
+    "EST. 2026",
+  ];
 
   const websiteJsonLd = {
     "@context": "https://schema.org",
@@ -153,7 +175,7 @@ export default async function HomePage() {
 
             <FadeIn delay={0.55} direction="up">
               <p className="mt-5 max-w-xl font-serif text-base italic leading-relaxed text-white/75 sm:mt-6 sm:text-lg">
-                The curated index of 172 AI tools — reviewed, compared, priced.
+                The curated index of {catalogStats.toolCount} AI tools — reviewed, compared, priced.
               </p>
             </FadeIn>
           </div>
@@ -199,7 +221,7 @@ export default async function HomePage() {
               <div className="grid grid-cols-3 gap-3 border-t border-white/10 pt-4">
                 <div>
                   <div className="font-serif text-2xl italic sm:text-3xl">
-                    <AnimatedCounter target={172} />
+                    <AnimatedCounter target={catalogStats.toolCount} />
                   </div>
                   <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-white/45">
                     Tools
@@ -207,7 +229,7 @@ export default async function HomePage() {
                 </div>
                 <div>
                   <div className="font-serif text-2xl italic sm:text-3xl">
-                    <AnimatedCounter target={19} />
+                    <AnimatedCounter target={catalogStats.categoryCount} />
                   </div>
                   <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-white/45">
                     Cats
@@ -243,7 +265,7 @@ export default async function HomePage() {
             <div className="lg:col-span-7">
               <RevealText>
                 <h2 className="font-serif text-[clamp(1.75rem,4.5vw,3.25rem)] font-normal leading-[1] tracking-[-0.03em]">
-                  172 tools.{" "}
+                  {catalogStats.toolCount} tools.{" "}
                   <em className="italic text-white/50">Handpicked.</em>
                 </h2>
               </RevealText>
