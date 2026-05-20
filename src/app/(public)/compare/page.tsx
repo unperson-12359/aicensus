@@ -46,7 +46,7 @@ export default async function CompareIndexPage() {
     categories: { name: string } | null;
   }[] = [];
   try {
-    const result = await getTools({ sort: "name", limit: 200 });
+    const result = await getTools({ sort: "name", limit: 1000 });
     allTools = result.tools.map((t) => ({
       slug: t.slug,
       name: t.name,

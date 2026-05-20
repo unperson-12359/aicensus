@@ -227,12 +227,20 @@ function SelectField({
 export function PromptBuilder() {
   const [state, setState] = useState<PromptState>(initialState);
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
   const prompt = useMemo(() => buildPrompt(state), [state]);
 
   async function copyPrompt() {
-    await navigator.clipboard.writeText(prompt);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1600);
+    try {
+      await navigator.clipboard.writeText(prompt);
+      setCopied(true);
+      setCopyError(false);
+      window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      setCopied(false);
+      setCopyError(true);
+      window.setTimeout(() => setCopyError(false), 2400);
+    }
   }
 
   function update<K extends keyof PromptState>(key: K, value: PromptState[K]) {
@@ -428,6 +436,11 @@ export function PromptBuilder() {
               <Eraser className="h-4 w-4" />
             </Button>
           </div>
+          {copyError && (
+            <p className="px-3 pb-3 text-xs text-destructive">
+              Clipboard access was blocked. Select the prompt text to copy it manually.
+            </p>
+          )}
         </div>
       </aside>
     </div>

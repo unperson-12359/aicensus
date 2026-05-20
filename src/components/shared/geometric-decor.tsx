@@ -30,7 +30,8 @@ interface GeometricDecorProps {
   className?: string;
 }
 
-export function GeometricDecor(_props: GeometricDecorProps) {
+export function GeometricDecor(props: GeometricDecorProps) {
+  void props;
   return null;
 }
 

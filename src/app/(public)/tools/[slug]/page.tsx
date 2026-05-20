@@ -23,6 +23,7 @@ import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
 import { SaveToolButton } from "@/components/saved/save-tool-button";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
+import { ToolLogo } from "@/components/shared/tool-logo";
 import { FadeIn, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
 import { GeometricDecor, pageHeaderShapes } from "@/components/shared/geometric-decor";
 import { getLogoUrl } from "@/lib/utils";
@@ -170,17 +171,11 @@ export default async function ToolDetailPage({ params }: PageProps) {
         <FadeIn>
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6">
           {/* Logo */}
-          <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/5 text-xl font-bold text-foreground sm:h-16 sm:w-16 sm:text-2xl">
-            {logoSrc ? (
-              <img
-                src={logoSrc}
-                alt={tool.name}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              tool.name.charAt(0)
-            )}
-          </div>
+          <ToolLogo
+            src={logoSrc}
+            name={tool.name}
+            className="h-14 w-14 rounded-xl border border-white/10 text-xl text-foreground sm:h-16 sm:w-16 sm:text-2xl"
+          />
 
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-2">

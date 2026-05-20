@@ -12,6 +12,7 @@ import { Pagination } from "@/components/shared/pagination";
 import { PaginationInfo } from "@/components/shared/pagination-info";
 import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
+import { ToolLogo } from "@/components/shared/tool-logo";
 import { FadeIn, RevealText } from "@/components/motion";
 import { getLogoUrl } from "@/lib/utils";
 import {
@@ -236,17 +237,11 @@ export default async function AlternativesPage({
                             <span className="font-serif text-3xl italic leading-none text-white/30">
                               {num}
                             </span>
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/5 text-sm font-bold text-white">
-                              {logoSrc ? (
-                                <img
-                                  src={logoSrc}
-                                  alt={alt.name}
-                                  className="h-full w-full object-cover"
-                                />
-                              ) : (
-                                alt.name.charAt(0)
-                              )}
-                            </div>
+                            <ToolLogo
+                              src={logoSrc}
+                              name={alt.name}
+                              className="h-10 w-10 rounded-xl border border-white/10 text-sm"
+                            />
                           </div>
                           <div className="mt-4">
                             <h2 className="font-serif text-2xl leading-tight tracking-[-0.02em]">

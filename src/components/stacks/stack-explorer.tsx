@@ -9,6 +9,7 @@ import { cn, getLogoUrl } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { RatingStars } from "@/components/shared/rating-stars";
+import { ToolLogo } from "@/components/shared/tool-logo";
 import { isStackSaved, useSavedItems } from "@/lib/saved-items";
 import { CAPABILITIES, type CapabilityDef } from "@/lib/stack-explorer";
 
@@ -386,17 +387,11 @@ export function StackExplorer({ tools }: StackExplorerProps) {
                     <span className="font-serif text-3xl italic leading-none text-white/30 sm:text-4xl">
                       {num}
                     </span>
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/5 text-sm font-bold text-white sm:h-12 sm:w-12 sm:text-base">
-                      {logoSrc ? (
-                        <img
-                          src={logoSrc}
-                          alt={tool.name}
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        tool.name.charAt(0)
-                      )}
-                    </div>
+                    <ToolLogo
+                      src={logoSrc}
+                      name={tool.name}
+                      className="h-10 w-10 rounded-xl border border-white/10 text-sm sm:h-12 sm:w-12 sm:text-base"
+                    />
                   </div>
 
                   <div className="min-w-0">

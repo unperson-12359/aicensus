@@ -35,10 +35,11 @@ export async function getTools(options?: {
   offset?: number;
 }) {
   const supabase = await createClient();
+  const categorySelect = options?.category ? "*, categories!inner(*)" : "*, categories(*)";
 
   let query = supabase
     .from("tools")
-    .select("*, categories(*)", { count: "exact" })
+    .select(categorySelect, { count: "exact" })
     .eq("status", "published");
 
   if (options?.category) {
@@ -59,7 +60,11 @@ export async function getTools(options?: {
 
   if (options?.search) {
     // Escape special PostgREST filter characters to prevent filter injection
-    const sanitized = options.search.replace(/[,.()"\\]/g, "");
+    const sanitized = options.search
+      .replace(/[,.()"\\%_*]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 80);
     if (sanitized) {
       query = query.or(
         `name.ilike.%${sanitized}%,tagline.ilike.%${sanitized}%,description.ilike.%${sanitized}%`

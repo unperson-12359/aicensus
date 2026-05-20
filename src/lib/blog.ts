@@ -66,7 +66,8 @@ export function getAllPosts(): BlogPostMeta[] {
       const post = getPostBySlug(slug);
       if (!post) return null;
       // Return meta only (no content) for the index page
-      const { content: _, ...meta } = post;
+      const { content, ...meta } = post;
+      void content;
       return meta;
     })
     .filter((post): post is BlogPostMeta => post !== null)

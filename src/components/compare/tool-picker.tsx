@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Search, X, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { ToolLogo } from "@/components/shared/tool-logo";
 import { getLogoUrl } from "@/lib/utils";
 
 interface ToolOption {
@@ -105,13 +106,11 @@ export function ToolPicker({ tools }: ToolPickerProps) {
                   : "border-border/40 bg-card hover:border-border disabled:opacity-40 disabled:cursor-not-allowed"
               }`}
             >
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-muted text-xs font-bold text-primary">
-                {logoSrc ? (
-                  <img src={logoSrc} alt={tool.name} className="h-8 w-8 rounded-md object-cover" />
-                ) : (
-                  tool.name.charAt(0)
-                )}
-              </div>
+              <ToolLogo
+                src={logoSrc}
+                name={tool.name}
+                className="h-8 w-8 rounded-md bg-muted text-xs text-primary"
+              />
               <div className="min-w-0 flex-1">
                 <p className="font-medium truncate">{tool.name}</p>
                 <p className="text-xs text-muted-foreground truncate">

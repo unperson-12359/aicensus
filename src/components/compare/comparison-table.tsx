@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { VerifiedBadge } from "@/components/shared/verified-badge";
+import { ToolLogo } from "@/components/shared/tool-logo";
 import { getLogoUrl } from "@/lib/utils";
 import type { ToolWithCategory } from "@/lib/types/database";
 
@@ -35,13 +36,11 @@ export function ComparisonTable({ tools }: ComparisonTableProps) {
               return (
                 <th key={tool.id} className="px-4 py-4 text-left">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-muted text-sm font-bold text-primary">
-                      {logoSrc ? (
-                        <img src={logoSrc} alt={tool.name} className="h-10 w-10 rounded-md object-cover" />
-                      ) : (
-                        tool.name.charAt(0)
-                      )}
-                    </div>
+                    <ToolLogo
+                      src={logoSrc}
+                      name={tool.name}
+                      className="h-10 w-10 rounded-md bg-muted text-sm text-primary"
+                    />
                     <div>
                       <div className="flex items-center gap-1.5">
                         <Link href={`/tools/${tool.slug}`} className="font-semibold text-foreground hover:text-primary transition-colors">

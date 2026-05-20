@@ -9,6 +9,7 @@ import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { JsonLd } from "@/components/shared/json-ld";
 import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
+import { ToolLogo } from "@/components/shared/tool-logo";
 import { getLogoUrl } from "@/lib/utils";
 import { getToolsBySlugs } from "@/lib/queries/tools";
 import {
@@ -182,17 +183,11 @@ export default async function BestForPage({ params }: Props) {
                       <span className="font-serif text-3xl italic leading-none text-white/30 sm:text-4xl">
                         {num}
                       </span>
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/5 text-sm font-bold text-white sm:h-12 sm:w-12 sm:text-base">
-                        {logoSrc ? (
-                          <img
-                            src={logoSrc}
-                            alt={tool?.name ?? pick.slug}
-                            className="h-full w-full object-cover"
-                          />
-                        ) : (
-                          (tool?.name ?? pick.slug).charAt(0).toUpperCase()
-                        )}
-                      </div>
+                      <ToolLogo
+                        src={logoSrc}
+                        name={tool?.name ?? pick.slug}
+                        className="h-10 w-10 rounded-xl border border-white/10 text-sm sm:h-12 sm:w-12 sm:text-base"
+                      />
                     </div>
 
                     {/* Content */}

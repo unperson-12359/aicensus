@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageTransition, FadeIn, StaggerChildren, StaggerItem } from "@/components/motion";
-import { createClient } from "@/lib/supabase/client";
 
 const subjects = [
   { value: "general", label: "General inquiry" },
@@ -69,14 +68,16 @@ export default function ContactPage() {
       email: formData.get("email") as string,
       subject: formData.get("subject") as string,
       message: formData.get("message") as string,
+      website: formData.get("website") as string,
     };
 
-    const supabase = createClient();
-    const { error: insertError } = await supabase
-      .from("contact_messages")
-      .insert(data);
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }).catch(() => null);
 
-    if (insertError) {
+    if (!response?.ok) {
       setError("Something went wrong. Please try again or email us directly.");
       setSubmitting(false);
       return;
@@ -168,6 +169,7 @@ export default function ContactPage() {
                       id="name"
                       name="name"
                       required
+                      maxLength={120}
                       placeholder="Your name"
                     />
                   </div>
@@ -178,6 +180,7 @@ export default function ContactPage() {
                       name="email"
                       type="email"
                       required
+                      maxLength={254}
                       placeholder="you@example.com"
                     />
                   </div>
@@ -205,6 +208,8 @@ export default function ContactPage() {
                     id="message"
                     name="message"
                     required
+                    minLength={10}
+                    maxLength={4000}
                     rows={5}
                     placeholder="Tell us what's on your mind..."
                   />

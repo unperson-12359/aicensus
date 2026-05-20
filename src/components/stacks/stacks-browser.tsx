@@ -12,6 +12,7 @@ import {
 } from "@/lib/stacks";
 import { ScalableTagFilter } from "@/components/filters/scalable-tag-filter";
 import { CollapsibleFilterPanel } from "@/components/filters/collapsible-filter-panel";
+import { ToolLogo } from "@/components/shared/tool-logo";
 
 interface StackLogoMap {
   [slug: string]: {
@@ -289,26 +290,13 @@ function StackCard({
           <div className="flex -space-x-2">
             {logoSlugs.map((slug) => {
               const entry = logos[slug];
-              const letter = (entry?.name || slug).charAt(0).toUpperCase();
               return (
-                <div
+                <ToolLogo
                   key={slug}
-                  className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-white/15 bg-white/5 ring-2 ring-black"
-                  title={entry?.name || slug}
-                >
-                  {entry?.logoSrc ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={entry.logoSrc}
-                      alt={entry.name}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <span className="flex h-full w-full items-center justify-center text-[11px] font-bold text-white/80">
-                      {letter}
-                    </span>
-                  )}
-                </div>
+                  src={entry?.logoSrc}
+                  name={entry?.name || slug}
+                  className="relative h-8 w-8 rounded-full border border-white/15 text-[11px] text-white/80 ring-2 ring-black"
+                />
               );
             })}
           </div>

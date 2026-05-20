@@ -6,6 +6,7 @@ import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { VerifiedBadge } from "@/components/shared/verified-badge";
 import { SaveToolButton } from "@/components/saved/save-tool-button";
+import { ToolLogo } from "@/components/shared/tool-logo";
 import { getLogoUrl } from "@/lib/utils";
 import type { ToolWithCategory } from "@/lib/types/database";
 
@@ -27,17 +28,11 @@ export function ToolCardFeatured({ tool }: ToolCardFeaturedProps) {
       <div className="absolute inset-0 bento-grid-pattern opacity-30 pointer-events-none" />
 
       <div className="pointer-events-none relative z-10 flex items-start justify-between">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 text-xl font-bold text-white sm:h-20 sm:w-20 sm:text-2xl">
-          {logoSrc ? (
-            <img
-              src={logoSrc}
-              alt={tool.name}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <span>{tool.name.charAt(0)}</span>
-          )}
-        </div>
+        <ToolLogo
+          src={logoSrc}
+          name={tool.name}
+          className="h-16 w-16 rounded-2xl border border-white/10 text-xl sm:h-20 sm:w-20 sm:text-2xl"
+        />
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-[10px] font-medium uppercase tracking-widest text-white/70">
             <Sparkles className="h-3 w-3" />

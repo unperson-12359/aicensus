@@ -6,6 +6,7 @@ import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { VerifiedBadge } from "@/components/shared/verified-badge";
 import { SaveToolButton } from "@/components/saved/save-tool-button";
+import { ToolLogo } from "@/components/shared/tool-logo";
 import { getLogoUrl } from "@/lib/utils";
 import type { ToolWithCategory } from "@/lib/types/database";
 
@@ -25,17 +26,11 @@ export function ToolCard({ tool }: ToolCardProps) {
       />
       {/* Top row: logo + external arrow */}
       <div className="pointer-events-none relative z-10 flex items-start justify-between">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/5 text-base font-bold text-white">
-          {logoSrc ? (
-            <img
-              src={logoSrc}
-              alt={tool.name}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <span>{tool.name.charAt(0)}</span>
-          )}
-        </div>
+        <ToolLogo
+          src={logoSrc}
+          name={tool.name}
+          className="h-12 w-12 rounded-xl border border-white/10 text-base"
+        />
         <div className="pointer-events-auto flex items-center gap-2">
           <SaveToolButton slug={tool.slug} name={tool.name} mode="icon" />
           <ArrowUpRight className="h-4 w-4 text-white/40 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />

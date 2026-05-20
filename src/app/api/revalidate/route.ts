@@ -6,7 +6,37 @@ const bodySchema = z.object({
   path: z.string().trim().optional(),
 });
 
-const ALLOWED_PATH_PREFIXES = ["/", "/tools", "/categories", "/about", "/blog", "/changelog", "/faq", "/contact", "/stacks"];
+const ALLOWED_PATH_PREFIXES = [
+  "/",
+  "/tools",
+  "/categories",
+  "/about",
+  "/blog",
+  "/changelog",
+  "/faq",
+  "/contact",
+  "/stacks",
+  "/compare",
+  "/prompt-builder",
+  "/mcps",
+  "/best",
+  "/saved",
+  "/privacy",
+  "/terms",
+  "/cookies",
+];
+
+const DEFAULT_REVALIDATION_PATHS = [
+  "/",
+  "/tools",
+  "/categories",
+  "/blog",
+  "/compare",
+  "/prompt-builder",
+  "/stacks",
+  "/mcps",
+  "/best",
+];
 
 function jsonError(message: string, status: number) {
   return NextResponse.json(
@@ -50,10 +80,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ revalidated: true, path });
     }
 
-    // Revalidate all main pages
-    revalidatePath("/");
-    revalidatePath("/tools");
-    revalidatePath("/categories");
+    for (const pathToRevalidate of DEFAULT_REVALIDATION_PATHS) {
+      revalidatePath(pathToRevalidate);
+    }
 
     return NextResponse.json({ revalidated: true, path: "all" });
   } catch {
