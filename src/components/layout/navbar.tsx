@@ -13,10 +13,11 @@ const navLinks = [
   { num: "01", href: "/tools", label: "Tools" },
   { num: "02", href: "/compare", label: "Compare" },
   { num: "03", href: "/stacks", label: "Stacks" },
-  { num: "04", href: "/mcps", label: "MCPs" },
-  { num: "05", href: "/best", label: "Best of" },
-  { num: "06", href: "/saved", label: "Saved" },
-  { num: "07", href: "/blog", label: "Blog" },
+  { num: "04", href: "/prompt-builder", label: "Prompts" },
+  { num: "05", href: "/mcps", label: "MCPs" },
+  { num: "06", href: "/best", label: "Best of" },
+  { num: "07", href: "/saved", label: "Saved" },
+  { num: "08", href: "/blog", label: "Blog" },
 ];
 
 export function Navbar() {
