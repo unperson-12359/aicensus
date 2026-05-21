@@ -11,7 +11,7 @@ import type { BestForPage } from "@/lib/best-for";
 interface ToolDiscoverySectionProps {
   toolName: string;
   toolSlug: string;
-  alternatives: ToolWithCategory[] | null;
+  alternatives: ToolWithCategory[];
   popularComparisons: ComparisonPair[];
   bestForPages: Pick<BestForPage, "slug" | "title" | "tagline">[];
   formatComparisonLabel: (slugs: string[]) => string;
@@ -25,7 +25,7 @@ export function ToolDiscoverySection({
   bestForPages,
   formatComparisonLabel,
 }: ToolDiscoverySectionProps) {
-  const hasAlternatives = alternatives && alternatives.length > 0;
+  const hasAlternatives = alternatives.length > 0;
   const hasComparisons = popularComparisons.length > 0;
   const hasBestFor = bestForPages.length > 0;
 
@@ -40,7 +40,7 @@ export function ToolDiscoverySection({
             description="Similar tools you might want to consider"
           />
           <div className="mt-6">
-            <AnimatedToolGrid tools={alternatives!} />
+            <AnimatedToolGrid tools={alternatives} />
           </div>
           <div className="mt-4">
             <Link

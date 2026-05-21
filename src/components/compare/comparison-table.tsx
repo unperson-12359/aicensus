@@ -119,19 +119,22 @@ function MobileComparisonCards({ tools }: { tools: ToolWithCategory[] }) {
         <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
           Visit
         </p>
-        <div className="mt-3 space-y-2">
+        <div className="mt-3 space-y-3">
           {tools.map((tool) => (
-            <div key={`visit-${tool.id}`} className="flex gap-2">
-              <Link href={`/tools/${tool.slug}`}>
-                <Button size="sm">Details</Button>
-              </Link>
-              {tool.website_url && (
-                <a href={tool.website_url} target="_blank" rel="noopener noreferrer">
-                  <Button size="sm" variant="outline">
-                    <ExternalLink className="h-3 w-3" />
-                  </Button>
-                </a>
-              )}
+            <div key={`visit-${tool.id}`}>
+              <p className="mb-1.5 text-sm font-medium">{tool.name}</p>
+              <div className="flex gap-2">
+                <Link href={`/tools/${tool.slug}`}>
+                  <Button size="sm">Details</Button>
+                </Link>
+                {tool.website_url && (
+                  <a href={tool.website_url} target="_blank" rel="noopener noreferrer">
+                    <Button size="sm" variant="outline">
+                      <ExternalLink className="h-3 w-3" />
+                    </Button>
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
