@@ -18,7 +18,7 @@ export function ToolCard({ tool }: ToolCardProps) {
   const logoSrc = getLogoUrl(tool.logo_url, tool.website_url);
 
   return (
-    <article className="bento-tile group relative flex h-full flex-col p-5 sm:p-6 hover:border-white/30">
+    <article className="bento-tile group relative flex h-full flex-col p-4 sm:p-5 lg:p-6 hover:border-white/30">
       <Link
         href={`/tools/${tool.slug}`}
         className="absolute inset-0 z-0"
@@ -29,7 +29,7 @@ export function ToolCard({ tool }: ToolCardProps) {
         <ToolLogo
           src={logoSrc}
           name={tool.name}
-          className="h-12 w-12 rounded-xl border border-white/10 text-base"
+          className="h-10 w-10 rounded-xl border border-white/10 text-base sm:h-12 sm:w-12"
         />
         <div className="pointer-events-auto flex items-center gap-2">
           <SaveToolButton slug={tool.slug} name={tool.name} mode="icon" />
@@ -38,7 +38,7 @@ export function ToolCard({ tool }: ToolCardProps) {
       </div>
 
       {/* Middle: name + tagline */}
-      <div className="pointer-events-none relative z-10 mt-5 flex-1">
+      <div className="pointer-events-none relative z-10 mt-3 flex-1 sm:mt-4 lg:mt-5">
         <div className="flex items-center gap-1.5">
           <h3 className="truncate text-base font-semibold tracking-tight text-foreground sm:text-lg">
             {tool.name}
@@ -51,7 +51,7 @@ export function ToolCard({ tool }: ToolCardProps) {
       </div>
 
       {/* Bottom: meta row */}
-      <div className="pointer-events-none relative z-10 mt-5 flex items-center justify-between border-t border-white/10 pt-4">
+      <div className="pointer-events-none relative z-10 mt-3 flex items-center justify-between border-t border-white/10 pt-3 sm:mt-4 sm:pt-4 lg:mt-5">
         <div className="flex items-center gap-2">
           {tool.categories && (
             <span className="tracking-accent text-muted-foreground">

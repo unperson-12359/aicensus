@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Badge } from "@/components/ui/badge";
-import { FadeIn, PageTransition } from "@/components/motion";
+import { FadeIn } from "@/components/motion";
+import { PageContainer } from "@/components/shared/page-container";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { PrevNextNav } from "@/components/shared/prev-next-nav";
@@ -85,8 +86,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <>
       <JsonLd data={articleJsonLd} />
       <JsonLd data={breadcrumbLd} />
-      <PageTransition>
-        <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+      <PageContainer variant="narrow">
+        <article>
           {/* Breadcrumbs */}
           <FadeIn>
             <Breadcrumbs
@@ -197,7 +198,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           </FadeIn>
         </article>
-      </PageTransition>
+      </PageContainer>
     </>
   );
 }

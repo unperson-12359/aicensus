@@ -19,6 +19,8 @@ import {
   BEST_FOR_PAGES,
 } from "@/lib/best-for";
 import { getStackBySlug } from "@/lib/stacks";
+import { PageContainer } from "@/components/shared/page-container";
+import { section } from "@/lib/layout";
 import type { ToolWithCategory } from "@/lib/types/database";
 
 export const revalidate = 3600;
@@ -119,7 +121,7 @@ export default async function BestForPage({ params }: Props) {
       <JsonLd data={breadcrumbLd} />
       <JsonLd data={faqLd} />
 
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+      <PageContainer variant="editorial" className="max-w-6xl">
         <FadeIn>
           <Breadcrumbs
             items={[
@@ -155,7 +157,7 @@ export default async function BestForPage({ params }: Props) {
 
         {/* Picks */}
         <FadeIn delay={0.15}>
-          <section className="mt-12 sm:mt-16">
+          <section className={section.gap}>
             <div className="flex items-center justify-between gap-4">
               <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                 § The picks
@@ -173,7 +175,7 @@ export default async function BestForPage({ params }: Props) {
                 return (
                   <li
                     key={pick.slug}
-                    className="bento-tile group relative grid gap-4 p-5 sm:grid-cols-[auto_1fr_auto] sm:items-start sm:gap-6 sm:p-6"
+                    className="bento-tile group relative grid gap-4 p-4 sm:grid-cols-[auto_1fr_auto] sm:items-start sm:gap-6 sm:p-5 lg:p-6"
                   >
                     {/* Rank + logo */}
                     <div className="flex items-center gap-4 sm:flex-col sm:items-start">
@@ -229,7 +231,7 @@ export default async function BestForPage({ params }: Props) {
                           </Button>
                         </a>
                       )}
-                      <Link href={`/tools/${pick.slug}`}>
+                      <Link href={`/tools/${pick.slug}`} className="hidden sm:block">
                         <Button size="sm" variant="outline">
                           Review
                         </Button>
@@ -245,7 +247,7 @@ export default async function BestForPage({ params }: Props) {
         {/* Related stack */}
         {stack && (
           <FadeIn delay={0.2}>
-            <section className="mt-16 sm:mt-20">
+            <section className={section.gapLoose}>
               <div className="flex items-center justify-between gap-4">
                 <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                   § Related recipe
@@ -273,7 +275,7 @@ export default async function BestForPage({ params }: Props) {
         {/* FAQ */}
         {page.faq.length > 0 && (
           <FadeIn delay={0.2}>
-            <section className="mt-16 sm:mt-24">
+            <section className={section.gapLoose}>
               <div className="flex items-center justify-between gap-4">
                 <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                   § Common questions
@@ -302,7 +304,7 @@ export default async function BestForPage({ params }: Props) {
         {/* Other Best-of pages */}
         {otherPages.length > 0 && (
           <FadeIn delay={0.2}>
-            <section className="mt-20 border-t border-white/10 pt-10 sm:mt-28">
+            <section className={section.divider}>
               <div className="flex items-center justify-between gap-4">
                 <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                   § More best-of lists
@@ -348,7 +350,7 @@ export default async function BestForPage({ params }: Props) {
             </Link>
           </div>
         </FadeIn>
-      </div>
+      </PageContainer>
     </>
   );
 }

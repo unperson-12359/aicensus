@@ -3,11 +3,10 @@ import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ToolCardFeatured } from "@/components/tools/tool-card-featured";
-import { ToolCard } from "@/components/tools/tool-card";
 import { CategoryCard } from "@/components/categories/category-card";
 import { JsonLd } from "@/components/shared/json-ld";
 import { SavedHomePanel } from "@/components/saved/saved-home-panel";
+import { HomeToolsSection } from "@/components/home/home-tools-section";
 import {
   FadeIn,
   StaggerChildren,
@@ -19,6 +18,8 @@ import { HowItWorks } from "@/components/home/how-it-works";
 import { TopTicker } from "@/components/home/top-ticker";
 import { SectionRail } from "@/components/home/section-rail";
 import { ChapterHeading } from "@/components/home/chapter-heading";
+import { section } from "@/lib/layout";
+import { cn } from "@/lib/utils";
 import {
   getCatalogStats,
   getFeaturedTools,
@@ -61,11 +62,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const sections = [
   { id: "ch-hero", label: "Top" },
-  { id: "ch-01", label: "Directory" },
-  { id: "ch-02", label: "Picks" },
-  { id: "ch-03", label: "Map" },
-  { id: "ch-04", label: "Flow" },
-  { id: "ch-05", label: "Join" },
+  { id: "ch-01", label: "Tools" },
+  { id: "ch-02", label: "Map" },
+  { id: "ch-03", label: "Flow" },
+  { id: "ch-04", label: "Join" },
 ];
 
 export default async function HomePage() {
@@ -125,9 +125,6 @@ export default async function HomePage() {
     description: "The curated directory of AI tools.",
   };
 
-  const heroFeature = featuredTools.tools[0];
-  const secondaryFeatures = featuredTools.tools.slice(1, 5);
-
   return (
     <>
       <JsonLd data={websiteJsonLd} />
@@ -139,19 +136,19 @@ export default async function HomePage() {
       {/* ─────────── HERO ─────────── */}
       <section
         id="ch-hero"
-        className="relative flex min-h-[62vh] items-center overflow-hidden lg:min-h-[68vh]"
+        className="relative flex min-h-[52vh] items-center overflow-hidden sm:min-h-[58vh] lg:min-h-[68vh]"
       >
         <div className="pointer-events-none absolute inset-0 bento-grid-pattern opacity-30" />
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 flex items-center justify-end overflow-hidden pr-2 sm:pr-10 lg:pr-16"
         >
-          <span className="select-none font-serif italic text-[28vw] leading-none text-white/[0.035] sm:text-[24vw] lg:text-[20vw]">
+          <span className="select-none font-serif italic text-[22vw] leading-none text-white/[0.02] sm:text-[24vw] sm:text-white/[0.035] lg:text-[20vw]">
             Ai
           </span>
         </div>
 
-        <div className="relative mx-auto grid w-full max-w-7xl gap-8 px-4 py-8 sm:px-6 sm:py-12 lg:grid-cols-12 lg:gap-8 lg:px-8 lg:py-16 lg:items-center">
+        <div className="relative mx-auto grid w-full max-w-7xl gap-6 px-4 py-8 sm:gap-8 sm:px-6 sm:py-12 lg:grid-cols-12 lg:gap-8 lg:px-8 lg:py-16 lg:items-center">
           <div className="lg:col-span-8">
             <FadeIn>
               <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
@@ -212,14 +209,14 @@ export default async function HomePage() {
 
               <Link
                 href="/compare"
-                className="group inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/45 transition-colors hover:text-white sm:text-[11px]"
+                className="group hidden items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/45 transition-colors hover:text-white sm:inline-flex sm:text-[11px]"
               >
                 or compare tools side-by-side
                 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               </Link>
               <Link
                 href="/best"
-                className="group inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/45 transition-colors hover:text-white sm:text-[11px]"
+                className="group hidden items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/45 transition-colors hover:text-white sm:inline-flex sm:text-[11px]"
               >
                 or browse best-of guides
                 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
@@ -227,11 +224,32 @@ export default async function HomePage() {
 
               <Link
                 href="/stacks"
-                className="group inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/45 transition-colors hover:text-white sm:text-[11px]"
+                className="group hidden items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/45 transition-colors hover:text-white sm:inline-flex sm:text-[11px]"
               >
                 or build from a → recipe
                 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               </Link>
+
+              <div className="flex flex-wrap gap-2 sm:hidden">
+                <Link
+                  href="/compare"
+                  className="rounded-full border border-white/15 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-white/55 hover:border-white/35 hover:text-white"
+                >
+                  Compare
+                </Link>
+                <Link
+                  href="/best"
+                  className="rounded-full border border-white/15 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-white/55 hover:border-white/35 hover:text-white"
+                >
+                  Best
+                </Link>
+                <Link
+                  href="/stacks"
+                  className="rounded-full border border-white/15 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-white/55 hover:border-white/35 hover:text-white"
+                >
+                  Stacks
+                </Link>
+              </div>
 
               <div className="grid grid-cols-3 gap-3 border-t border-white/10 pt-4">
                 <div>
@@ -264,142 +282,32 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <SavedHomePanel />
-
-      {/* ─────────── § 01 — DIRECTORY (tight) ─────────── */}
-      <section
-        id="ch-01"
-        className="relative border-t border-white/10 py-10 sm:py-14"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <ChapterHeading num="01" label="The directory" />
-          </FadeIn>
-
-          <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:items-end sm:mt-8">
-            <div className="lg:col-span-7">
-              <RevealText>
-                <h2 className="font-serif text-[clamp(1.75rem,4.5vw,3.25rem)] font-normal leading-[1] tracking-[-0.03em]">
-                  {catalogStats.toolCount} tools.{" "}
-                  <em className="italic text-white/50">Handpicked.</em>
-                </h2>
-              </RevealText>
-              <FadeIn delay={0.15}>
-                <p className="mt-3 max-w-xl font-serif text-base italic leading-relaxed text-white/70">
-                  Every tool tested by a human. No scraping, no affiliate
-                  grift, no pay-to-rank.
-                </p>
-              </FadeIn>
-            </div>
-            <FadeIn delay={0.2} className="lg:col-span-5">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="bento-tile p-4">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">
-                    Reviewed
-                  </p>
-                  <p className="mt-1 font-serif text-xl italic sm:text-2xl">
-                    100%
-                  </p>
-                </div>
-                <div className="bento-tile p-4">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">
-                    Scraped
-                  </p>
-                  <p className="mt-1 font-serif text-xl italic sm:text-2xl">
-                    0%
-                  </p>
-                </div>
-              </div>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* ─────────── § 02 — FEATURED ─────────── */}
-      {featuredTools.tools.length > 0 && (
+      {/* ─────────── § 01 — TOOLS ─────────── */}
+      {(featuredTools.tools.length > 0 || recentTools.tools.length > 0) && (
         <section
-          id="ch-02"
-          className="relative border-t border-white/10 py-10 sm:py-14"
+          id="ch-01"
+          className={cn("relative border-t border-white/10", section.y)}
         >
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <FadeIn>
-              <ChapterHeading num="02" label="Editor's picks" />
+              <ChapterHeading num="01" label="Tools" />
             </FadeIn>
 
-            <div className="mt-6 flex items-end justify-between gap-4 sm:mt-8">
-              <RevealText>
-                <h2 className="font-serif text-[clamp(1.75rem,4.5vw,3.25rem)] font-normal leading-[1] tracking-[-0.03em]">
-                  Featured <em className="italic text-white/50">now</em>.
-                </h2>
-              </RevealText>
-              <Link
-                href="/tools"
-                className="group shrink-0 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/70 transition-colors hover:text-white sm:text-[11px]"
-              >
-                View all
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </Link>
+            <div className={section.inner}>
+              <HomeToolsSection
+                featuredTools={featuredTools.tools}
+                recentTools={recentTools.tools}
+              />
             </div>
-
-            <StaggerChildren className="mt-6 grid gap-3 sm:gap-4 lg:grid-cols-12 lg:auto-rows-[1fr]">
-              {heroFeature && (
-                <StaggerItem className="lg:col-span-8 lg:row-span-2">
-                  <ToolCardFeatured tool={heroFeature} />
-                </StaggerItem>
-              )}
-              {secondaryFeatures.slice(0, 2).map((tool) => (
-                <StaggerItem key={tool.id} className="lg:col-span-4">
-                  <ToolCard tool={tool} />
-                </StaggerItem>
-              ))}
-              {secondaryFeatures.slice(2, 4).map((tool) => (
-                <StaggerItem key={tool.id} className="lg:col-span-6">
-                  <ToolCard tool={tool} />
-                </StaggerItem>
-              ))}
-            </StaggerChildren>
           </div>
         </section>
       )}
 
-      {recentTools.tools.length > 0 && (
-        <section className="relative border-t border-white/10 py-10 sm:py-14">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <FadeIn>
-              <ChapterHeading num="02B" label="Recently added" />
-            </FadeIn>
-
-            <div className="mt-6 flex items-end justify-between gap-4 sm:mt-8">
-              <RevealText>
-                <h2 className="font-serif text-[clamp(1.75rem,4.5vw,3.25rem)] font-normal leading-[1] tracking-[-0.03em]">
-                  New tools <em className="italic text-white/50">to track</em>.
-                </h2>
-              </RevealText>
-              <Link
-                href="/tools?sort=newest"
-                className="group shrink-0 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/70 transition-colors hover:text-white sm:text-[11px]"
-              >
-                View newest
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </Link>
-            </div>
-
-            <StaggerChildren className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
-              {recentTools.tools.map((tool) => (
-                <StaggerItem key={tool.id}>
-                  <ToolCard tool={tool} />
-                </StaggerItem>
-              ))}
-            </StaggerChildren>
-          </div>
-        </section>
-      )}
-
-      {/* ─────────── § 03 — MAP ─────────── */}
+      {/* ─────────── § 02 — MAP ─────────── */}
       {categories.length > 0 && (
         <section
-          id="ch-03"
-          className="relative overflow-hidden border-t border-white/10 py-10 sm:py-14"
+          id="ch-02"
+          className={cn("relative overflow-hidden border-t border-white/10", section.y)}
         >
           <div
             aria-hidden
@@ -412,10 +320,10 @@ export default async function HomePage() {
 
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <FadeIn>
-              <ChapterHeading num="03" label="The map" />
+              <ChapterHeading num="02" label="The map" />
             </FadeIn>
 
-            <div className="mt-6 grid gap-6 sm:mt-8 lg:grid-cols-12 lg:items-start lg:gap-8">
+            <div className={cn("grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-8", section.inner)}>
               <div className="lg:col-span-4 lg:sticky lg:top-20 lg:self-start">
                 <RevealText>
                   <h2 className="font-serif text-[clamp(1.75rem,4.5vw,3.25rem)] font-normal leading-[1] tracking-[-0.03em]">
@@ -438,8 +346,14 @@ export default async function HomePage() {
               </div>
 
               <StaggerChildren className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3 lg:col-span-8 lg:grid-cols-2 xl:grid-cols-3">
-                {categories.map((category) => (
-                  <StaggerItem key={category.id}>
+                {categories.slice(0, 12).map((category, i) => (
+                  <StaggerItem
+                    key={category.id}
+                    className={cn(
+                      i >= 6 && i < 9 && "hidden lg:block",
+                      i >= 9 && "hidden xl:block"
+                    )}
+                  >
                     <CategoryCard category={category} />
                   </StaggerItem>
                 ))}
@@ -451,15 +365,15 @@ export default async function HomePage() {
 
       {/* ─────────── § 04 — FLOW ─────────── */}
       <section
-        id="ch-04"
-        className="relative border-t border-white/10 py-10 sm:py-14"
+        id="ch-03"
+        className={cn("relative border-t border-white/10", section.y)}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <ChapterHeading num="04" label="The flow" />
+            <ChapterHeading num="03" label="The flow" />
           </FadeIn>
 
-          <div className="mt-6 grid gap-6 sm:mt-8 lg:grid-cols-12 lg:items-start lg:gap-8">
+          <div className={cn("grid gap-6 lg:grid-cols-12 lg:items-start lg:gap-8", section.inner)}>
             <div className="lg:col-span-4">
               <RevealText>
                 <h2 className="font-serif text-[clamp(1.75rem,4.5vw,3.25rem)] font-normal leading-[1] tracking-[-0.03em]">
@@ -480,48 +394,66 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ─────────── § 05 — FINAL CTA ─────────── */}
-      <section
-        id="ch-05"
-        className="relative border-t border-white/10 py-10 sm:py-14"
-      >
+      {/* ─────────── § 04 — JOIN ─────────── */}
+      <section id="ch-04" className={cn("relative border-t border-white/10", section.y)}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <ChapterHeading num="05" label="Start" />
+            <ChapterHeading num="04" label="Start" />
           </FadeIn>
 
-          <div className="mt-6 grid gap-6 sm:mt-8 lg:grid-cols-12 lg:items-end lg:gap-8">
+          <div className={cn("grid gap-6 lg:grid-cols-12 lg:items-end lg:gap-8", section.inner)}>
             <div className="lg:col-span-8">
               <RevealText>
-                <h2 className="font-serif text-[clamp(2rem,5.5vw,4.25rem)] font-normal leading-[0.98] tracking-[-0.035em]">
-                  Find your{" "}
-                  <em className="italic text-white/50">stack</em>.
+                <h2 className="font-serif text-[clamp(1.75rem,5vw,4.25rem)] font-normal leading-[0.98] tracking-[-0.035em]">
+                  Keep exploring{" "}
+                  <em className="italic text-white/50">your way</em>.
                 </h2>
               </RevealText>
               <FadeIn delay={0.15}>
-                <p className="mt-4 max-w-xl font-serif text-base italic leading-relaxed text-white/70">
-                  Browse the index. Build from a recipe. All free.
+                <p className="mt-3 max-w-xl font-serif text-base italic leading-relaxed text-white/70 sm:mt-4">
+                  Compare tools, save a shortlist, or jump into a stack recipe.
                 </p>
               </FadeIn>
-            </div>
-            <FadeIn delay={0.25} className="lg:col-span-4">
-              <div className="flex flex-col gap-2 sm:flex-row lg:flex-col">
-                <Link href="/tools" className="flex-1">
-                  <Button size="default" className="w-full">
-                    Browse tools
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+              <div className="mt-4 flex flex-wrap gap-2 sm:mt-5">
+                <Link
+                  href="/compare"
+                  className="rounded-full border border-white/15 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/60 transition-colors hover:border-white/35 hover:text-white"
+                >
+                  Compare
                 </Link>
-                <Link href="/stacks" className="flex-1">
-                  <Button size="default" variant="outline" className="w-full">
-                    Browse stacks
-                  </Button>
+                <Link
+                  href="/best"
+                  className="rounded-full border border-white/15 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/60 transition-colors hover:border-white/35 hover:text-white"
+                >
+                  Best
+                </Link>
+                <Link
+                  href="/stacks"
+                  className="rounded-full border border-white/15 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/60 transition-colors hover:border-white/35 hover:text-white"
+                >
+                  Stacks
+                </Link>
+                <Link
+                  href="/mcps"
+                  className="rounded-full border border-white/15 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/60 transition-colors hover:border-white/35 hover:text-white"
+                >
+                  MCPs
                 </Link>
               </div>
+            </div>
+            <FadeIn delay={0.25} className="lg:col-span-4">
+              <Link href="/tools" className="block">
+                <Button size="default" className="w-full">
+                  Browse all tools
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
             </FadeIn>
           </div>
         </div>
       </section>
+
+      <SavedHomePanel />
     </>
   );
 }

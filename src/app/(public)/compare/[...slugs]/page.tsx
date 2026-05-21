@@ -21,6 +21,8 @@ import {
   getRelatedComparisons,
 } from "@/lib/popular-comparisons";
 import { CompareViewTracker } from "@/components/compare/compare-view-tracker";
+import { PageContainer } from "@/components/shared/page-container";
+import { section } from "@/lib/layout";
 import type { ToolWithCategory } from "@/lib/types/database";
 
 export const revalidate = 3600;
@@ -115,7 +117,7 @@ export default async function ComparePage({ params }: Props) {
       <JsonLd data={itemListLd} />
       {faqs.length > 0 && <JsonLd data={faqLd} />}
 
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+      <PageContainer variant="editorial">
         <FadeIn>
           <Breadcrumbs
             items={[
@@ -162,7 +164,7 @@ export default async function ComparePage({ params }: Props) {
         {/* Verdict */}
         {verdicts.length > 0 && (
           <FadeIn delay={0.15}>
-            <section className="mt-12 sm:mt-16">
+            <section className={section.gap}>
               <div className="flex items-center justify-between gap-4">
                 <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                   § Verdict
@@ -196,7 +198,7 @@ export default async function ComparePage({ params }: Props) {
 
         {/* Spec table */}
         <FadeIn delay={0.2}>
-          <section className="mt-16 sm:mt-24">
+          <section className={section.gapLoose}>
             <div className="flex items-center justify-between gap-4">
               <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                 § Spec sheet
@@ -211,7 +213,7 @@ export default async function ComparePage({ params }: Props) {
 
         {/* Best for */}
         <FadeIn delay={0.2}>
-          <section className="mt-16 sm:mt-24">
+          <section className={section.gapLoose}>
             <div className="flex items-center justify-between gap-4">
               <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                 § Best for
@@ -246,7 +248,7 @@ export default async function ComparePage({ params }: Props) {
         {/* FAQ */}
         {faqs.length > 0 && (
           <FadeIn delay={0.2}>
-            <section className="mt-16 sm:mt-24">
+            <section className={section.gapLoose}>
               <div className="flex items-center justify-between gap-4">
                 <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                   § Common questions
@@ -275,7 +277,7 @@ export default async function ComparePage({ params }: Props) {
         {/* Related comparisons */}
         {related.length > 0 && (
           <FadeIn delay={0.2}>
-            <section className="mt-20 border-t border-white/10 pt-10 sm:mt-28">
+            <section className={section.divider}>
               <div className="flex items-center justify-between gap-4">
                 <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                   § Related comparisons
@@ -321,7 +323,7 @@ export default async function ComparePage({ params }: Props) {
             </Link>
           </div>
         </FadeIn>
-      </div>
+      </PageContainer>
     </>
   );
 }

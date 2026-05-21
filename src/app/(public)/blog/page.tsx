@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FadeIn, StaggerChildren, StaggerItem, PageTransition } from "@/components/motion";
+import { FadeIn, StaggerChildren, StaggerItem } from "@/components/motion";
+import { PageContainer } from "@/components/shared/page-container";
 import { Pagination } from "@/components/shared/pagination";
 import { PaginationInfo } from "@/components/shared/pagination-info";
 import { BlogTagFilter } from "@/components/blog/blog-tag-filter";
@@ -67,8 +68,7 @@ export default async function BlogPage({
   return (
     <>
       <JsonLd data={blogLd} />
-    <PageTransition>
-      <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+      <PageContainer variant="wide">
         <FadeIn>
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
             Blog
@@ -179,8 +179,7 @@ export default async function BlogPage({
             )}
           </>
         )}
-      </div>
-    </PageTransition>
+      </PageContainer>
     </>
   );
 }
