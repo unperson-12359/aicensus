@@ -6,7 +6,7 @@ import { PromptBuilder } from "@/components/prompt-builder/prompt-builder";
 export const metadata: Metadata = {
   title: "AI Prompt Builder | AiCensus",
   description:
-    "Build structured prompts for research, comparison, coding, content, and workflow tasks. Choose the goal, audience, model style, tone, constraints, format, context, and examples.",
+    "Build structured prompts for research, coding, writing, data analysis, agents, extraction, support, visual generation, and workflow tasks.",
   alternates: { canonical: "/prompt-builder" },
 };
 
@@ -28,12 +28,12 @@ export default function PromptBuilderPage() {
         </p>
         <div className="mt-4 max-w-3xl">
           <h1 className="font-display text-3xl font-bold tracking-[-0.03em] sm:text-4xl">
-            Build a sharper AI prompt.
+            Build a prompt for almost any AI task.
           </h1>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-            Turn a loose request into a structured prompt with the right goal,
-            audience, model style, tone, constraints, output format, context,
-            and examples.
+            Turn rough intent into a reusable prompt with modes, patterns,
+            guardrails, schemas, source rules, examples, variables, and separate
+            system/user output.
           </p>
         </div>
       </FadeIn>
