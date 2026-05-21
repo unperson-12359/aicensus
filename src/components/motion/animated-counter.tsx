@@ -24,7 +24,8 @@ export function AnimatedCounter({
   const ref = useRef<HTMLSpanElement>(null);
   const shouldReduce = useReducedMotion();
   const inView = useInView(ref, { once: true, amount: 0.1 });
-  const [display, setDisplay] = useState(target);
+  const shouldAnimate = inView && !shouldReduce;
+  const [animatedValue, setAnimatedValue] = useState(target);
 
   const motionValue = useMotionValue(target);
   const springValue = useSpring(motionValue, {
@@ -32,25 +33,20 @@ export function AnimatedCounter({
     bounce: 0,
   });
 
-  // Always show the real count when not animating (mobile below fold, reduced motion).
   useEffect(() => {
-    if (shouldReduce || !inView) {
-      setDisplay(target);
-    }
-  }, [target, inView, shouldReduce]);
-
-  useEffect(() => {
-    if (shouldReduce || !inView) return;
+    if (!shouldAnimate) return;
 
     const start = Math.max(0, Math.floor(target * 0.85));
     motionValue.set(start);
     const unsubscribe = springValue.on("change", (latest) => {
-      setDisplay(Math.round(latest));
+      setAnimatedValue(Math.round(latest));
     });
     motionValue.set(target);
 
     return unsubscribe;
-  }, [inView, shouldReduce, target, motionValue, springValue]);
+  }, [shouldAnimate, target, motionValue, springValue]);
+
+  const display = shouldAnimate ? animatedValue : target;
 
   return (
     <span ref={ref} className={className}>
