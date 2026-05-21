@@ -42,6 +42,8 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
 
   // Coding
   { slugs: ["cursor", "github-copilot"], group: "coding" },
+  { slugs: ["cursor", "codeium"], group: "coding" },
+  { slugs: ["github-copilot", "codeium"], group: "coding" },
   { slugs: ["cursor", "windsurf"], group: "coding" },
   { slugs: ["cursor", "v0"], group: "coding" },
   { slugs: ["v0", "bolt-new"], group: "coding" },
@@ -76,6 +78,9 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
   { slugs: ["mubert", "suno"], group: "music" },
   { slugs: ["elevenlabs", "deepgram"], group: "audio" },
   { slugs: ["descript", "otter-ai"], group: "audio" },
+  { slugs: ["otter-ai", "fathom"], group: "audio" },
+  { slugs: ["otter-ai", "fireflies-ai"], group: "audio" },
+  { slugs: ["fathom", "fireflies-ai"], group: "audio" },
   { slugs: ["opus-clip", "descript"], group: "audio" },
 
   // Frameworks / agents
