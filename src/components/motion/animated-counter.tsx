@@ -1,7 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { useInView, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import {
+  useInView,
+  useMotionValue,
+  useSpring,
+  useReducedMotion,
+} from "framer-motion";
 
 interface AnimatedCounterProps {
   target: number;
@@ -18,32 +23,39 @@ export function AnimatedCounter({
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const shouldReduce = useReducedMotion();
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, amount: 0.1 });
+  const [display, setDisplay] = useState(target);
 
-  const motionValue = useMotionValue(0);
+  const motionValue = useMotionValue(target);
   const springValue = useSpring(motionValue, {
     duration: duration * 1000,
     bounce: 0,
   });
 
+  // Always show the real count when not animating (mobile below fold, reduced motion).
   useEffect(() => {
-    if (inView) {
-      motionValue.set(target);
+    if (shouldReduce || !inView) {
+      setDisplay(target);
     }
-  }, [inView, motionValue, target]);
+  }, [target, inView, shouldReduce]);
 
   useEffect(() => {
+    if (shouldReduce || !inView) return;
+
+    const start = Math.max(0, Math.floor(target * 0.85));
+    motionValue.set(start);
     const unsubscribe = springValue.on("change", (latest) => {
-      if (ref.current) {
-        ref.current.textContent = Math.round(latest) + suffix;
-      }
+      setDisplay(Math.round(latest));
     });
+    motionValue.set(target);
+
     return unsubscribe;
-  }, [springValue, suffix]);
+  }, [inView, shouldReduce, target, motionValue, springValue]);
 
-  if (shouldReduce) {
-    return <span className={className}>{target}{suffix}</span>;
-  }
-
-  return <span ref={ref} className={className}>0{suffix}</span>;
+  return (
+    <span ref={ref} className={className}>
+      {display}
+      {suffix}
+    </span>
+  );
 }
