@@ -7,6 +7,7 @@ import { FadeIn, StaggerChildren, StaggerItem, PageTransition } from "@/componen
 import { Pagination } from "@/components/shared/pagination";
 import { PaginationInfo } from "@/components/shared/pagination-info";
 import { BlogTagFilter } from "@/components/blog/blog-tag-filter";
+import { JsonLd } from "@/components/shared/json-ld";
 import { getAllPosts } from "@/lib/blog";
 
 const POSTS_PER_PAGE = 9;
@@ -48,7 +49,24 @@ export default async function BlogPage({
   const offset = (currentPage - 1) * POSTS_PER_PAGE;
   const posts = filtered.slice(offset, offset + POSTS_PER_PAGE);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
+  const blogLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "AiCensus Blog",
+    description: "Insights, guides, and updates from AiCensus.",
+    url: `${siteUrl}/blog`,
+    blogPost: allPosts.slice(0, 20).map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      datePublished: post.date,
+      url: `${siteUrl}/blog/${post.slug}`,
+    })),
+  };
+
   return (
+    <>
+      <JsonLd data={blogLd} />
     <PageTransition>
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <FadeIn>
@@ -163,5 +181,6 @@ export default async function BlogPage({
         )}
       </div>
     </PageTransition>
+    </>
   );
 }

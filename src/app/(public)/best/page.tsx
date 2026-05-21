@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { FadeIn, RevealText } from "@/components/motion";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { JsonLd } from "@/components/shared/json-ld";
 import { BEST_FOR_PAGES } from "@/lib/best-for";
 
 export const revalidate = 3600;
@@ -15,7 +16,32 @@ export const metadata: Metadata = {
 };
 
 export default function BestForIndex() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
+  const collectionLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Best AI Tools by Use Case",
+    description:
+      "Curated picks of the best AI tools for every persona and job — solo founders, PMs, marketers, designers, students, and more.",
+    url: `${siteUrl}/best`,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: BEST_FOR_PAGES.length,
+      itemListElement: BEST_FOR_PAGES.map((page, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "WebPage",
+          name: page.title,
+          url: `${siteUrl}/best/${page.slug}`,
+        },
+      })),
+    },
+  };
+
   return (
+    <>
+      <JsonLd data={collectionLd} />
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       <FadeIn>
         <Breadcrumbs
@@ -84,5 +110,6 @@ export default function BestForIndex() {
         </div>
       </FadeIn>
     </div>
+    </>
   );
 }

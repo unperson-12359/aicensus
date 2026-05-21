@@ -3,6 +3,7 @@
 import { Bookmark, BookmarkCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { isComparisonSaved, useSavedItems } from "@/lib/saved-items";
+import { trackComparisonSaved } from "@/lib/analytics";
 
 interface SaveComparisonButtonProps {
   slugs: string[];
@@ -21,7 +22,11 @@ export function SaveComparisonButton({ slugs, names }: SaveComparisonButtonProps
       type="button"
       variant={saved ? "secondary" : "outline"}
       size="sm"
-      onClick={() => toggleComparison(slugs, label)}
+      onClick={() => {
+        const willSave = !saved;
+        toggleComparison(slugs, label);
+        trackComparisonSaved(slugs, willSave);
+      }}
       aria-label={actionLabel}
       aria-pressed={saved}
     >

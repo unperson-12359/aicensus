@@ -1,5 +1,93 @@
 import { createClient } from "@/lib/supabase/server";
-import type { ToolWithCategory } from "@/lib/types/database";
+import type { Tool, ToolWithCategory } from "@/lib/types/database";
+
+function sanitizeSearchQuery(search: string): string {
+  return search
+    .replace(/[,.()"\\%_*]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 80);
+}
+
+async function getToolsViaSearchRpc(
+  options: {
+    category?: string;
+    pricing?: string;
+    verified?: boolean;
+    featured?: boolean;
+    search: string;
+    sort?: "rating" | "name" | "newest";
+    limit?: number;
+    offset?: number;
+  }
+): Promise<{ tools: ToolWithCategory[]; count: number } | null> {
+  const sanitized = sanitizeSearchQuery(options.search);
+  if (!sanitized) return null;
+
+  const supabase = await createClient();
+  const { data: rpcRows, error } = await supabase.rpc("search_tools", {
+    search_query: sanitized,
+  });
+
+  if (error || !rpcRows?.length) return null;
+
+  let rows = rpcRows as Tool[];
+
+  if (options.category) {
+    const { data: category } = await supabase
+      .from("categories")
+      .select("id")
+      .eq("slug", options.category)
+      .single();
+    if (!category) return { tools: [], count: 0 };
+    rows = rows.filter((row) => row.category_id === category.id);
+  }
+
+  if (options.pricing) {
+    rows = rows.filter((row) => row.pricing_model === options.pricing);
+  }
+  if (options.verified) {
+    rows = rows.filter((row) => row.is_verified);
+  }
+  if (options.featured) {
+    rows = rows.filter((row) => row.is_featured);
+  }
+
+  if (options.sort === "rating") {
+    rows.sort(
+      (a, b) => (b.editor_rating ?? 0) - (a.editor_rating ?? 0)
+    );
+  } else if (options.sort === "name") {
+    rows.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (options.sort === "newest") {
+    rows.sort((a, b) => {
+      const aTime = a.published_at ? new Date(a.published_at).getTime() : 0;
+      const bTime = b.published_at ? new Date(b.published_at).getTime() : 0;
+      return bTime - aTime;
+    });
+  }
+
+  const count = rows.length;
+  const limit = options.limit ?? 20;
+  const offset = options.offset ?? 0;
+  const pageIds = rows.slice(offset, offset + limit).map((row) => row.id);
+  if (pageIds.length === 0) return { tools: [], count };
+
+  const { data: withCategories, error: fetchError } = await supabase
+    .from("tools")
+    .select("*, categories(*)")
+    .in("id", pageIds)
+    .eq("status", "published");
+
+  if (fetchError || !withCategories) return null;
+
+  const order = new Map(pageIds.map((id, index) => [id, index]));
+  const tools = (withCategories as ToolWithCategory[]).sort(
+    (a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0)
+  );
+
+  return { tools, count };
+}
 
 export async function getCatalogStats(): Promise<{
   toolCount: number;
@@ -34,6 +122,20 @@ export async function getTools(options?: {
   limit?: number;
   offset?: number;
 }) {
+  if (options?.search) {
+    const rpcResult = await getToolsViaSearchRpc({
+      category: options.category,
+      pricing: options.pricing,
+      verified: options.verified,
+      featured: options.featured,
+      search: options.search,
+      sort: options.sort,
+      limit: options.limit,
+      offset: options.offset,
+    });
+    if (rpcResult) return rpcResult;
+  }
+
   const supabase = await createClient();
   const categorySelect = options?.category ? "*, categories!inner(*)" : "*, categories(*)";
 
@@ -59,12 +161,7 @@ export async function getTools(options?: {
   }
 
   if (options?.search) {
-    // Escape special PostgREST filter characters to prevent filter injection
-    const sanitized = options.search
-      .replace(/[,.()"\\%_*]/g, " ")
-      .replace(/\s+/g, " ")
-      .trim()
-      .slice(0, 80);
+    const sanitized = sanitizeSearchQuery(options.search);
     if (sanitized) {
       query = query.or(
         `name.ilike.%${sanitized}%,tagline.ilike.%${sanitized}%,description.ilike.%${sanitized}%`

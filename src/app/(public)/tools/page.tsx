@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { getTools } from "@/lib/queries/tools";
 import { getCategories } from "@/lib/queries/categories";
 import { FilterBar } from "@/components/filters/filter-bar";
+import { SearchQueryTracker } from "@/components/filters/search-query-tracker";
 import { Pagination } from "@/components/shared/pagination";
 import { PaginationInfo } from "@/components/shared/pagination-info";
 import { PageTransition } from "@/components/motion";
@@ -54,6 +55,7 @@ export default async function ToolsPage({ searchParams }: PageProps) {
 
   let tools: { tools: ToolWithCategory[]; count: number } = { tools: [], count: 0 };
   let categories: Category[] = [];
+  let loadError = false;
 
   try {
     [tools, categories] = await Promise.all([
@@ -68,8 +70,8 @@ export default async function ToolsPage({ searchParams }: PageProps) {
       }),
       getCategories(),
     ]);
-  } catch (err) {
-    console.error("Failed to fetch tools/categories:", err);
+  } catch {
+    loadError = true;
   }
 
   const totalPages = Math.max(1, Math.ceil(tools.count / TOOLS_PER_PAGE));
@@ -100,6 +102,7 @@ export default async function ToolsPage({ searchParams }: PageProps) {
 
   return (
     <>
+    <SearchQueryTracker query={params.q} />
     <JsonLd data={itemListJsonLd} />
     <PageTransition>
     <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
@@ -119,7 +122,14 @@ export default async function ToolsPage({ searchParams }: PageProps) {
       </div>
 
       <div id="results" className="mt-6 scroll-mt-24">
-        {tools.tools.length === 0 ? (
+        {loadError ? (
+          <div className="flex flex-col items-center justify-center py-16 text-center">
+            <p className="text-lg font-medium">Could not load tools</p>
+            <p className="mt-2 max-w-md text-sm text-muted-foreground">
+              The directory is temporarily unavailable. Please refresh the page or try again in a few minutes.
+            </p>
+          </div>
+        ) : tools.tools.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <p className="text-lg font-medium">No tools found</p>
             <p className="mt-2 text-sm text-muted-foreground">

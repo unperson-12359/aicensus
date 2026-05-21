@@ -5,6 +5,7 @@ import { Bookmark, BookmarkCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { isToolSaved, useSavedItems } from "@/lib/saved-items";
+import { trackToolSaved } from "@/lib/analytics";
 
 interface SaveToolButtonProps {
   slug: string;
@@ -27,7 +28,9 @@ export function SaveToolButton({
   function onClick(event: MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     event.stopPropagation();
+    const willSave = !saved;
     toggleTool(slug);
+    trackToolSaved(slug, willSave);
   }
 
   if (mode === "icon") {

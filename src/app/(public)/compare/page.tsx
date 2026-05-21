@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/motion";
 import { Breadcrumbs } from "@/components/shared/breadcrumbs";
+import { JsonLd } from "@/components/shared/json-ld";
 import { ToolPicker } from "@/components/compare/tool-picker";
 import { getTools } from "@/lib/queries/tools";
 import {
@@ -46,7 +47,7 @@ export default async function CompareIndexPage() {
     categories: { name: string } | null;
   }[] = [];
   try {
-    const result = await getTools({ sort: "name", limit: 1000 });
+    const result = await getTools({ sort: "name", limit: 300 });
     allTools = result.tools.map((t) => ({
       slug: t.slug,
       name: t.name,
@@ -60,8 +61,32 @@ export default async function CompareIndexPage() {
   }
 
   const grouped = groupComparisons(POPULAR_COMPARISONS);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
+  const itemListLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Compare AI Tools",
+    description:
+      "Side-by-side comparisons of popular AI tools — pricing, features, pros & cons, and editorial verdicts.",
+    url: `${siteUrl}/compare`,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: POPULAR_COMPARISONS.length,
+      itemListElement: POPULAR_COMPARISONS.map((pair, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "WebPage",
+          name: pair.slugs.map(titleCase).join(" vs "),
+          url: `${siteUrl}/compare/${pair.slugs.join("/")}`,
+        },
+      })),
+    },
+  };
 
   return (
+    <>
+      <JsonLd data={itemListLd} />
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       <FadeIn>
         <Breadcrumbs
@@ -134,5 +159,6 @@ export default async function CompareIndexPage() {
         </section>
       </FadeIn>
     </div>
+    </>
   );
 }

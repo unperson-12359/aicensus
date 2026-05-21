@@ -1,10 +1,14 @@
 import Link from "next/link";
+import { NewsletterSignup } from "@/components/layout/newsletter-signup";
 
 const footerLinks = {
   Product: [
     { href: "/tools", label: "Browse tools" },
-    { href: "/prompt-builder", label: "Prompt builder" },
+    { href: "/compare", label: "Compare" },
+    { href: "/best", label: "Best of" },
     { href: "/stacks", label: "Stacks" },
+    { href: "/mcps", label: "MCPs" },
+    { href: "/prompt-builder", label: "Prompt builder" },
     { href: "/categories", label: "Categories" },
   ],
   Resources: [
@@ -36,6 +40,7 @@ export function Footer() {
               The curated directory of AI tools. Handpicked, reviewed, priced —
               no noise.
             </p>
+            <NewsletterSignup />
           </div>
 
           {Object.entries(footerLinks).map(([title, links]) => (

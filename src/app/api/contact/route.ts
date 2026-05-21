@@ -2,17 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { createHash } from "node:crypto";
 import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { sendContactNotification } from "@/lib/contact-notify";
+import { captureException } from "@/lib/monitoring";
 
 export const runtime = "nodejs";
 
 const SUBJECTS = ["general", "bug", "partnership", "feedback", "other"] as const;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
-
-type RateLimitBucket = {
-  count: number;
-  resetAt: number;
-};
 
 interface PersistentRateLimitRow {
   request_count: number;
@@ -34,18 +31,6 @@ function jsonResponse(body: unknown, status = 200) {
   });
 }
 
-function getRateLimitStore() {
-  const globalForRateLimit = globalThis as typeof globalThis & {
-    __aicensusContactRateLimit?: Map<string, RateLimitBucket>;
-  };
-
-  if (!globalForRateLimit.__aicensusContactRateLimit) {
-    globalForRateLimit.__aicensusContactRateLimit = new Map();
-  }
-
-  return globalForRateLimit.__aicensusContactRateLimit;
-}
-
 function getClientKey(request: NextRequest) {
   const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
   const ip =
@@ -60,25 +45,6 @@ function getClientKey(request: NextRequest) {
 
 function hashClientKey(clientKey: string) {
   return createHash("sha256").update(clientKey).digest("hex");
-}
-
-function isRateLimited(request: NextRequest) {
-  const now = Date.now();
-  const store = getRateLimitStore();
-  const key = getClientKey(request);
-  const bucket = store.get(key);
-
-  if (!bucket || bucket.resetAt <= now) {
-    store.set(key, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
-    return false;
-  }
-
-  if (bucket.count >= RATE_LIMIT_MAX) {
-    return true;
-  }
-
-  bucket.count += 1;
-  return false;
 }
 
 async function isPersistentlyRateLimited(
@@ -97,10 +63,8 @@ async function isPersistentlyRateLimited(
     .maybeSingle();
 
   if (error) {
-    // The table is added by a later migration. Fall back to in-memory limiting
-    // if the migration has not been applied yet so contact remains available.
     if (error.code !== "42P01" && error.code !== "PGRST205") {
-      console.error("Contact rate-limit lookup failed:", error);
+      captureException(error, { route: "contact", stage: "rate-limit-lookup" });
     }
     return false;
   }
@@ -131,10 +95,8 @@ async function isPersistentlyRateLimited(
       { onConflict: "key_hash" }
     );
 
-  if (upsertError) {
-    if (upsertError.code !== "42P01" && upsertError.code !== "PGRST205") {
-      console.error("Contact rate-limit update failed:", upsertError);
-    }
+  if (upsertError && upsertError.code !== "42P01" && upsertError.code !== "PGRST205") {
+    captureException(upsertError, { route: "contact", stage: "rate-limit-update" });
   }
 
   return false;
@@ -154,10 +116,6 @@ export async function POST(request: NextRequest) {
     return jsonResponse({ ok: true }, 202);
   }
 
-  if (isRateLimited(request)) {
-    return jsonResponse({ error: "Too many messages. Please try again later." }, 429);
-  }
-
   const supabase = createAdminClient();
   if (!supabase) {
     return jsonResponse({ error: "Contact form is not configured" }, 503);
@@ -175,8 +133,14 @@ export async function POST(request: NextRequest) {
   });
 
   if (error) {
-    console.error("Failed to save contact message:", error);
+    captureException(error, { route: "contact", stage: "insert" });
     return jsonResponse({ error: "Could not send message" }, 500);
+  }
+
+  try {
+    await sendContactNotification(message);
+  } catch (notifyError) {
+    captureException(notifyError, { route: "contact", stage: "notify" });
   }
 
   return jsonResponse({ ok: true });

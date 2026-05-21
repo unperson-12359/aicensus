@@ -1,3 +1,14 @@
+/**
+ * Database types for Supabase.
+ *
+ * ACTIVE (used by public app): categories, tools, tool_alternatives,
+ * contact_messages, contact_rate_limits (API only, add to Tables when typed).
+ *
+ * LEGACY (may exist in DB but no UI/routes): submissions, admin_profiles,
+ * user_profiles, portfolio_projects, project_messages, featured_subscriptions,
+ * tags, tool_tags, chat_rate_limits.
+ */
+
 export type ToolStatus = "draft" | "published" | "archived";
 export type SubmissionStatus = "pending" | "approved" | "rejected";
 export type ProjectStatus = "draft" | "pending_review" | "published" | "rejected";
@@ -155,6 +166,7 @@ export interface Database {
           published_at?: string | null;
         };
       };
+      // Legacy — schema exists; not queried by active public app
       tags: {
         Row: {
           id: string;
@@ -203,6 +215,7 @@ export interface Database {
           alternative_id?: string;
         };
       };
+      // Legacy — no public /submit route
       submissions: {
         Row: {
           id: string;
@@ -256,6 +269,7 @@ export interface Database {
           created_at?: string;
         };
       };
+      // Legacy — no admin panel
       admin_profiles: {
         Row: {
           id: string;
@@ -276,6 +290,7 @@ export interface Database {
           created_at?: string;
         };
       };
+      // Legacy — no user dashboard
       user_profiles: {
         Row: {
           id: string;
@@ -332,6 +347,7 @@ export interface Database {
           updated_at?: string;
         };
       };
+      // Legacy — portfolio feature removed
       portfolio_projects: {
         Row: {
           id: string;
@@ -391,6 +407,7 @@ export interface Database {
           published_at?: string | null;
         };
       };
+      // Legacy — portfolio feature removed
       project_messages: {
         Row: {
           id: string;
@@ -452,6 +469,7 @@ export interface Database {
           created_at?: string;
         };
       };
+      // Legacy — Stripe integration removed
       featured_subscriptions: {
         Row: {
           id: string;

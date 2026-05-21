@@ -95,23 +95,30 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-0QBWVXJJQ0";
+
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} font-sans antialiased`}
       >
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-0QBWVXJJQ0"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
+        {gaId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-0QBWVXJJQ0');
+            gtag('config', '${gaId}');
           `}
-        </Script>
+            </Script>
+          </>
+        ) : null}
         <ThemeProvider>
           <TooltipProvider>
             <div className="flex min-h-screen flex-col">{children}</div>

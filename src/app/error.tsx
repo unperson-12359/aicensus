@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
+import { captureException } from "@/lib/monitoring";
 import { Button } from "@/components/ui/button";
 
-export default function GlobalError({
+export default function Error({
   error,
   reset,
 }: {
@@ -11,7 +12,7 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("Unhandled error:", error);
+    captureException(error, { digest: error.digest, boundary: "error" });
   }, [error]);
 
   return (

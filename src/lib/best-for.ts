@@ -443,6 +443,12 @@ export const BEST_FOR_PAGES: BestForPage[] = [
   },
 ];
 
+export function getBestForPagesForTool(slug: string, limit = 3): BestForPage[] {
+  return BEST_FOR_PAGES.filter((page) =>
+    page.picks.some((pick) => pick.slug === slug)
+  ).slice(0, limit);
+}
+
 export function getBestForBySlug(slug: string): BestForPage | undefined {
   return BEST_FOR_PAGES.find((p) => p.slug === slug);
 }

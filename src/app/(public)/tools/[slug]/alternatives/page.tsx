@@ -26,6 +26,7 @@ import {
   buildFaq,
   buildMethodologyLine,
 } from "@/lib/alternatives-content";
+import { formatContentLastUpdated } from "@/lib/content-dates";
 import type { ToolWithCategory } from "@/lib/types/database";
 
 export const revalidate = 3600;
@@ -53,11 +54,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: { card: "summary_large_image", title, description },
     alternates: { canonical: `${siteUrl}/tools/${slug}/alternatives` },
   };
-}
-
-function formatLastUpdated(): string {
-  const now = new Date();
-  return now.toLocaleDateString("en-US", { month: "long", year: "numeric" });
 }
 
 export default async function AlternativesPage({
@@ -98,7 +94,7 @@ export default async function AlternativesPage({
   const tableTools = [tool, ...alternatives.slice(0, 3)];
   const intro = buildIntroParagraph(tool, total);
   const faqs = buildFaq(tool, alternatives);
-  const lastUpdated = formatLastUpdated();
+  const lastUpdated = formatContentLastUpdated([tool, ...alternatives]);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
   const itemListLd = {

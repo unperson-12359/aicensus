@@ -21,6 +21,7 @@ import { PricingBadge } from "@/components/shared/pricing-badge";
 import { VerifiedBadge } from "@/components/shared/verified-badge";
 import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
 import { SaveToolButton } from "@/components/saved/save-tool-button";
+import { ToolOutboundLink } from "@/components/tools/tool-outbound-link";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
 import { ToolLogo } from "@/components/shared/tool-logo";
@@ -31,7 +32,10 @@ import {
   getToolBySlug,
   getToolAlternatives,
   getAdjacentTools,
+  getToolsBySlugs,
 } from "@/lib/queries/tools";
+import { getComparisonsForTool } from "@/lib/popular-comparisons";
+import { getBestForPagesForTool } from "@/lib/best-for";
 
 export const revalidate = 3600;
 
@@ -98,6 +102,34 @@ export default async function ToolDetailPage({ params }: PageProps) {
     adjacent = { prev: null, next: null };
   }
 
+  const popularComparisons = getComparisonsForTool(tool.slug).slice(0, 4);
+  const bestForPages = getBestForPagesForTool(tool.slug, 2);
+  const comparisonNameSlugs = Array.from(
+    new Set(popularComparisons.flatMap((pair) => pair.slugs))
+  );
+  let comparisonNameBySlug = new Map<string, string>([[tool.slug, tool.name]]);
+  try {
+    const comparisonTools = await getToolsBySlugs(comparisonNameSlugs);
+    comparisonNameBySlug = new Map(
+      comparisonTools.map((entry) => [entry.slug, entry.name])
+    );
+    comparisonNameBySlug.set(tool.slug, tool.name);
+  } catch {
+    // Fall back to slug-based labels below
+  }
+
+  const formatComparisonLabel = (slugs: string[]) =>
+    slugs
+      .map(
+        (entry) =>
+          comparisonNameBySlug.get(entry) ??
+          entry
+            .split("-")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")
+      )
+      .join(" vs ");
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -115,13 +147,6 @@ export default async function ToolDetailPage({ params }: PageProps) {
       description: tool.pricing_details || `${tool.pricing_model} pricing`,
     },
     ...(tool.editor_rating && {
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: tool.editor_rating,
-        bestRating: 5,
-        worstRating: 0,
-        ratingCount: 1,
-      },
       review: {
         "@type": "Review",
         author: { "@type": "Organization", name: "AiCensus" },
@@ -130,11 +155,12 @@ export default async function ToolDetailPage({ params }: PageProps) {
           ratingValue: tool.editor_rating,
           bestRating: 5,
         },
+        reviewBody: `Editor rating: ${tool.editor_rating.toFixed(1)}/5 based on AiCensus editorial review.`,
       },
     }),
   };
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -148,6 +174,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
   };
 
   const logoSrc = getLogoUrl(tool.logo_url, tool.website_url);
+  const outboundHref = tool.affiliate_url || tool.website_url;
 
   return (
     <>
@@ -199,19 +226,25 @@ export default async function ToolDetailPage({ params }: PageProps) {
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              <a
-                href={tool.affiliate_url || tool.website_url}
-                target="_blank"
-                rel="noopener noreferrer"
+              <ToolOutboundLink
+                href={outboundHref}
+                toolSlug={tool.slug}
+                toolName={tool.name}
               >
                 <Button>
                   Visit {tool.name} <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
-              </a>
+              </ToolOutboundLink>
               <SaveToolButton slug={tool.slug} name={tool.name} />
-              <Link href="/compare">
-                <Button variant="outline">Compare</Button>
-              </Link>
+              {popularComparisons[0] ? (
+                <Link href={`/compare/${popularComparisons[0].slugs.join("/")}`}>
+                  <Button variant="outline">Compare</Button>
+                </Link>
+              ) : (
+                <Link href="/compare">
+                  <Button variant="outline">Compare</Button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -409,6 +442,53 @@ export default async function ToolDetailPage({ params }: PageProps) {
                 View all alternatives →
               </Link>
             </div>
+          </FadeIn>
+        )}
+
+        {(popularComparisons.length > 0 || bestForPages.length > 0) && (
+          <FadeIn className="mt-16 border-t border-white/10 pt-10">
+            {popularComparisons.length > 0 && (
+              <div>
+                <SectionHeading
+                  title={`Compare ${tool.name}`}
+                  description="Popular head-to-head comparisons"
+                />
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {popularComparisons.map((pair) => (
+                    <Link
+                      key={pair.slugs.join("-")}
+                      href={`/compare/${pair.slugs.join("/")}`}
+                      className="bento-tile group flex items-center justify-between p-4 transition-colors hover:border-white/30"
+                    >
+                      <span className="font-serif text-base text-white/85">
+                        {formatComparisonLabel(pair.slugs)}
+                      </span>
+                      <ExternalLink className="h-4 w-4 shrink-0 text-white/40 group-hover:text-white" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+            {bestForPages.length > 0 && (
+              <div className={popularComparisons.length > 0 ? "mt-10" : ""}>
+                <SectionHeading
+                  title="Featured in best-of guides"
+                  description="Editorial lists that include this tool"
+                />
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {bestForPages.map((page) => (
+                    <Link
+                      key={page.slug}
+                      href={`/best/${page.slug}`}
+                      className="bento-tile group p-4 transition-colors hover:border-white/30 sm:p-5"
+                    >
+                      <p className="font-serif text-lg italic text-white/85">{page.title}</p>
+                      <p className="mt-2 text-sm text-white/65">{page.tagline}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </FadeIn>
         )}
 

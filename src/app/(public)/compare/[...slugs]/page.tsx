@@ -15,10 +15,12 @@ import {
   buildIntroParagraph,
   buildFaq,
 } from "@/lib/comparison-content";
+import { formatContentLastUpdated } from "@/lib/content-dates";
 import {
   POPULAR_COMPARISONS,
   getRelatedComparisons,
 } from "@/lib/popular-comparisons";
+import { CompareViewTracker } from "@/components/compare/compare-view-tracker";
 import type { ToolWithCategory } from "@/lib/types/database";
 
 export const revalidate = 3600;
@@ -59,11 +61,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function formatLastUpdated(): string {
-  const now = new Date();
-  return now.toLocaleDateString("en-US", { month: "long", year: "numeric" });
-}
-
 export default async function ComparePage({ params }: Props) {
   const { slugs } = await params;
   if (!slugs || slugs.length < 2 || slugs.length > 4) notFound();
@@ -79,7 +76,7 @@ export default async function ComparePage({ params }: Props) {
   const intro = buildIntroParagraph(tools);
   const faqs = buildFaq(tools);
   const related = getRelatedComparisons(slugs, 6);
-  const lastUpdated = formatLastUpdated();
+  const lastUpdated = formatContentLastUpdated(tools);
 
   const itemListLd = {
     "@context": "https://schema.org",
@@ -114,6 +111,7 @@ export default async function ComparePage({ params }: Props) {
 
   return (
     <>
+      <CompareViewTracker slugs={tools.map((tool) => tool.slug)} />
       <JsonLd data={itemListLd} />
       {faqs.length > 0 && <JsonLd data={faqLd} />}
 

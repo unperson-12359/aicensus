@@ -123,8 +123,28 @@ Required production environment variables:
 ## Useful Commands
 
 ```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run start    # Start production server
-npm run lint     # Run linter
+npm run dev            # Start development server
+npm run build          # Build for production
+npm run start          # Start production server
+npm run lint           # Run linter
+npm run check:links    # Validate static catalog slugs against Supabase
+npm run check:predeploy # lint + check:links + build
 ```
+
+## Content Operations
+
+| Cadence | Action |
+|---------|--------|
+| Weekly | Review contact messages; add 2–5 tools via SQL migration |
+| Bi-weekly | Run `npm run check:links`; fix broken slugs in static catalogs |
+| Monthly | Update changelog; refresh 1–2 best-of pages |
+| After migrations | POST `/api/revalidate` with `REVALIDATION_SECRET` |
+
+## CI
+
+GitHub Actions runs `lint`, `build`, and `check:links` on push/PR to `main`.  
+Set repository secrets: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+
+## Platform Direction
+
+See [PLATFORM.md](./PLATFORM.md) for the current lean-public strategy and when to revisit admin/monetization features.

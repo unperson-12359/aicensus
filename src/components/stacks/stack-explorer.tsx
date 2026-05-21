@@ -11,6 +11,7 @@ import { PricingBadge } from "@/components/shared/pricing-badge";
 import { RatingStars } from "@/components/shared/rating-stars";
 import { ToolLogo } from "@/components/shared/tool-logo";
 import { isStackSaved, useSavedItems } from "@/lib/saved-items";
+import { trackStackBuilt } from "@/lib/analytics";
 import { CAPABILITIES, type CapabilityDef } from "@/lib/stack-explorer";
 
 type PricingModel =
@@ -217,6 +218,7 @@ export function StackExplorer({ tools }: StackExplorerProps) {
     const url = `${window.location.origin}${currentStackUrl}`;
     navigator.clipboard?.writeText(url).then(() => {
       setCopied(true);
+      trackStackBuilt(url);
       setTimeout(() => setCopied(false), 1800);
     });
   }, [currentStackUrl]);

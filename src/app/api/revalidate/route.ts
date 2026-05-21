@@ -23,7 +23,6 @@ const ALLOWED_PATH_PREFIXES = [
   "/saved",
   "/privacy",
   "/terms",
-  "/cookies",
 ];
 
 const DEFAULT_REVALIDATION_PATHS = [

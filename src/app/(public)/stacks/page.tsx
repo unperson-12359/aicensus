@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Wand2, ArrowRight } from "lucide-react";
 import { FadeIn, RevealText } from "@/components/motion";
+import { JsonLd } from "@/components/shared/json-ld";
 import { StacksBrowser } from "@/components/stacks/stacks-browser";
 import { getToolsBySlugs } from "@/lib/queries/tools";
 import { getLogoUrl } from "@/lib/utils";
@@ -44,6 +45,30 @@ export default async function StacksIndexPage() {
   }
 
   return (
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "AI Tool Stacks",
+          description:
+            "Opinionated, battle-tested AI tool recipes for shipping real projects.",
+          url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co"}/stacks`,
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: stacks.length,
+            itemListElement: stacks.map((stack, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@type": "WebPage",
+                name: stack.name,
+                url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co"}/stacks/${stack.slug}`,
+              },
+            })),
+          },
+        }}
+      />
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       <FadeIn>
         <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
@@ -95,5 +120,6 @@ export default async function StacksIndexPage() {
 
       <StacksBrowser stacks={stacks} logos={logoMap} />
     </div>
+    </>
   );
 }

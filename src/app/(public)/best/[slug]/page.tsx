@@ -11,6 +11,7 @@ import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { ToolLogo } from "@/components/shared/tool-logo";
 import { getLogoUrl } from "@/lib/utils";
+import { formatContentLastUpdated } from "@/lib/content-dates";
 import { getToolsBySlugs } from "@/lib/queries/tools";
 import {
   getBestForBySlug,
@@ -47,10 +48,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function formatLastUpdated(): string {
-  const now = new Date();
-  return now.toLocaleDateString("en-US", { month: "long", year: "numeric" });
-}
 
 export default async function BestForPage({ params }: Props) {
   const { slug } = await params;
@@ -72,7 +69,7 @@ export default async function BestForPage({ params }: Props) {
   const otherPages = BEST_FOR_PAGES.filter((p) => p.slug !== slug).slice(0, 6);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
-  const lastUpdated = formatLastUpdated();
+  const lastUpdated = formatContentLastUpdated(tools);
 
   const itemListLd = {
     "@context": "https://schema.org",
