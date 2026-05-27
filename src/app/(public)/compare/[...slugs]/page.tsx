@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { Trophy, Sparkles, ArrowRight } from "lucide-react";
 import { ComparisonTable } from "@/components/compare/comparison-table";
 import { SaveComparisonButton } from "@/components/saved/save-comparison-button";
@@ -16,6 +16,12 @@ import {
   buildFaq,
 } from "@/lib/comparison-content";
 import { formatContentLastUpdated } from "@/lib/content-dates";
+import {
+  getComparisonPath,
+  normalizeComparisonSlugs,
+  shouldIndexComparison,
+  slugsNeedRedirect,
+} from "@/lib/compare-urls";
 import {
   POPULAR_COMPARISONS,
   getRelatedComparisons,
@@ -46,20 +52,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Compare AI Tools | AiCensus" };
   }
 
-  const tools = await Promise.all(slugs.map((s) => getToolBySlug(s)));
+  const normalizedSlugs = normalizeComparisonSlugs(slugs);
+  const tools = await Promise.all(normalizedSlugs.map((s) => getToolBySlug(s)));
   const names = tools.filter(Boolean).map((t) => t!.name);
   if (names.length < 2) return { title: "Compare AI Tools | AiCensus" };
 
   const title = `${names.join(" vs ")} — Detailed Comparison (2026) | AiCensus`;
   const description = `${names.join(" vs ")}: side-by-side pricing, features, ratings, pros & cons, plus our verdict on which one wins for which use case.`;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
+  const canonicalPath = getComparisonPath(normalizedSlugs);
+  const indexable = shouldIndexComparison(normalizedSlugs);
 
   return {
     title,
     description,
-    openGraph: { title, description, url: `/compare/${slugs.join("/")}` },
+    openGraph: { title, description, url: canonicalPath },
     twitter: { card: "summary_large_image", title, description },
-    alternates: { canonical: `${siteUrl}/compare/${slugs.join("/")}` },
+    alternates: { canonical: `${siteUrl}${canonicalPath}` },
+    robots: indexable
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
   };
 }
 
@@ -67,24 +79,30 @@ export default async function ComparePage({ params }: Props) {
   const { slugs } = await params;
   if (!slugs || slugs.length < 2 || slugs.length > 4) notFound();
 
-  const toolResults = await Promise.all(slugs.map((s) => getToolBySlug(s)));
+  if (slugsNeedRedirect(slugs)) {
+    permanentRedirect(getComparisonPath(slugs));
+  }
+
+  const normalizedSlugs = normalizeComparisonSlugs(slugs);
+  const toolResults = await Promise.all(normalizedSlugs.map((s) => getToolBySlug(s)));
   const tools = toolResults.filter((t): t is ToolWithCategory => t !== null);
   if (tools.length < 2) notFound();
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
+  const canonicalPath = getComparisonPath(normalizedSlugs);
   const names = tools.map((t) => t.name);
   const verdicts = buildVerdict(tools);
   const bestFor = buildBestForCallouts(tools);
   const intro = buildIntroParagraph(tools);
   const faqs = buildFaq(tools);
-  const related = getRelatedComparisons(slugs, 6);
+  const related = getRelatedComparisons(normalizedSlugs, 6);
   const lastUpdated = formatContentLastUpdated(tools);
 
   const itemListLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: `${names.join(" vs ")} Comparison`,
-    url: `${siteUrl}/compare/${slugs.join("/")}`,
+    url: `${siteUrl}${canonicalPath}`,
     numberOfItems: tools.length,
     itemListElement: tools.map((t, i) => ({
       "@type": "ListItem",
@@ -288,7 +306,7 @@ export default async function ComparePage({ params }: Props) {
                 {related.map((p) => (
                   <Link
                     key={p.slugs.join("-")}
-                    href={`/compare/${p.slugs.join("/")}`}
+                    href={getComparisonPath(p.slugs)}
                     className="bento-tile group flex items-center justify-between p-4 transition-colors hover:border-white/30 sm:p-5"
                   >
                     <span className="font-serif text-base text-white/85 sm:text-lg">

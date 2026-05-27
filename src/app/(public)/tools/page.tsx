@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound, permanentRedirect } from "next/navigation";
 import { ToolGrid } from "@/components/tools/tool-grid";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -15,7 +16,7 @@ export const revalidate = 1800;
 
 const TOOLS_PER_PAGE = 12;
 
-export const metadata: Metadata = {
+const BASE_METADATA: Metadata = {
   title: "Browse AI Tools — Curated Directory with Honest Reviews | AiCensus",
   description:
     "Curated by humans, not scraped by bots. Browse AI tools with honest pricing, real pros & cons, and no sponsored rankings. Filter by category, pricing, and more.",
@@ -36,21 +37,62 @@ export const metadata: Metadata = {
   },
 };
 
+interface ToolsSearchParams {
+  q?: string;
+  category?: string;
+  pricing?: string;
+  verified?: string;
+  sort?: string;
+  page?: string;
+}
+
 interface PageProps {
-  searchParams: Promise<{
-    q?: string;
-    category?: string;
-    pricing?: string;
-    verified?: string;
-    sort?: string;
-    page?: string;
-  }>;
+  searchParams: Promise<ToolsSearchParams>;
+}
+
+function hasToolsFilterParams(params: ToolsSearchParams): boolean {
+  return Boolean(
+    params.q ||
+      params.category ||
+      params.pricing ||
+      params.verified ||
+      params.sort ||
+      params.page
+  );
+}
+
+function buildToolsPagePath(page: number, params: ToolsSearchParams): string {
+  const search = new URLSearchParams();
+  if (params.q) search.set("q", params.q);
+  if (params.category) search.set("category", params.category);
+  if (params.pricing) search.set("pricing", params.pricing);
+  if (params.verified) search.set("verified", params.verified);
+  if (params.sort) search.set("sort", params.sort);
+  if (page > 1) search.set("page", String(page));
+  const qs = search.toString();
+  return qs ? `/tools?${qs}` : "/tools";
+}
+
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const params = await searchParams;
+
+  if (!hasToolsFilterParams(params)) {
+    return BASE_METADATA;
+  }
+
+  return {
+    ...BASE_METADATA,
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function ToolsPage({ searchParams }: PageProps) {
   const params = await searchParams;
   const currentPage = Math.max(1, parseInt(params.page || "1", 10) || 1);
   const offset = (currentPage - 1) * TOOLS_PER_PAGE;
+  const hasFilters = hasToolsFilterParams(params);
 
   let tools: { tools: ToolWithCategory[]; count: number } = { tools: [], count: 0 };
   let categories: Category[] = [];
@@ -75,6 +117,14 @@ export default async function ToolsPage({ searchParams }: PageProps) {
 
   const totalPages = Math.max(1, Math.ceil(tools.count / TOOLS_PER_PAGE));
   const clampedPage = Math.min(currentPage, totalPages);
+
+  if (!loadError && currentPage !== clampedPage) {
+    permanentRedirect(buildToolsPagePath(clampedPage, params));
+  }
+
+  if (!loadError && tools.count === 0 && hasFilters) {
+    notFound();
+  }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
   const itemListJsonLd = {

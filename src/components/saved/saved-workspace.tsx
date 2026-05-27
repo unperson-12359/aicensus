@@ -14,6 +14,7 @@ import {
   type SavedComparison,
   type SavedStack,
 } from "@/lib/saved-items";
+import { getComparisonPath } from "@/lib/compare-urls";
 import type { ToolWithCategory } from "@/lib/types/database";
 
 function formatSavedAt(value: string): string {
@@ -106,7 +107,7 @@ function ComparisonCard({
       <p className="mt-4 text-xs text-white/45">{formatSavedAt(comparison.savedAt)}</p>
       <div className="mt-auto pt-5">
         <Link
-          href={`/compare/${comparison.slugs.join("/")}`}
+          href={getComparisonPath(comparison.slugs)}
           className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/60 transition-colors hover:text-white sm:text-[11px]"
         >
           Open comparison <ArrowRight className="h-3 w-3" />

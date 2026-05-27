@@ -13,7 +13,7 @@ import { getToolsBySlugs } from "@/lib/queries/tools";
 // state, so it must render dynamically.
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+const BASE_METADATA: Metadata = {
   title: "AI Stack Builder — Pick Your AI Tools by Capability | AiCensus",
   description:
     "Build your own AI stack interactively. Pick the capabilities you need, set your constraints (free, OSS, high-rated), and get a tool recommendation per capability — shareable as a URL.",
@@ -24,6 +24,37 @@ export const metadata: Metadata = {
       "Pick the capabilities you need, set your constraints, and we'll match the best tool to each. Shareable.",
   },
 };
+
+interface StackBuildSearchParams {
+  caps?: string;
+  free?: string;
+  oss?: string;
+  hr?: string;
+  o?: string;
+}
+
+function hasStackBuilderParams(params: StackBuildSearchParams): boolean {
+  return Boolean(
+    params.caps || params.free || params.oss || params.hr || params.o
+  );
+}
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<StackBuildSearchParams>;
+}): Promise<Metadata> {
+  const params = await searchParams;
+
+  if (!hasStackBuilderParams(params)) {
+    return BASE_METADATA;
+  }
+
+  return {
+    ...BASE_METADATA,
+    robots: { index: false, follow: true },
+  };
+}
 
 export default async function StackBuildPage() {
   // Pull every tool referenced by the capability catalog so the client has

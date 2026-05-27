@@ -37,6 +37,7 @@ import {
 } from "@/lib/queries/tools";
 import { getComparisonsForTool } from "@/lib/popular-comparisons";
 import { getBestForPagesForTool } from "@/lib/best-for";
+import { getComparisonPath } from "@/lib/compare-urls";
 
 export const revalidate = 3600;
 
@@ -236,7 +237,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
               </ToolOutboundLink>
               <SaveToolButton slug={tool.slug} name={tool.name} />
               {popularComparisons[0] ? (
-                <Link href={`/compare/${popularComparisons[0].slugs.join("/")}`}>
+                <Link href={getComparisonPath(popularComparisons[0].slugs)}>
                   <Button variant="outline">Compare</Button>
                 </Link>
               ) : (

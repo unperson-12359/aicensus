@@ -3,6 +3,7 @@ import { ExternalLink } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { AnimatedToolGrid } from "@/components/tools/animated-tool-grid";
 import { section } from "@/lib/layout";
+import { getComparisonPath } from "@/lib/compare-urls";
 import { cn } from "@/lib/utils";
 import type { ToolWithCategory } from "@/lib/types/database";
 import type { ComparisonPair } from "@/lib/popular-comparisons";
@@ -63,7 +64,7 @@ export function ToolDiscoverySection({
             {popularComparisons.map((pair) => (
               <Link
                 key={pair.slugs.join("-")}
-                href={`/compare/${pair.slugs.join("/")}`}
+                href={getComparisonPath(pair.slugs)}
                 className="bento-tile group flex items-center justify-between p-4 transition-colors hover:border-white/30"
               >
                 <span className="font-serif text-base text-white/85">

@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ToolLogo } from "@/components/shared/tool-logo";
 import { getLogoUrl } from "@/lib/utils";
+import { getComparisonPath } from "@/lib/compare-urls";
 
 interface ToolOption {
   slug: string;
@@ -47,7 +48,7 @@ export function ToolPicker({ tools }: ToolPickerProps) {
 
   function compare() {
     if (selected.length >= 2) {
-      router.push(`/compare/${selected.map((t) => t.slug).join("/")}`);
+      router.push(getComparisonPath(selected.map((t) => t.slug)));
     }
   }
 

@@ -11,6 +11,7 @@ import {
   GROUP_LABELS,
   type ComparisonPair,
 } from "@/lib/popular-comparisons";
+import { getComparisonPath } from "@/lib/compare-urls";
 
 export const revalidate = 3600;
 
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
   title: "Compare AI Tools Side by Side | AiCensus",
   description:
     "Compare AI tools head-to-head. See pricing, features, pros & cons, and ratings side by side. Includes 50+ pre-built comparisons of the most popular AI tools in 2026.",
+  alternates: { canonical: "/compare" },
 };
 
 function titleCase(slug: string): string {
@@ -78,7 +80,7 @@ export default async function CompareIndexPage() {
         item: {
           "@type": "WebPage",
           name: pair.slugs.map(titleCase).join(" vs "),
-          url: `${siteUrl}/compare/${pair.slugs.join("/")}`,
+          url: `${siteUrl}${getComparisonPath(pair.slugs)}`,
         },
       })),
     },
@@ -125,7 +127,7 @@ export default async function CompareIndexPage() {
                   {pairs.map((p) => (
                     <Link
                       key={p.slugs.join("-")}
-                      href={`/compare/${p.slugs.join("/")}`}
+                      href={getComparisonPath(p.slugs)}
                       className="bento-tile group flex items-center justify-between p-3 transition-colors hover:border-white/30 sm:p-4"
                     >
                       <span className="text-sm text-white/85 sm:text-[15px]">

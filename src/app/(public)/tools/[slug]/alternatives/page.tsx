@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { ArrowLeft, ArrowRight, ExternalLink, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -27,6 +27,7 @@ import {
   buildMethodologyLine,
 } from "@/lib/alternatives-content";
 import { formatContentLastUpdated } from "@/lib/content-dates";
+import { getComparisonPath } from "@/lib/compare-urls";
 import type { ToolWithCategory } from "@/lib/types/database";
 
 export const revalidate = 3600;
@@ -87,6 +88,15 @@ export default async function AlternativesPage({
   const total = alternatives.length;
   const totalPages = Math.max(1, Math.ceil(total / ALTERNATIVES_PER_PAGE));
   const clampedPage = Math.min(currentPage, totalPages);
+
+  if (currentPage !== clampedPage) {
+    const target =
+      clampedPage > 1
+        ? `/tools/${slug}/alternatives?page=${clampedPage}`
+        : `/tools/${slug}/alternatives`;
+    permanentRedirect(target);
+  }
+
   const offset = (clampedPage - 1) * ALTERNATIVES_PER_PAGE;
   const paged = alternatives.slice(offset, offset + ALTERNATIVES_PER_PAGE);
 
@@ -258,7 +268,7 @@ export default async function AlternativesPage({
                           </div>
                           <div className="mt-5 flex items-center justify-between gap-3 border-t border-white/10 pt-4">
                             <Link
-                              href={`/compare/${tool.slug}/${alt.slug}`}
+                              href={getComparisonPath([tool.slug, alt.slug])}
                               className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
                             >
                               vs {tool.name} →

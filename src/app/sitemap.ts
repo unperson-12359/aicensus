@@ -3,6 +3,7 @@ import { stacks } from "@/lib/stacks";
 import { BEST_FOR_PAGES } from "@/lib/best-for";
 import { MCP_SERVERS } from "@/lib/mcp-servers";
 import { POPULAR_COMPARISONS } from "@/lib/popular-comparisons";
+import { getComparisonPath } from "@/lib/compare-urls";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
@@ -45,7 +46,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const comparisonPages: MetadataRoute.Sitemap = POPULAR_COMPARISONS.map((pair) => ({
-    url: `${baseUrl}/compare/${pair.slugs.join("/")}`,
+    url: `${baseUrl}${getComparisonPath(pair.slugs)}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.65,

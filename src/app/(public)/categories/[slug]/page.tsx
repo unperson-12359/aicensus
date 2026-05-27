@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { ToolGrid } from "@/components/tools/tool-grid";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -85,7 +85,16 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
     // Supabase error
   }
 
-  const totalPages = Math.ceil(result.count / TOOLS_PER_PAGE);
+  const totalPages = Math.max(1, Math.ceil(result.count / TOOLS_PER_PAGE));
+  const clampedPage = Math.min(currentPage, totalPages);
+
+  if (currentPage !== clampedPage) {
+    const target =
+      clampedPage > 1
+        ? `/categories/${slug}?page=${clampedPage}`
+        : `/categories/${slug}`;
+    permanentRedirect(target);
+  }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
 
@@ -152,12 +161,12 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
         {result.count > 0 && totalPages > 1 && (
           <div className="mt-10 flex flex-col items-center gap-4 sm:mt-12">
             <PaginationInfo
-              currentPage={currentPage}
+              currentPage={clampedPage}
               perPage={TOOLS_PER_PAGE}
               total={result.count}
             />
             <Pagination
-              currentPage={currentPage}
+              currentPage={clampedPage}
               totalPages={totalPages}
               basePath={`/categories/${slug}`}
               anchor="results"
@@ -167,7 +176,7 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
         {result.count > 0 && totalPages <= 1 && (
           <div className="mt-8 flex justify-center">
             <PaginationInfo
-              currentPage={currentPage}
+              currentPage={clampedPage}
               perPage={TOOLS_PER_PAGE}
               total={result.count}
             />
