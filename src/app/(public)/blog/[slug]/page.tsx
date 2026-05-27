@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn } from "@/components/motion";
 import { PageContainer } from "@/components/shared/page-container";
@@ -146,7 +147,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Content */}
           <FadeIn delay={0.2}>
             <div className="blog-content mt-10">
-              <MDXRemote source={post.content} />
+              <MDXRemote
+                source={post.content}
+                options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+                components={{
+                  table: (props) => (
+                    <div className="table-wrapper">
+                      <table {...props} />
+                    </div>
+                  ),
+                }}
+              />
             </div>
           </FadeIn>
 

@@ -361,3 +361,40 @@ body {
   color: var(--blog-blockquote);
   font-style: italic;
 }
+.blog-content .table-wrapper {
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--blog-pre-border);
+  border-radius: 0.375rem;
+}
+.blog-content table {
+  width: 100%;
+  min-width: 32rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.blog-content thead {
+  background: var(--blog-code-bg);
+}
+.blog-content th {
+  padding: 0.625rem 0.875rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--blog-heading-alt);
+  border-bottom: 1px solid var(--blog-pre-border);
+  white-space: nowrap;
+}
+.blog-content td {
+  padding: 0.625rem 0.875rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--blog-hr);
+  color: var(--blog-body);
+}
+.blog-content tbody tr:last-child td {
+  border-bottom: none;
+}
+.blog-content tbody tr:hover {
+  background: oklch(1 0 0 / 3%);
+}
