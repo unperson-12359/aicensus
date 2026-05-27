@@ -16,6 +16,11 @@ const nextConfig: NextConfig = {
       { slug: "playht", destination: "/tools/elevenlabs" },
       { slug: "perplexity-pages", destination: "/tools/perplexity" },
       { slug: "babyagi", destination: "/tools/crewai" },
+      { slug: "phind", destination: "/tools/perplexity" },
+      { slug: "socratic", destination: "/tools/brilliant" },
+      { slug: "sweep", destination: "/tools/windsurf" },
+      { slug: "agentgpt", destination: "/tools/crewai" },
+      { slug: "haiper", destination: "/best/ai-video-generators" },
     ].flatMap(({ slug, destination }) => [
       {
         source: `/tools/${slug}`,

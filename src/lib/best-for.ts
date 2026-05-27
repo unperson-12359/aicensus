@@ -43,6 +43,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       { slug: "notion-ai", pitch: "Where the spec lives. Generates summaries, action items, and Q&A directly inside your existing PM workspace." },
       { slug: "reclaim-ai", pitch: "Protects focus time and schedules around real work automatically. Useful for PMs juggling interviews, standups, and planning blocks." },
       { slug: "fathom", pitch: "Clean meeting recaps and CRM-friendly follow-ups for customer calls, stakeholder reviews, and product interviews." },
+      { slug: "krisp", pitch: "On-device noise cancellation plus AI meeting notes on any call app — clearer audio and automatic summaries in one tool." },
       { slug: "gong", pitch: "When PMs sit in on sales calls and need deal-level conversation intelligence beyond basic notes — best for larger orgs." },
       { slug: "read-ai", pitch: "Good for PMs drowning in cross-functional communication: summaries across meetings, email, and action items." },
       { slug: "otter-ai", pitch: "Best when you need transcripts your stakeholders can search later — interviews, customer calls, exec recordings." },
@@ -130,6 +131,8 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       { slug: "openai-codex", pitch: "OpenAI's coding agent for implementation tasks, reviewable diffs, and end-to-end software maintenance workflows." },
       { slug: "cursor", pitch: "Best daily-driver agent inside an IDE: fast multi-file edits, repo context, and enough manual control to keep senior engineers comfortable." },
       { slug: "cline", pitch: "Best open-source option for agentic VS Code workflows, especially if you want provider choice and transparent behavior." },
+      { slug: "roo-code", pitch: "Active open-source VS Code agent fork with MCP support — the maintained Cline lineage pick for BYOK workflows." },
+      { slug: "warp", pitch: "Agent Mode in a native terminal: multi-step shell workflows from natural language without leaving the command line." },
       { slug: "augment-code", pitch: "The large-codebase specialist. Deep context makes it useful when simple chat assistants lose the plot." },
       { slug: "coderabbit", pitch: "PR-native review agent that helps catch review gaps after humans and coding agents generate the diff." },
       { slug: "github-copilot", pitch: "The safest default for GitHub-heavy teams that want agentic coding without leaving existing enterprise workflows." },
@@ -198,6 +201,8 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       { slug: "baseten", pitch: "Production inference platform for teams serving custom and open models at scale." },
       { slug: "pinecone", pitch: "Managed vector database for RAG, semantic search, recommendations, and production retrieval memory." },
       { slug: "openrouter", pitch: "Model router for comparing and switching providers without rewriting your app around every API." },
+      { slug: "deepinfra", pitch: "Cheap pay-as-you-go inference for open models — strong default when cost per token matters more than frontier quality." },
+      { slug: "litellm", pitch: "Self-hosted LLM gateway for routing, logging, and budget controls across 100+ providers with one OpenAI-compatible API." },
     ],
     faq: [
       { question: "Should I start with hosted APIs or self-hosting?", answer: "Start hosted unless cost, privacy, latency, or control forces the issue. Self-hosting pays off later, but it adds operational work immediately." },
@@ -305,6 +310,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       "Open-source AI is no longer the consolation prize — it's competitive on capability and decisive on cost, privacy, and control. The tools below are the open-source options that have crossed the production-ready bar.",
     picks: [
       { slug: "ollama", pitch: "Run open-weight models locally with one command. The friendliest entry point to local AI." },
+      { slug: "llamafile", pitch: "Download a single executable and run an LLM — no Python, CUDA, or setup ceremony required." },
       { slug: "llama-cpp", pitch: "The local inference workhorse behind countless desktop and server deployments. Boring in the best possible way." },
       { slug: "vllm", pitch: "High-throughput open-source serving for serious inference workloads. The pick once local demos become production traffic." },
       { slug: "llamaindex", pitch: "Open-source RAG framework. The fastest path from documents to a production retrieval pipeline." },
@@ -417,6 +423,8 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       { slug: "genspark", pitch: "AI search engine for fast synthesized research pages when you need breadth before depth." },
       { slug: "openevidence", pitch: "Clinical evidence search for medical questions where source-grounded answers matter more than chatbot fluency." },
       { slug: "perplexity", pitch: "Citation-first search. The substitute for general Googling when you need verifiable sources fast." },
+      { slug: "exa", pitch: "Neural search API built for agents and RAG — clean web content extraction instead of SEO snippets." },
+      { slug: "scispace", pitch: "AI workspace for reading papers: explain dense passages, generate literature reviews, and manage citations." },
       { slug: "semantic-scholar", pitch: "The canonical open academic graph. Free, and the bedrock under several other tools above." },
       { slug: "connected-papers", pitch: "Visualize a paper's intellectual lineage. Find load-bearing citations the paper itself didn't cite." },
     ],
@@ -424,6 +432,44 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       { question: "Will AI hallucinate fake papers?", answer: "ChatGPT and Claude will. The tools above (Elicit, Consensus, Semantic Scholar, NotebookLM-with-your-PDFs) are grounded in real corpora and don't fabricate citations. Always verify links — even with these — before you cite." },
       { question: "Is Perplexity enough on its own?", answer: "For background research, yes. For peer-reviewed academic work, no — you need Elicit/Consensus/Semantic Scholar for the actual papers, then Perplexity for context." },
       { question: "Are these free?", answer: "Most have free tiers — Elicit, Consensus, NotebookLM, Semantic Scholar, Connected Papers all offer meaningful free use. Perplexity Pro adds depth but the free tier is enough for casual research." },
+    ],
+  },
+  {
+    slug: "private-ai-tools",
+    title: "Best Private AI Tools in 2026",
+    tagline: "Chat and inference without cloud logging.",
+    intro:
+      "Privacy-conscious users want AI assistance without prompts stored on vendor servers or training on their data. The picks below prioritize local encryption, no-retention policies, bring-your-own keys, or self-hosted inference — trade-offs and all.",
+    picks: [
+      { slug: "venice-ai", pitch: "Privacy-first chat and image gen with no prompt storage and an OpenAI-compatible API for private app integrations." },
+      { slug: "ollama", pitch: "Run open-weight models entirely on your hardware — the baseline for offline, zero-logging AI workflows." },
+      { slug: "llamafile", pitch: "Single-file local LLMs with no install friction — the fastest path to private inference on any laptop." },
+      { slug: "openclaw", pitch: "Local-first personal agent that runs on your devices and connects to messaging apps without a cloud middleman." },
+      { slug: "krisp", pitch: "On-device noise cancellation and meeting transcription — audio processed locally, not sent to the cloud for denoising." },
+    ],
+    faq: [
+      { question: "Is any cloud AI truly private?", answer: "Some vendors offer no-retention or zero-training policies, but you still send data to their servers. For maximum privacy, run open models locally with Ollama or Llamafile." },
+      { question: "What is Venice AI best for?", answer: "Uncensored, privacy-positioned chat and API access when you want fewer content filters and explicit no-prompt-storage claims." },
+      { question: "Do private tools sacrifice quality?", answer: "Local open models trail frontier cloud models on hard reasoning tasks. For everyday writing, coding help, and research, the gap is narrow enough for many users." },
+    ],
+  },
+  {
+    slug: "ai-tools-for-data-analysts",
+    title: "Best AI Tools for Data Analysts in 2026",
+    tagline: "From spreadsheet questions to stakeholder-ready notebooks.",
+    intro:
+      "Data analysts spend most of their time cleaning, exploring, and explaining — not modeling from scratch. The tools below compress that loop with natural-language queries, collaborative notebooks, and AI-assisted chart generation tied to real warehouses.",
+    picks: [
+      { slug: "hex", pitch: "AI-native collaborative notebook with SQL, Python, and no-code cells — publish data apps stakeholders can actually use." },
+      { slug: "julius-ai", pitch: "Conversational data analysis: upload spreadsheets or connect warehouses, ask questions, get charts and reports." },
+      { slug: "claude", pitch: "Strong reasoning partner for interpreting results, writing analysis narratives, and debugging SQL or Python logic." },
+      { slug: "notebooklm", pitch: "Upload reports and documentation, then synthesize findings across multiple source documents." },
+      { slug: "perplexity", pitch: "Fast external context — market benchmarks, industry stats, and cited background for your analysis." },
+    ],
+    faq: [
+      { question: "Hex or Julius AI?", answer: "Hex for team notebooks, warehouse connectors, and publishing stakeholder apps. Julius for fast ad-hoc analysis on files and simpler conversational workflows." },
+      { question: "Can AI replace SQL skills?", answer: "No — but it lowers the bar for exploration and drafts. You still need to validate joins, aggregations, and business logic before shipping numbers." },
+      { question: "What about Excel?", answer: "Julius handles spreadsheets well for quick questions. For recurring team workflows, graduate to Hex or a warehouse-connected stack." },
     ],
   },
   {

@@ -36,6 +36,20 @@ const typeStyles: Record<EntryType, { label: string; className: string }> = {
 const entries: ChangelogEntry[] = [
   {
     date: "May 2026",
+    title: "Q2 2026 Catalog Expansion",
+    description:
+      "Added 30 new tools including Venice AI, Warp, Hex, and Browserbase — plus a fact-check refresh updating pricing and archiving discontinued products.",
+    type: "feature",
+  },
+  {
+    date: "May 2026",
+    title: "New Best-Of Guides",
+    description:
+      "Published private AI tools and data analyst guides, with curated comparisons for Venice AI, Warp, Roo Code, and DeepInfra.",
+    type: "improvement",
+  },
+  {
+    date: "May 2026",
     title: "Catalog Growth Refresh",
     description:
       "Expanded the directory to 200+ published tools and refreshed homepage counts so the site reflects live catalog data.",

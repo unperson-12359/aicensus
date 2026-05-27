@@ -39,6 +39,8 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
   { slugs: ["chatgpt", "perplexity"], group: "llms" },
   { slugs: ["gemini", "grok"], group: "llms" },
   { slugs: ["claude", "perplexity"], group: "llms" },
+  { slugs: ["venice-ai", "chatgpt"], group: "llms" },
+  { slugs: ["venice-ai", "claude"], group: "llms" },
 
   // Coding
   { slugs: ["cursor", "github-copilot"], group: "coding" },
@@ -57,6 +59,8 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
   { slugs: ["openai-codex", "github-copilot"], group: "coding" },
   { slugs: ["augment-code", "cursor"], group: "coding" },
   { slugs: ["gemini-cli", "claude-code"], group: "coding" },
+  { slugs: ["warp", "cursor"], group: "coding" },
+  { slugs: ["roo-code", "cline"], group: "coding" },
 
   // Image
   { slugs: ["midjourney", "dall-e-3"], group: "image" },
@@ -123,6 +127,7 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
   { slugs: ["fal-ai", "replicate"], group: "inference" },
   { slugs: ["modal", "baseten"], group: "inference" },
   { slugs: ["hugging-face", "replicate"], group: "inference" },
+  { slugs: ["deepinfra", "together-ai"], group: "inference" },
 
   // Design
   { slugs: ["canva", "adobe-firefly"], group: "design" },
