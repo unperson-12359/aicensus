@@ -36,6 +36,13 @@ const typeStyles: Record<EntryType, { label: string; className: string }> = {
 const entries: ChangelogEntry[] = [
   {
     date: "May 2026",
+    title: "6 New SEO Blog Posts",
+    description:
+      "Published GSC-informed guides on Claude Code vs Gemini CLI, ElevenLabs vs Higgsfield, LMArena alternatives, llama.cpp alternatives, free AI tools, and voice/audio tools.",
+    type: "feature",
+  },
+  {
+    date: "May 2026",
     title: "Q2 2026 Catalog Expansion",
     description:
       "Added 30 new tools including Venice AI, Warp, Hex, and Browserbase — plus a fact-check refresh updating pricing and archiving discontinued products.",

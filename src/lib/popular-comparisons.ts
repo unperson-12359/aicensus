@@ -81,6 +81,7 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
   { slugs: ["suno", "udio"], group: "music" },
   { slugs: ["mubert", "suno"], group: "music" },
   { slugs: ["elevenlabs", "deepgram"], group: "audio" },
+  { slugs: ["elevenlabs", "higgsfield"], group: "audio" },
   { slugs: ["descript", "otter-ai"], group: "audio" },
   { slugs: ["otter-ai", "fathom"], group: "audio" },
   { slugs: ["otter-ai", "fireflies-ai"], group: "audio" },
