@@ -229,7 +229,11 @@ export default async function BestForPage({ params }: Props) {
                         <a
                           href={tool.affiliate_url || tool.website_url}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel={
+                            tool.affiliate_url
+                              ? "noopener noreferrer sponsored nofollow"
+                              : "noopener noreferrer"
+                          }
                         >
                           <Button size="sm">
                             Visit

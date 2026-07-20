@@ -19,7 +19,7 @@ const steps = [
     num: "03",
     title: "Pick and build",
     description:
-      "Direct links. No affiliate redirects, no paywall for picks.",
+      "Direct links, no paywall for picks. Some links support the site — ratings stay editorial.",
   },
 ];
 

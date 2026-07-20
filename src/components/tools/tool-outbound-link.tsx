@@ -7,6 +7,7 @@ interface ToolOutboundLinkProps {
   href: string;
   toolSlug: string;
   toolName: string;
+  isAffiliate?: boolean;
   className?: string;
   children: ReactNode;
 }
@@ -15,6 +16,7 @@ export function ToolOutboundLink({
   href,
   toolSlug,
   toolName,
+  isAffiliate = false,
   className,
   children,
 }: ToolOutboundLinkProps) {
@@ -22,7 +24,7 @@ export function ToolOutboundLink({
     <a
       href={href}
       target="_blank"
-      rel="noopener noreferrer"
+      rel={isAffiliate ? "noopener noreferrer sponsored nofollow" : "noopener noreferrer"}
       className={className}
       onClick={() => trackOutboundClick(toolSlug, toolName, href)}
     >

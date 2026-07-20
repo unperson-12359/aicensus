@@ -276,7 +276,11 @@ export default async function AlternativesPage({
                             <a
                               href={alt.affiliate_url || alt.website_url}
                               target="_blank"
-                              rel="noopener noreferrer"
+                              rel={
+                                alt.affiliate_url
+                                  ? "noopener noreferrer sponsored nofollow"
+                                  : "noopener noreferrer"
+                              }
                               className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
                             >
                               Visit <ExternalLink className="h-3 w-3" />

@@ -55,6 +55,11 @@ const faqCategories: FaqCategory[] = [
           "Every tool on AiCensus is reviewed by our team. We check that the tool exists, works as described, and provides real value. No scraping, no affiliate-driven ranking.",
       },
       {
+        question: "Does AiCensus use affiliate links?",
+        answer:
+          "Yes, on some tools. If you sign up through one of those links, the vendor pays us a commission at no extra cost to you. Affiliate status never affects ratings or rankings - many top-rated tools have no program at all. See the affiliate disclosure page for details.",
+      },
+      {
         question: "How often is the directory updated?",
         answer:
           "We add new tools regularly and revisit existing listings to refresh pricing, links, ratings, and descriptions.",

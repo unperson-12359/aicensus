@@ -187,6 +187,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
 
   const logoSrc = getLogoUrl(tool.logo_url, tool.website_url);
   const outboundHref = tool.affiliate_url || tool.website_url;
+  const isAffiliate = Boolean(tool.affiliate_url);
 
   return (
     <>
@@ -248,6 +249,7 @@ export default async function ToolDetailPage({ params }: PageProps) {
                 href={outboundHref}
                 toolSlug={tool.slug}
                 toolName={tool.name}
+                isAffiliate={isAffiliate}
               >
                 <Button>
                   Visit {tool.name} <ExternalLink className="ml-2 h-4 w-4" />
@@ -264,6 +266,19 @@ export default async function ToolDetailPage({ params }: PageProps) {
                 </Link>
               )}
             </div>
+            {isAffiliate && (
+              <p className="mt-2 text-xs text-muted-foreground/80">
+                We may earn a commission if you sign up through this link — at no
+                extra cost to you.{" "}
+                <Link
+                  href="/affiliate-disclosure"
+                  className="underline decoration-white/20 underline-offset-2 hover:text-foreground"
+                >
+                  Learn more
+                </Link>
+                . Our ratings are never for sale.
+              </p>
+            )}
           </div>
         </div>
         </FadeIn>
