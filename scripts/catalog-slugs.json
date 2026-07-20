@@ -1,0 +1,3265 @@
+{
+  "exportedAt": "2026-07-20T19:01:37.528Z",
+  "publishedCount": 244,
+  "published": [
+    {
+      "slug": "abridge",
+      "name": "Abridge",
+      "website_url": "https://www.abridge.com",
+      "category": "ai-science-healthcare",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "activepieces",
+      "name": "Activepieces",
+      "website_url": "https://www.activepieces.com",
+      "category": "ai-agents",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "adobe-firefly",
+      "name": "Adobe Firefly",
+      "website_url": "https://firefly.adobe.com",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "ai21-labs",
+      "name": "AI21 Labs",
+      "website_url": "https://www.ai21.com",
+      "category": "llm-providers",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "aider",
+      "name": "Aider",
+      "website_url": "https://aider.chat",
+      "category": "coding-development",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "aiva",
+      "name": "AIVA",
+      "website_url": "https://www.aiva.ai",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "alphafold",
+      "name": "AlphaFold",
+      "website_url": "https://alphafold.ebi.ac.uk",
+      "category": "ai-science-healthcare",
+      "pricing_model": "free"
+    },
+    {
+      "slug": "amazon-bedrock",
+      "name": "Amazon Bedrock",
+      "website_url": "https://aws.amazon.com/bedrock",
+      "category": "llm-providers",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "amazon-q-developer",
+      "name": "Amazon Q Developer",
+      "website_url": "https://aws.amazon.com/q/developer/",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "anthropic-api",
+      "name": "Anthropic API",
+      "website_url": "https://console.anthropic.com",
+      "category": "llm-providers",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "arc-max",
+      "name": "Arc Max",
+      "website_url": "https://arc.net/max",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "artificial-analysis",
+      "name": "Artificial Analysis",
+      "website_url": "https://artificialanalysis.ai",
+      "category": "models-infrastructure",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "augment-code",
+      "name": "Augment Code",
+      "website_url": "https://www.augmentcode.com",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "autogpt",
+      "name": "AutoGPT",
+      "website_url": "https://agpt.co",
+      "category": "ai-agents",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "bankr",
+      "name": "BANKR",
+      "website_url": "https://bankr.bot",
+      "category": "ai-agents",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "baseten",
+      "name": "Baseten",
+      "website_url": "https://www.baseten.co",
+      "category": "models-infrastructure",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "beautiful-ai",
+      "name": "Beautiful.ai",
+      "website_url": "https://www.beautiful.ai",
+      "category": "design-creative",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "benchling",
+      "name": "Benchling",
+      "website_url": "https://www.benchling.com",
+      "category": "ai-science-healthcare",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "bolt-new",
+      "name": "Bolt.new",
+      "website_url": "https://bolt.new",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "brainly",
+      "name": "Brainly",
+      "website_url": "https://brainly.com",
+      "category": "ai-education",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "brilliant",
+      "name": "Brilliant",
+      "website_url": "https://brilliant.org",
+      "category": "ai-education",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "browserbase",
+      "name": "Browserbase",
+      "website_url": "https://browserbase.com",
+      "category": "agents-automation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "canva",
+      "name": "Canva",
+      "website_url": "https://www.canva.com",
+      "category": "design-creative",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "capcut",
+      "name": "CapCut",
+      "website_url": "https://www.capcut.com",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "character-ai",
+      "name": "Character.AI",
+      "website_url": "https://character.ai",
+      "category": "chatbots-assistants",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "chatgpt",
+      "name": "ChatGPT",
+      "website_url": "https://chatgpt.com",
+      "category": "chatbots-assistants",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "chatgpt-atlas",
+      "name": "ChatGPT Atlas",
+      "website_url": "https://help.openai.com/en/collections/16051538-chatgpt-atlas",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "claude",
+      "name": "Claude",
+      "website_url": "https://claude.ai",
+      "category": "chatbots-assistants",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "claude-code",
+      "name": "Claude Code",
+      "website_url": "https://www.anthropic.com/product/claude-code",
+      "category": "coding-development",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "clawhub",
+      "name": "ClawHub",
+      "website_url": "https://hub.openclaw.ai",
+      "category": "mcp-skills-platforms",
+      "pricing_model": "free"
+    },
+    {
+      "slug": "clay",
+      "name": "Clay",
+      "website_url": "https://www.clay.com",
+      "category": "data-analytics",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "clearscope",
+      "name": "Clearscope",
+      "website_url": "https://www.clearscope.io",
+      "category": "writing-content",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "cline",
+      "name": "Cline",
+      "website_url": "https://cline.bot",
+      "category": "coding-development",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "clipdrop",
+      "name": "Clipdrop",
+      "website_url": "https://clipdrop.co",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "codeium",
+      "name": "Codeium",
+      "website_url": "https://codeium.com",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "coderabbit",
+      "name": "CodeRabbit",
+      "website_url": "https://www.coderabbit.ai",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "cohere",
+      "name": "Cohere",
+      "website_url": "https://cohere.com",
+      "category": "llm-providers",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "comfyui",
+      "name": "ComfyUI",
+      "website_url": "https://comfy.org",
+      "category": "image-generation",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "composio",
+      "name": "Composio",
+      "website_url": "https://composio.dev",
+      "category": "mcp-skills-platforms",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "connected-papers",
+      "name": "Connected Papers",
+      "website_url": "https://www.connectedpapers.com",
+      "category": "research-search",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "consensus",
+      "name": "Consensus",
+      "website_url": "https://consensus.app",
+      "category": "research-search",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "continue-dev",
+      "name": "Continue",
+      "website_url": "https://continue.dev",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "copy-ai",
+      "name": "Copy.ai",
+      "website_url": "https://www.copy.ai",
+      "category": "writing-content",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "crewai",
+      "name": "CrewAI",
+      "website_url": "https://www.crewai.com",
+      "category": "ai-agents",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "csm",
+      "name": "CSM",
+      "website_url": "https://csm.ai",
+      "category": "ai-3d-game-dev",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "cursor",
+      "name": "Cursor",
+      "website_url": "https://www.cursor.com",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "d-id",
+      "name": "D-ID",
+      "website_url": "https://www.d-id.com",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "dall-e-3",
+      "name": "DALL-E 3",
+      "website_url": "https://openai.com/dall-e-3",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "decagon",
+      "name": "Decagon",
+      "website_url": "https://decagon.ai",
+      "category": "ai-agents",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "deepgram",
+      "name": "Deepgram",
+      "website_url": "https://deepgram.com",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "deepinfra",
+      "name": "DeepInfra",
+      "website_url": "https://deepinfra.com",
+      "category": "llm-providers",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "deepseek",
+      "name": "DeepSeek",
+      "website_url": "https://www.deepseek.com",
+      "category": "chatbots-assistants",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "descript",
+      "name": "Descript",
+      "website_url": "https://www.descript.com",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "devin",
+      "name": "Devin",
+      "website_url": "https://devin.ai",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "dia",
+      "name": "Dia",
+      "website_url": "https://www.diabrowser.com",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "dify",
+      "name": "Dify",
+      "website_url": "https://dify.ai",
+      "category": "ai-agents",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "duolingo-max",
+      "name": "Duolingo Max",
+      "website_url": "https://www.duolingo.com",
+      "category": "ai-education",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "dust",
+      "name": "Dust",
+      "website_url": "https://dust.tt",
+      "category": "chatbots-assistants",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "e2b",
+      "name": "E2B",
+      "website_url": "https://e2b.dev",
+      "category": "ai-agents",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "elevenlabs",
+      "name": "ElevenLabs",
+      "website_url": "https://elevenlabs.io",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "elicit",
+      "name": "Elicit",
+      "website_url": "https://elicit.com",
+      "category": "research-search",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "exa",
+      "name": "Exa",
+      "website_url": "https://exa.ai",
+      "category": "research-search",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "factory",
+      "name": "Factory",
+      "website_url": "https://factory.ai",
+      "category": "coding-development",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "fal-ai",
+      "name": "fal.ai",
+      "website_url": "https://fal.ai",
+      "category": "models-infrastructure",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "fathom",
+      "name": "Fathom",
+      "website_url": "https://fathom.video",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "figma-ai",
+      "name": "Figma AI",
+      "website_url": "https://www.figma.com",
+      "category": "design-creative",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "fireflies-ai",
+      "name": "Fireflies.ai",
+      "website_url": "https://fireflies.ai",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "fireworks-ai",
+      "name": "Fireworks AI",
+      "website_url": "https://fireworks.ai",
+      "category": "llm-providers",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "flowise",
+      "name": "Flowise",
+      "website_url": "https://flowiseai.com",
+      "category": "mcp-skills-platforms",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "flux",
+      "name": "Flux",
+      "website_url": "https://bfl.ai",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "fonfik",
+      "name": "Fonfik",
+      "website_url": "https://fonfik.com/",
+      "category": "ai-agents",
+      "pricing_model": "free"
+    },
+    {
+      "slug": "framer",
+      "name": "Framer",
+      "website_url": "https://www.framer.com",
+      "category": "design-creative",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "frase",
+      "name": "Frase",
+      "website_url": "https://www.frase.io",
+      "category": "writing-content",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "freepik-ai",
+      "name": "Freepik AI",
+      "website_url": "https://www.freepik.com/ai",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "gamma",
+      "name": "Gamma",
+      "website_url": "https://gamma.app",
+      "category": "design-creative",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "gemini",
+      "name": "Gemini",
+      "website_url": "https://gemini.google.com",
+      "category": "chatbots-assistants",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "gemini-cli",
+      "name": "Gemini CLI",
+      "website_url": "https://google-gemini.github.io/gemini-cli/",
+      "category": "coding-development",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "genspark",
+      "name": "Genspark",
+      "website_url": "https://www.genspark.ai",
+      "category": "research-search",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "github-copilot",
+      "name": "GitHub Copilot",
+      "website_url": "https://github.com/features/copilot",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "glama",
+      "name": "Glama",
+      "website_url": "https://glama.ai",
+      "category": "mcp-skills-platforms",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "glean",
+      "name": "Glean",
+      "website_url": "https://www.glean.com",
+      "category": "productivity",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "gong",
+      "name": "Gong",
+      "website_url": "https://www.gong.io",
+      "category": "productivity",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "google-flow",
+      "name": "Google Flow",
+      "website_url": "https://labs.google/fx/tools/flow",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "gpt4all",
+      "name": "GPT4All",
+      "website_url": "https://www.nomic.ai/gpt4all",
+      "category": "local-open-source",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "grammarly",
+      "name": "Grammarly",
+      "website_url": "https://www.grammarly.com",
+      "category": "writing-content",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "granola",
+      "name": "Granola",
+      "website_url": "https://www.granola.ai",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "graphite",
+      "name": "Graphite",
+      "website_url": "https://graphite.dev",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "greptile",
+      "name": "Greptile",
+      "website_url": "https://greptile.com",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "grok",
+      "name": "Grok",
+      "website_url": "https://grok.com",
+      "category": "chatbots-assistants",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "groq",
+      "name": "Groq",
+      "website_url": "https://groq.com",
+      "category": "llm-providers",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "gumloop",
+      "name": "Gumloop",
+      "website_url": "https://www.gumloop.com",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "hailuo-ai",
+      "name": "Hailuo AI",
+      "website_url": "https://hailuoai.video",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "harvey",
+      "name": "Harvey",
+      "website_url": "https://www.harvey.ai",
+      "category": "productivity",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "hebbia",
+      "name": "Hebbia",
+      "website_url": "https://www.hebbia.ai",
+      "category": "research-search",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "hemingway",
+      "name": "Hemingway Editor",
+      "website_url": "https://hemingwayapp.com",
+      "category": "writing-content",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "heurist",
+      "name": "Heurist",
+      "website_url": "https://heurist.ai",
+      "category": "ai-agents",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "hex",
+      "name": "Hex",
+      "website_url": "https://hex.tech",
+      "category": "data-analytics",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "heygen",
+      "name": "HeyGen",
+      "website_url": "https://www.heygen.com",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "higgsfield",
+      "name": "Higgsfield",
+      "website_url": "https://higgsfield.ai",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "hippocratic-ai",
+      "name": "Hippocratic AI",
+      "website_url": "https://www.hippocraticai.com",
+      "category": "ai-science-healthcare",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "hugging-face",
+      "name": "Hugging Face",
+      "website_url": "https://huggingface.co",
+      "category": "models-infrastructure",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "ideogram",
+      "name": "Ideogram",
+      "website_url": "https://ideogram.ai",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "insilico-medicine",
+      "name": "Insilico Medicine",
+      "website_url": "https://insilico.com",
+      "category": "ai-science-healthcare",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "intercom-fin",
+      "name": "Intercom Fin",
+      "website_url": "https://www.intercom.com/fin",
+      "category": "ai-agents",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "invideo-ai",
+      "name": "InVideo AI",
+      "website_url": "https://invideo.io",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "inworld-ai",
+      "name": "Inworld AI",
+      "website_url": "https://inworld.ai",
+      "category": "ai-3d-game-dev",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "isomorphic-labs",
+      "name": "Isomorphic Labs",
+      "website_url": "https://isomorphiclabs.com",
+      "category": "ai-science-healthcare",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "jan",
+      "name": "Jan",
+      "website_url": "https://jan.ai",
+      "category": "local-open-source",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "jasper",
+      "name": "Jasper",
+      "website_url": "https://www.jasper.ai",
+      "category": "writing-content",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "jetbrains-ai",
+      "name": "JetBrains AI",
+      "website_url": "https://www.jetbrains.com/ai/",
+      "category": "coding-development",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "julius-ai",
+      "name": "Julius AI",
+      "website_url": "https://julius.ai",
+      "category": "data-analytics",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "khanmigo",
+      "name": "Khanmigo",
+      "website_url": "https://www.khanmigo.ai",
+      "category": "ai-education",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "kling-ai",
+      "name": "Kling AI",
+      "website_url": "https://kling.ai",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "koboldai",
+      "name": "KoboldAI",
+      "website_url": "https://koboldai.com",
+      "category": "local-open-source",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "krea",
+      "name": "Krea",
+      "website_url": "https://www.krea.ai",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "krisp",
+      "name": "Krisp",
+      "website_url": "https://krisp.ai",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "langchain",
+      "name": "LangChain",
+      "website_url": "https://www.langchain.com",
+      "category": "ai-agents",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "langflow",
+      "name": "Langflow",
+      "website_url": "https://www.langflow.org",
+      "category": "mcp-skills-platforms",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "langgraph",
+      "name": "LangGraph",
+      "website_url": "https://www.langchain.com/langgraph",
+      "category": "ai-agents",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "leonardo-ai",
+      "name": "Leonardo AI",
+      "website_url": "https://leonardo.ai",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "lex",
+      "name": "Lex",
+      "website_url": "https://lex.page",
+      "category": "writing-content",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "lindy",
+      "name": "Lindy",
+      "website_url": "https://www.lindy.ai",
+      "category": "ai-agents",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "litellm",
+      "name": "LiteLLM",
+      "website_url": "https://litellm.ai",
+      "category": "models-infrastructure",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "llama-cpp",
+      "name": "llama.cpp",
+      "website_url": "https://github.com/ggml-org/llama.cpp",
+      "category": "local-open-source",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "llamafile",
+      "name": "Llamafile",
+      "website_url": "https://llamafile.ai",
+      "category": "local-open-source",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "llamaindex",
+      "name": "LlamaIndex",
+      "website_url": "https://www.llamaindex.ai",
+      "category": "ai-agents",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "lm-studio",
+      "name": "LM Studio",
+      "website_url": "https://lmstudio.ai",
+      "category": "local-open-source",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "lmarena",
+      "name": "LMArena",
+      "website_url": "https://arena.ai",
+      "category": "models-infrastructure",
+      "pricing_model": "free"
+    },
+    {
+      "slug": "localai",
+      "name": "LocalAI",
+      "website_url": "https://localai.io",
+      "category": "local-open-source",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "looka",
+      "name": "Looka",
+      "website_url": "https://looka.com",
+      "category": "design-creative",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "lovable",
+      "name": "Lovable",
+      "website_url": "https://lovable.dev",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "ltx-studio",
+      "name": "LTX Studio",
+      "website_url": "https://ltx.studio",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "luma-dream-machine",
+      "name": "Luma Dream Machine",
+      "website_url": "https://lumalabs.ai",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "magicschool-ai",
+      "name": "MagicSchool AI",
+      "website_url": "https://www.magicschool.ai",
+      "category": "ai-education",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "magnific-ai",
+      "name": "Magnific AI",
+      "website_url": "https://magnific.ai",
+      "category": "image-generation",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "make-com",
+      "name": "Make.com",
+      "website_url": "https://www.make.com",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "manus-ai",
+      "name": "Manus AI",
+      "website_url": "https://manus.im",
+      "category": "ai-agents",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "mem-ai",
+      "name": "Mem",
+      "website_url": "https://mem.ai",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "meshy",
+      "name": "Meshy",
+      "website_url": "https://www.meshy.ai",
+      "category": "ai-3d-game-dev",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "meta-ai",
+      "name": "Meta AI",
+      "website_url": "https://www.meta.ai",
+      "category": "chatbots-assistants",
+      "pricing_model": "free"
+    },
+    {
+      "slug": "meta-llama",
+      "name": "Meta Llama",
+      "website_url": "https://llama.meta.com",
+      "category": "llm-providers",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "microsoft-copilot",
+      "name": "Microsoft Copilot",
+      "website_url": "https://copilot.microsoft.com",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "midjourney",
+      "name": "Midjourney",
+      "website_url": "https://www.midjourney.com",
+      "category": "image-generation",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "mistral-ai",
+      "name": "Mistral AI",
+      "website_url": "https://mistral.ai",
+      "category": "llm-providers",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "modal",
+      "name": "Modal",
+      "website_url": "https://modal.com",
+      "category": "models-infrastructure",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "moises",
+      "name": "Moises",
+      "website_url": "https://moises.ai",
+      "category": "music-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "moltbook",
+      "name": "Moltbook",
+      "website_url": "https://www.moltbook.com",
+      "category": "ai-agents",
+      "pricing_model": "free"
+    },
+    {
+      "slug": "motion",
+      "name": "Motion",
+      "website_url": "https://www.usemotion.com",
+      "category": "productivity",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "mubert",
+      "name": "Mubert",
+      "website_url": "https://mubert.com",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "murf-ai",
+      "name": "Murf AI",
+      "website_url": "https://murf.ai",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "n8n",
+      "name": "n8n",
+      "website_url": "https://n8n.io",
+      "category": "ai-agents",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "napkin-ai",
+      "name": "Napkin AI",
+      "website_url": "https://www.napkin.ai",
+      "category": "design-creative",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "nightcafe",
+      "name": "NightCafe",
+      "website_url": "https://nightcafe.studio",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "notebooklm",
+      "name": "NotebookLM",
+      "website_url": "https://notebooklm.google.com",
+      "category": "research-search",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "notion-ai",
+      "name": "Notion AI",
+      "website_url": "https://www.notion.so",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "ollama",
+      "name": "Ollama",
+      "website_url": "https://ollama.com",
+      "category": "local-open-source",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "open-webui",
+      "name": "Open WebUI",
+      "website_url": "https://openwebui.com",
+      "category": "local-open-source",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "openai-api",
+      "name": "OpenAI API",
+      "website_url": "https://platform.openai.com",
+      "category": "llm-providers",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "openai-codex",
+      "name": "OpenAI Codex",
+      "website_url": "https://openai.com/codex/",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "openclaw",
+      "name": "OpenClaw",
+      "website_url": "https://openclaw.ai",
+      "category": "ai-agents",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "openevidence",
+      "name": "OpenEvidence",
+      "website_url": "https://www.openevidence.com",
+      "category": "ai-science-healthcare",
+      "pricing_model": "free"
+    },
+    {
+      "slug": "openrouter",
+      "name": "OpenRouter",
+      "website_url": "https://openrouter.ai",
+      "category": "llm-providers",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "opus-clip",
+      "name": "Opus Clip",
+      "website_url": "https://www.opus.pro",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "otter-ai",
+      "name": "Otter.ai",
+      "website_url": "https://otter.ai",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "perplexity",
+      "name": "Perplexity",
+      "website_url": "https://www.perplexity.ai",
+      "category": "research-search",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "perplexity-comet",
+      "name": "Perplexity Comet",
+      "website_url": "https://www.perplexity.ai/comet",
+      "category": "research-search",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "phidata",
+      "name": "Agno",
+      "website_url": "https://www.agno.com",
+      "category": "ai-agents",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "photomath",
+      "name": "Photomath",
+      "website_url": "https://photomath.com",
+      "category": "ai-education",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "photoroom",
+      "name": "Photoroom",
+      "website_url": "https://www.photoroom.com",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "pi-ai",
+      "name": "Pi",
+      "website_url": "https://pi.ai",
+      "category": "chatbots-assistants",
+      "pricing_model": "free"
+    },
+    {
+      "slug": "picsart",
+      "name": "Picsart",
+      "website_url": "https://picsart.com",
+      "category": "design-creative",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "pieces",
+      "name": "Pieces for Developers",
+      "website_url": "https://pieces.app",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "pika",
+      "name": "Pika",
+      "website_url": "https://pika.art",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "pinecone",
+      "name": "Pinecone",
+      "website_url": "https://www.pinecone.io",
+      "category": "models-infrastructure",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "pipedream",
+      "name": "Pipedream",
+      "website_url": "https://pipedream.com",
+      "category": "agents-automation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "pixverse",
+      "name": "PixVerse",
+      "website_url": "https://pixverse.ai",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "playground-ai",
+      "name": "Playground",
+      "website_url": "https://playground.com",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "poe",
+      "name": "Poe",
+      "website_url": "https://poe.com",
+      "category": "chatbots-assistants",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "pulse-mcp",
+      "name": "PulseMCP",
+      "website_url": "https://www.pulsemcp.com",
+      "category": "mcp-skills-platforms",
+      "pricing_model": "free"
+    },
+    {
+      "slug": "qodo",
+      "name": "Qodo",
+      "website_url": "https://www.qodo.ai",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "quizlet",
+      "name": "Quizlet",
+      "website_url": "https://quizlet.com",
+      "category": "ai-education",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "raycast",
+      "name": "Raycast",
+      "website_url": "https://www.raycast.com",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "read-ai",
+      "name": "Read AI",
+      "website_url": "https://www.read.ai",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "reclaim-ai",
+      "name": "Reclaim AI",
+      "website_url": "https://reclaim.ai",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "recraft",
+      "name": "Recraft",
+      "website_url": "https://www.recraft.ai",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "relevance-ai",
+      "name": "Relevance AI",
+      "website_url": "https://relevanceai.com",
+      "category": "ai-agents",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "relume",
+      "name": "Relume",
+      "website_url": "https://relume.io",
+      "category": "design-creative",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "replicate",
+      "name": "Replicate",
+      "website_url": "https://replicate.com",
+      "category": "models-infrastructure",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "replika",
+      "name": "Replika",
+      "website_url": "https://replika.com",
+      "category": "chatbots-assistants",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "replit",
+      "name": "Replit",
+      "website_url": "https://replit.com",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "reve",
+      "name": "Reve",
+      "website_url": "https://app.reve.com",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "rive",
+      "name": "Rive",
+      "website_url": "https://rive.app",
+      "category": "design-creative",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "roo-code",
+      "name": "Roo Code",
+      "website_url": "https://roocode.com",
+      "category": "coding-development",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "runway",
+      "name": "Runway",
+      "website_url": "https://runwayml.com",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "rytr",
+      "name": "Rytr",
+      "website_url": "https://rytr.me",
+      "category": "writing-content",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "salesforce-agentforce",
+      "name": "Salesforce Agentforce",
+      "website_url": "https://www.salesforce.com/agentforce/",
+      "category": "ai-agents",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "scenario",
+      "name": "Scenario",
+      "website_url": "https://www.scenario.com",
+      "category": "ai-3d-game-dev",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "scispace",
+      "name": "SciSpace",
+      "website_url": "https://scispace.com",
+      "category": "research-search",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "scite-ai",
+      "name": "scite",
+      "website_url": "https://scite.ai",
+      "category": "research-search",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "semantic-scholar",
+      "name": "Semantic Scholar",
+      "website_url": "https://www.semanticscholar.org",
+      "category": "research-search",
+      "pricing_model": "free"
+    },
+    {
+      "slug": "semrush-ai",
+      "name": "Semrush AI",
+      "website_url": "https://www.semrush.com",
+      "category": "writing-content",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "shortwave",
+      "name": "Shortwave",
+      "website_url": "https://www.shortwave.com",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "sierra",
+      "name": "Sierra",
+      "website_url": "https://www.sierra.ai",
+      "category": "ai-agents",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "sloyd",
+      "name": "Sloyd",
+      "website_url": "https://www.sloyd.ai",
+      "category": "ai-3d-game-dev",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "smithery",
+      "name": "Smithery",
+      "website_url": "https://smithery.ai",
+      "category": "mcp-skills-platforms",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "soundraw",
+      "name": "SOUNDRAW",
+      "website_url": "https://soundraw.io",
+      "category": "music-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "sourcegraph-cody",
+      "name": "Sourcegraph Cody",
+      "website_url": "https://sourcegraph.com/cody",
+      "category": "coding-development",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "spellbook",
+      "name": "Spellbook",
+      "website_url": "https://www.spellbook.legal",
+      "category": "productivity",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "spline-ai",
+      "name": "Spline AI",
+      "website_url": "https://spline.design",
+      "category": "ai-3d-game-dev",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "stable-diffusion",
+      "name": "Stable Diffusion",
+      "website_url": "https://stability.ai",
+      "category": "image-generation",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "stanford-helm",
+      "name": "Stanford HELM",
+      "website_url": "https://github.com/stanford-crfm/helm",
+      "category": "models-infrastructure",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "sudowrite",
+      "name": "Sudowrite",
+      "website_url": "https://www.sudowrite.com",
+      "category": "writing-content",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "sui",
+      "name": "Sui",
+      "website_url": "https://sui.io",
+      "category": "ai-agents",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "suno",
+      "name": "Suno",
+      "website_url": "https://suno.com",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "superagi",
+      "name": "SuperAGI",
+      "website_url": "https://superagi.com",
+      "category": "ai-agents",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "superhuman",
+      "name": "Superhuman",
+      "website_url": "https://superhuman.com",
+      "category": "productivity",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "surfer-seo",
+      "name": "Surfer SEO",
+      "website_url": "https://surferseo.com",
+      "category": "writing-content",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "swe-bench",
+      "name": "SWE-bench",
+      "website_url": "https://www.swebench.com",
+      "category": "models-infrastructure",
+      "pricing_model": "free"
+    },
+    {
+      "slug": "synthesia",
+      "name": "Synthesia",
+      "website_url": "https://www.synthesia.io",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "tabnine",
+      "name": "Tabnine",
+      "website_url": "https://www.tabnine.com",
+      "category": "coding-development",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "taskade",
+      "name": "Taskade",
+      "website_url": "https://www.taskade.com",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "tavily",
+      "name": "Tavily",
+      "website_url": "https://tavily.com",
+      "category": "llm-providers",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "tensor-art",
+      "name": "Tensor.Art",
+      "website_url": "https://tensor.art",
+      "category": "image-generation",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "text-generation-webui",
+      "name": "TextGen",
+      "website_url": "https://github.com/oobabooga/text-generation-webui",
+      "category": "local-open-source",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "tl-dv",
+      "name": "tl;dv",
+      "website_url": "https://tldv.io",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "together-ai",
+      "name": "Together AI",
+      "website_url": "https://www.together.ai",
+      "category": "llm-providers",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "topaz-labs",
+      "name": "Topaz Labs",
+      "website_url": "https://www.topazlabs.com",
+      "category": "image-generation",
+      "pricing_model": "paid"
+    },
+    {
+      "slug": "tripo-ai",
+      "name": "Tripo AI",
+      "website_url": "https://www.tripo3d.ai",
+      "category": "ai-3d-game-dev",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "udio",
+      "name": "Udio",
+      "website_url": "https://www.udio.com",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "v0",
+      "name": "v0",
+      "website_url": "https://v0.app",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "veed",
+      "name": "VEED",
+      "website_url": "https://www.veed.io",
+      "category": "video-audio",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "venice-ai",
+      "name": "Venice AI",
+      "website_url": "https://venice.ai",
+      "category": "chatbots-assistants",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "vllm",
+      "name": "vLLM",
+      "website_url": "https://vllm.ai",
+      "category": "local-open-source",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "warp",
+      "name": "Warp",
+      "website_url": "https://warp.dev",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "windsurf",
+      "name": "Windsurf",
+      "website_url": "https://windsurf.com",
+      "category": "coding-development",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "wolfram-alpha",
+      "name": "Wolfram Alpha",
+      "website_url": "https://www.wolframalpha.com",
+      "category": "ai-education",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "wordtune",
+      "name": "Wordtune",
+      "website_url": "https://www.wordtune.com",
+      "category": "writing-content",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "wordware",
+      "name": "Wordware",
+      "website_url": "https://www.wordware.ai",
+      "category": "mcp-skills-platforms",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "writer",
+      "name": "Writer",
+      "website_url": "https://writer.com",
+      "category": "writing-content",
+      "pricing_model": "enterprise"
+    },
+    {
+      "slug": "writesonic",
+      "name": "Writesonic",
+      "website_url": "https://writesonic.com",
+      "category": "writing-content",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "x402",
+      "name": "x402",
+      "website_url": "https://x402.org",
+      "category": "ai-agents",
+      "pricing_model": "open_source"
+    },
+    {
+      "slug": "you-com",
+      "name": "You.com",
+      "website_url": "https://you.com",
+      "category": "research-search",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "zapier",
+      "name": "Zapier",
+      "website_url": "https://zapier.com",
+      "category": "productivity",
+      "pricing_model": "freemium"
+    },
+    {
+      "slug": "zendesk-ai",
+      "name": "Zendesk AI",
+      "website_url": "https://www.zendesk.com/service/ai/",
+      "category": "ai-agents",
+      "pricing_model": "paid"
+    }
+  ],
+  "archived": [],
+  "categories": [
+    {
+      "slug": "agents-automation",
+      "name": "Agents & Automation"
+    },
+    {
+      "slug": "ai-3d-game-dev",
+      "name": "AI 3D & Game Dev"
+    },
+    {
+      "slug": "ai-agents",
+      "name": "AI Agents"
+    },
+    {
+      "slug": "ai-education",
+      "name": "AI Education"
+    },
+    {
+      "slug": "ai-science-healthcare",
+      "name": "AI Science & Healthcare"
+    },
+    {
+      "slug": "chatbots-assistants",
+      "name": "Chatbots & Assistants"
+    },
+    {
+      "slug": "coding-development",
+      "name": "Coding & Development"
+    },
+    {
+      "slug": "data-analytics",
+      "name": "Data & Analytics"
+    },
+    {
+      "slug": "design-creative",
+      "name": "Design & Creative"
+    },
+    {
+      "slug": "image-generation",
+      "name": "Image Generation"
+    },
+    {
+      "slug": "llm-providers",
+      "name": "LLM Providers & APIs"
+    },
+    {
+      "slug": "local-open-source",
+      "name": "Local & Open Source AI"
+    },
+    {
+      "slug": "mcp-skills-platforms",
+      "name": "MCP & Skills Platforms"
+    },
+    {
+      "slug": "models-infrastructure",
+      "name": "Models & Infrastructure"
+    },
+    {
+      "slug": "music-audio",
+      "name": "Music & Audio"
+    },
+    {
+      "slug": "productivity",
+      "name": "Productivity"
+    },
+    {
+      "slug": "research-search",
+      "name": "Research & Search"
+    },
+    {
+      "slug": "video-audio",
+      "name": "Video & Audio"
+    },
+    {
+      "slug": "writing-content",
+      "name": "Writing & Content"
+    }
+  ],
+  "factCheckBatches": {
+    "fc1": [
+      {
+        "slug": "brainly",
+        "name": "Brainly",
+        "website_url": "https://brainly.com",
+        "category": "ai-education"
+      },
+      {
+        "slug": "brilliant",
+        "name": "Brilliant",
+        "website_url": "https://brilliant.org",
+        "category": "ai-education"
+      },
+      {
+        "slug": "character-ai",
+        "name": "Character.AI",
+        "website_url": "https://character.ai",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "chatgpt",
+        "name": "ChatGPT",
+        "website_url": "https://chatgpt.com",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "claude",
+        "name": "Claude",
+        "website_url": "https://claude.ai",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "clearscope",
+        "name": "Clearscope",
+        "website_url": "https://www.clearscope.io",
+        "category": "writing-content"
+      },
+      {
+        "slug": "connected-papers",
+        "name": "Connected Papers",
+        "website_url": "https://www.connectedpapers.com",
+        "category": "research-search"
+      },
+      {
+        "slug": "consensus",
+        "name": "Consensus",
+        "website_url": "https://consensus.app",
+        "category": "research-search"
+      },
+      {
+        "slug": "copy-ai",
+        "name": "Copy.ai",
+        "website_url": "https://www.copy.ai",
+        "category": "writing-content"
+      },
+      {
+        "slug": "deepseek",
+        "name": "DeepSeek",
+        "website_url": "https://www.deepseek.com",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "duolingo-max",
+        "name": "Duolingo Max",
+        "website_url": "https://www.duolingo.com",
+        "category": "ai-education"
+      },
+      {
+        "slug": "dust",
+        "name": "Dust",
+        "website_url": "https://dust.tt",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "elicit",
+        "name": "Elicit",
+        "website_url": "https://elicit.com",
+        "category": "research-search"
+      },
+      {
+        "slug": "exa",
+        "name": "Exa",
+        "website_url": "https://exa.ai",
+        "category": "research-search"
+      },
+      {
+        "slug": "frase",
+        "name": "Frase",
+        "website_url": "https://www.frase.io",
+        "category": "writing-content"
+      },
+      {
+        "slug": "gemini",
+        "name": "Gemini",
+        "website_url": "https://gemini.google.com",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "genspark",
+        "name": "Genspark",
+        "website_url": "https://www.genspark.ai",
+        "category": "research-search"
+      },
+      {
+        "slug": "grammarly",
+        "name": "Grammarly",
+        "website_url": "https://www.grammarly.com",
+        "category": "writing-content"
+      },
+      {
+        "slug": "grok",
+        "name": "Grok",
+        "website_url": "https://grok.com",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "hebbia",
+        "name": "Hebbia",
+        "website_url": "https://www.hebbia.ai",
+        "category": "research-search"
+      },
+      {
+        "slug": "hemingway",
+        "name": "Hemingway Editor",
+        "website_url": "https://hemingwayapp.com",
+        "category": "writing-content"
+      },
+      {
+        "slug": "jasper",
+        "name": "Jasper",
+        "website_url": "https://www.jasper.ai",
+        "category": "writing-content"
+      },
+      {
+        "slug": "khanmigo",
+        "name": "Khanmigo",
+        "website_url": "https://www.khanmigo.ai",
+        "category": "ai-education"
+      },
+      {
+        "slug": "lex",
+        "name": "Lex",
+        "website_url": "https://lex.page",
+        "category": "writing-content"
+      },
+      {
+        "slug": "magicschool-ai",
+        "name": "MagicSchool AI",
+        "website_url": "https://www.magicschool.ai",
+        "category": "ai-education"
+      },
+      {
+        "slug": "meta-ai",
+        "name": "Meta AI",
+        "website_url": "https://www.meta.ai",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "notebooklm",
+        "name": "NotebookLM",
+        "website_url": "https://notebooklm.google.com",
+        "category": "research-search"
+      },
+      {
+        "slug": "perplexity",
+        "name": "Perplexity",
+        "website_url": "https://www.perplexity.ai",
+        "category": "research-search"
+      },
+      {
+        "slug": "perplexity-comet",
+        "name": "Perplexity Comet",
+        "website_url": "https://www.perplexity.ai/comet",
+        "category": "research-search"
+      },
+      {
+        "slug": "photomath",
+        "name": "Photomath",
+        "website_url": "https://photomath.com",
+        "category": "ai-education"
+      },
+      {
+        "slug": "pi-ai",
+        "name": "Pi",
+        "website_url": "https://pi.ai",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "poe",
+        "name": "Poe",
+        "website_url": "https://poe.com",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "quizlet",
+        "name": "Quizlet",
+        "website_url": "https://quizlet.com",
+        "category": "ai-education"
+      },
+      {
+        "slug": "replika",
+        "name": "Replika",
+        "website_url": "https://replika.com",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "rytr",
+        "name": "Rytr",
+        "website_url": "https://rytr.me",
+        "category": "writing-content"
+      },
+      {
+        "slug": "scispace",
+        "name": "SciSpace",
+        "website_url": "https://scispace.com",
+        "category": "research-search"
+      },
+      {
+        "slug": "scite-ai",
+        "name": "scite",
+        "website_url": "https://scite.ai",
+        "category": "research-search"
+      },
+      {
+        "slug": "semantic-scholar",
+        "name": "Semantic Scholar",
+        "website_url": "https://www.semanticscholar.org",
+        "category": "research-search"
+      },
+      {
+        "slug": "semrush-ai",
+        "name": "Semrush AI",
+        "website_url": "https://www.semrush.com",
+        "category": "writing-content"
+      },
+      {
+        "slug": "sudowrite",
+        "name": "Sudowrite",
+        "website_url": "https://www.sudowrite.com",
+        "category": "writing-content"
+      },
+      {
+        "slug": "surfer-seo",
+        "name": "Surfer SEO",
+        "website_url": "https://surferseo.com",
+        "category": "writing-content"
+      },
+      {
+        "slug": "venice-ai",
+        "name": "Venice AI",
+        "website_url": "https://venice.ai",
+        "category": "chatbots-assistants"
+      },
+      {
+        "slug": "wolfram-alpha",
+        "name": "Wolfram Alpha",
+        "website_url": "https://www.wolframalpha.com",
+        "category": "ai-education"
+      },
+      {
+        "slug": "wordtune",
+        "name": "Wordtune",
+        "website_url": "https://www.wordtune.com",
+        "category": "writing-content"
+      },
+      {
+        "slug": "writer",
+        "name": "Writer",
+        "website_url": "https://writer.com",
+        "category": "writing-content"
+      },
+      {
+        "slug": "writesonic",
+        "name": "Writesonic",
+        "website_url": "https://writesonic.com",
+        "category": "writing-content"
+      },
+      {
+        "slug": "you-com",
+        "name": "You.com",
+        "website_url": "https://you.com",
+        "category": "research-search"
+      }
+    ],
+    "fc2": [
+      {
+        "slug": "activepieces",
+        "name": "Activepieces",
+        "website_url": "https://www.activepieces.com",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "ai21-labs",
+        "name": "AI21 Labs",
+        "website_url": "https://www.ai21.com",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "aider",
+        "name": "Aider",
+        "website_url": "https://aider.chat",
+        "category": "coding-development"
+      },
+      {
+        "slug": "amazon-bedrock",
+        "name": "Amazon Bedrock",
+        "website_url": "https://aws.amazon.com/bedrock",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "amazon-q-developer",
+        "name": "Amazon Q Developer",
+        "website_url": "https://aws.amazon.com/q/developer/",
+        "category": "coding-development"
+      },
+      {
+        "slug": "anthropic-api",
+        "name": "Anthropic API",
+        "website_url": "https://console.anthropic.com",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "artificial-analysis",
+        "name": "Artificial Analysis",
+        "website_url": "https://artificialanalysis.ai",
+        "category": "models-infrastructure"
+      },
+      {
+        "slug": "augment-code",
+        "name": "Augment Code",
+        "website_url": "https://www.augmentcode.com",
+        "category": "coding-development"
+      },
+      {
+        "slug": "autogpt",
+        "name": "AutoGPT",
+        "website_url": "https://agpt.co",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "bankr",
+        "name": "BANKR",
+        "website_url": "https://bankr.bot",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "baseten",
+        "name": "Baseten",
+        "website_url": "https://www.baseten.co",
+        "category": "models-infrastructure"
+      },
+      {
+        "slug": "bolt-new",
+        "name": "Bolt.new",
+        "website_url": "https://bolt.new",
+        "category": "coding-development"
+      },
+      {
+        "slug": "browserbase",
+        "name": "Browserbase",
+        "website_url": "https://browserbase.com",
+        "category": "agents-automation"
+      },
+      {
+        "slug": "claude-code",
+        "name": "Claude Code",
+        "website_url": "https://www.anthropic.com/product/claude-code",
+        "category": "coding-development"
+      },
+      {
+        "slug": "clawhub",
+        "name": "ClawHub",
+        "website_url": "https://hub.openclaw.ai",
+        "category": "mcp-skills-platforms"
+      },
+      {
+        "slug": "cline",
+        "name": "Cline",
+        "website_url": "https://cline.bot",
+        "category": "coding-development"
+      },
+      {
+        "slug": "codeium",
+        "name": "Codeium",
+        "website_url": "https://codeium.com",
+        "category": "coding-development"
+      },
+      {
+        "slug": "coderabbit",
+        "name": "CodeRabbit",
+        "website_url": "https://www.coderabbit.ai",
+        "category": "coding-development"
+      },
+      {
+        "slug": "cohere",
+        "name": "Cohere",
+        "website_url": "https://cohere.com",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "composio",
+        "name": "Composio",
+        "website_url": "https://composio.dev",
+        "category": "mcp-skills-platforms"
+      },
+      {
+        "slug": "continue-dev",
+        "name": "Continue",
+        "website_url": "https://continue.dev",
+        "category": "coding-development"
+      },
+      {
+        "slug": "crewai",
+        "name": "CrewAI",
+        "website_url": "https://www.crewai.com",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "cursor",
+        "name": "Cursor",
+        "website_url": "https://www.cursor.com",
+        "category": "coding-development"
+      },
+      {
+        "slug": "decagon",
+        "name": "Decagon",
+        "website_url": "https://decagon.ai",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "deepinfra",
+        "name": "DeepInfra",
+        "website_url": "https://deepinfra.com",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "devin",
+        "name": "Devin",
+        "website_url": "https://devin.ai",
+        "category": "coding-development"
+      },
+      {
+        "slug": "dify",
+        "name": "Dify",
+        "website_url": "https://dify.ai",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "e2b",
+        "name": "E2B",
+        "website_url": "https://e2b.dev",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "factory",
+        "name": "Factory",
+        "website_url": "https://factory.ai",
+        "category": "coding-development"
+      },
+      {
+        "slug": "fal-ai",
+        "name": "fal.ai",
+        "website_url": "https://fal.ai",
+        "category": "models-infrastructure"
+      },
+      {
+        "slug": "fireworks-ai",
+        "name": "Fireworks AI",
+        "website_url": "https://fireworks.ai",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "flowise",
+        "name": "Flowise",
+        "website_url": "https://flowiseai.com",
+        "category": "mcp-skills-platforms"
+      },
+      {
+        "slug": "fonfik",
+        "name": "Fonfik",
+        "website_url": "https://fonfik.com/",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "gemini-cli",
+        "name": "Gemini CLI",
+        "website_url": "https://google-gemini.github.io/gemini-cli/",
+        "category": "coding-development"
+      },
+      {
+        "slug": "github-copilot",
+        "name": "GitHub Copilot",
+        "website_url": "https://github.com/features/copilot",
+        "category": "coding-development"
+      },
+      {
+        "slug": "glama",
+        "name": "Glama",
+        "website_url": "https://glama.ai",
+        "category": "mcp-skills-platforms"
+      },
+      {
+        "slug": "gpt4all",
+        "name": "GPT4All",
+        "website_url": "https://www.nomic.ai/gpt4all",
+        "category": "local-open-source"
+      },
+      {
+        "slug": "graphite",
+        "name": "Graphite",
+        "website_url": "https://graphite.dev",
+        "category": "coding-development"
+      },
+      {
+        "slug": "greptile",
+        "name": "Greptile",
+        "website_url": "https://greptile.com",
+        "category": "coding-development"
+      },
+      {
+        "slug": "groq",
+        "name": "Groq",
+        "website_url": "https://groq.com",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "heurist",
+        "name": "Heurist",
+        "website_url": "https://heurist.ai",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "hugging-face",
+        "name": "Hugging Face",
+        "website_url": "https://huggingface.co",
+        "category": "models-infrastructure"
+      },
+      {
+        "slug": "intercom-fin",
+        "name": "Intercom Fin",
+        "website_url": "https://www.intercom.com/fin",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "jan",
+        "name": "Jan",
+        "website_url": "https://jan.ai",
+        "category": "local-open-source"
+      },
+      {
+        "slug": "jetbrains-ai",
+        "name": "JetBrains AI",
+        "website_url": "https://www.jetbrains.com/ai/",
+        "category": "coding-development"
+      },
+      {
+        "slug": "koboldai",
+        "name": "KoboldAI",
+        "website_url": "https://koboldai.com",
+        "category": "local-open-source"
+      },
+      {
+        "slug": "langchain",
+        "name": "LangChain",
+        "website_url": "https://www.langchain.com",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "langflow",
+        "name": "Langflow",
+        "website_url": "https://www.langflow.org",
+        "category": "mcp-skills-platforms"
+      },
+      {
+        "slug": "langgraph",
+        "name": "LangGraph",
+        "website_url": "https://www.langchain.com/langgraph",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "lindy",
+        "name": "Lindy",
+        "website_url": "https://www.lindy.ai",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "litellm",
+        "name": "LiteLLM",
+        "website_url": "https://litellm.ai",
+        "category": "models-infrastructure"
+      },
+      {
+        "slug": "llama-cpp",
+        "name": "llama.cpp",
+        "website_url": "https://github.com/ggml-org/llama.cpp",
+        "category": "local-open-source"
+      },
+      {
+        "slug": "llamafile",
+        "name": "Llamafile",
+        "website_url": "https://llamafile.ai",
+        "category": "local-open-source"
+      },
+      {
+        "slug": "llamaindex",
+        "name": "LlamaIndex",
+        "website_url": "https://www.llamaindex.ai",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "lm-studio",
+        "name": "LM Studio",
+        "website_url": "https://lmstudio.ai",
+        "category": "local-open-source"
+      },
+      {
+        "slug": "lmarena",
+        "name": "LMArena",
+        "website_url": "https://arena.ai",
+        "category": "models-infrastructure"
+      },
+      {
+        "slug": "localai",
+        "name": "LocalAI",
+        "website_url": "https://localai.io",
+        "category": "local-open-source"
+      },
+      {
+        "slug": "lovable",
+        "name": "Lovable",
+        "website_url": "https://lovable.dev",
+        "category": "coding-development"
+      },
+      {
+        "slug": "manus-ai",
+        "name": "Manus AI",
+        "website_url": "https://manus.im",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "meta-llama",
+        "name": "Meta Llama",
+        "website_url": "https://llama.meta.com",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "mistral-ai",
+        "name": "Mistral AI",
+        "website_url": "https://mistral.ai",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "modal",
+        "name": "Modal",
+        "website_url": "https://modal.com",
+        "category": "models-infrastructure"
+      },
+      {
+        "slug": "moltbook",
+        "name": "Moltbook",
+        "website_url": "https://www.moltbook.com",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "n8n",
+        "name": "n8n",
+        "website_url": "https://n8n.io",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "ollama",
+        "name": "Ollama",
+        "website_url": "https://ollama.com",
+        "category": "local-open-source"
+      },
+      {
+        "slug": "open-webui",
+        "name": "Open WebUI",
+        "website_url": "https://openwebui.com",
+        "category": "local-open-source"
+      },
+      {
+        "slug": "openai-api",
+        "name": "OpenAI API",
+        "website_url": "https://platform.openai.com",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "openai-codex",
+        "name": "OpenAI Codex",
+        "website_url": "https://openai.com/codex/",
+        "category": "coding-development"
+      },
+      {
+        "slug": "openclaw",
+        "name": "OpenClaw",
+        "website_url": "https://openclaw.ai",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "openrouter",
+        "name": "OpenRouter",
+        "website_url": "https://openrouter.ai",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "phidata",
+        "name": "Agno",
+        "website_url": "https://www.agno.com",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "pieces",
+        "name": "Pieces for Developers",
+        "website_url": "https://pieces.app",
+        "category": "coding-development"
+      },
+      {
+        "slug": "pinecone",
+        "name": "Pinecone",
+        "website_url": "https://www.pinecone.io",
+        "category": "models-infrastructure"
+      },
+      {
+        "slug": "pipedream",
+        "name": "Pipedream",
+        "website_url": "https://pipedream.com",
+        "category": "agents-automation"
+      },
+      {
+        "slug": "pulse-mcp",
+        "name": "PulseMCP",
+        "website_url": "https://www.pulsemcp.com",
+        "category": "mcp-skills-platforms"
+      },
+      {
+        "slug": "qodo",
+        "name": "Qodo",
+        "website_url": "https://www.qodo.ai",
+        "category": "coding-development"
+      },
+      {
+        "slug": "relevance-ai",
+        "name": "Relevance AI",
+        "website_url": "https://relevanceai.com",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "replicate",
+        "name": "Replicate",
+        "website_url": "https://replicate.com",
+        "category": "models-infrastructure"
+      },
+      {
+        "slug": "replit",
+        "name": "Replit",
+        "website_url": "https://replit.com",
+        "category": "coding-development"
+      },
+      {
+        "slug": "roo-code",
+        "name": "Roo Code",
+        "website_url": "https://roocode.com",
+        "category": "coding-development"
+      },
+      {
+        "slug": "salesforce-agentforce",
+        "name": "Salesforce Agentforce",
+        "website_url": "https://www.salesforce.com/agentforce/",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "sierra",
+        "name": "Sierra",
+        "website_url": "https://www.sierra.ai",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "smithery",
+        "name": "Smithery",
+        "website_url": "https://smithery.ai",
+        "category": "mcp-skills-platforms"
+      },
+      {
+        "slug": "sourcegraph-cody",
+        "name": "Sourcegraph Cody",
+        "website_url": "https://sourcegraph.com/cody",
+        "category": "coding-development"
+      },
+      {
+        "slug": "stanford-helm",
+        "name": "Stanford HELM",
+        "website_url": "https://github.com/stanford-crfm/helm",
+        "category": "models-infrastructure"
+      },
+      {
+        "slug": "sui",
+        "name": "Sui",
+        "website_url": "https://sui.io",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "superagi",
+        "name": "SuperAGI",
+        "website_url": "https://superagi.com",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "swe-bench",
+        "name": "SWE-bench",
+        "website_url": "https://www.swebench.com",
+        "category": "models-infrastructure"
+      },
+      {
+        "slug": "tabnine",
+        "name": "Tabnine",
+        "website_url": "https://www.tabnine.com",
+        "category": "coding-development"
+      },
+      {
+        "slug": "tavily",
+        "name": "Tavily",
+        "website_url": "https://tavily.com",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "text-generation-webui",
+        "name": "TextGen",
+        "website_url": "https://github.com/oobabooga/text-generation-webui",
+        "category": "local-open-source"
+      },
+      {
+        "slug": "together-ai",
+        "name": "Together AI",
+        "website_url": "https://www.together.ai",
+        "category": "llm-providers"
+      },
+      {
+        "slug": "v0",
+        "name": "v0",
+        "website_url": "https://v0.app",
+        "category": "coding-development"
+      },
+      {
+        "slug": "vllm",
+        "name": "vLLM",
+        "website_url": "https://vllm.ai",
+        "category": "local-open-source"
+      },
+      {
+        "slug": "warp",
+        "name": "Warp",
+        "website_url": "https://warp.dev",
+        "category": "coding-development"
+      },
+      {
+        "slug": "windsurf",
+        "name": "Windsurf",
+        "website_url": "https://windsurf.com",
+        "category": "coding-development"
+      },
+      {
+        "slug": "wordware",
+        "name": "Wordware",
+        "website_url": "https://www.wordware.ai",
+        "category": "mcp-skills-platforms"
+      },
+      {
+        "slug": "x402",
+        "name": "x402",
+        "website_url": "https://x402.org",
+        "category": "ai-agents"
+      },
+      {
+        "slug": "zendesk-ai",
+        "name": "Zendesk AI",
+        "website_url": "https://www.zendesk.com/service/ai/",
+        "category": "ai-agents"
+      }
+    ],
+    "fc3": [
+      {
+        "slug": "abridge",
+        "name": "Abridge",
+        "website_url": "https://www.abridge.com",
+        "category": "ai-science-healthcare"
+      },
+      {
+        "slug": "adobe-firefly",
+        "name": "Adobe Firefly",
+        "website_url": "https://firefly.adobe.com",
+        "category": "image-generation"
+      },
+      {
+        "slug": "aiva",
+        "name": "AIVA",
+        "website_url": "https://www.aiva.ai",
+        "category": "video-audio"
+      },
+      {
+        "slug": "alphafold",
+        "name": "AlphaFold",
+        "website_url": "https://alphafold.ebi.ac.uk",
+        "category": "ai-science-healthcare"
+      },
+      {
+        "slug": "arc-max",
+        "name": "Arc Max",
+        "website_url": "https://arc.net/max",
+        "category": "productivity"
+      },
+      {
+        "slug": "beautiful-ai",
+        "name": "Beautiful.ai",
+        "website_url": "https://www.beautiful.ai",
+        "category": "design-creative"
+      },
+      {
+        "slug": "benchling",
+        "name": "Benchling",
+        "website_url": "https://www.benchling.com",
+        "category": "ai-science-healthcare"
+      },
+      {
+        "slug": "canva",
+        "name": "Canva",
+        "website_url": "https://www.canva.com",
+        "category": "design-creative"
+      },
+      {
+        "slug": "capcut",
+        "name": "CapCut",
+        "website_url": "https://www.capcut.com",
+        "category": "video-audio"
+      },
+      {
+        "slug": "chatgpt-atlas",
+        "name": "ChatGPT Atlas",
+        "website_url": "https://help.openai.com/en/collections/16051538-chatgpt-atlas",
+        "category": "productivity"
+      },
+      {
+        "slug": "clay",
+        "name": "Clay",
+        "website_url": "https://www.clay.com",
+        "category": "data-analytics"
+      },
+      {
+        "slug": "clipdrop",
+        "name": "Clipdrop",
+        "website_url": "https://clipdrop.co",
+        "category": "image-generation"
+      },
+      {
+        "slug": "comfyui",
+        "name": "ComfyUI",
+        "website_url": "https://comfy.org",
+        "category": "image-generation"
+      },
+      {
+        "slug": "csm",
+        "name": "CSM",
+        "website_url": "https://csm.ai",
+        "category": "ai-3d-game-dev"
+      },
+      {
+        "slug": "d-id",
+        "name": "D-ID",
+        "website_url": "https://www.d-id.com",
+        "category": "video-audio"
+      },
+      {
+        "slug": "dall-e-3",
+        "name": "DALL-E 3",
+        "website_url": "https://openai.com/dall-e-3",
+        "category": "image-generation"
+      },
+      {
+        "slug": "deepgram",
+        "name": "Deepgram",
+        "website_url": "https://deepgram.com",
+        "category": "video-audio"
+      },
+      {
+        "slug": "descript",
+        "name": "Descript",
+        "website_url": "https://www.descript.com",
+        "category": "video-audio"
+      },
+      {
+        "slug": "dia",
+        "name": "Dia",
+        "website_url": "https://www.diabrowser.com",
+        "category": "productivity"
+      },
+      {
+        "slug": "elevenlabs",
+        "name": "ElevenLabs",
+        "website_url": "https://elevenlabs.io",
+        "category": "video-audio"
+      },
+      {
+        "slug": "fathom",
+        "name": "Fathom",
+        "website_url": "https://fathom.video",
+        "category": "productivity"
+      },
+      {
+        "slug": "figma-ai",
+        "name": "Figma AI",
+        "website_url": "https://www.figma.com",
+        "category": "design-creative"
+      },
+      {
+        "slug": "fireflies-ai",
+        "name": "Fireflies.ai",
+        "website_url": "https://fireflies.ai",
+        "category": "productivity"
+      },
+      {
+        "slug": "flux",
+        "name": "Flux",
+        "website_url": "https://bfl.ai",
+        "category": "image-generation"
+      },
+      {
+        "slug": "framer",
+        "name": "Framer",
+        "website_url": "https://www.framer.com",
+        "category": "design-creative"
+      },
+      {
+        "slug": "freepik-ai",
+        "name": "Freepik AI",
+        "website_url": "https://www.freepik.com/ai",
+        "category": "image-generation"
+      },
+      {
+        "slug": "gamma",
+        "name": "Gamma",
+        "website_url": "https://gamma.app",
+        "category": "design-creative"
+      },
+      {
+        "slug": "glean",
+        "name": "Glean",
+        "website_url": "https://www.glean.com",
+        "category": "productivity"
+      },
+      {
+        "slug": "gong",
+        "name": "Gong",
+        "website_url": "https://www.gong.io",
+        "category": "productivity"
+      },
+      {
+        "slug": "google-flow",
+        "name": "Google Flow",
+        "website_url": "https://labs.google/fx/tools/flow",
+        "category": "video-audio"
+      },
+      {
+        "slug": "granola",
+        "name": "Granola",
+        "website_url": "https://www.granola.ai",
+        "category": "productivity"
+      },
+      {
+        "slug": "gumloop",
+        "name": "Gumloop",
+        "website_url": "https://www.gumloop.com",
+        "category": "productivity"
+      },
+      {
+        "slug": "hailuo-ai",
+        "name": "Hailuo AI",
+        "website_url": "https://hailuoai.video",
+        "category": "video-audio"
+      },
+      {
+        "slug": "harvey",
+        "name": "Harvey",
+        "website_url": "https://www.harvey.ai",
+        "category": "productivity"
+      },
+      {
+        "slug": "hex",
+        "name": "Hex",
+        "website_url": "https://hex.tech",
+        "category": "data-analytics"
+      },
+      {
+        "slug": "heygen",
+        "name": "HeyGen",
+        "website_url": "https://www.heygen.com",
+        "category": "video-audio"
+      },
+      {
+        "slug": "higgsfield",
+        "name": "Higgsfield",
+        "website_url": "https://higgsfield.ai",
+        "category": "video-audio"
+      },
+      {
+        "slug": "hippocratic-ai",
+        "name": "Hippocratic AI",
+        "website_url": "https://www.hippocraticai.com",
+        "category": "ai-science-healthcare"
+      },
+      {
+        "slug": "ideogram",
+        "name": "Ideogram",
+        "website_url": "https://ideogram.ai",
+        "category": "image-generation"
+      },
+      {
+        "slug": "insilico-medicine",
+        "name": "Insilico Medicine",
+        "website_url": "https://insilico.com",
+        "category": "ai-science-healthcare"
+      },
+      {
+        "slug": "invideo-ai",
+        "name": "InVideo AI",
+        "website_url": "https://invideo.io",
+        "category": "video-audio"
+      },
+      {
+        "slug": "inworld-ai",
+        "name": "Inworld AI",
+        "website_url": "https://inworld.ai",
+        "category": "ai-3d-game-dev"
+      },
+      {
+        "slug": "isomorphic-labs",
+        "name": "Isomorphic Labs",
+        "website_url": "https://isomorphiclabs.com",
+        "category": "ai-science-healthcare"
+      },
+      {
+        "slug": "julius-ai",
+        "name": "Julius AI",
+        "website_url": "https://julius.ai",
+        "category": "data-analytics"
+      },
+      {
+        "slug": "kling-ai",
+        "name": "Kling AI",
+        "website_url": "https://kling.ai",
+        "category": "video-audio"
+      },
+      {
+        "slug": "krea",
+        "name": "Krea",
+        "website_url": "https://www.krea.ai",
+        "category": "image-generation"
+      },
+      {
+        "slug": "krisp",
+        "name": "Krisp",
+        "website_url": "https://krisp.ai",
+        "category": "productivity"
+      },
+      {
+        "slug": "leonardo-ai",
+        "name": "Leonardo AI",
+        "website_url": "https://leonardo.ai",
+        "category": "image-generation"
+      },
+      {
+        "slug": "looka",
+        "name": "Looka",
+        "website_url": "https://looka.com",
+        "category": "design-creative"
+      },
+      {
+        "slug": "ltx-studio",
+        "name": "LTX Studio",
+        "website_url": "https://ltx.studio",
+        "category": "video-audio"
+      },
+      {
+        "slug": "luma-dream-machine",
+        "name": "Luma Dream Machine",
+        "website_url": "https://lumalabs.ai",
+        "category": "video-audio"
+      },
+      {
+        "slug": "magnific-ai",
+        "name": "Magnific AI",
+        "website_url": "https://magnific.ai",
+        "category": "image-generation"
+      },
+      {
+        "slug": "make-com",
+        "name": "Make.com",
+        "website_url": "https://www.make.com",
+        "category": "productivity"
+      },
+      {
+        "slug": "mem-ai",
+        "name": "Mem",
+        "website_url": "https://mem.ai",
+        "category": "productivity"
+      },
+      {
+        "slug": "meshy",
+        "name": "Meshy",
+        "website_url": "https://www.meshy.ai",
+        "category": "ai-3d-game-dev"
+      },
+      {
+        "slug": "microsoft-copilot",
+        "name": "Microsoft Copilot",
+        "website_url": "https://copilot.microsoft.com",
+        "category": "productivity"
+      },
+      {
+        "slug": "midjourney",
+        "name": "Midjourney",
+        "website_url": "https://www.midjourney.com",
+        "category": "image-generation"
+      },
+      {
+        "slug": "moises",
+        "name": "Moises",
+        "website_url": "https://moises.ai",
+        "category": "music-audio"
+      },
+      {
+        "slug": "motion",
+        "name": "Motion",
+        "website_url": "https://www.usemotion.com",
+        "category": "productivity"
+      },
+      {
+        "slug": "mubert",
+        "name": "Mubert",
+        "website_url": "https://mubert.com",
+        "category": "video-audio"
+      },
+      {
+        "slug": "murf-ai",
+        "name": "Murf AI",
+        "website_url": "https://murf.ai",
+        "category": "video-audio"
+      },
+      {
+        "slug": "napkin-ai",
+        "name": "Napkin AI",
+        "website_url": "https://www.napkin.ai",
+        "category": "design-creative"
+      },
+      {
+        "slug": "nightcafe",
+        "name": "NightCafe",
+        "website_url": "https://nightcafe.studio",
+        "category": "image-generation"
+      },
+      {
+        "slug": "notion-ai",
+        "name": "Notion AI",
+        "website_url": "https://www.notion.so",
+        "category": "productivity"
+      },
+      {
+        "slug": "openevidence",
+        "name": "OpenEvidence",
+        "website_url": "https://www.openevidence.com",
+        "category": "ai-science-healthcare"
+      },
+      {
+        "slug": "opus-clip",
+        "name": "Opus Clip",
+        "website_url": "https://www.opus.pro",
+        "category": "video-audio"
+      },
+      {
+        "slug": "otter-ai",
+        "name": "Otter.ai",
+        "website_url": "https://otter.ai",
+        "category": "productivity"
+      },
+      {
+        "slug": "photoroom",
+        "name": "Photoroom",
+        "website_url": "https://www.photoroom.com",
+        "category": "image-generation"
+      },
+      {
+        "slug": "picsart",
+        "name": "Picsart",
+        "website_url": "https://picsart.com",
+        "category": "design-creative"
+      },
+      {
+        "slug": "pika",
+        "name": "Pika",
+        "website_url": "https://pika.art",
+        "category": "video-audio"
+      },
+      {
+        "slug": "pixverse",
+        "name": "PixVerse",
+        "website_url": "https://pixverse.ai",
+        "category": "video-audio"
+      },
+      {
+        "slug": "playground-ai",
+        "name": "Playground",
+        "website_url": "https://playground.com",
+        "category": "image-generation"
+      },
+      {
+        "slug": "raycast",
+        "name": "Raycast",
+        "website_url": "https://www.raycast.com",
+        "category": "productivity"
+      },
+      {
+        "slug": "read-ai",
+        "name": "Read AI",
+        "website_url": "https://www.read.ai",
+        "category": "productivity"
+      },
+      {
+        "slug": "reclaim-ai",
+        "name": "Reclaim AI",
+        "website_url": "https://reclaim.ai",
+        "category": "productivity"
+      },
+      {
+        "slug": "recraft",
+        "name": "Recraft",
+        "website_url": "https://www.recraft.ai",
+        "category": "image-generation"
+      },
+      {
+        "slug": "relume",
+        "name": "Relume",
+        "website_url": "https://relume.io",
+        "category": "design-creative"
+      },
+      {
+        "slug": "reve",
+        "name": "Reve",
+        "website_url": "https://app.reve.com",
+        "category": "image-generation"
+      },
+      {
+        "slug": "rive",
+        "name": "Rive",
+        "website_url": "https://rive.app",
+        "category": "design-creative"
+      },
+      {
+        "slug": "runway",
+        "name": "Runway",
+        "website_url": "https://runwayml.com",
+        "category": "video-audio"
+      },
+      {
+        "slug": "scenario",
+        "name": "Scenario",
+        "website_url": "https://www.scenario.com",
+        "category": "ai-3d-game-dev"
+      },
+      {
+        "slug": "shortwave",
+        "name": "Shortwave",
+        "website_url": "https://www.shortwave.com",
+        "category": "productivity"
+      },
+      {
+        "slug": "sloyd",
+        "name": "Sloyd",
+        "website_url": "https://www.sloyd.ai",
+        "category": "ai-3d-game-dev"
+      },
+      {
+        "slug": "soundraw",
+        "name": "SOUNDRAW",
+        "website_url": "https://soundraw.io",
+        "category": "music-audio"
+      },
+      {
+        "slug": "spellbook",
+        "name": "Spellbook",
+        "website_url": "https://www.spellbook.legal",
+        "category": "productivity"
+      },
+      {
+        "slug": "spline-ai",
+        "name": "Spline AI",
+        "website_url": "https://spline.design",
+        "category": "ai-3d-game-dev"
+      },
+      {
+        "slug": "stable-diffusion",
+        "name": "Stable Diffusion",
+        "website_url": "https://stability.ai",
+        "category": "image-generation"
+      },
+      {
+        "slug": "suno",
+        "name": "Suno",
+        "website_url": "https://suno.com",
+        "category": "video-audio"
+      },
+      {
+        "slug": "superhuman",
+        "name": "Superhuman",
+        "website_url": "https://superhuman.com",
+        "category": "productivity"
+      },
+      {
+        "slug": "synthesia",
+        "name": "Synthesia",
+        "website_url": "https://www.synthesia.io",
+        "category": "video-audio"
+      },
+      {
+        "slug": "taskade",
+        "name": "Taskade",
+        "website_url": "https://www.taskade.com",
+        "category": "productivity"
+      },
+      {
+        "slug": "tensor-art",
+        "name": "Tensor.Art",
+        "website_url": "https://tensor.art",
+        "category": "image-generation"
+      },
+      {
+        "slug": "tl-dv",
+        "name": "tl;dv",
+        "website_url": "https://tldv.io",
+        "category": "productivity"
+      },
+      {
+        "slug": "topaz-labs",
+        "name": "Topaz Labs",
+        "website_url": "https://www.topazlabs.com",
+        "category": "image-generation"
+      },
+      {
+        "slug": "tripo-ai",
+        "name": "Tripo AI",
+        "website_url": "https://www.tripo3d.ai",
+        "category": "ai-3d-game-dev"
+      },
+      {
+        "slug": "udio",
+        "name": "Udio",
+        "website_url": "https://www.udio.com",
+        "category": "video-audio"
+      },
+      {
+        "slug": "veed",
+        "name": "VEED",
+        "website_url": "https://www.veed.io",
+        "category": "video-audio"
+      },
+      {
+        "slug": "zapier",
+        "name": "Zapier",
+        "website_url": "https://zapier.com",
+        "category": "productivity"
+      }
+    ]
+  }
+}
