@@ -57,6 +57,9 @@ export async function generateMetadata(): Promise<Metadata> {
       title: "AiCensus - The curated directory of AI tools",
       description,
     },
+    alternates: {
+      canonical: "/",
+    },
   };
 }
 
