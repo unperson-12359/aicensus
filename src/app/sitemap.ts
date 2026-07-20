@@ -22,6 +22,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/prompt-builder`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/faq`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.3 },
     { url: `${baseUrl}/changelog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.3 },
+    { url: `${baseUrl}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
+    { url: `${baseUrl}/terms`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
+    { url: `${baseUrl}/cookies`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
   ];
 
   const stackPages: MetadataRoute.Sitemap = stacks.map((stack) => ({
@@ -72,18 +75,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const { createClient } = await import("@/lib/supabase/public");
     const supabase = await createClient();
 
-    const { data: tools } = (await supabase
+    const { data: tools, error: toolsError } = (await supabase
       .from("tools")
       .select("slug, updated_at")
       .eq("status", "published")) as {
       data: { slug: string; updated_at: string }[] | null;
+      error: unknown;
     };
 
-    const { data: categories } = (await supabase
+    if (toolsError) throw toolsError;
+
+    const { data: categories, error: categoriesError } = (await supabase
       .from("categories")
       .select("slug, updated_at")) as {
       data: { slug: string; updated_at: string }[] | null;
+      error: unknown;
     };
+
+    if (categoriesError) throw categoriesError;
 
     toolPages = (tools || []).map((tool) => ({
       url: `${baseUrl}/tools/${tool.slug}`,
@@ -107,8 +116,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.7,
     }));
-  } catch {
-    // Supabase not configured
+  } catch (error) {
+    // Supabase not configured or unreachable — without this the sitemap would
+    // silently lose all tool/category URLs, so make the failure visible.
+    console.error("sitemap: failed to load tools/categories from Supabase", error);
   }
 
   return [
