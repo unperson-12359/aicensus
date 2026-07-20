@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/public";
 import type { Tool, ToolWithCategory } from "@/lib/types/database";
 
 function sanitizeSearchQuery(search: string): string {

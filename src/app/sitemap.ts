@@ -69,7 +69,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let categoryPages: MetadataRoute.Sitemap = [];
 
   try {
-    const { createClient } = await import("@/lib/supabase/server");
+    const { createClient } = await import("@/lib/supabase/public");
     const supabase = await createClient();
 
     const { data: tools } = (await supabase
