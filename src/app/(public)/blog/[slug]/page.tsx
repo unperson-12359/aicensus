@@ -61,6 +61,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
+    ...(post.updated ? { dateModified: post.updated } : {}),
     author: {
       "@type": "Organization",
       name: post.author,
@@ -113,6 +114,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     year: "numeric",
                   })}
                 </span>
+                {post.updated && (
+                  <span className="flex items-center gap-1.5">
+                    Last updated{" "}
+                    {new Date(post.updated).toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </span>
+                )}
                 <span className="flex items-center gap-1.5">
                   <Clock className="h-3.5 w-3.5" />
                   {post.readingTime}

@@ -11,10 +11,10 @@ Loop state for the recurring freshness work sessions. See LOOP-PROMPT.md for the
 - [x] 4. Windsurf→Devin Desktop rebrand — DONE Loop 1 (migration written; MUST be applied in Supabase)
 
 ### P1 — Freshness system
-- [x] 5. Migration: tools += pricing_as_of, last_verified_at, aka, successor_slug + display on tool pages — DONE Loop 2 (⚠️ DDL pending: owner must run 20260720130000 in Supabase SQL editor; display code deployed and safe without it)
-- [x] 6. Fix high-traffic records (arrays included): chatgpt, gemini, grok, deepseek, midjourney, github-copilot — DONE Loop 2 (applied + verified live; cursor, character-ai, arc-max/dia, elevenlabs, suno, microsoft-copilot deferred to Loop 3)
-- [ ] 7. Archive dall-e-3 and arc-max with successor pointers
-- [ ] 8. Render `updated` frontmatter + dateModified in blog JSON-LD; refresh best-ai-writing-tools, best-ai-video-tools-2026, run-ai-locally-open-source-models, best-free-ai-tools-2026
+- [x] 5. Migration: tools += pricing_as_of, last_verified_at, aka, successor_slug + display on tool pages — DONE Loop 2 (DDL applied live by owner 2026-07-20; verified)
+- [x] 6. Fix high-traffic records (arrays included) — DONE Loops 2+3 (all 12 records: chatgpt, gemini, grok, deepseek, midjourney, github-copilot, cursor, character-ai, elevenlabs, suno, microsoft-copilot, dia)
+- [x] 7. Archive dall-e-3 and arc-max with successor pointers — DONE Loop 3 (status=archived, successor_slug=chatgpt/dia; broken refs repointed)
+- [x] 8. Render `updated` frontmatter + dateModified in blog JSON-LD — rendering DONE Loop 3; article refreshes (best-ai-writing-tools, best-ai-video-tools-2026, run-ai-locally-open-source-models, best-free-ai-tools-2026) still pending → Loop 4
 
 ### P2 — Quality
 - [ ] 9. FAQPage JSON-LD from existing ## FAQ sections
@@ -28,6 +28,43 @@ Loop state for the recurring freshness work sessions. See LOOP-PROMPT.md for the
 - [ ] 15. editor_rating recalibration proposal
 
 ## Run log
+
+### Loop 3 — 2026-07-20 (completed; deployed)
+- Batch: P1-6 remainder (6 records) + P1-7 (2 archives) + P1-8 (blog updated/dateModified rendering)
+- Owner applied BOTH pending SQL files in Supabase (20260720130000 DDL + 20260720131000 DML);
+  verified live: all 6 Loop-2 records carry pricing_as_of=2026-07-20.
+- Files changed:
+  - supabase/migrations/20260720132000_refresh_remaining_high_traffic.sql (8 rows, arrays + status/successor_slug)
+  - scripts/apply-remaining-refresh-rest.py (applied live via PostgREST, all 8 verified)
+  - src/lib/blog.ts (+`updated` frontmatter field), src/app/(public)/blog/[slug]/page.tsx
+    (visible "Last updated" + dateModified in Article JSON-LD), src/app/(public)/blog/page.tsx
+    (dateModified in Blog JSON-LD)
+  - src/lib/stack-explorer.ts, src/lib/popular-comparisons.ts, src/lib/best-for.ts —
+    archived-slug refs repointed to successors (arc-max→dia, dall-e-3→chatgpt/GPT Image)
+  - src/content/blog/ai-image-generators-guide.mdx, how-to-use-ai-for-marketing.mdx —
+    /tools/dall-e-3 links repointed to /tools/chatgpt, `updated: 2026-07-20` stamped
+- Records updated live + verified (facts web-verified 2026-07-20):
+  - cursor: SpaceX ~$60B all-stock acquisition of Anysphere announced Jun 2026, closing Q3
+    (TechCrunch-referenced, multi-source); Hobby/Pro $20/Pro+ $60/Ultra $200/Teams $40; Composer 2.5
+  - character-ai: free unlimited w/ ads + waiting rooms; c.ai+ $9.99/mo; under-18 chat ban
+    effective Nov 25 2025 (AP News); strict filters, DMCA/safety bot sweeps
+  - elevenlabs: official pricing page — Free 10k credits, Starter $6, Creator $22 ($11 first month),
+    Pro $99, Scale $299, Business $990; v3 70+ languages, IVC/PVC
+  - suno: v5.5 (Mar 26 2026) Voices/Custom Models; Free 50 credits/day non-commercial;
+    Pro $10, Premier $30 (Studio DAW, MIDI); Warner licensed Nov 2025, Sony/UMG litigation open
+  - microsoft-copilot: DALL-E refs removed (OpenAI retired DALL-E API May 2026); M365 Copilot
+    Business $21/user/mo standard (launched Dec 2025); consumer free tier
+  - dia: Atlassian acquired The Browser Company $610M (closed Oct 21 2025); positioned as Arc successor
+- Archives (P1-7): dall-e-3 → status=archived, successor_slug=chatgpt (DALL-E 2/3 API deprecated
+  May 12 2026); arc-max → status=archived, successor_slug=dia. Verified live.
+- Detection pass: URL spot-check #3 (8 URLs): jasper, copy-ai, notion, zapier, beautiful-ai all 200;
+  grammarly.com 200 (locale redirect to /1); make.com + gamma.app 403 to bots (bot-blocking,
+  almost certainly live — recheck in browser next loop). No new findings.
+- Verification: eslint clean; check:links passed (27 posts, 242 tools [2 archived], 19 categories);
+  next build OK.
+- NEXT BATCH (Loop 4): P1-8 article refreshes — best-ai-writing-tools, best-ai-video-tools-2026,
+  run-ai-locally-open-source-models, best-free-ai-tools-2026 (each needs fresh web verification at
+  that time; stamp `updated` frontmatter on each)
 
 ### Loop 2 — 2026-07-20 (completed; deployed as ceb602f)
 - Batch: P1-5 + P1-6 (6 of 12 records; rest deferred to Loop 3)

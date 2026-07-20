@@ -61,6 +61,7 @@ export default async function BlogPage({
       "@type": "BlogPosting",
       headline: post.title,
       datePublished: post.date,
+      ...(post.updated ? { dateModified: post.updated } : {}),
       url: `${siteUrl}/blog/${post.slug}`,
     })),
   };

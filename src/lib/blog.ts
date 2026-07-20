@@ -10,6 +10,7 @@ export interface BlogPost {
   title: string;
   description: string;
   date: string;
+  updated?: string;
   author: string;
   tags: string[];
   readingTime: string;
@@ -21,6 +22,7 @@ export interface BlogPostMeta {
   title: string;
   description: string;
   date: string;
+  updated?: string;
   author: string;
   tags: string[];
   readingTime: string;
@@ -48,6 +50,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
       title: data.title || "",
       description: data.description || "",
       date: data.date || "",
+      updated: data.updated || undefined,
       author: data.author || "AiCensus",
       tags: data.tags || [],
       readingTime: stats.text,

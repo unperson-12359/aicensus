@@ -63,10 +63,10 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
   { slugs: ["roo-code", "cline"], group: "coding" },
 
   // Image
-  { slugs: ["midjourney", "dall-e-3"], group: "image" },
+  { slugs: ["midjourney", "chatgpt"], group: "image" },
   { slugs: ["midjourney", "flux"], group: "image" },
   { slugs: ["midjourney", "ideogram"], group: "image" },
-  { slugs: ["ideogram", "dall-e-3"], group: "image" },
+  { slugs: ["ideogram", "chatgpt"], group: "image" },
   { slugs: ["midjourney", "leonardo-ai"], group: "image" },
   { slugs: ["adobe-firefly", "midjourney"], group: "image" },
 
@@ -109,8 +109,8 @@ export const POPULAR_COMPARISONS: ComparisonPair[] = [
 
   // AI browsers / web agents
   { slugs: ["chatgpt-atlas", "perplexity-comet"], group: "browser" },
-  { slugs: ["dia", "arc-max"], group: "browser" },
   { slugs: ["chatgpt-atlas", "dia"], group: "browser" },
+  { slugs: ["perplexity-comet", "dia"], group: "browser" },
   { slugs: ["perplexity-comet", "perplexity"], group: "browser" },
 
   // Model leaderboards / benchmarks

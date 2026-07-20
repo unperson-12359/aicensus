@@ -153,8 +153,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
     picks: [
       { slug: "chatgpt-atlas", pitch: "OpenAI's browser for people who want ChatGPT built directly into reading, research, and page-aware workflows." },
       { slug: "perplexity-comet", pitch: "Best search-first AI browser: Perplexity's answer engine wrapped around tabs, sources, and web research." },
-      { slug: "dia", pitch: "The Browser Company's AI-first bet for everyday browsing, writing, and tab-context workflows." },
-      { slug: "arc-max", pitch: "Lightweight AI inside Arc Browser: summaries, tab help, and opt-in browsing assistance without switching browsers." },
+      { slug: "dia", pitch: "The Browser Company's AI-first bet for everyday browsing, writing, and tab-context workflows — now backed by Atlassian." },
       { slug: "perplexity", pitch: "The most reliable AI-native browsing habit today: search, citations, follow-ups, and source trails in one surface." },
       { slug: "genspark", pitch: "AI search alternative that turns web research into synthesized pages and organized answers." },
       { slug: "tavily", pitch: "Developer-facing search and extraction API for teams building browser agents or web-aware assistants." },
@@ -352,7 +351,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
       "Image generation has split: aesthetics (Midjourney), text fidelity (Ideogram), open-source flexibility (Flux), and commercial safety (Adobe Firefly). Each pick below wins on a different axis — choose by what you're shipping.",
     picks: [
       { slug: "midjourney", pitch: "Best aesthetic quality, period. The default for moodboards, hero art, concept work — anywhere taste matters more than control." },
-      { slug: "dall-e-3", pitch: "Tightly integrated with ChatGPT; best at following prompts literally. Less artistic, more reliable." },
+      { slug: "chatgpt", pitch: "GPT Image inside ChatGPT: tightly integrated, best at following prompts literally and rendering text. Less artistic, more reliable." },
       { slug: "ideogram", pitch: "The text-in-image king. Posters, ads, anything where typography is part of the art." },
       { slug: "recraft", pitch: "Stronger for controlled graphics, icons, and brand assets than generic image generators." },
       { slug: "flux", pitch: "Open-weight quality that rivals Midjourney. The pick for self-hosting, fine-tuning, or running outside US infrastructure." },
