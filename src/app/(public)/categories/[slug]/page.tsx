@@ -11,7 +11,7 @@ import { GeometricDecor, pageHeaderShapes } from "@/components/shared/geometric-
 import { getToolsByCategory } from "@/lib/queries/tools";
 import { getCategoryBySlug, getAllCategorySlugs } from "@/lib/queries/categories";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 const TOOLS_PER_PAGE = 12;
 
