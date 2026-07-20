@@ -227,6 +227,14 @@ export default async function ToolDetailPage({ params }: PageProps) {
 
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <RatingStars rating={tool.editor_rating} size="sm" />
+              {tool.editor_rating !== null && (
+                <Link
+                  href="/how-we-rate"
+                  className="text-xs text-muted-foreground underline decoration-white/20 underline-offset-2 transition-colors hover:text-foreground"
+                >
+                  How we rate
+                </Link>
+              )}
               <PricingBadge pricing={tool.pricing_model} />
               {tool.categories && (
                 <Link href={`/categories/${tool.categories.slug}`}>

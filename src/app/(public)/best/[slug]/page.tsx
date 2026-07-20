@@ -163,6 +163,12 @@ export default async function BestForPage({ params }: Props) {
                 § The picks
               </p>
               <span className="h-px flex-1 bg-white/10" />
+              <Link
+                href="/how-we-rate"
+                className="shrink-0 font-mono text-[10px] uppercase tracking-[0.22em] text-white/40 transition-colors hover:text-white/70 sm:text-[11px]"
+              >
+                How we rate
+              </Link>
             </div>
 
             <ol className="mt-6 space-y-4 sm:space-y-5">

@@ -14,25 +14,40 @@ interface ComparisonTableProps {
   tools: ToolWithCategory[];
 }
 
+const ratingLabel = (
+  <Link
+    href="/how-we-rate"
+    title="How AiCensus assigns editor ratings"
+    className="underline decoration-white/20 underline-offset-2 transition-colors hover:text-foreground"
+  >
+    Rating
+  </Link>
+);
+
 const ROWS: {
-  label: string;
+  id: string;
+  label: ReactNode;
   render: (tool: ToolWithCategory) => ReactNode;
 }[] = [
   {
-    label: "Rating",
+    id: "rating",
+    label: ratingLabel,
     render: (t) => <RatingStars rating={t.editor_rating} />,
   },
   {
+    id: "pricing",
     label: "Pricing",
     render: (t) => <PricingBadge pricing={t.pricing_model} />,
   },
   {
+    id: "category",
     label: "Category",
     render: (t) => (
       <span className="text-sm">{t.categories?.name || "—"}</span>
     ),
   },
   {
+    id: "features",
     label: "Features",
     render: (t) =>
       t.key_features && t.key_features.length > 0 ? (
@@ -48,6 +63,7 @@ const ROWS: {
       ),
   },
   {
+    id: "pros",
     label: "Pros",
     render: (t) =>
       t.pros && t.pros.length > 0 ? (
@@ -63,6 +79,7 @@ const ROWS: {
       ),
   },
   {
+    id: "cons",
     label: "Cons",
     render: (t) =>
       t.cons && t.cons.length > 0 ? (
@@ -78,6 +95,7 @@ const ROWS: {
       ),
   },
   {
+    id: "use-cases",
     label: "Use Cases",
     render: (t) => (
       <div className="flex flex-wrap gap-1">
@@ -98,14 +116,14 @@ function MobileComparisonCards({ tools }: { tools: ToolWithCategory[] }) {
   return (
     <div className="space-y-3 md:hidden">
       {ROWS.map((row) => (
-        <div key={row.label} className="rounded-lg border border-border/40 p-4">
+        <div key={row.id} className="rounded-lg border border-border/40 p-4">
           <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
             {row.label}
           </p>
           <div className="mt-3 space-y-3">
             {tools.map((tool) => (
               <div
-                key={`${row.label}-${tool.id}`}
+                key={`${row.id}-${tool.id}`}
                 className="border-t border-border/30 pt-3 first:border-t-0 first:pt-0"
               >
                 <p className="mb-1 text-sm font-medium">{tool.name}</p>
@@ -148,7 +166,7 @@ function Row({
   children,
   alt,
 }: {
-  label: string;
+  label: ReactNode;
   children: ReactNode;
   alt?: boolean;
 }) {
@@ -205,7 +223,7 @@ export function ComparisonTable({ tools }: ComparisonTableProps) {
             </tr>
           </thead>
           <tbody>
-            <Row label="Rating">
+            <Row label={ratingLabel}>
               {tools.map((t) => (
                 <td key={t.id} className="px-4 py-3">
                   <RatingStars rating={t.editor_rating} />

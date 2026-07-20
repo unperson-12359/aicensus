@@ -84,10 +84,27 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     ],
   };
 
+  const faqJsonLd =
+    post.faqs && post.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: post.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
+
   return (
     <>
       <JsonLd data={articleJsonLd} />
       <JsonLd data={breadcrumbLd} />
+      {faqJsonLd && <JsonLd data={faqJsonLd} />}
       <PageContainer variant="narrow">
         <article>
           {/* Breadcrumbs */}
