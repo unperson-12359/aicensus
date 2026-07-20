@@ -34,6 +34,7 @@ import {
   getToolAlternatives,
   getAdjacentTools,
   getToolsBySlugs,
+  getAllToolSlugs,
 } from "@/lib/queries/tools";
 import { getComparisonsForTool } from "@/lib/popular-comparisons";
 import { getBestForPagesForTool } from "@/lib/best-for";
@@ -43,6 +44,15 @@ export const revalidate = 3600;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  try {
+    const slugs = await getAllToolSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

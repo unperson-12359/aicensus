@@ -72,7 +72,9 @@ caching, and any Supabase latency/outage produces slow or failed responses exact
 Google crawls. On a new domain with thin trust, this is a strong contributor to
 "Crawled/Discovered — currently not indexed" (112 URLs in the GSC export).
 
-**Fix (this branch):** cookie-less Supabase client for the read-only catalog query layer.
+**Fix (this branch):** cookie-less Supabase client for the read-only catalog query layer,
+plus `generateStaticParams` on `/tools/[slug]` so all 244 tool pages prerender at build
+(verified: `x-nextjs-cache: HIT`, `s-maxage=3600` locally).
 
 ### H2. `aicensus.vercel.app` serves a full duplicate of the site
 
