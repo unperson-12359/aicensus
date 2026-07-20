@@ -99,6 +99,10 @@ export interface Database {
           founded_year: number | null;
           company_name: string | null;
           headquarters: string | null;
+          pricing_as_of: string | null;
+          last_verified_at: string | null;
+          aka: string[];
+          successor_slug: string | null;
           created_at: string;
           updated_at: string;
           published_at: string | null;
@@ -130,6 +134,10 @@ export interface Database {
           founded_year?: number | null;
           company_name?: string | null;
           headquarters?: string | null;
+          pricing_as_of?: string | null;
+          last_verified_at?: string | null;
+          aka?: string[];
+          successor_slug?: string | null;
           created_at?: string;
           updated_at?: string;
           published_at?: string | null;
@@ -161,6 +169,10 @@ export interface Database {
           founded_year?: number | null;
           company_name?: string | null;
           headquarters?: string | null;
+          pricing_as_of?: string | null;
+          last_verified_at?: string | null;
+          aka?: string[];
+          successor_slug?: string | null;
           created_at?: string;
           updated_at?: string;
           published_at?: string | null;

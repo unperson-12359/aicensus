@@ -29,7 +29,11 @@ Loop state for the recurring freshness work sessions. See LOOP-PROMPT.md for the
 
 ## Run log
 
-### Loop 1 — 2026-07-20 (completed; push blocked on git credentials)
+### Loop 2 — 2026-07-20 (in progress)
+- Batch: P1-5 (freshness columns + tool-page display) + P1-6 (six high-traffic record fixes)
+- Status: started
+
+### Loop 1 — 2026-07-20 (completed; deployed)
 - Batch: P0-3 (article rewrite) + P0-4 (Windsurf rebrand). Bonus: P0-1 + P0-2 completed
   via inherited reconcile/backfill work (validated: replay 244 == live 244, check:links passes).
 - Files changed:

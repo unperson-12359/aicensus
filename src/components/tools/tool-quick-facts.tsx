@@ -53,6 +53,15 @@ export function ToolQuickFacts({ tool }: ToolQuickFactsProps) {
           {tool.pricing_details}
         </p>
       )}
+      {tool.pricing_as_of && (
+        <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.14em] text-white/40">
+          Pricing verified{" "}
+          {new Date(`${tool.pricing_as_of}T00:00:00`).toLocaleDateString("en-US", {
+            month: "short",
+            year: "numeric",
+          })}
+        </p>
+      )}
     </div>
   );
 }
