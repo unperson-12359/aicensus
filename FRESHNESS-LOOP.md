@@ -11,8 +11,8 @@ Loop state for the recurring freshness work sessions. See LOOP-PROMPT.md for the
 - [x] 4. Windsurf→Devin Desktop rebrand — DONE Loop 1 (migration written; MUST be applied in Supabase)
 
 ### P1 — Freshness system
-- [ ] 5. Migration: tools += pricing_as_of, last_verified_at, aka, successor_slug + display on tool pages
-- [ ] 6. Fix high-traffic records (arrays included): chatgpt, gemini, grok, deepseek, midjourney, github-copilot, cursor, character-ai, arc-max/dia, elevenlabs, suno, microsoft-copilot
+- [x] 5. Migration: tools += pricing_as_of, last_verified_at, aka, successor_slug + display on tool pages — DONE Loop 2 (⚠️ DDL pending: owner must run 20260720130000 in Supabase SQL editor; display code deployed and safe without it)
+- [x] 6. Fix high-traffic records (arrays included): chatgpt, gemini, grok, deepseek, midjourney, github-copilot — DONE Loop 2 (applied + verified live; cursor, character-ai, arc-max/dia, elevenlabs, suno, microsoft-copilot deferred to Loop 3)
 - [ ] 7. Archive dall-e-3 and arc-max with successor pointers
 - [ ] 8. Render `updated` frontmatter + dateModified in blog JSON-LD; refresh best-ai-writing-tools, best-ai-video-tools-2026, run-ai-locally-open-source-models, best-free-ai-tools-2026
 
@@ -29,9 +29,33 @@ Loop state for the recurring freshness work sessions. See LOOP-PROMPT.md for the
 
 ## Run log
 
-### Loop 2 — 2026-07-20 (in progress)
-- Batch: P1-5 (freshness columns + tool-page display) + P1-6 (six high-traffic record fixes)
-- Status: started
+### Loop 2 — 2026-07-20 (completed; deployed as ceb602f)
+- Batch: P1-5 + P1-6 (6 of 12 records; rest deferred to Loop 3)
+- Files changed:
+  - supabase/migrations/20260720130000_add_tool_freshness_columns.sql (DDL — NOT yet applied to live DB)
+  - supabase/migrations/20260720131000_refresh_high_traffic_tools.sql (DML — applied live via REST)
+  - src/lib/types/database.ts (4 new fields on tools Row/Insert/Update)
+  - src/app/(public)/tools/[slug]/page.tsx + src/components/tools/tool-quick-facts.tsx
+    ("Pricing verified Mon YYYY" — renders only when pricing_as_of is set)
+  - scripts/apply-high-traffic-refresh-rest.py
+- Records updated live + verified (chatgpt, gemini, grok, deepseek, midjourney, github-copilot):
+  - chatgpt: GPT-5.6 family, Free/Go $8/Plus $20/Pro $100/$200/Business (aipricing.guru, techjacksolutions — 2026-07)
+  - gemini: 3.1 Pro + 3.5 Flash, Free/AI Plus $4.99/AI Pro $19.99/Ultra $99.99-$199.99 (saganote, pricepertoken, gamsgo — 2026-07)
+  - grok: Grok 4.5 flagship (Jul 8), 4.3 1M ctx, SuperGrok ~$30/Heavy ~$300, Imagine (benchlm, ai-toolbox — 2026-07)
+  - deepseek: V4 Flash $0.14/$0.28 + V4 Pro $0.435/$0.87, 1M ctx, free chat (felloai, chat-deep.ai — 2026-07)
+  - midjourney: V8.1 (Apr 30), $10/$30/$60/$120, annual -20%, no free tier (pixverse, aisimplr — 2026-06)
+  - github-copilot: Free 2,000 comp./Pro $10/Pro+ $39/Max $100/Business $19/Enterprise $39; AI Credits since Jun 1 (nocode.mba, techjacksolutions, yixscout — 2026-06/07)
+- ⚠️ OWNER ACTION (one paste): run supabase/migrations/20260720130000_add_tool_freshness_columns.sql
+  in the Supabase SQL editor, THEN the freshness UPDATE at the bottom of 20260720131000 (already in
+  the file) will set pricing_as_of on the 6 refreshed records. Until then, tool pages simply don't
+  render the badge (safe). DDL cannot be applied via PostgREST — no API channel exists for it.
+- Detection pass: URL spot-check #2 (8 URLs): perplexity.ai, claude.ai, chat.deepseek.com return 403
+  to bots (bot-blocking, certainly live); gemini.google.com, grok.com, github.com, cursor.com,
+  heygen.com all 200. No new findings.
+- Verification: eslint clean; check:links passed (27 posts, 244 tools, 19 categories); build OK; pushed ceb602f.
+- NEXT BATCH (Loop 3): finish P1-6 remainder (cursor, character-ai, arc-max/dia successor pointers,
+  elevenlabs, suno, microsoft-copilot) + P1-7 (archive dall-e-3, arc-max with successor_slug once
+  DDL is applied) + P1-8 (`updated` rendering + dateModified in blog JSON-LD)
 
 ### Loop 1 — 2026-07-20 (completed; deployed)
 - Batch: P0-3 (article rewrite) + P0-4 (Windsurf rebrand). Bonus: P0-1 + P0-2 completed
