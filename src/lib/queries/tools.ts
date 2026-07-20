@@ -295,6 +295,62 @@ export async function getToolsBySlugs(
   return rows;
 }
 
+/**
+ * Every published tool as a minimal { slug, name } pair, ordered by name.
+ * Backs the crawlable /tools/all A–Z index — intentionally selects only the
+ * two columns needed for plain links.
+ */
+export async function getAllToolsForIndex(): Promise<
+  { slug: string; name: string }[]
+> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("tools")
+    .select("slug, name")
+    .eq("status", "published")
+    .order("name", { ascending: true });
+
+  if (error) throw error;
+  return (data as { slug: string; name: string }[]) || [];
+}
+
+/**
+ * Slugs of published tools that have at least one curated row in
+ * tool_alternatives (either direction, matching the bidirectional lookup the
+ * alternatives page uses). Tools not in this set render the category-fallback
+ * version of /tools/{slug}/alternatives, which is kept out of the sitemap
+ * and the index.
+ */
+export async function getToolSlugsWithCuratedAlternatives(): Promise<
+  Set<string>
+> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("tool_alternatives")
+    .select("tool_id, alternative_id");
+
+  if (error) throw error;
+
+  const ids = new Set<string>();
+  for (const row of data || []) {
+    ids.add(row.tool_id as string);
+    ids.add(row.alternative_id as string);
+  }
+  if (ids.size === 0) return new Set();
+
+  const { data: tools, error: toolsError } = await supabase
+    .from("tools")
+    .select("slug")
+    .in("id", Array.from(ids))
+    .eq("status", "published");
+
+  if (toolsError) throw toolsError;
+
+  return new Set((tools || []).map((t) => t.slug as string));
+}
+
 export async function getFeaturedTools(limit = 6) {
   return getTools({ featured: true, limit, sort: "rating" });
 }

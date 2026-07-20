@@ -11,7 +11,7 @@ import { RatingStars } from "@/components/shared/rating-stars";
 import { PricingBadge } from "@/components/shared/pricing-badge";
 import { ToolLogo } from "@/components/shared/tool-logo";
 import { getLogoUrl } from "@/lib/utils";
-import { formatContentLastUpdated } from "@/lib/content-dates";
+import { formatContentLastUpdated, maxUpdatedAt } from "@/lib/content-dates";
 import { getToolsBySlugs } from "@/lib/queries/tools";
 import {
   getBestForBySlug,
@@ -39,10 +39,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return { title: "Not Found" };
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
-  const description = `${page.tagline} ${page.intro}`.slice(0, 300);
+  const firstSentence = page.intro.split(/(?<=[.!?])\s+/)[0] ?? page.intro;
+  const combined = `${page.tagline} ${firstSentence}`;
+  const description =
+    combined.length <= 160
+      ? combined
+      : `${combined.slice(0, 157).replace(/\s+\S*$/, "")}…`;
 
   return {
-    title: `${page.title} | AiCensus`,
+    title: page.title,
     description,
     openGraph: { title: page.title, description, url: `/best/${slug}` },
     twitter: { card: "summary_large_image", title: page.title, description },
@@ -79,6 +84,11 @@ export default async function BestForPage({ params }: Props) {
     name: page.title,
     description: page.intro,
     url: `${siteUrl}/best/${slug}`,
+    // No date field exists in best-for.ts; mirror the visible "Updated" label,
+    // which derives from the newest updated_at among the listed tools.
+    ...(tools.length > 0
+      ? { dateModified: maxUpdatedAt(tools).toISOString() }
+      : {}),
     numberOfItems: page.picks.length,
     itemListElement: page.picks.map((pick, i) => {
       const t = toolMap.get(pick.slug);

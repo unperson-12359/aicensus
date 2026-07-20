@@ -13,7 +13,7 @@ import { FadeIn, RevealText, StaggerChildren, StaggerItem, PageTransition } from
 import { GeometricDecor, aboutHeroShapes, sectionShapes } from "@/components/shared/geometric-decor";
 
 export const metadata: Metadata = {
-  title: "How We Rate AI Tools — AiCensus Methodology",
+  title: "How We Rate AI Tools — Methodology",
   description:
     "The AiCensus editor rating is an editorial score out of 5, based on hands-on review of output quality, pricing fairness, ease of use, reliability, privacy practices, and pace of development.",
   openGraph: {

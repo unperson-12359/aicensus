@@ -63,13 +63,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Tool Not Found" };
   }
 
-  const description = `${tool.tagline}. Read our review of ${tool.name}: pricing, pros & cons, use cases, and alternatives.`;
+  const suffix = "Pricing, pros & cons, alternatives.";
+  const truncateAtWord = (text: string, max: number) =>
+    text.length <= max ? text : text.slice(0, max).replace(/\s+\S*$/, "");
+  const tagline = truncateAtWord(
+    tool.tagline.replace(/\.+$/, ""),
+    160 - suffix.length - 2
+  );
+  const fallbackDescription = `${tagline}. ${suffix}`;
+
+  const title = tool.meta_title ?? `${tool.name} — AI Tool Review & Pricing`;
+  const description = tool.meta_description ?? fallbackDescription;
 
   return {
-    title: `${tool.name} — AI Tool Review & Pricing`,
+    title,
     description,
     openGraph: {
-      title: `${tool.name} — Review & Pricing | AiCensus`,
+      title,
       description: tool.tagline,
       url: `/tools/${tool.slug}`,
       images: tool.screenshot_url
@@ -78,7 +88,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: `${tool.name} — AI Tool Review & Pricing`,
+      title,
       description: tool.tagline,
     },
     alternates: {
@@ -151,9 +161,12 @@ export default async function ToolDetailPage({ params }: PageProps) {
     image: tool.logo_url,
     applicationCategory: "Artificial Intelligence",
     operatingSystem: "Web",
+    dateModified: tool.updated_at,
     offers: {
       "@type": "Offer",
-      ...(tool.pricing_model === "free" || tool.pricing_model === "open_source"
+      ...(tool.pricing_model === "free" ||
+      tool.pricing_model === "freemium" ||
+      tool.pricing_model === "open_source"
         ? { price: "0", priceCurrency: "USD" }
         : {}),
       description: tool.pricing_details || `${tool.pricing_model} pricing`,
@@ -162,12 +175,15 @@ export default async function ToolDetailPage({ params }: PageProps) {
       review: {
         "@type": "Review",
         author: { "@type": "Organization", name: "AiCensus" },
+        datePublished: tool.updated_at,
         reviewRating: {
           "@type": "Rating",
           ratingValue: tool.editor_rating,
           bestRating: 5,
         },
-        reviewBody: `Editor rating: ${tool.editor_rating.toFixed(1)}/5 based on AiCensus editorial review.`,
+        reviewBody:
+          tool.pros[0] ??
+          `Editor rating: ${tool.editor_rating.toFixed(1)}/5 based on AiCensus editorial review.`,
       },
     }),
   };

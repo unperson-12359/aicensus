@@ -4,6 +4,7 @@ import { NewsletterSignup } from "@/components/layout/newsletter-signup";
 const footerLinks = {
   Product: [
     { href: "/tools", label: "Browse tools" },
+    { href: "/tools/all", label: "A–Z all tools" },
     { href: "/compare", label: "Compare" },
     { href: "/best", label: "Best of" },
     { href: "/stacks", label: "Stacks" },

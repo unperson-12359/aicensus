@@ -33,8 +33,8 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co"
   ),
   title: {
-    default: "AiCensus — Discover & Compare the Best AI Tools",
-    template: "%s",
+    default: "AiCensus — The curated directory of AI tools",
+    template: "%s | AiCensus",
   },
   description:
     "The curated directory of verified AI tools. Find, compare, and choose the right AI tools for your workflow. Expert reviews, pricing breakdowns, pros & cons.",

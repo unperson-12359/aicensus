@@ -28,7 +28,7 @@ export async function generateMetadata({
   if (!post) return {};
 
   return {
-    title: `${post.title} — AiCensus Blog`,
+    title: post.title,
     description: post.description,
     alternates: { canonical: `/blog/${slug}` },
     openGraph: {
@@ -57,11 +57,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
     datePublished: post.date,
     ...(post.updated ? { dateModified: post.updated } : {}),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/blog/${slug}`,
+    },
+    image: `${siteUrl}/opengraph-image`,
     author: {
       "@type": "Organization",
       name: post.author,

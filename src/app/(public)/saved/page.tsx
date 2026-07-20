@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { SavedWorkspace } from "@/components/saved/saved-workspace";
 
 export const metadata: Metadata = {
-  title: "Saved AI Tools, Comparisons, and Stacks | AiCensus",
+  title: "Saved AI Tools, Comparisons, and Stacks",
   description:
     "Your private AiCensus shortlist for saved AI tools, comparisons, and stack-builder results.",
   alternates: { canonical: "/saved" },

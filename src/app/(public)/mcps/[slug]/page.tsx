@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = `${server.tagline} ${server.description}`.slice(0, 280);
 
   return {
-    title: `${server.name} MCP Server — Setup, Tools, Use Cases | AiCensus`,
+    title: `${server.name} MCP Server — Setup, Tools, Use Cases`,
     description,
     openGraph: {
       title: `${server.name} MCP Server`,

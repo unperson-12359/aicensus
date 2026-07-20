@@ -5,6 +5,8 @@ interface SectionHeadingProps {
   description?: string;
   className?: string;
   size?: "default" | "lg" | "xl";
+  /** Heading level for the title. Use "h1" for the page-level heading. */
+  as?: "h1" | "h2";
   /** @deprecated No-op in B&W theme */
   gradient?: boolean;
   accent?: boolean;
@@ -16,6 +18,7 @@ export function SectionHeading({
   description,
   className,
   size = "default",
+  as = "h2",
   accent = false,
   eyebrow,
 }: SectionHeadingProps) {
@@ -25,6 +28,8 @@ export function SectionHeading({
     xl: "text-4xl sm:text-5xl md:text-6xl",
   };
 
+  const HeadingTag = as;
+
   return (
     <div className={cn("space-y-2", className)}>
       {(eyebrow || accent) && (
@@ -32,14 +37,14 @@ export function SectionHeading({
           {eyebrow ?? "Section"}
         </p>
       )}
-      <h2
+      <HeadingTag
         className={cn(
           "font-display font-bold tracking-hero leading-[1]",
           sizeClasses[size]
         )}
       >
         {title}
-      </h2>
+      </HeadingTag>
       {description && (
         <p className="mt-1 max-w-2xl text-sm text-muted-foreground sm:text-base">
           {description}

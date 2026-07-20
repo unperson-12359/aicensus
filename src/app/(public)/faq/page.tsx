@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/accordion";
 
 export const metadata: Metadata = {
-  title: "Frequently Asked Questions - AiCensus",
+  title: "Frequently Asked Questions",
   description: "Common questions about the AiCensus AI tools directory.",
   alternates: { canonical: "/faq" },
 };

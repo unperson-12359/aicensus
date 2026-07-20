@@ -65,6 +65,7 @@ export default async function CategoriesPage() {
       <PageTransition>
         <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
           <SectionHeading
+            as="h1"
             title="Categories"
             description="Browse AI tools by category and find the perfect tool for your needs."
             eyebrow="The map"

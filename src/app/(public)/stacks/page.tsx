@@ -11,7 +11,7 @@ import { stacks } from "@/lib/stacks";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Stacks — Opinionated AI tool recipes | AiCensus",
+  title: "Stacks — Opinionated AI tool recipes",
   description:
     "15 battle-tested AI tool combos for shipping real things. From SaaS to podcasts — pick a recipe, start building.",
   alternates: { canonical: "/stacks" },

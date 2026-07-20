@@ -15,7 +15,7 @@ import {
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "MCP Server Directory — Index of Model Context Protocol Servers | AiCensus",
+  title: "MCP Server Directory — Index of Model Context Protocol Servers",
   description:
     "Curated directory of MCP (Model Context Protocol) servers — the open standard for connecting AI agents to filesystems, databases, search, GitHub, Slack, and more. Maintained, ranked, and reviewed.",
   alternates: { canonical: "/mcps" },

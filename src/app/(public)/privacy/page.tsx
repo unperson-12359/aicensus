@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FadeIn, PageTransition } from "@/components/motion";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - AiCensus",
+  title: "Privacy Policy",
   description:
     "Learn how AiCensus collects, uses, and protects information from visitors.",
   alternates: { canonical: "/privacy" },

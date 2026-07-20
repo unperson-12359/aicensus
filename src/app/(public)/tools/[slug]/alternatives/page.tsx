@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound, permanentRedirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, ArrowRight, ExternalLink, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -39,21 +39,43 @@ interface Props {
   searchParams: Promise<{ page?: string }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({
+  params,
+  searchParams,
+}: Props): Promise<Metadata> {
+  const [{ slug }, sp] = await Promise.all([params, searchParams]);
   const tool = await getToolBySlug(slug);
   if (!tool) return { title: "Not Found" };
 
-  const title = `Best ${tool.name} Alternatives in 2026 — Reviewed | AiCensus`;
+  const title = `Best ${tool.name} Alternatives in 2026 — Reviewed`;
   const description = `The top alternatives to ${tool.name}, compared side-by-side. Pricing, pros & cons, ratings, and the verdict on which one fits your use case.`;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
+
+  // Only curated versions (explicit tool_alternatives rows) stay indexed.
+  // The category-fallback version is thin near-duplicate content.
+  let curated = false;
+  try {
+    curated = (await getToolAlternativesBidirectional(tool.id)).length > 0;
+  } catch {
+    curated = false;
+  }
+
+  // Paginated URLs (?page=N, N>1) are self-canonical and noindex,follow.
+  const page = Math.max(1, parseInt(sp.page || "1", 10) || 1);
+  const isPaginated = page > 1;
+  const canonicalPath = isPaginated
+    ? `/tools/${slug}/alternatives?page=${page}`
+    : `/tools/${slug}/alternatives`;
 
   return {
     title,
     description,
     openGraph: { title, description, url: `/tools/${slug}/alternatives` },
     twitter: { card: "summary_large_image", title, description },
-    alternates: { canonical: `${siteUrl}/tools/${slug}/alternatives` },
+    alternates: { canonical: `${siteUrl}${canonicalPath}` },
+    ...(!curated || isPaginated
+      ? { robots: { index: false, follow: true } }
+      : {}),
   };
 }
 
@@ -94,7 +116,7 @@ export default async function AlternativesPage({
       clampedPage > 1
         ? `/tools/${slug}/alternatives?page=${clampedPage}`
         : `/tools/${slug}/alternatives`;
-    permanentRedirect(target);
+    redirect(target);
   }
 
   const offset = (clampedPage - 1) * ALTERNATIVES_PER_PAGE;

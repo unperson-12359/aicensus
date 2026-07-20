@@ -21,6 +21,8 @@ const nextConfig: NextConfig = {
       { slug: "sweep", destination: "/tools/windsurf" },
       { slug: "agentgpt", destination: "/tools/crewai" },
       { slug: "haiper", destination: "/best/ai-video-generators" },
+      { slug: "dall-e-3", destination: "/best/ai-image-generators" },
+      { slug: "arc-max", destination: "/tools/dia" },
     ].flatMap(({ slug, destination }) => [
       {
         source: `/tools/${slug}`,

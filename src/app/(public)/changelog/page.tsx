@@ -3,7 +3,7 @@ import { FadeIn, PageTransition } from "@/components/motion";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "What's New - AiCensus",
+  title: "What's New",
   description:
     "See what's new on AiCensus. Latest features, improvements, and updates to the AI tools directory.",
   alternates: { canonical: "/changelog" },

@@ -16,7 +16,7 @@ import { getComparisonPath } from "@/lib/compare-urls";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Compare AI Tools Side by Side | AiCensus",
+  title: "Compare AI Tools Side by Side",
   description:
     "Compare AI tools head-to-head. See pricing, features, pros & cons, and ratings side by side. Includes 50+ pre-built comparisons of the most popular AI tools in 2026.",
   alternates: { canonical: "/compare" },

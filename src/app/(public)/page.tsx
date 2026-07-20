@@ -50,7 +50,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = `${toolCount} handpicked AI tools across ${categoryCount} categories. Verified reviews, honest comparisons, transparent pricing.`;
 
   return {
-    title: "AiCensus - The curated directory of AI tools",
+    // absolute: the brand is already in the title, so the root title
+    // template must not append it again.
+    title: { absolute: "AiCensus - The curated directory of AI tools" },
     description,
     openGraph: {
       title: "AiCensus - The curated directory of AI tools",
@@ -71,27 +73,19 @@ const sections = [
 ];
 
 export default async function HomePage() {
-  let featuredTools: { tools: ToolWithCategory[]; count: number } = {
-    tools: [],
-    count: 0,
-  };
-  let recentTools: { tools: ToolWithCategory[]; count: number } = {
-    tools: [],
-    count: 0,
-  };
-  let categories: CategoryWithCount[] = [];
-  let catalogStats = FALLBACK_CATALOG_STATS;
-
-  try {
-    [featuredTools, recentTools, categories, catalogStats] = await Promise.all([
-      getFeaturedTools(6),
-      getRecentTools(8),
-      getCategoriesWithToolCount(),
-      getCatalogStats(),
-    ]);
-  } catch {
-    // Supabase not configured yet
-  }
+  // DB failures throw to the error boundary (500) instead of rendering a
+  // homepage with silently missing sections (a soft 404 to crawlers).
+  const [featuredTools, recentTools, categories, catalogStats]: [
+    { tools: ToolWithCategory[]; count: number },
+    { tools: ToolWithCategory[]; count: number },
+    CategoryWithCount[],
+    { toolCount: number; categoryCount: number },
+  ] = await Promise.all([
+    getFeaturedTools(6),
+    getRecentTools(8),
+    getCategoriesWithToolCount(),
+    getCatalogStats(),
+  ]);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
 
@@ -156,9 +150,9 @@ export default async function HomePage() {
                 </h1>
               </RevealText>
               <RevealText delay={0.25}>
-                <h1 className="font-serif text-[clamp(2.25rem,8vw,6.5rem)] font-normal leading-[0.95] tracking-[-0.035em] text-white/45">
+                <p className="font-serif text-[clamp(2.25rem,8vw,6.5rem)] font-normal leading-[0.95] tracking-[-0.035em] text-white/45">
                   Build <em className="font-serif italic">without</em> noise.
-                </h1>
+                </p>
               </RevealText>
             </div>
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FadeIn, PageTransition } from "@/components/motion";
 
 export const metadata: Metadata = {
-  title: "Affiliate Disclosure - AiCensus",
+  title: "Affiliate Disclosure",
   description:
     "How AiCensus uses affiliate links, what we earn, and why it never affects our ratings or rankings.",
   alternates: { canonical: "/affiliate-disclosure" },

@@ -13,12 +13,37 @@ import { getAllPosts } from "@/lib/blog";
 
 const POSTS_PER_PAGE = 9;
 
-export const metadata: Metadata = {
-  title: "Blog — AiCensus",
+const BASE_METADATA: Metadata = {
+  title: "Blog",
   description:
     "Insights, guides, and updates from AiCensus. AI tools, reviews, and how to pick the right stack.",
   alternates: { canonical: "/blog" },
 };
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag?: string; page?: string }>;
+}): Promise<Metadata> {
+  const { tag, page: pageParam } = await searchParams;
+  const page = Math.max(1, parseInt(pageParam || "1", 10) || 1);
+
+  // Bare /blog is the only indexable URL. ?tag= and ?page>1 variants are
+  // self-canonical and noindex,follow (unified param policy).
+  if (!tag && page === 1) {
+    return BASE_METADATA;
+  }
+
+  const search = new URLSearchParams();
+  if (tag) search.set("tag", tag);
+  if (page > 1) search.set("page", String(page));
+
+  return {
+    ...BASE_METADATA,
+    alternates: { canonical: `/blog?${search.toString()}` },
+    robots: { index: false, follow: true },
+  };
+}
 
 export default async function BlogPage({
   searchParams,

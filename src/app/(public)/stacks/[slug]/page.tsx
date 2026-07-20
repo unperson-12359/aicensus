@@ -33,12 +33,12 @@ export async function generateMetadata({
   const stack = getStackBySlug(slug);
 
   if (!stack) {
-    return { title: "Stack not found — AiCensus" };
+    return { title: "Stack not found" };
   }
 
   return {
-    title: `${stack.name} — Stack | AiCensus`,
-    description: `${stack.tagline} ${stack.heroTakeaway}`.slice(0, 300),
+    title: `${stack.name} — Stack`,
+    description: `${stack.tagline} ${stack.heroTakeaway}`.slice(0, 160),
     alternates: { canonical: `/stacks/${stack.slug}` },
     openGraph: {
       title: `${stack.name} — AI tool recipe`,
@@ -75,12 +75,9 @@ export default async function StackDetailPage({ params }: PageProps) {
 
   const slugs = stack.steps.map((s) => s.toolSlug);
 
-  let tools: ToolWithCategory[] = [];
-  try {
-    tools = await getToolsBySlugs(slugs);
-  } catch {
-    tools = [];
-  }
+  // DB failures throw to the error boundary (500) instead of rendering a
+  // stack full of placeholder tiles as a silent 200.
+  const tools = await getToolsBySlugs(slugs);
 
   const toolMap = new Map<string, ToolWithCategory>();
   for (const t of tools) toolMap.set(t.slug, t);

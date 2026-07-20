@@ -8,51 +8,51 @@ import { getComparisonPath } from "@/lib/compare-urls";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
 
+  // Static pages have no honest modification date — omit lastModified
+  // rather than claiming "now" on every render.
   const staticPages: MetadataRoute.Sitemap = [
-    { url: baseUrl, lastModified: new Date(), changeFrequency: "daily", priority: 1.0 },
-    { url: `${baseUrl}/tools`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
-    { url: `${baseUrl}/categories`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${baseUrl}/stacks`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
-    { url: `${baseUrl}/best`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
-    { url: `${baseUrl}/mcps`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
-    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.4 },
-    { url: `${baseUrl}/how-we-rate`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.4 },
-    { url: `${baseUrl}/affiliate-disclosure`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
-    { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.4 },
-    { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
-    { url: `${baseUrl}/compare`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.6 },
-    { url: `${baseUrl}/prompt-builder`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${baseUrl}/faq`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.3 },
-    { url: `${baseUrl}/changelog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.3 },
-    { url: `${baseUrl}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
-    { url: `${baseUrl}/terms`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
-    { url: `${baseUrl}/cookies`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
+    { url: baseUrl, changeFrequency: "daily", priority: 1.0 },
+    { url: `${baseUrl}/tools`, changeFrequency: "daily", priority: 0.9 },
+    { url: `${baseUrl}/tools/all`, changeFrequency: "daily", priority: 0.8 },
+    { url: `${baseUrl}/categories`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${baseUrl}/stacks`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${baseUrl}/stacks/build`, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${baseUrl}/best`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${baseUrl}/mcps`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${baseUrl}/about`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${baseUrl}/how-we-rate`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${baseUrl}/affiliate-disclosure`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${baseUrl}/contact`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${baseUrl}/blog`, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${baseUrl}/compare`, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${baseUrl}/prompt-builder`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${baseUrl}/faq`, changeFrequency: "monthly", priority: 0.3 },
+    { url: `${baseUrl}/changelog`, changeFrequency: "weekly", priority: 0.3 },
+    { url: `${baseUrl}/privacy`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${baseUrl}/terms`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${baseUrl}/cookies`, changeFrequency: "yearly", priority: 0.2 },
   ];
 
   const stackPages: MetadataRoute.Sitemap = stacks.map((stack) => ({
     url: `${baseUrl}/stacks/${stack.slug}`,
-    lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
 
   const bestPages: MetadataRoute.Sitemap = BEST_FOR_PAGES.map((page) => ({
     url: `${baseUrl}/best/${page.slug}`,
-    lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.65,
   }));
 
   const mcpPages: MetadataRoute.Sitemap = MCP_SERVERS.map((server) => ({
     url: `${baseUrl}/mcps/${server.slug}`,
-    lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
 
   const comparisonPages: MetadataRoute.Sitemap = POPULAR_COMPARISONS.map((pair) => ({
     url: `${baseUrl}${getComparisonPath(pair.slugs)}`,
-    lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.65,
   }));
@@ -62,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const { getAllPosts } = await import("@/lib/blog");
     blogPages = getAllPosts().map((post) => ({
       url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: post.date ? new Date(post.date) : new Date(),
+      lastModified: new Date(post.updated ?? post.date),
       changeFrequency: "monthly" as const,
       priority: 0.5,
     }));
@@ -96,6 +96,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     if (categoriesError) throw categoriesError;
 
+    // Only tools with curated tool_alternatives rows get their alternatives
+    // page in the sitemap — the rest render a thin category-fallback version.
+    const { getToolSlugsWithCuratedAlternatives } = await import(
+      "@/lib/queries/tools"
+    );
+    const curatedAlternativeSlugs = await getToolSlugsWithCuratedAlternatives();
+
     toolPages = (tools || []).map((tool) => ({
       url: `${baseUrl}/tools/${tool.slug}`,
       lastModified: new Date(tool.updated_at),
@@ -103,12 +110,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     }));
 
-    const alternativePages: MetadataRoute.Sitemap = (tools || []).map((tool) => ({
-      url: `${baseUrl}/tools/${tool.slug}/alternatives`,
-      lastModified: new Date(tool.updated_at),
-      changeFrequency: "weekly" as const,
-      priority: 0.6,
-    }));
+    const alternativePages: MetadataRoute.Sitemap = (tools || [])
+      .filter((tool) => curatedAlternativeSlugs.has(tool.slug))
+      .map((tool) => ({
+        url: `${baseUrl}/tools/${tool.slug}/alternatives`,
+        lastModified: new Date(tool.updated_at),
+        changeFrequency: "weekly" as const,
+        priority: 0.6,
+      }));
 
     toolPages = [...toolPages, ...alternativePages];
 

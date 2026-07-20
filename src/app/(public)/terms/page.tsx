@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FadeIn, PageTransition } from "@/components/motion";
 
 export const metadata: Metadata = {
-  title: "Terms of Service - AiCensus",
+  title: "Terms of Service",
   description:
     "Terms and conditions for using the AiCensus AI tools directory.",
   alternates: { canonical: "/terms" },

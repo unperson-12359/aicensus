@@ -9,7 +9,7 @@ import { BEST_FOR_PAGES } from "@/lib/best-for";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Best AI Tools by Use Case | AiCensus",
+  title: "Best AI Tools by Use Case",
   description:
     "Curated picks of the best AI tools for every persona and job — solo founders, PMs, marketers, designers, students, podcasters, researchers, and more.",
   alternates: { canonical: "/best" },

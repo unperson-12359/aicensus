@@ -14,7 +14,7 @@ import { getToolsBySlugs } from "@/lib/queries/tools";
 export const dynamic = "force-dynamic";
 
 const BASE_METADATA: Metadata = {
-  title: "AI Stack Builder — Pick Your AI Tools by Capability | AiCensus",
+  title: "AI Stack Builder — Pick Your AI Tools by Capability",
   description:
     "Build your own AI stack interactively. Pick the capabilities you need, set your constraints (free, OSS, high-rated), and get a tool recommendation per capability — shareable as a URL.",
   alternates: { canonical: "/stacks/build" },

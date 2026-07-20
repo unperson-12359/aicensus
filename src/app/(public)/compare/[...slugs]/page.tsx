@@ -15,7 +15,7 @@ import {
   buildIntroParagraph,
   buildFaq,
 } from "@/lib/comparison-content";
-import { formatContentLastUpdated } from "@/lib/content-dates";
+import { formatContentLastUpdated, maxUpdatedAt } from "@/lib/content-dates";
 import {
   getComparisonPath,
   normalizeComparisonSlugs,
@@ -49,15 +49,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slugs } = await params;
   if (!slugs || slugs.length < 2 || slugs.length > 4) {
-    return { title: "Compare AI Tools | AiCensus" };
+    return { title: "Compare AI Tools" };
   }
 
   const normalizedSlugs = normalizeComparisonSlugs(slugs);
   const tools = await Promise.all(normalizedSlugs.map((s) => getToolBySlug(s)));
   const names = tools.filter(Boolean).map((t) => t!.name);
-  if (names.length < 2) return { title: "Compare AI Tools | AiCensus" };
+  if (names.length < 2) return { title: "Compare AI Tools" };
 
-  const title = `${names.join(" vs ")} — Detailed Comparison (2026) | AiCensus`;
+  const title = `${names.join(" vs ")} — Detailed Comparison (2026)`;
   const description = `${names.join(" vs ")}: side-by-side pricing, features, ratings, pros & cons, plus our verdict on which one wins for which use case.`;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
   const canonicalPath = getComparisonPath(normalizedSlugs);
@@ -103,6 +103,8 @@ export default async function ComparePage({ params }: Props) {
     "@type": "ItemList",
     name: `${names.join(" vs ")} Comparison`,
     url: `${siteUrl}${canonicalPath}`,
+    // Mirror the visible "Updated" label: newest updated_at among the compared tools.
+    dateModified: maxUpdatedAt(tools).toISOString(),
     numberOfItems: tools.length,
     itemListElement: tools.map((t, i) => ({
       "@type": "ListItem",

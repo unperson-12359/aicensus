@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound, permanentRedirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ToolGrid } from "@/components/tools/tool-grid";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -29,8 +29,11 @@ export async function generateStaticParams() {
   }
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({
+  params,
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const [{ slug }, sp] = await Promise.all([params, searchParams]);
   const category = await getCategoryBySlug(slug);
 
   if (!category) {
@@ -41,22 +44,32 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     category.meta_description ||
     `Discover the best ${category.name.toLowerCase()} AI tools. Curated and verified reviews with pricing, pros & cons.`;
 
+  const title = `${category.name} AI Tools — Best ${category.name} Apps & Agents`;
+
+  // Paginated URLs (?page=N, N>1) are self-canonical and noindex,follow —
+  // one unified param policy instead of canonicalizing everything to page 1.
+  const page = Math.max(1, parseInt(sp.page || "1", 10) || 1);
+  const isPaginated = page > 1;
+
   return {
-    title: `${category.name} AI Tools — Best ${category.name} Apps & Agents`,
+    title,
     description,
     openGraph: {
-      title: `${category.name} AI Tools — Best ${category.name} Apps & Agents`,
+      title,
       description,
       url: `/categories/${slug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${category.name} AI Tools | AiCensus`,
+      title: `${category.name} AI Tools`,
       description,
     },
     alternates: {
-      canonical: `/categories/${slug}`,
+      canonical: isPaginated
+        ? `/categories/${slug}?page=${page}`
+        : `/categories/${slug}`,
     },
+    ...(isPaginated ? { robots: { index: false, follow: true } } : {}),
   };
 }
 
@@ -66,8 +79,6 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
   const offset = (currentPage - 1) * TOOLS_PER_PAGE;
 
   let category;
-  let result: Awaited<ReturnType<typeof getToolsByCategory>> = { tools: [], count: 0 };
-
   try {
     category = await getCategoryBySlug(slug);
   } catch {
@@ -76,14 +87,15 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
 
   if (!category) notFound();
 
-  try {
-    result = await getToolsByCategory(slug, {
-      limit: TOOLS_PER_PAGE,
-      offset,
-    });
-  } catch {
-    // Supabase error
-  }
+  // DB failures throw to the error boundary (500) instead of rendering a
+  // silent empty 200 that reads as a soft 404.
+  const result = await getToolsByCategory(slug, {
+    limit: TOOLS_PER_PAGE,
+    offset,
+  });
+
+  // A real category with zero tools is a thin page — treat it as not found.
+  if (result.count === 0) notFound();
 
   const totalPages = Math.max(1, Math.ceil(result.count / TOOLS_PER_PAGE));
   const clampedPage = Math.min(currentPage, totalPages);
@@ -93,7 +105,7 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
       clampedPage > 1
         ? `/categories/${slug}?page=${clampedPage}`
         : `/categories/${slug}`;
-    permanentRedirect(target);
+    redirect(target);
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
@@ -147,6 +159,7 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
         />
 
         <SectionHeading
+          as="h1"
           title={`${category.name} Tools`}
           description={
             category.description ||

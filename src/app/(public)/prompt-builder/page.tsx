@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 import { PromptBuilder } from "@/components/prompt-builder/prompt-builder";
 
 export const metadata: Metadata = {
-  title: "AI Prompt Builder | AiCensus",
+  title: "AI Prompt Builder",
   description:
     "Build structured prompts for research, coding, writing, data analysis, agents, extraction, support, visual generation, and workflow tasks.",
   alternates: { canonical: "/prompt-builder" },
