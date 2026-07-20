@@ -14,20 +14,69 @@ Loop state for the recurring freshness work sessions. See LOOP-PROMPT.md for the
 - [x] 5. Migration: tools += pricing_as_of, last_verified_at, aka, successor_slug + display on tool pages — DONE Loop 2 (DDL applied live by owner 2026-07-20; verified)
 - [x] 6. Fix high-traffic records (arrays included) — DONE Loops 2+3 (all 12 records: chatgpt, gemini, grok, deepseek, midjourney, github-copilot, cursor, character-ai, elevenlabs, suno, microsoft-copilot, dia)
 - [x] 7. Archive dall-e-3 and arc-max with successor pointers — DONE Loop 3 (status=archived, successor_slug=chatgpt/dia; broken refs repointed)
-- [x] 8. Render `updated` frontmatter + dateModified in blog JSON-LD — rendering DONE Loop 3; article refreshes (best-ai-writing-tools, best-ai-video-tools-2026, run-ai-locally-open-source-models, best-free-ai-tools-2026) still pending → Loop 4
+- [x] 8. Render `updated` frontmatter + dateModified in blog JSON-LD — DONE Loops 3+4 (rendering Loop 3; all 4 article refreshes Loop 4)
 
 ### P2 — Quality
-- [ ] 9. FAQPage JSON-LD from existing ## FAQ sections
-- [ ] 10. "How we rate" methodology page
-- [ ] 11. Fix free-tools cannibalization; enforce no-signup promise; consolidate 3 framework posts
-- [ ] 12. Resolve Jasper price contradiction; batch-verify writing-tools price table
+- [x] 9. FAQPage JSON-LD from existing ## FAQ sections — DONE Loop 5 (20 of 27 posts emit FAQPage)
+- [x] 10. "How we rate" methodology page — DONE Loop 5 (/how-we-rate + links on tool pages, comparison tables, best-of pages)
+- [x] 11. Fix free-tools cannibalization; enforce no-signup promise; consolidate 3 framework posts — DONE Loop 5 (no-signup post rewritten w/ 15 verified no-account picks; canonical framework + beginner 101 + stack-building differentiation)
+- [x] 12. Resolve Jasper price contradiction; batch-verify writing-tools price table — DONE Loops 4+5 (Jasper = Pro $59/seat annual sitewide; writing-tools table fully re-verified)
 
 ### P3 — Polish
-- [ ] 13. Expand top-ai-tools-for-building-websites
-- [ ] 14. Retitle elevenlabs-vs-higgsfield (voice vs video)
-- [ ] 15. editor_rating recalibration proposal
+- [x] 13. Expand top-ai-tools-for-building-websites — DONE Loop 6 (546→~1,460w, 7 per-tool links, table, FAQ)
+- [x] 14. Retitle elevenlabs-vs-higgsfield (voice vs video) — DONE Loop 6 ("AI Voice vs AI Video — Which Do You Need?")
+- [x] 15. editor_rating recalibration proposal — DONE Loop 6 (docs/editor-rating-recalibration.md; execution NOT yet applied — owner decision)
+
+### Catalog expansion (audit P2-11, "add more" phase)
+- [x] 16. Add missing tools — DONE Loop 7 (added qwen, kimi, seedream, seedance, google-ai-studio, gpt-image; folded nano-banana→google-ai-studio, grok-imagine→grok, suno-studio→suno, lovable-cloud→lovable)
+- [x] 17. Fix miscategorized tools + crypto fate — DONE Loop 7 (tavily→research-search; mubert/aiva/suno/udio→music-audio; heurist/x402→models-infrastructure; bankr kept w/ exploit caution; fonfik archived)
+
+**BACKLOG COMPLETE 2026-07-20. Loop is now in MAINTENANCE mode (detection pass + drift fixes only).**
 
 ## Run log
+
+### Loop 7 — 2026-07-20 (catalog expansion; deployed as ccececa)
+- Swarm of 2: catalog-gap additions + recategorization (audit P2-11, the "add more" phase)
+- Added 6 tools live (migration 20260720133000, applied via REST, all GET-verified):
+  qwen (4.4), kimi (4.3), seedream (4.4), seedance (4.5), google-ai-studio (4.4, includes Nano
+  Banana models), gpt-image (4.3) — all web-verified 2026-07-20, sources in agent reports
+- Folded (not standalone products): grok-imagine→grok, suno-studio→suno, lovable-cloud→lovable
+  (lovable key_features PATCHed to name Lovable Cloud)
+- Recategorized (migration 20260720134000, applied + verified): tavily→research-search (Nebius
+  acquisition Feb 2026 noted), mubert/aiva/suno/udio→music-audio, heurist/x402→models-infrastructure,
+  bankr kept (May 2026 prompt-injection exploit caution added), fonfik ARCHIVED (forum, not a tool)
+- Verification: eslint clean; check:links passed (27 posts, 247 tools, 19 categories); build OK
+- MAINTENANCE MODE from here: future loops = detection pass (watchlist grep + URL rotation) +
+  drift fixes only. Optional pending decision: execute docs/editor-rating-recalibration.md
+  (rank-preserving stretch; requires the stack-explorer >=4.0 filter fix in the same release).
+
+### Loop 6 — 2026-07-20 (P3 polish; deployed as 53ef905)
+- Swarm of 3: top-ai-tools-for-building-websites expanded 546→~1,460w (7 per-tool /tools/{slug}
+  links, comparison table, FAQ; all prices web-verified); elevenlabs-vs-higgsfield retitled to
+  "AI Voice vs AI Video — Which Do You Need?" (Higgsfield pricing verified w/ volatility
+  disclaimer); docs/editor-rating-recalibration.md written (mean 4.29, stddev 0.22, 93.8% within
+  4.0–4.8 → recommends rank-preserving stretch to 2.0–5.0 + tier labels; NOT yet executed)
+- Verification: eslint/check:links/build all green
+
+### Loop 5 — 2026-07-20 (P2 quality; deployed as 8557be8)
+- Swarm of 4: FAQPage JSON-LD (parseFaqs in src/lib/blog.ts handles ### and bold-question formats;
+  20/27 posts now emit FAQPage); /how-we-rate methodology page + links beside ratings on tool
+  pages, comparison tables, best-of pages (+sitemap); free-ai-tools-no-signup fully rewritten —
+  13 of 15 old picks required accounts, replaced with 15 web-verified no-signup picks (Duck.ai,
+  HuggingChat, Perplexity logged-out, DeepL, Craiyon, TurboScribe…); framework-post cluster
+  consolidated (canonical framework / beginner 101 / stack-building, cross-linked);
+  Jasper price fixed sitewide (Pro $59/seat/mo annual, Creator retired)
+- Verification: eslint clean; check:links passed; build OK
+
+### Loop 4 — 2026-07-20 (P1-8 article refreshes; deployed as ac82dfa)
+- Swarm of 4, one per stale article, all facts web-verified 2026-07-20:
+  best-ai-writing-tools (12 tools, Jasper Pro $59, Grammarly Pro, Notion AI bundled into Business,
+  Writesonic $99 repositioning — full body/table rewrite), best-ai-video-tools-2026 (Runway Gen-4.5,
+  Kling 3.0, Pika 2.5, Veo 3.1; Sora consumer shutdown Apr 2026 documented), run-ai-locally
+  (Llama 3.1→Gemma 4/Qwen3/gpt-oss-20b/Ministral 3/Phi-4; "Llama-shaped hole" explained),
+  best-free-ai-tools-2026 (15 picks with honest free-tier limits; Runway/Notion AI/Gamma dropped
+  as trial-bait; Midjourney no-free-tier FAQ)
+- Verification: eslint clean; check:links passed (27 posts, 242 tools, 19 categories); build OK
 
 ### Loop 3 — 2026-07-20 (completed; deployed)
 - Batch: P1-6 remainder (6 records) + P1-7 (2 archives) + P1-8 (blog updated/dateModified rendering)
