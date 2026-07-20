@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/public";
 import type { Category } from "@/lib/types/database";
 
 export async function getCategories() {

@@ -72,6 +72,13 @@ const nextConfig: NextConfig = {
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
         ],
       },
+      {
+        // The default deployment domain serves a full duplicate of the site;
+        // keep it out of the index so aicensus.co is the only canonical surface.
+        source: "/:path*",
+        has: [{ type: "host", value: "aicensus.vercel.app" }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
 };
