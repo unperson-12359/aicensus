@@ -15,7 +15,6 @@ import {
   AnimatedCounter,
 } from "@/components/motion";
 import { HowItWorks } from "@/components/home/how-it-works";
-import { TopTicker } from "@/components/home/top-ticker";
 import { SectionRail } from "@/components/home/section-rail";
 import { ChapterHeading } from "@/components/home/chapter-heading";
 import { section } from "@/lib/layout";
@@ -95,15 +94,6 @@ export default async function HomePage() {
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
-  const tickerItems = [
-    `${catalogStats.toolCount} verified AI tools`,
-    `${catalogStats.categoryCount} categories`,
-    "Reviewed by humans",
-    "No affiliate noise",
-    "Free forever",
-    "Updated weekly",
-    "EST. 2026",
-  ];
 
   const websiteJsonLd = {
     "@context": "https://schema.org",
@@ -133,7 +123,6 @@ export default async function HomePage() {
       <JsonLd data={websiteJsonLd} />
       <JsonLd data={organizationJsonLd} />
 
-      <TopTicker items={tickerItems} />
       <SectionRail sections={sections} />
 
       {/* ─────────── HERO ─────────── */}
