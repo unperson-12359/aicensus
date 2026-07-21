@@ -14,6 +14,7 @@ import {
   type Stack,
 } from "@/lib/stacks";
 import { getToolsBySlugs } from "@/lib/queries/tools";
+import { truncateAtWordBoundary } from "@/lib/utils";
 import type { ToolWithCategory } from "@/lib/types/database";
 
 export const revalidate = 3600;
@@ -38,7 +39,10 @@ export async function generateMetadata({
 
   return {
     title: `${stack.name} — Stack`,
-    description: `${stack.tagline} ${stack.heroTakeaway}`.slice(0, 160),
+    description: truncateAtWordBoundary(
+      `${stack.tagline} ${stack.heroTakeaway}`,
+      160
+    ),
     alternates: { canonical: `/stacks/${stack.slug}` },
     openGraph: {
       title: `${stack.name} — AI tool recipe`,

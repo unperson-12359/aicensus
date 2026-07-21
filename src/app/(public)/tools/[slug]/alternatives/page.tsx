@@ -205,18 +205,18 @@ export default async function AlternativesPage({
               {intro}
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
-              <Link href={`/tools/${slug}`}>
-                <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" asChild>
+                <Link href={`/tools/${slug}`}>
                   <ArrowLeft className="mr-1.5 h-3.5 w-3.5" />
                   Back to {tool.name}
-                </Button>
-              </Link>
-              {tool.category_id && tool.categories && (
-                <Link href={`/categories/${tool.categories.slug}`}>
-                  <Button variant="outline" size="sm">
-                    All {tool.categories.name}
-                  </Button>
                 </Link>
+              </Button>
+              {tool.category_id && tool.categories && (
+                <Button variant="outline" size="sm" asChild>
+                  <Link href={`/categories/${tool.categories.slug}`}>
+                    All {tool.categories.name}
+                  </Link>
+                </Button>
               )}
             </div>
           </div>
@@ -233,9 +233,9 @@ export default async function AlternativesPage({
                 Check back soon, or browse the full directory.
               </p>
               <div className="mt-5">
-                <Link href="/tools">
-                  <Button variant="outline" size="sm">Browse all tools</Button>
-                </Link>
+                <Button variant="outline" size="sm" asChild>
+                  <Link href="/tools">Browse all tools</Link>
+                </Button>
               </div>
             </div>
           </FadeIn>

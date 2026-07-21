@@ -57,6 +57,7 @@ export function HomeToolsSection({
               <button
                 type="button"
                 onClick={() => setTab("featured")}
+                aria-pressed={tab === "featured"}
                 className={cn(
                   "rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors sm:text-[11px]",
                   tab === "featured"
@@ -69,6 +70,7 @@ export function HomeToolsSection({
               <button
                 type="button"
                 onClick={() => setTab("newest")}
+                aria-pressed={tab === "newest"}
                 className={cn(
                   "rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors sm:text-[11px]",
                   tab === "newest"

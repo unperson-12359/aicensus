@@ -184,17 +184,17 @@ export default async function HomePage() {
               </form>
 
               <div className="flex flex-col gap-2 sm:flex-row lg:flex-col">
-                <Link href="/tools" className="flex-1">
-                  <Button size="default" className="w-full">
+                <Button size="default" className="w-full flex-1" asChild>
+                  <Link href="/tools">
                     Browse tools
                     <ArrowRight className="ml-1.5 h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link href="/categories" className="flex-1">
-                  <Button size="default" variant="outline" className="w-full">
+                  </Link>
+                </Button>
+                <Button size="default" variant="outline" className="w-full flex-1" asChild>
+                  <Link href="/categories">
                     Explore categories
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
 
               <Link
@@ -480,12 +480,12 @@ export default async function HomePage() {
               </div>
             </div>
             <FadeIn delay={0.25} className="lg:col-span-4">
-              <Link href="/tools" className="block">
-                <Button size="default" className="w-full">
+              <Button size="default" className="block w-full" asChild>
+                <Link href="/tools">
                   Browse all tools
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </FadeIn>
           </div>
         </div>

@@ -71,12 +71,12 @@ function EmptySavedSection({
 }) {
   return (
     <EmptyState title={title} description={description}>
-      <Link href={href}>
-        <Button variant="outline" size="sm">
+      <Button variant="outline" size="sm" asChild>
+        <Link href={href}>
           {cta}
           <ArrowRight className="h-3.5 w-3.5" />
-        </Button>
-      </Link>
+        </Link>
+      </Button>
     </EmptyState>
   );
 }

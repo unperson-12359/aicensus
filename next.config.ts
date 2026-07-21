@@ -42,6 +42,17 @@ const nextConfig: NextConfig = {
         destination: "/blog/welcome-to-aicensus",
         permanent: true,
       },
+      // Root-level feed aliases for the blog RSS (readers commonly probe these).
+      {
+        source: "/rss.xml",
+        destination: "/blog/rss.xml",
+        permanent: true,
+      },
+      {
+        source: "/feed.xml",
+        destination: "/blog/rss.xml",
+        permanent: true,
+      },
       ...archivedToolRedirects,
       {
         source: "/:path*",

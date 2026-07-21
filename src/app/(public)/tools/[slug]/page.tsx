@@ -267,25 +267,27 @@ export default async function ToolDetailPage({ params }: PageProps) {
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              <ToolOutboundLink
-                href={outboundHref}
-                toolSlug={tool.slug}
-                toolName={tool.name}
-                isAffiliate={isAffiliate}
-              >
-                <Button>
+              <Button asChild>
+                <ToolOutboundLink
+                  href={outboundHref}
+                  toolSlug={tool.slug}
+                  toolName={tool.name}
+                  isAffiliate={isAffiliate}
+                >
                   Visit {tool.name} <ExternalLink className="ml-2 h-4 w-4" />
-                </Button>
-              </ToolOutboundLink>
+                </ToolOutboundLink>
+              </Button>
               <SaveToolButton slug={tool.slug} name={tool.name} />
               {popularComparisons[0] ? (
-                <Link href={getComparisonPath(popularComparisons[0].slugs)}>
-                  <Button variant="outline">Compare</Button>
-                </Link>
+                <Button variant="outline" asChild>
+                  <Link href={getComparisonPath(popularComparisons[0].slugs)}>
+                    Compare
+                  </Link>
+                </Button>
               ) : (
-                <Link href="/compare">
-                  <Button variant="outline">Compare</Button>
-                </Link>
+                <Button variant="outline" asChild>
+                  <Link href="/compare">Compare</Link>
+                </Button>
               )}
             </div>
             {isAffiliate && (

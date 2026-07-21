@@ -39,6 +39,7 @@ export function FilterBar({ categories }: FilterBarProps) {
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           placeholder="Search tools..."
+          aria-label="Search tools"
           defaultValue={currentQ}
           className="pl-9 focus:glow-sm transition-shadow duration-300"
           onKeyDown={(e) => {

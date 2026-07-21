@@ -167,20 +167,20 @@ export default async function McpDetailPage({ params }: Props) {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2">
-              <a href={server.repoUrl} target="_blank" rel="noopener noreferrer">
-                <Button>
+              <Button asChild>
+                <a href={server.repoUrl} target="_blank" rel="noopener noreferrer">
                   <Github className="mr-1.5 h-4 w-4" />
                   Repository
                   <ExternalLink className="ml-1.5 h-3 w-3" />
-                </Button>
-              </a>
+                </a>
+              </Button>
               {server.docsUrl && server.docsUrl !== server.repoUrl && (
-                <a href={server.docsUrl} target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline">
+                <Button variant="outline" asChild>
+                  <a href={server.docsUrl} target="_blank" rel="noopener noreferrer">
                     Docs
                     <ExternalLink className="ml-1.5 h-3 w-3" />
-                  </Button>
-                </a>
+                  </a>
+                </Button>
               )}
             </div>
 

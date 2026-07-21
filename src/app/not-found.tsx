@@ -19,12 +19,12 @@ export default function NotFound() {
       <p className="mt-2 text-muted-foreground">
         The page you&apos;re looking for doesn&apos;t exist or has been moved.
       </p>
-      <Link href="/" className="mt-8">
-        <Button variant="outline">
+      <Button variant="outline" className="mt-8" asChild>
+        <Link href="/">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to homepage
-        </Button>
-      </Link>
+        </Link>
+      </Button>
     </div>
   );
 }

@@ -1,6 +1,16 @@
 import { createClient } from "@/lib/supabase/public";
 import type { Tool, ToolWithCategory } from "@/lib/types/database";
 
+/**
+ * Column set for card/listing contexts (tool grids, cards, pickers). Detail
+ * pages and comparison tables need full rows (description, pros/cons,
+ * key_features, meta_*), so those queries keep `select("*")`.
+ */
+const TOOL_CARD_SELECT =
+  "id, slug, name, tagline, logo_url, website_url, pricing_model, editor_rating, is_verified, categories(name, slug, icon)";
+const TOOL_CARD_SELECT_CATEGORY_INNER =
+  "id, slug, name, tagline, logo_url, website_url, pricing_model, editor_rating, is_verified, categories!inner(name, slug, icon)";
+
 function sanitizeSearchQuery(search: string): string {
   return search
     .replace(/[,.()"\\%_*]/g, " ")
@@ -75,14 +85,14 @@ async function getToolsViaSearchRpc(
 
   const { data: withCategories, error: fetchError } = await supabase
     .from("tools")
-    .select("*, categories(*)")
+    .select(TOOL_CARD_SELECT)
     .in("id", pageIds)
     .eq("status", "published");
 
   if (fetchError || !withCategories) return null;
 
   const order = new Map(pageIds.map((id, index) => [id, index]));
-  const tools = (withCategories as ToolWithCategory[]).sort(
+  const tools = (withCategories as unknown as ToolWithCategory[]).sort(
     (a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0)
   );
 
@@ -137,7 +147,9 @@ export async function getTools(options?: {
   }
 
   const supabase = await createClient();
-  const categorySelect = options?.category ? "*, categories!inner(*)" : "*, categories(*)";
+  const categorySelect = options?.category
+    ? TOOL_CARD_SELECT_CATEGORY_INNER
+    : TOOL_CARD_SELECT;
 
   let query = supabase
     .from("tools")
@@ -195,7 +207,8 @@ export async function getTools(options?: {
   const { data, error, count } = await query;
 
   if (error) throw error;
-  return { tools: (data as ToolWithCategory[]) || [], count: count || 0 };
+  // Slim card-field select — rows only carry TOOL_CARD_SELECT columns.
+  return { tools: (data as unknown as ToolWithCategory[]) || [], count: count || 0 };
 }
 
 export async function getToolBySlug(slug: string) {
@@ -224,13 +237,14 @@ export async function getToolAlternatives(toolId: string) {
 
   const ids = alternativeIds.map((a) => a.alternative_id);
 
+  // Card-only consumer (ToolDiscoverySection renders these in a ToolCard grid).
   const { data } = await supabase
     .from("tools")
-    .select("*, categories(*)")
+    .select(TOOL_CARD_SELECT)
     .in("id", ids)
     .eq("status", "published");
 
-  return (data as ToolWithCategory[]) || [];
+  return (data as unknown as ToolWithCategory[]) || [];
 }
 
 export async function getToolAlternativesBidirectional(toolId: string) {
@@ -432,13 +446,13 @@ export async function getToolsByCategory(
 
   const { data, count } = await supabase
     .from("tools")
-    .select("*, categories(*)", { count: "exact" })
+    .select(TOOL_CARD_SELECT, { count: "exact" })
     .eq("status", "published")
     .eq("category_id", category.id)
     .order("editor_rating", { ascending: false, nullsFirst: false })
     .range(offset, offset + limit - 1);
 
-  return { tools: (data as ToolWithCategory[]) || [], count: count || 0 };
+  return { tools: (data as unknown as ToolWithCategory[]) || [], count: count || 0 };
 }
 
 /**

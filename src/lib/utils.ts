@@ -15,6 +15,15 @@ export function getLogoUrl(logoUrl: string | null, websiteUrl: string): string |
   }
 }
 
+/**
+ * Truncate to `maxLength` chars on a word boundary (for meta descriptions),
+ * appending an ellipsis when truncation occurs.
+ */
+export function truncateAtWordBoundary(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength - 1).replace(/\s+\S*$/, "")}…`;
+}
+
 export function slugify(text: string): string {
   return text
     .toLowerCase()

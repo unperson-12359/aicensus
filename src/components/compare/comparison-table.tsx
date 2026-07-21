@@ -142,15 +142,15 @@ function MobileComparisonCards({ tools }: { tools: ToolWithCategory[] }) {
             <div key={`visit-${tool.id}`}>
               <p className="mb-1.5 text-sm font-medium">{tool.name}</p>
               <div className="flex gap-2">
-                <Link href={`/tools/${tool.slug}`}>
-                  <Button size="sm">Details</Button>
-                </Link>
+                <Button size="sm" asChild>
+                  <Link href={`/tools/${tool.slug}`}>Details</Link>
+                </Button>
                 {tool.website_url && (
-                  <a href={tool.website_url} target="_blank" rel="noopener noreferrer">
-                    <Button size="sm" variant="outline">
+                  <Button size="sm" variant="outline" asChild>
+                    <a href={tool.website_url} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-3 w-3" />
-                    </Button>
-                  </a>
+                    </a>
+                  </Button>
                 )}
               </div>
             </div>
@@ -322,19 +322,19 @@ export function ComparisonTable({ tools }: ComparisonTableProps) {
               {tools.map((t) => (
                 <td key={t.id} className="px-4 py-3">
                   <div className="flex gap-2">
-                    <Link href={`/tools/${t.slug}`}>
-                      <Button size="sm">Details</Button>
-                    </Link>
+                    <Button size="sm" asChild>
+                      <Link href={`/tools/${t.slug}`}>Details</Link>
+                    </Button>
                     {t.website_url && (
-                      <a
-                        href={t.website_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Button size="sm" variant="outline">
+                      <Button size="sm" variant="outline" asChild>
+                        <a
+                          href={t.website_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <ExternalLink className="h-3 w-3" />
-                        </Button>
-                      </a>
+                        </a>
+                      </Button>
                     )}
                   </div>
                 </td>

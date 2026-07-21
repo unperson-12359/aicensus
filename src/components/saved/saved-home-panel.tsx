@@ -115,16 +115,16 @@ export function SavedHomePanel() {
                     </p>
                   )}
                   <div className="mt-4 flex flex-wrap gap-2">
-                    <Link href="/saved">
-                      <Button size="sm">
+                    <Button size="sm" asChild>
+                      <Link href="/saved">
                         Open shortlist <ArrowRight className="h-3.5 w-3.5" />
-                      </Button>
-                    </Link>
-                    <Link href="/tools">
-                      <Button size="sm" variant="outline">
+                      </Link>
+                    </Button>
+                    <Button size="sm" variant="outline" asChild>
+                      <Link href="/tools">
                         Keep browsing
-                      </Button>
-                    </Link>
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               </div>

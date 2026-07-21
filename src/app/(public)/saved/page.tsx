@@ -43,18 +43,18 @@ export default function SavedPage() {
           No account required; your shortlist stays on this device.
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
-          <Link href="/tools">
-            <Button size="sm" variant="outline">
+          <Button size="sm" variant="outline" asChild>
+            <Link href="/tools">
               Browse tools
               <ArrowRight className="h-3.5 w-3.5" />
-            </Button>
-          </Link>
-          <Link href="/stacks/build">
-            <Button size="sm" variant="outline">
+            </Link>
+          </Button>
+          <Button size="sm" variant="outline" asChild>
+            <Link href="/stacks/build">
               Build a stack
               <ArrowRight className="h-3.5 w-3.5" />
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </FadeIn>
 

@@ -112,12 +112,12 @@ export default async function StackBuildPage() {
         </p>
 
         <div className="mt-6">
-          <Link href="/stacks">
-            <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" asChild>
+            <Link href="/stacks">
               <ArrowLeft className="mr-1.5 h-3.5 w-3.5" />
               All curated stacks
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </FadeIn>
 
@@ -132,9 +132,9 @@ export default async function StackBuildPage() {
               light up automatically.
             </p>
             <div className="mt-5">
-              <Link href="/tools">
-                <Button variant="outline" size="sm">Browse the directory</Button>
-              </Link>
+              <Button variant="outline" size="sm" asChild>
+                <Link href="/tools">Browse the directory</Link>
+              </Button>
             </div>
           </div>
         </FadeIn>
