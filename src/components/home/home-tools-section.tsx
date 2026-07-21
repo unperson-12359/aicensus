@@ -93,17 +93,12 @@ export function HomeToolsSection({
       {tab === "featured" && hasFeatured && (
         <StaggerChildren className="mt-4 grid gap-3 sm:mt-6 sm:gap-4 lg:grid-cols-12 lg:auto-rows-[1fr] lg:mt-8">
           {heroFeature && (
-            <StaggerItem className="lg:col-span-8 lg:row-span-2">
+            <StaggerItem className="lg:col-span-6 lg:row-span-2">
               <ToolCardFeatured tool={heroFeature} />
             </StaggerItem>
           )}
-          {secondaryFeatures.slice(0, 2).map((tool) => (
-            <StaggerItem key={tool.id} className="lg:col-span-4">
-              <ToolCard tool={tool} />
-            </StaggerItem>
-          ))}
-          {secondaryFeatures.slice(2, 4).map((tool) => (
-            <StaggerItem key={tool.id} className="lg:col-span-6">
+          {secondaryFeatures.map((tool) => (
+            <StaggerItem key={tool.id} className="lg:col-span-3">
               <ToolCard tool={tool} />
             </StaggerItem>
           ))}
