@@ -6,6 +6,7 @@
 // ------------------------------------------------------------
 
 import type { ToolWithCategory } from "@/lib/types/database";
+import { getCompareVerdict } from "@/lib/compare-verdicts";
 
 const PRICING_DESCRIPTOR: Record<string, string> = {
   free: "fully free",
@@ -118,6 +119,13 @@ export function buildBestForCallouts(tools: ToolWithCategory[]): {
 }
 
 export function buildIntroParagraph(tools: ToolWithCategory[]): string {
+  // Hand-written editorial verdict for high-traffic pairs — keeps the top
+  // comparison pages from sharing the same generated intro.
+  const handVerdict = getCompareVerdict(tools.map((t) => t.slug));
+  if (handVerdict) {
+    return `${handVerdict} The spec sheet, editor scores, and answers below back that up with data.`;
+  }
+
   const names = tools.map((t) => t.name);
   const joined =
     names.length === 2
@@ -193,10 +201,15 @@ export function buildFaq(
     });
   }
 
-  faqs.push({
-    question: `Are there other tools to consider?`,
-    answer: `Yes — every tool in this comparison has its own alternatives page that ranks the closest competitors. Click any tool name to drill into its full review and alternatives list.`,
-  });
+  // The generic "other tools" closer is word-for-word identical on every
+  // comparison page; skip it on pairs that have a hand-written verdict so
+  // those pages stay fully unique.
+  if (!getCompareVerdict(tools.map((t) => t.slug))) {
+    faqs.push({
+      question: `Are there other tools to consider?`,
+      answer: `Yes — every tool in this comparison has its own alternatives page that ranks the closest competitors. Click any tool name to drill into its full review and alternatives list.`,
+    });
+  }
 
   return faqs;
 }

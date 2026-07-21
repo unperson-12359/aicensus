@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ToolGrid } from "@/components/tools/tool-grid";
 import { SectionHeading } from "@/components/shared/section-heading";
@@ -10,6 +11,9 @@ import { PageTransition } from "@/components/motion";
 import { GeometricDecor, pageHeaderShapes } from "@/components/shared/geometric-decor";
 import { getToolsByCategory } from "@/lib/queries/tools";
 import { getCategoryBySlug, getAllCategorySlugs } from "@/lib/queries/categories";
+import { getCategoryIntro } from "@/lib/category-intros";
+import { BEST_FOR_PAGES } from "@/lib/best-for";
+import { getPostBySlug } from "@/lib/blog";
 
 export const revalidate = 3600;
 
@@ -142,10 +146,37 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
     ],
   };
 
+  // Editorial intro / FAQ / cross-links (page 1 only — paginated variants are
+  // noindex and shouldn't duplicate the copy). Falls back gracefully for
+  // slugs missing from the map.
+  const isFirstPage = clampedPage === 1;
+  const categoryIntro = isFirstPage ? getCategoryIntro(slug) : undefined;
+  const introParagraphs = categoryIntro?.intro.split(/\n\n+/) ?? [];
+  const bestPage = categoryIntro?.bestSlug
+    ? BEST_FOR_PAGES.find((p) => p.slug === categoryIntro.bestSlug)
+    : undefined;
+  const blogPosts = (categoryIntro?.blogSlugs ?? [])
+    .map((s) => getPostBySlug(s))
+    .filter((p): p is NonNullable<typeof p> => p !== null);
+
+  const faqJsonLd =
+    categoryIntro?.faqs && categoryIntro.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: categoryIntro.faqs.map((f) => ({
+            "@type": "Question",
+            name: f.question,
+            acceptedAnswer: { "@type": "Answer", text: f.answer },
+          })),
+        }
+      : null;
+
   return (
     <>
       <JsonLd data={collectionJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
+      {faqJsonLd && <JsonLd data={faqJsonLd} />}
 
       <PageTransition>
       <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -166,6 +197,42 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
             `${result.count} AI tools in ${category.name}`
           }
         />
+
+        {categoryIntro && (
+          <section className="mt-8 max-w-3xl">
+            <div className="space-y-4">
+              {introParagraphs.map((paragraph, i) => (
+                <p
+                  key={i}
+                  className="text-sm leading-relaxed text-muted-foreground sm:text-base"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            {(bestPage || blogPosts.length > 0) && (
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border border-white/10 bg-white/[0.02] px-4 py-3 text-sm">
+                {bestPage && (
+                  <Link
+                    href={`/best/${bestPage.slug}`}
+                    className="font-medium text-white underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-white"
+                  >
+                    {bestPage.title}
+                  </Link>
+                )}
+                {blogPosts.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="text-white/70 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white hover:decoration-white/50"
+                  >
+                    {post.title}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </section>
+        )}
 
         <div id="results" className="mt-8 scroll-mt-24">
           <ToolGrid tools={result.tools} />
@@ -194,6 +261,32 @@ export default async function CategoryDetailPage({ params, searchParams }: PageP
               total={result.count}
             />
           </div>
+        )}
+
+        {categoryIntro?.faqs && categoryIntro.faqs.length > 0 && (
+          <section className="mt-14 sm:mt-16">
+            <div className="flex items-center justify-between gap-4">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                § Common questions
+              </p>
+              <span className="h-px flex-1 bg-white/10" />
+            </div>
+            <div className="mt-6 grid gap-4 sm:gap-5 lg:grid-cols-2">
+              {categoryIntro.faqs.map((faq, i) => (
+                <div
+                  key={i}
+                  className="border border-white/10 bg-white/[0.02] p-5 sm:p-6"
+                >
+                  <h3 className="font-display text-base font-semibold sm:text-lg">
+                    {faq.question}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/70">
+                    {faq.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
         )}
       </div>
       </PageTransition>

@@ -23,6 +23,7 @@ import { SaveToolButton } from "@/components/saved/save-tool-button";
 import { ToolOutboundLink } from "@/components/tools/tool-outbound-link";
 import { ToolQuickFacts } from "@/components/tools/tool-quick-facts";
 import { ToolDiscoverySection } from "@/components/tools/tool-discovery-section";
+import { RelatedGuides } from "@/components/tools/related-guides";
 import { PageContainer } from "@/components/shared/page-container";
 import { section } from "@/lib/layout";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -38,6 +39,7 @@ import {
 } from "@/lib/queries/tools";
 import { getComparisonsForTool } from "@/lib/popular-comparisons";
 import { getBestForPagesForTool } from "@/lib/best-for";
+import { getRelatedGuideSlugs } from "@/lib/related-guides";
 import { getComparisonPath } from "@/lib/compare-urls";
 
 export const revalidate = 3600;
@@ -126,6 +128,10 @@ export default async function ToolDetailPage({ params }: PageProps) {
 
   const popularComparisons = getComparisonsForTool(tool.slug).slice(0, 4);
   const bestForPages = getBestForPagesForTool(tool.slug, 2);
+  const relatedGuideSlugs = getRelatedGuideSlugs(
+    tool.slug,
+    tool.categories?.slug
+  );
   const comparisonNameSlugs = Array.from(
     new Set(popularComparisons.flatMap((pair) => pair.slugs))
   );
@@ -387,6 +393,10 @@ export default async function ToolDetailPage({ params }: PageProps) {
                   </div>
                 </CardContent>
               </Card>
+            </StaggerItem>
+
+            <StaggerItem>
+              <RelatedGuides slugs={relatedGuideSlugs} />
             </StaggerItem>
           </StaggerChildren>
 

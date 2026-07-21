@@ -28,6 +28,7 @@ import {
   getCategoriesWithToolCount,
   type CategoryWithCount,
 } from "@/lib/queries/categories";
+import { getAllPosts } from "@/lib/blog";
 import type { ToolWithCategory } from "@/lib/types/database";
 
 export const revalidate = 3600;
@@ -88,6 +89,9 @@ export default async function HomePage() {
   ]);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
+
+  // Newest first (getAllPosts sorts date-desc); take the 3 freshest guides.
+  const latestPosts = getAllPosts().slice(0, 3);
 
   const websiteJsonLd = {
     "@context": "https://schema.org",
@@ -379,6 +383,54 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ─────────── LATEST GUIDES ─────────── */}
+      {latestPosts.length > 0 && (
+        <section className={cn("relative border-t border-white/10", section.y)}>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <FadeIn>
+              <div className="flex items-baseline justify-between gap-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                  § guides · Latest from the blog
+                </p>
+                <Link
+                  href="/blog"
+                  className="group inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
+                >
+                  All guides
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
+              </div>
+
+              <div className="mt-5 grid gap-3 sm:mt-6 sm:grid-cols-3 sm:gap-4">
+                {latestPosts.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="group flex flex-col rounded-xl border border-white/10 bg-card p-4 transition-colors hover:border-white/25 sm:p-5"
+                  >
+                    <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/40 sm:text-[10px]">
+                      {new Date(`${post.date}T00:00:00`).toLocaleDateString(
+                        "en-US",
+                        { month: "short", day: "numeric", year: "numeric" }
+                      )}
+                      {" · "}
+                      {post.readingTime}
+                    </p>
+                    <h3 className="mt-2 font-serif text-base leading-snug tracking-[-0.01em] text-foreground transition-colors group-hover:text-white sm:text-lg">
+                      {post.title}
+                    </h3>
+                    <span className="mt-3 inline-flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.18em] text-white/45 transition-colors group-hover:text-white sm:text-[10px]">
+                      Read guide
+                      <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+      )}
 
       {/* ─────────── § 04 — JOIN ─────────── */}
       <section id="ch-04" className={cn("relative border-t border-white/10", section.y)}>
