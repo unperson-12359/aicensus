@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Calendar, Clock } from "lucide-react";
+import { Calendar, Clock, Rss } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn, StaggerChildren, StaggerItem } from "@/components/motion";
@@ -17,7 +17,10 @@ const BASE_METADATA: Metadata = {
   title: "Blog",
   description:
     "Insights, guides, and updates from AiCensus. AI tools, reviews, and how to pick the right stack.",
-  alternates: { canonical: "/blog" },
+  alternates: {
+    canonical: "/blog",
+    types: { "application/rss+xml": "/blog/rss.xml" },
+  },
 };
 
 export async function generateMetadata({
@@ -85,6 +88,8 @@ export default async function BlogPage({
     blogPost: allPosts.slice(0, 20).map((post) => ({
       "@type": "BlogPosting",
       headline: post.title,
+      description: post.description,
+      author: { "@type": "Organization", name: post.author },
       datePublished: post.date,
       ...(post.updated ? { dateModified: post.updated } : {}),
       url: `${siteUrl}/blog/${post.slug}`,
@@ -103,7 +108,14 @@ export default async function BlogPage({
             Insights &amp; <em className="italic text-white/60">updates</em>.
           </h1>
           <p className="mt-3 max-w-lg text-sm text-muted-foreground sm:text-base">
-            Guides, tool roundups, and updates from the AiCensus team.
+            Guides, tool roundups, and updates from the AiCensus team.{" "}
+            <a
+              href="/blog/rss.xml"
+              className="inline-flex items-center gap-1 text-white/60 underline-offset-4 transition-colors hover:text-white hover:underline"
+            >
+              <Rss className="h-3.5 w-3.5" aria-hidden="true" />
+              RSS
+            </a>
           </p>
         </FadeIn>
 
@@ -141,6 +153,19 @@ export default async function BlogPage({
                               year: "numeric",
                             })}
                           </span>
+                          {post.updated && (
+                            <span className="text-white/40">
+                              Updated{" "}
+                              {new Date(post.updated).toLocaleDateString(
+                                "en-US",
+                                {
+                                  month: "short",
+                                  day: "numeric",
+                                  year: "numeric",
+                                }
+                              )}
+                            </span>
+                          )}
                           {post.readingTime && (
                             <span className="flex items-center gap-1.5">
                               <Clock className="h-3 w-3" />

@@ -1,0 +1,416 @@
+[
+  {
+    "name": "Wispr Flow",
+    "slug": "wispr-flow",
+    "tagline": "AI voice dictation that turns natural speech into polished text in any app, on desktop and mobile.",
+    "description": "Wispr Flow is a voice-to-text app that works system-wide on Mac, Windows, iPhone, and Android, converting speech into edited, formatted text inside any application. It removes filler words, adapts formatting to the app in use, supports 100+ languages, and learns a personal dictionary over time. It is used by writers, developers, lawyers, sales teams, and accessibility users who want to replace typing with speaking.",
+    "website_url": "https://wisprflow.ai",
+    "category": "productivity",
+    "pricing_model": "freemium",
+    "pricing_details": "Flow Basic is free with weekly word limits (2,000 words/week on desktop, 1,000 on iPhone). Flow Pro is $15/user/mo or $12/user/mo billed annually with unlimited words; Enterprise is custom-priced with SOC 2 and SSO. New accounts get a 14-day Pro trial.",
+    "use_cases": [
+      "Dictating emails, documents, and messages instead of typing",
+      "Voice input for coding tools like Cursor and VS Code",
+      "Drafting legal notes, case records, and client communications",
+      "Faster ticket and DM responses for support and sales teams",
+      "Accessibility-friendly text input for users slowed by keyboards"
+    ],
+    "pros": [
+      "Works in any app across Mac, Windows, iOS, and Android",
+      "AI auto-editing produces clean, formatted text without filler words",
+      "Personal dictionary, snippets, and 100+ language support",
+      "Genuine free tier plus a 14-day Pro trial"
+    ],
+    "cons": [
+      "Free plan has tight weekly word limits",
+      "Best results still require reviewing dictated text",
+      "Full compliance features (SOC 2, enforced HIPAA) gated to Enterprise"
+    ],
+    "who_its_for": [
+      "Writers and knowledge workers with heavy typing loads",
+      "Developers who want voice input in coding tools",
+      "Sales, support, and legal professionals",
+      "Users with accessibility needs"
+    ],
+    "key_features": [
+      "System-wide dictation in any application",
+      "AI auto-edits that clean up rambling speech",
+      "Command mode for voice-driven text editing",
+      "Personal dictionary and snippet shortcuts",
+      "100+ languages with automatic detection",
+      "Privacy mode with zero data retention"
+    ],
+    "editor_rating": 4.6,
+    "founded_year": 2021,
+    "company_name": "Wispr AI",
+    "verification_source": "https://wisprflow.ai, https://wisprflow.ai/pricing"
+  },
+  {
+    "name": "Superwhisper",
+    "slug": "superwhisper",
+    "tagline": "Voice-to-text app with on-device AI models for private dictation on macOS, Windows, and iOS.",
+    "description": "Superwhisper is an AI dictation app that runs Whisper models locally on the device, so audio never has to leave the user's machine, with optional cloud models for higher accuracy. Beyond dictation in any app, it offers file and meeting transcription, custom modes, and integrations aimed at driving agentic coding tools like Cursor and Claude Code by voice. It is built by an independent developer and popular with privacy-conscious professionals and developers.",
+    "website_url": "https://superwhisper.com",
+    "category": "productivity",
+    "pricing_model": "freemium",
+    "pricing_details": "Free tier includes unlimited use of small local models and voice-to-text in any app. Pro is listed by third-party sources at $8.49/mo, $84.99/yr, or a $249.99 lifetime license; the official pricing page was not directly fetchable at review time.",
+    "use_cases": [
+      "Private, offline dictation for sensitive professional work",
+      "Voice prompting of AI coding agents like Cursor and Claude Code",
+      "Transcribing meetings and audio or video files",
+      "Writing long-form text faster than typing",
+      "Multilingual dictation and translation"
+    ],
+    "pros": [
+      "On-device processing keeps audio private by default",
+      "Choice of local and cloud AI models with custom modes",
+      "Usable free tier rather than a time-limited trial",
+      "Lifetime license option avoids a recurring subscription"
+    ],
+    "cons": [
+      "Local models are less accurate than the largest cloud models",
+      "Model downloads and settings can feel technical for casual users",
+      "Cloud model usage can add per-provider API costs"
+    ],
+    "who_its_for": [
+      "Privacy-conscious professionals such as lawyers and clinicians",
+      "Developers driving agentic coding tools by voice",
+      "Mac and iOS users who want offline dictation",
+      "Writers who prefer a one-time purchase option"
+    ],
+    "key_features": [
+      "System-wide dictation with on-device Whisper models",
+      "Optional cloud models for higher accuracy",
+      "Meeting recording and file transcription",
+      "Custom modes and per-app profiles",
+      "100+ languages with translation",
+      "Works with agentic coding apps"
+    ],
+    "editor_rating": 4.3,
+    "founded_year": null,
+    "company_name": "Superwhisper",
+    "verification_source": "https://superwhisper.com"
+  },
+  {
+    "name": "VoiceOS",
+    "slug": "voiceos",
+    "tagline": "Voice operating system for Mac and Windows that dictates text and executes actions across apps.",
+    "description": "VoiceOS is a voice assistant for Mac and Windows that combines dictation with an agent layer: users can dictate text in any app, rewrite selected text by voice, and trigger multi-step actions such as sending Slack messages, replying to Gmail, or creating calendar events. Actions run across integrated apps with user confirmation before execution. It is built by WakoAI, a San Francisco startup backed by Y Combinator, and targets founders and professionals who want to replace repetitive keyboard work with voice commands.",
+    "website_url": "https://www.voiceos.com",
+    "category": "productivity",
+    "pricing_model": "paid",
+    "pricing_details": "7-day free trial, then Pro at $11.99/month billed annually with unlimited usage. Enterprise is custom-priced with zero data retention, SOC 2 Type II, ISO 27001, and SSO/SAML.",
+    "use_cases": [
+      "Dictating polished text in any desktop application",
+      "Sending Slack messages and email replies by voice",
+      "Creating and moving calendar events hands-free",
+      "Asking questions about what is on screen",
+      "Rewriting selected text with voice commands"
+    ],
+    "pros": [
+      "Goes beyond dictation to executing real actions across apps",
+      "Works system-wide on both Mac and Windows",
+      "Confirmation step before any action is taken",
+      "Audio not stored on servers unless the user opts in"
+    ],
+    "cons": [
+      "No permanent free tier, only a 7-day trial",
+      "Agent integrations center on Google and Slack ecosystems",
+      "Young product with a smaller track record than established rivals"
+    ],
+    "who_its_for": [
+      "Founders and operators who live in Slack, Gmail, and Calendar",
+      "Voice-first professionals on Mac or Windows",
+      "Users who want one tool for dictation plus app actions",
+      "Teams needing enterprise controls on a voice assistant"
+    ],
+    "key_features": [
+      "Dictation mode with automatic formatting per app",
+      "Agent mode for multi-step actions across integrated apps",
+      "Edit mode for voice-driven rewriting",
+      "Screen-aware questions and answers",
+      "Privacy controls with on-device transcript storage option",
+      "Enterprise tier with SOC 2, ISO 27001, and SSO"
+    ],
+    "editor_rating": 4.1,
+    "founded_year": 2023,
+    "company_name": "WakoAI, Inc.",
+    "verification_source": "https://www.voiceos.com/"
+  },
+  {
+    "name": "Fyxer",
+    "slug": "fyxer",
+    "tagline": "AI email assistant that sorts the inbox, drafts replies in your tone, and takes meeting notes.",
+    "description": "Fyxer connects to Gmail or Outlook and automatically categorizes incoming email, drafts replies matched to the user's writing tone, and records meetings to produce summaries and follow-ups. It works inside the existing inbox rather than requiring a new email client, and scales from individual professionals to large teams. The company is headquartered in New York and London and was founded by Richard Hollingsworth, Archie Hollingsworth, and Matthew Ffrench.",
+    "website_url": "https://fyxer.com",
+    "category": "productivity",
+    "pricing_model": "paid",
+    "pricing_details": "Starter is $22.50/user/month and Professional is $37.50/user/month, both billed annually ($30 and $50 month-to-month per third-party reviews); Enterprise is custom. A 7-day free trial is offered.",
+    "use_cases": [
+      "Triaging a high-volume inbox into smart categories",
+      "Sending tone-matched reply drafts with minimal editing",
+      "Capturing meeting notes and follow-ups automatically",
+      "Searching email and meeting history for context",
+      "Standardizing email workflow across client-facing teams"
+    ],
+    "pros": [
+      "Works inside Gmail and Outlook with near-zero setup",
+      "Drafts learn the user's tone over time",
+      "Combines inbox triage, drafting, and meeting notes in one tool",
+      "SOC 2 Type II, ISO 27001, GDPR, and HIPAA compliance"
+    ],
+    "cons": [
+      "No free tier beyond a short trial",
+      "Does not support Apple Mail",
+      "Per-seat pricing adds up for larger teams"
+    ],
+    "who_its_for": [
+      "Professionals who spend 2+ hours a day on email",
+      "Sales, consulting, and real estate teams",
+      "Executives managing heavy meeting schedules",
+      "Organizations wanting a managed, compliant email assistant"
+    ],
+    "key_features": [
+      "Automatic inbox categorization and prioritization",
+      "Reply drafts written in the user's voice",
+      "Meeting recording, transcription, and summaries for online and in-person meetings",
+      "Fyxer Chat for searching email and meeting context",
+      "Scheduling suggestions and booking links in replies",
+      "CRM integration on the Professional plan"
+    ],
+    "editor_rating": 4.2,
+    "founded_year": 2024,
+    "company_name": "Fyxer AI Limited",
+    "verification_source": "https://fyxer.com, https://www.fyxer.com/for-ai-assistants, https://fyxer.com/pricing"
+  },
+  {
+    "name": "Jace",
+    "slug": "jace",
+    "tagline": "AI email agent that organizes the inbox and prepares context-rich reply drafts in your voice.",
+    "description": "Jace is an AI email assistant that connects to a user's inbox, labels and prioritizes incoming mail, and prepares reply drafts that pull in context from attachments, calendar, and connected tools like Slack. It also supports custom automation rules and integrations that trigger actions in other business tools when email arrives. Jace is built by Zeta Labs, a London startup founded by former Meta engineers, and is aimed at professionals and teams with heavy email workloads.",
+    "website_url": "https://jace.ai",
+    "category": "productivity",
+    "pricing_model": "paid",
+    "pricing_details": "7-day free trial, then credit-based plans: Plus is $25/mo ($20/mo billed annually) for 10,000 monthly credits and 2 inboxes; Pro is $50/mo ($40/mo billed annually) starting at 20,000 credits and up to 8 inboxes. Enterprise is usage-based and custom.",
+    "use_cases": [
+      "Reviewing pre-written reply drafts instead of composing from scratch",
+      "Auto-labeling and prioritizing a busy inbox",
+      "Pulling attachment, calendar, and Slack context into replies",
+      "Automating follow-up actions via custom rules",
+      "Triggering tickets and notifications from incoming email"
+    ],
+    "pros": [
+      "Drafts include context from attachments and connected tools",
+      "Self-onboarding with no manual training required",
+      "Flexible automation rules beyond simple drafting",
+      "Competitive entry price compared with similar email assistants"
+    ],
+    "cons": [
+      "Credit-based metering can be hard to predict",
+      "Gmail-centric; third-party reviewers note limited provider support",
+      "Occasionally generates drafts for low-value email"
+    ],
+    "who_its_for": [
+      "Founders and operators drowning in inbound email",
+      "Professionals who want drafts ready on inbox open",
+      "Teams connecting email to Slack and ticketing tools",
+      "Power users who want rule-based email automation"
+    ],
+    "key_features": [
+      "AI reply drafts with attachment and calendar context",
+      "Automatic labeling by type and priority",
+      "Custom smart rules for CCs, templates, and actions",
+      "Business integrations that trigger workflows from email",
+      "Chat over 1-3 years of email history",
+      "Support for multiple inboxes and unlimited calendars"
+    ],
+    "editor_rating": 4.1,
+    "founded_year": 2023,
+    "company_name": "Zeta Labs",
+    "verification_source": "https://jace.ai, https://jace.ai/pricing, https://jace.ai/about"
+  },
+  {
+    "name": "Howie",
+    "slug": "howie",
+    "tagline": "Email-based AI secretary that schedules and reschedules meetings by handling the back-and-forth.",
+    "description": "Howie is an AI scheduling secretary that works over email, SMS, and iMessage: users CC Howie on a thread and it negotiates times, sends invites, reschedules, and follows up until the meeting is booked. It learns individual scheduling preferences and manages calendars with a focus on doing one job - calendar management - rather than being a general assistant. The Seattle-based company raised a $6M seed round in 2025 and reports scheduling thousands of meetings per week for over a thousand paying customers.",
+    "website_url": "https://howie.ai",
+    "category": "productivity",
+    "pricing_model": "paid",
+    "pricing_details": "The official site advertises Individual, Team, and custom Enterprise tiers with a free starting option, but does not publish exact prices; third-party comparisons cite Standard around $35/user/month and Pro around $145/user/month.",
+    "use_cases": [
+      "Booking meetings by CC'ing Howie on an email thread",
+      "Coordinating group meetings across busy schedules",
+      "Rescheduling and clearing the calendar on short notice",
+      "Following up automatically when invitees go quiet",
+      "Enforcing personal scheduling preferences and focus time"
+    ],
+    "pros": [
+      "Handles the entire scheduling conversation end to end",
+      "Learns flexible, user-defined scheduling preferences",
+      "Works over email and messaging without a new app to learn",
+      "Deliberately narrow scope keeps it reliable at its one job"
+    ],
+    "cons": [
+      "Scheduling only - no broader email or task assistance",
+      "Exact pricing is not published on the official site",
+      "Historically centered on Google Calendar, limiting Outlook shops"
+    ],
+    "who_its_for": [
+      "Executives and founders with heavy external meeting loads",
+      "Sales and recruiting teams scheduling constantly",
+      "Professionals who want a human-like secretary experience",
+      "Teams replacing manual EA scheduling work"
+    ],
+    "key_features": [
+      "CC-based scheduling over email, SMS, and iMessage",
+      "Automatic follow-ups until meetings are booked",
+      "Rescheduling and conflict detection",
+      "Customizable scheduling preferences and rules",
+      "Calendar audits and focus-time protection",
+      "Team and Enterprise plans with custom billing and support"
+    ],
+    "editor_rating": 4.3,
+    "founded_year": null,
+    "company_name": "Howie",
+    "verification_source": "https://howie.ai/, https://howie.com/"
+  },
+  {
+    "name": "Littlebird",
+    "slug": "littlebird",
+    "tagline": "Ambient AI assistant that reads your screen and meetings so it already knows what you're working on.",
+    "description": "Littlebird is a desktop AI assistant for Mac and Windows that builds a private memory of a user's work by observing the active window, listening to meetings, and connecting to tools like email and calendar. It uses that context to answer questions, take meeting notes, draft emails and documents in the user's voice, and run scheduled routines such as morning briefings. The San Francisco company launched publicly in late 2025 and raised an $11M seed round led by Lotus Studio.",
+    "website_url": "https://littlebird.ai",
+    "category": "productivity",
+    "pricing_model": "freemium",
+    "pricing_details": "Basic is free with daily usage credits and limited meeting notes. Plus is $17/mo billed annually ($20 monthly), Power is $42/mo billed annually ($50 monthly), and Pro starts at $100/mo; Team starts at $17/seat/mo and Enterprise is custom.",
+    "use_cases": [
+      "Asking an assistant that already has context on current work",
+      "Automatic meeting notes and pre-meeting prep",
+      "Drafting emails and docs informed by real work context",
+      "Instant cross-app search over things seen on screen",
+      "Scheduled briefings and recurring routines"
+    ],
+    "pros": [
+      "Full work context without manual copy-pasting into a chatbot",
+      "User controls which apps are visible and can delete data anytime",
+      "SOC 2 certified with a no-training-on-your-data policy",
+      "Generous free tier and optional integrations"
+    ],
+    "cons": [
+      "Always-on screen observation will not suit every workplace",
+      "Heavier usage quickly pushes users into higher-priced tiers",
+      "Cloud storage of captured context requires trusting the vendor"
+    ],
+    "who_its_for": [
+      "Knowledge workers juggling many apps, docs, and meetings",
+      "Founders and managers who want automatic recall",
+      "Client-facing professionals needing meeting prep and notes",
+      "Users who want a personal assistant without manual setup"
+    ],
+    "key_features": [
+      "Screen-aware context across all apps without setup",
+      "Meeting notes in 10+ languages plus meeting prep",
+      "Cross-app instant search over observed work",
+      "Drafting in the user's voice from real context",
+      "Scheduled routines like daily briefings",
+      "Hundreds of optional integrations and MCP access on higher tiers"
+    ],
+    "editor_rating": 4.2,
+    "founded_year": null,
+    "company_name": "Littlebird",
+    "verification_source": "https://littlebird.ai/, https://littlebird.ai/pricing"
+  },
+  {
+    "name": "Stilla",
+    "slug": "stilla",
+    "tagline": "AI teammate that turns conversations across meetings and tools into completed work.",
+    "description": "Stilla is a collaborative AI platform that maintains shared memory across an organization's tools, meetings, and conversations, then acts on it - drafting PRs, posting Slack updates, editing Notion pages, and automating workflows across 3,000+ integrations. It includes AI meeting notes, a coding agent, sandboxed task machines, and an MCP server for extensibility. The Stockholm-based company was founded by Siavash Ghorbani and Kaj Drobin and emerged from stealth in early 2026 with $5M in funding.",
+    "website_url": "https://stilla.ai",
+    "category": "agents-automation",
+    "pricing_model": "freemium",
+    "pricing_details": "Free to start with $100 in usage credits and no card required; ongoing use is credit-based. Detailed paid tier pricing is not published on the public site.",
+    "use_cases": [
+      "Turning meeting outcomes into tasks and follow-ups automatically",
+      "Mentioning @Stilla in Slack or Discord to execute work",
+      "Automating workflows across 3,000+ connected tools",
+      "Delegating code changes to an agent that opens and reviews PRs",
+      "Searching shared memory across every connected tool"
+    ],
+    "pros": [
+      "Shared memory persists context across tools and conversations",
+      "Acts directly in tools rather than only suggesting next steps",
+      "Free starting credits with no card required",
+      "Open extensibility via MCP server"
+    ],
+    "cons": [
+      "Very new product with limited public track record",
+      "Credit-based pricing is not transparent on the site",
+      "Capped at 29 members per organization on standard plans"
+    ],
+    "who_its_for": [
+      "Product and engineering teams drowning in coordination work",
+      "Startups that want agentic automation without building it",
+      "Teams standardizing workflows as reusable skills",
+      "Organizations wanting one memory layer across their stack"
+    ],
+    "key_features": [
+      "Shared memory across tools, meetings, and chats",
+      "Agents that execute work in Slack, Discord, GitHub, and more",
+      "AI meeting notes with automatic tasks and follow-ups",
+      "Coding agent that writes, opens, and reviews PRs",
+      "3,000+ integrations plus an MCP server",
+      "Sandboxed computers for running tasks"
+    ],
+    "editor_rating": 4.0,
+    "founded_year": 2024,
+    "company_name": "Stilla Development AB",
+    "verification_source": "https://stilla.ai/"
+  },
+  {
+    "name": "Demi",
+    "slug": "demi-ai",
+    "tagline": "Proactive AI teammate for Mac that drafts replies, books meetings, and clears to-dos before you ask.",
+    "description": "Demi is a Mac app that works alongside the user, spotting to-dos across connected tools and preparing the actions to clear them - drafting email replies, booking meetings, summarizing threads, and updating CRM records. It shows each planned action for approval before executing, and connects to 100+ tools including Gmail, Google Calendar, Slack, and CRMs. It targets individuals and small teams who want a proactive assistant rather than a chatbot they have to prompt.",
+    "website_url": "https://www.demi.ai",
+    "category": "productivity",
+    "pricing_model": "paid",
+    "pricing_details": "Individual plan is $50/month for the Mac app with upgradeable usage credits; Team pricing is custom with dedicated onboarding and compliance review support.",
+    "use_cases": [
+      "Approving pre-drafted email replies instead of writing them",
+      "Booking meetings and managing calendar logistics",
+      "Summarizing long threads and teeing up follow-ups",
+      "Keeping the CRM updated from daily work",
+      "Delegating tasks from any app or screen on Mac"
+    ],
+    "pros": [
+      "Proactively surfaces tasks instead of waiting for prompts",
+      "Approval gate on every action before anything is sent",
+      "Broad 100+ tool connectivity including CRM and Drive",
+      "Google-verified app with SOC 2 Type II and CASA Tier II compliance"
+    ],
+    "cons": [
+      "Mac-only at present",
+      "No free tier; $50/month entry is steep for casual users",
+      "Messaging channels beyond Slack (iMessage, WhatsApp) still upcoming"
+    ],
+    "who_its_for": [
+      "Busy executives and founders on Mac",
+      "Sales and customer-facing professionals",
+      "Individuals who want delegation rather than a chatbot",
+      "Small teams standardizing on one assistant"
+    ],
+    "key_features": [
+      "Proactive task detection across connected tools",
+      "Drafted replies, meeting booking, and thread summaries",
+      "Human approval required before any action executes",
+      "100+ integrations including Gmail, Calendar, Slack, and CRMs",
+      "Callable from any app or screen via the Mac client",
+      "SOC 2 Type II and CASA Tier II compliance with zero-retention AI vendors"
+    ],
+    "editor_rating": 3.9,
+    "founded_year": null,
+    "company_name": "Demi",
+    "verification_source": "https://www.demi.ai/"
+  }
+]

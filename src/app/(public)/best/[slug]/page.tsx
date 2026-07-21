@@ -25,6 +25,28 @@ import type { ToolWithCategory } from "@/lib/types/database";
 
 export const revalidate = 3600;
 
+/** Strip [text](href) inline links from intro copy for meta/JSON-LD contexts. */
+function plainIntro(intro: string): string {
+  return intro.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1");
+}
+
+/** Render intro copy, turning [text](href) segments into internal links. */
+function renderIntro(intro: string) {
+  return intro.split(/(\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
+    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (!match) return part;
+    return (
+      <Link
+        key={i}
+        href={match[2]}
+        className="text-white/90 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white/70"
+      >
+        {match[1]}
+      </Link>
+    );
+  });
+}
+
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -39,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return { title: "Not Found" };
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
-  const firstSentence = page.intro.split(/(?<=[.!?])\s+/)[0] ?? page.intro;
+  const firstSentence = plainIntro(page.intro).split(/(?<=[.!?])\s+/)[0] ?? page.intro;
   const combined = `${page.tagline} ${firstSentence}`;
   const description =
     combined.length <= 160
@@ -82,7 +104,7 @@ export default async function BestForPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: page.title,
-    description: page.intro,
+    description: plainIntro(page.intro),
     url: `${siteUrl}/best/${slug}`,
     // No date field exists in best-for.ts; mirror the visible "Updated" label,
     // which derives from the newest updated_at among the listed tools.
@@ -160,7 +182,7 @@ export default async function BestForPage({ params }: Props) {
               </RevealText>
             </div>
             <p className="mt-5 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base">
-              {page.intro}
+              {renderIntro(page.intro)}
             </p>
           </div>
         </FadeIn>
@@ -236,26 +258,29 @@ export default async function BestForPage({ params }: Props) {
                     {/* CTAs */}
                     <div className="flex flex-wrap gap-2 sm:flex-col sm:items-end">
                       {tool && (
-                        <a
-                          href={tool.affiliate_url || tool.website_url}
-                          target="_blank"
-                          rel={
-                            tool.affiliate_url
-                              ? "noopener noreferrer sponsored nofollow"
-                              : "noopener noreferrer"
-                          }
-                        >
-                          <Button size="sm">
+                        <Button size="sm" asChild>
+                          <a
+                            href={tool.affiliate_url || tool.website_url}
+                            target="_blank"
+                            rel={
+                              tool.affiliate_url
+                                ? "noopener noreferrer sponsored nofollow"
+                                : "noopener noreferrer"
+                            }
+                          >
                             Visit
                             <ExternalLink className="ml-1.5 h-3 w-3" />
-                          </Button>
-                        </a>
-                      )}
-                      <Link href={`/tools/${pick.slug}`} className="hidden sm:block">
-                        <Button size="sm" variant="outline">
-                          Review
+                          </a>
                         </Button>
-                      </Link>
+                      )}
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        asChild
+                        className="hidden sm:inline-flex"
+                      >
+                        <Link href={`/tools/${pick.slug}`}>Review</Link>
+                      </Button>
                     </div>
                   </li>
                 );

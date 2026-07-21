@@ -18,7 +18,8 @@ export interface BestForPage {
   title: string;
   /** 5-12 word descriptor for the hero */
   tagline: string;
-  /** ~50-70 word intro paragraph; varies per page so search engines treat each as unique. */
+  /** ~50-70 word intro paragraph; varies per page so search engines treat each as unique.
+   *  Supports inline internal links in markdown form: [anchor text](/path). */
   intro: string;
   /** Optional pre-built stack slug to cross-link to */
   relatedStack?: string;
@@ -100,7 +101,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
     title: "Best AI Coding Assistants in 2026",
     tagline: "The IDE companions that actually ship code.",
     intro:
-      "AI coding has split into two camps: tab-complete that understands your file, and agents that understand your repo. The picks below are tested on real codebases (not toy projects) and ranked by what experienced engineers actually keep paying for. This page covers in-editor assistants — autocomplete and chat-in-editor tools. For autonomous, multi-step agents that take tickets and open PRs, see our best AI coding agents list.",
+      "AI coding has split into two camps: tab-complete that understands your file, and agents that understand your repo. The picks below are tested on real codebases (not toy projects) and ranked by what experienced engineers actually keep paying for. This page covers in-editor assistants — autocomplete and chat-in-editor tools. For autonomous, multi-step agents that take tickets and open PRs, see our [best AI coding agents list](/best/best-ai-coding-agents).",
     relatedStack: "indie-hacker-starter",
     picks: [
       { slug: "cursor", pitch: "The category leader. Multi-file edits, agent mode, and tab-complete that understands your project — all in one IDE." },
@@ -124,7 +125,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
     title: "Best AI Coding Agents in 2026",
     tagline: "Repo-aware agents for tickets, refactors, and pull requests.",
     intro:
-      "AI coding agents are moving beyond autocomplete into delegated engineering work: planning changes, editing multiple files, running commands, and opening PRs. The picks below favor tools that operate on real repositories, expose enough control for senior engineers, and fit into the review loop instead of pretending review is optional. This page covers autonomous, multi-step agents. For autocomplete and chat-in-editor assistants, see our best AI tools for developers list.",
+      "AI coding agents are moving beyond autocomplete into delegated engineering work: planning changes, editing multiple files, running commands, and opening PRs. The picks below favor tools that operate on real repositories, expose enough control for senior engineers, and fit into the review loop instead of pretending review is optional. This page covers autonomous, multi-step agents. For autocomplete and chat-in-editor assistants, see our [best AI tools for developers list](/best/ai-tools-for-developers).",
     relatedStack: "indie-hacker-starter",
     picks: [
       { slug: "claude-code", pitch: "Best terminal-native agent for serious repo work: reads code, edits files, runs commands, and fits the human review loop." },
@@ -306,7 +307,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
     title: "Best Open-Source AI Tools in 2026",
     tagline: "Self-hostable, forkable, no vendor lock-in.",
     intro:
-      "Open-source AI is no longer the consolation prize — it's competitive on capability and decisive on cost, privacy, and control. The tools below are the open-source options that have crossed the production-ready bar. Going local? Our blog guides cover which open-source models are worth running on your own hardware and the best llama.cpp alternatives and runtimes to run them on.",
+      "Open-source AI is no longer the consolation prize — it's competitive on capability and decisive on cost, privacy, and control. The tools below are the open-source options that have crossed the production-ready bar. Going local? Our blog guides cover [which open-source models are worth running on your own hardware](/blog/run-ai-locally-open-source-models) and the [best llama.cpp alternatives and runtimes](/blog/best-llama-cpp-alternatives) to run them on.",
     picks: [
       { slug: "ollama", pitch: "Run open-weight models locally with one command. The friendliest entry point to local AI." },
       { slug: "llamafile", pitch: "Download a single executable and run an LLM — no Python, CUDA, or setup ceremony required." },
@@ -370,7 +371,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
     title: "Best AI Video Generators in 2026",
     tagline: "Text-to-video that's actually usable.",
     intro:
-      "AI video crossed the usable threshold in 2025-2026 — outputs are now good enough for B-roll, hero shots, and short-form social content. The picks below are ranked by quality per dollar, with notes on where each one fits in a real production pipeline. Generators only — for editors and avatar platforms, see our AI video tools guide on the blog.",
+      "AI video crossed the usable threshold in 2025-2026 — outputs are now good enough for B-roll, hero shots, and short-form social content. The picks below are ranked by quality per dollar, with notes on where each one fits in a real production pipeline. Generators only — for editors and avatar platforms, see our [AI video tools guide on the blog](/blog/best-ai-video-tools-2026).",
     picks: [
       { slug: "runway", pitch: "The professional pick. Strong control surfaces, image-to-video, motion brush. Where pros do iterative work." },
       { slug: "google-flow", pitch: "Google's AI filmmaking surface for storyboarding and directing cinematic scenes with its generative media models." },
@@ -412,7 +413,7 @@ export const BEST_FOR_PAGES: BestForPage[] = [
     title: "Best AI Tools for Research in 2026",
     tagline: "Lit reviews, synthesis, and writing — at graduate scale.",
     intro:
-      "Research is a throughput problem: read 40 papers to cite 10. The tools below remove the mechanical overhead — semantic search, multi-paper synthesis, citation tracking — so you can spend more time on the part that actually matters. For the methodology behind how to evaluate and choose a research tool, see our AI research tools guide on the blog.",
+      "Research is a throughput problem: read 40 papers to cite 10. The tools below remove the mechanical overhead — semantic search, multi-paper synthesis, citation tracking — so you can spend more time on the part that actually matters. For the methodology behind how to evaluate and choose a research tool, see our [AI research tools guide on the blog](/blog/best-ai-research-tools).",
     relatedStack: "academic-research-helper",
     picks: [
       { slug: "elicit", pitch: "Semantic search across 200M papers. Asks the research question directly instead of keyword-matching." },

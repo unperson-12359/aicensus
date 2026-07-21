@@ -1,0 +1,416 @@
+[
+  {
+    "name": "Firecrawl",
+    "slug": "firecrawl",
+    "tagline": "Web data API that turns websites into clean, LLM-ready markdown, JSON, and search results.",
+    "description": "Firecrawl is a web crawling, scraping, and search API built for AI applications. It converts URLs to clean markdown, HTML, screenshots, or structured JSON via a single API call, handling JavaScript rendering and proxies automatically. The project is open source with a large community, and the hosted version adds an interact mode for operating pages and an MCP server for agent integrations.",
+    "website_url": "https://www.firecrawl.dev/",
+    "category": "ai-agents",
+    "pricing_model": "freemium",
+    "pricing_details": "Free tier includes 1,000 pages/month. Paid plans: Hobby $16/mo (5,000 pages), Standard $83/mo (100,000 pages), Growth $333/mo (500,000 pages), Scale $599/mo (1M credits), Enterprise custom; prices are annual-billing equivalents.",
+    "use_cases": [
+      "Feeding web pages into RAG pipelines as clean markdown",
+      "Powering deep-research agents with search and scrape",
+      "Crawling entire sites for structured data extraction",
+      "Lead enrichment and competitive intelligence",
+      "Giving coding agents web access via MCP"
+    ],
+    "pros": [
+      "Open source core with very large community adoption",
+      "Clean markdown output reduces token usage for LLMs",
+      "Handles JS-heavy pages without configuration",
+      "Official MCP server and multi-language SDKs"
+    ],
+    "cons": [
+      "Credit system makes costs hard to predict at scale",
+      "No pay-per-use option; credits mostly do not roll over",
+      "Advanced features consume extra credits per call"
+    ],
+    "who_its_for": [
+      "AI engineers building agents and RAG pipelines",
+      "Developers needing web data without maintaining scrapers",
+      "Data teams doing large-scale extraction",
+      "Startups shipping AI features on live web data"
+    ],
+    "key_features": [
+      "Scrape, crawl, map, search, and interact endpoints",
+      "LLM-ready markdown and structured JSON output",
+      "Automatic JavaScript rendering and smart wait",
+      "Official MCP server and CLI for agent setup",
+      "SDKs for Python, Node, Go, Rust, Java, and Elixir",
+      "Open-source core with hosted enterprise options"
+    ],
+    "editor_rating": 4.6,
+    "founded_year": 2024,
+    "company_name": "SideGuide Technologies (formerly Mendable)",
+    "verification_source": "https://www.firecrawl.dev/ ; https://www.firecrawl.dev/pricing"
+  },
+  {
+    "name": "Context.dev",
+    "slug": "context-dev",
+    "tagline": "Web scraping and brand data API for AI agents, turning any URL into markdown or structured data.",
+    "description": "Context.dev is a developer API that scrapes URLs, crawls sites, and extracts structured data such as markdown, HTML, sitemaps, screenshots, and brand assets (logos, colors, fonts). It targets AI products and agents, offering self-serve API keys, SDKs, and quick integration. Customers include Mintlify, daily.dev, and DocsBot, mainly for onboarding enrichment and agent features.",
+    "website_url": "https://www.context.dev/",
+    "category": "ai-agents",
+    "pricing_model": "freemium",
+    "pricing_details": "Free plan with 500 API credits and no credit card required. Paid plans listed on the pricing page: Developer $25/mo, Pro $149/mo, Scale $499/mo, with a custom Enterprise tier for teams needing more than 2M credits per month.",
+    "use_cases": [
+      "Enriching SaaS onboarding with brand data from a URL",
+      "Giving AI agents the ability to read web pages",
+      "Crawling sites for markdown content at scale",
+      "Extracting logos, colors, and company info automatically",
+      "Powering enrichment and automation features in AI products"
+    ],
+    "pros": [
+      "Self-serve signup with immediate API key",
+      "Combines scraping and brand intelligence under one key",
+      "No credit card needed to test the API",
+      "Thorough documentation with 10-minute integration reported by users"
+    ],
+    "cons": [
+      "Smaller credit allotments than some scraping competitors",
+      "Brand data focus may be unnecessary for pure scraping needs",
+      "Relatively young product with a smaller track record"
+    ],
+    "who_its_for": [
+      "SaaS founders adding URL-based onboarding enrichment",
+      "AI product teams building agents that read the web",
+      "Developers wanting a single API for scrape plus brand data",
+      "Startups replacing in-house scraping infrastructure"
+    ],
+    "key_features": [
+      "URL-to-markdown scraping and full-site crawling",
+      "Brand data API: logos, colors, fonts, company info",
+      "Structured extraction with AI",
+      "Self-serve API keys and developer SDKs",
+      "Screenshots, sitemaps, and HTML output",
+      "Usage-based credit system across all endpoints"
+    ],
+    "editor_rating": 4.2,
+    "founded_year": null,
+    "company_name": "Context.dev",
+    "verification_source": "https://www.context.dev/ ; https://www.context.dev/pricing"
+  },
+  {
+    "name": "Zernio",
+    "slug": "zernio",
+    "tagline": "One API to publish, message, advertise, and analyze across 15 social and messaging platforms.",
+    "description": "Zernio is a unified social media and messaging API for developers and AI agents. It covers publishing, scheduling, analytics, DMs, comments, and ad boosting across 15 channels including Instagram, TikTok, X, LinkedIn, YouTube, WhatsApp, and Bluesky, using official platform APIs. It also provides WhatsApp business numbers with KYC handled, and ships an MCP server so agents can post and manage accounts in natural language.",
+    "website_url": "https://www.zernio.com/",
+    "category": "agents-automation",
+    "pricing_model": "freemium",
+    "pricing_details": "Usage-based per connected account: first 2 accounts free (no card), then $6/account/mo for accounts 3-10, $3/account/mo for 11-100, and $1/account/mo for 101+. X/Twitter API calls, phone numbers, calls, and SMS are billed separately at pass-through rates.",
+    "use_cases": [
+      "Adding social publishing to a SaaS product without building 15 integrations",
+      "Letting AI agents post and reply to DMs via MCP",
+      "Scheduling content across all major platforms from one call",
+      "Running unified analytics for many client accounts",
+      "Provisioning WhatsApp business numbers programmatically"
+    ],
+    "pros": [
+      "Single OAuth flow and API across 15 channels",
+      "Uses only official platform APIs, avoiding account bans",
+      "Transparent graduated per-account pricing with a real free tier",
+      "MCP server with 280+ tools for agent workflows"
+    ],
+    "cons": [
+      "Developer-oriented; requires API skills or no-code connectors",
+      "X/Twitter usage costs extra at pass-through rates",
+      "Per-account billing can add up for agencies with many clients"
+    ],
+    "who_its_for": [
+      "Developers building social features into products",
+      "Agencies managing many client social accounts",
+      "Teams adding WhatsApp messaging without regulatory paperwork",
+      "Builders wiring AI agents to social channels"
+    ],
+    "key_features": [
+      "Unified posting, scheduling, and analytics across 15 platforms",
+      "Single OAuth connection flow, no per-platform dev apps",
+      "Unified inbox for DMs, comments, and reviews",
+      "Ad boosting across multiple ad networks",
+      "WhatsApp number provisioning with KYC handled",
+      "MCP server for natural-language agent control"
+    ],
+    "editor_rating": 4.3,
+    "founded_year": null,
+    "company_name": null,
+    "verification_source": "https://www.zernio.com/ ; https://www.zernio.com/pricing"
+  },
+  {
+    "name": "Peec AI",
+    "slug": "peec-ai",
+    "tagline": "AI search analytics tracking how brands appear in ChatGPT, Perplexity, Gemini, and other AI answers.",
+    "description": "Peec AI is a Berlin-based platform that measures brand visibility, position, and sentiment in AI-generated search answers across models like ChatGPT, Perplexity, and Google AI Overviews. Marketing teams track prompts, citations, and competitors with daily refresh, and export reporting via Looker Studio or API. It is used by over a thousand brands and agencies and has raised about $29M in venture funding.",
+    "website_url": "https://peec.ai/",
+    "category": "data-analytics",
+    "pricing_model": "paid",
+    "pricing_details": "Brand plans: Starter $95/mo (50 prompts, 1 project), Pro $245/mo (150 prompts, 2 projects), Advanced $495/mo (350 prompts, 5 projects), Enterprise custom; agency plans from $245/mo. Annual billing saves about 15%, and a 7-day free trial is offered.",
+    "use_cases": [
+      "Monitoring brand mentions in AI search answers",
+      "Tracking prompt-level visibility versus competitors",
+      "Measuring sentiment and position in LLM responses",
+      "Reporting AI visibility to clients via Looker Studio",
+      "Informing GEO (generative engine optimization) strategy"
+    ],
+    "pros": [
+      "Purpose-built for AI search visibility rather than retrofitted SEO metrics",
+      "Unlimited users on every plan",
+      "Daily tracking cadence on all self-serve tiers",
+      "Strong multi-country and multilingual coverage"
+    ],
+    "cons": [
+      "Only 3 AI models included per plan; extra models cost more",
+      "Monitoring-focused, with limited built-in optimization guidance",
+      "Higher entry price than some newer competitors"
+    ],
+    "who_its_for": [
+      "Marketing and SEO teams at mid-size to enterprise brands",
+      "Agencies reporting AI visibility to multiple clients",
+      "Growth teams building a GEO practice",
+      "Global brands needing multi-market tracking"
+    ],
+    "key_features": [
+      "Prompt tracking across major AI search models",
+      "Visibility, position, and sentiment metrics",
+      "Competitor share-of-voice comparisons",
+      "Daily data refresh on all plans",
+      "Looker Studio integration and CSV exports",
+      "Multi-country and multi-language tracking"
+    ],
+    "editor_rating": 4.4,
+    "founded_year": 2025,
+    "company_name": "Peec AI",
+    "verification_source": "https://peec.ai/ ; https://peec.ai/pricing ; https://peec.ai/ai-instructions"
+  },
+  {
+    "name": "Ranked AI",
+    "slug": "ranked-ai",
+    "tagline": "Fully managed AI SEO and PPC combining tracking software with a team that implements the work.",
+    "description": "Ranked AI is a hybrid software-plus-service offering for search marketing. Its platform includes keyword and AI-prompt tracking, audits, backlink monitoring, and local heatmaps, while its team writes content, builds links, and implements on-page fixes. Plans are month-to-month starting at $99 per website, with white-label options for agencies.",
+    "website_url": "https://ranked.ai/",
+    "category": "research-search",
+    "pricing_model": "paid",
+    "pricing_details": "Standard $99/mo per website (25 target keywords, 1 article/week), Plus $198/mo (50 keywords, 2 articles/week), Enterprise $349/mo (100 keywords, 4 articles/week, dedicated account executive). Month-to-month with a free trial and no contracts.",
+    "use_cases": [
+      "Outsourcing SEO execution for local and niche businesses",
+      "Tracking both traditional rankings and AI search visibility",
+      "Getting weekly blog content produced and published",
+      "Reselling SEO under an agency's own brand",
+      "Managing PPC campaigns with specialist oversight"
+    ],
+    "pros": [
+      "Service included, not just software dashboards",
+      "Low entry price at $99/mo with no contracts",
+      "No-limits keyword and prompt tracking on all plans",
+      "White-label option for agencies"
+    ],
+    "cons": [
+      "Priced per website, so multi-site costs scale linearly",
+      "Content output volume is capped per plan tier",
+      "Hybrid model means results depend on the assigned team"
+    ],
+    "who_its_for": [
+      "Small and local businesses without in-house SEO staff",
+      "Multi-location businesses needing managed search",
+      "Agencies wanting a white-label SEO stack",
+      "Teams wanting both AI visibility tracking and execution"
+    ],
+    "key_features": [
+      "Unlimited keyword and AI prompt tracking",
+      "Weekly managed blog content and web copy",
+      "On-page optimization and backlink acquisition",
+      "Local heatmaps and GBP management",
+      "GA, GSC, and GBP integrations",
+      "White-label dashboard, reports, and client portal"
+    ],
+    "editor_rating": 4.1,
+    "founded_year": null,
+    "company_name": "Ranked AI",
+    "verification_source": "https://ranked.ai/"
+  },
+  {
+    "name": "Subscribr",
+    "slug": "subscribr",
+    "tagline": "AI assistant for YouTube that finds outlier video ideas and writes scripts in your channel's voice.",
+    "description": "Subscribr is a YouTube-focused AI tool that analyzes a creator's channel and niche to surface data-backed video ideas ranked by outlier performance, then generates ready-to-film scripts with hooks, structure, and retention-focused pacing. It also offers competitor channel tracking, an AI thumbnail generator, and voice matching trained on the creator's existing content. Billing is annual only, with a low-cost 7-day trial.",
+    "website_url": "https://subscribr.ai/",
+    "category": "video-audio",
+    "pricing_model": "paid",
+    "pricing_details": "Annual billing only; the Creator plan is listed at $299/year on the site's checkout. New users can start with a $7 trial for the first 7 days, and a 30-day money-back guarantee is offered.",
+    "use_cases": [
+      "Generating YouTube video ideas based on outlier data",
+      "Writing long-form scripts that match a creator's voice",
+      "Tracking competitor channels for topic opportunities",
+      "Producing thumbnails from script concepts",
+      "Speeding up pre-production for faceless channels"
+    ],
+    "pros": [
+      "Purpose-built for YouTube rather than generic AI writing",
+      "Idea generation grounded in live outlier video data",
+      "Voice matching keeps scripts on-brand",
+      "Low-risk $7 trial and 30-day refund policy"
+    ],
+    "cons": [
+      "Annual billing only; no monthly subscription option",
+      "Optimized for English; other languages need manual polish",
+      "Focused on pre-production, no editing or publishing tools"
+    ],
+    "who_its_for": [
+      "YouTube creators publishing long-form content",
+      "Faceless channel operators producing at volume",
+      "Video marketers scripting educational or story content",
+      "Creators who struggle with topic research and hooks"
+    ],
+    "key_features": [
+      "Outlier video idea generator using live YouTube data",
+      "Script writing with hooks, structure, and outros",
+      "Voice matching trained on the user's channel",
+      "Competitor channel tracking",
+      "AI thumbnail generation from script ideas",
+      "Built-in research agents with web search"
+    ],
+    "editor_rating": 4.2,
+    "founded_year": null,
+    "company_name": null,
+    "verification_source": "https://subscribr.ai/ ; https://subscribr.ai/pricing"
+  },
+  {
+    "name": "Typa",
+    "slug": "typa",
+    "tagline": "AI content engine that drafts on-brand social posts from voice notes, links, and your knowledge base.",
+    "description": "Typa is an AI content platform that learns a brand's voice and opinions, then drafts and schedules posts for X, LinkedIn, Bluesky, and Medium. Users can reach it through iMessage, Slack, voice calls, or the web app, and every draft waits for human approval before publishing. A self-updating knowledge base keeps research and drafts grounded in the company's actual material.",
+    "website_url": "https://www.typa.ai/",
+    "category": "writing-content",
+    "pricing_model": "freemium",
+    "pricing_details": "Free plan at $0/mo with $3 of usage credits. Pro is $17/mo plus $10 per connected social account (one connection included). A managed 'Founder Mode' ghostwriting service is available at custom pricing.",
+    "use_cases": [
+      "Drafting social posts that match a founder's voice",
+      "Turning voice notes and links into publishable threads",
+      "Scheduling content across X, LinkedIn, Bluesky, and Medium",
+      "Maintaining a knowledge base that informs drafts",
+      "Delegating content review workflows to a team channel"
+    ],
+    "pros": [
+      "Voice cloning produces drafts that read authentically",
+      "Works inside iMessage, Slack, and voice calls",
+      "Human approval required before anything posts",
+      "Generous free entry point for testing"
+    ],
+    "cons": [
+      "Per-account connection fees add to the base subscription",
+      "Publishing coverage limited to a few text-first platforms",
+      "Young product with a small public track record"
+    ],
+    "who_its_for": [
+      "Founders and executives building a personal brand",
+      "Small marketing teams running social content",
+      "Creators who think out loud and want drafts from voice notes",
+      "Brands wanting ghostwriting with approval control"
+    ],
+    "key_features": [
+      "Brand voice matching across all drafts",
+      "Drafting from voice notes, links, and research",
+      "Multi-surface access: iMessage, Slack, voice, web",
+      "Approval workflow; nothing auto-publishes",
+      "Self-updating knowledge base",
+      "Scheduling to X, LinkedIn, Bluesky, and Medium"
+    ],
+    "editor_rating": 4.0,
+    "founded_year": null,
+    "company_name": null,
+    "verification_source": "https://www.typa.ai/ ; https://www.typa.ai/pricing"
+  },
+  {
+    "name": "Riverflow",
+    "slug": "riverflow",
+    "tagline": "AI creative platform that generates on-brand images, videos, and ads trained on your visual identity.",
+    "description": "Riverflow is an AI creative tool for marketing teams that trains on a brand's visual identity, values, and products to generate consistent campaign assets. It produces product photography-style images, static ads, and videos for channels like Meta, TikTok, email, and print, with a credit-based pricing model and commercial usage rights. An MCP integration lets teams generate assets from Claude, ChatGPT, or Codex.",
+    "website_url": "https://www.riverflow.ai/",
+    "category": "image-generation",
+    "pricing_model": "freemium",
+    "pricing_details": "Free plan with 50 credits/day for one brand. Paid plans per the official help center: Starter $39/mo ($29/mo annual, 2,250 credits), Growth $99/mo ($74/mo annual, 6,000 credits), Scale $249/mo ($187/mo annual, 16,000 credits), Enterprise custom.",
+    "use_cases": [
+      "Generating on-brand product photography without shoots",
+      "Producing static ads and videos for paid social campaigns",
+      "Scaling creative output across multiple brands",
+      "Creating campaign assets in hours instead of weeks",
+      "Generating visuals directly from AI chat tools via MCP"
+    ],
+    "pros": [
+      "Brand training keeps outputs visually consistent",
+      "Covers images, static ads, and video in one credit system",
+      "Commercial usage rights included on all plans",
+      "Free daily-credit plan for evaluation"
+    ],
+    "cons": [
+      "Credit math differs per asset type, complicating budgeting",
+      "Lower tiers cap brand profiles and custom styles",
+      "Best results require upfront brand training effort"
+    ],
+    "who_its_for": [
+      "E-commerce and consumer brand marketing teams",
+      "Agencies producing ad creative for multiple brands",
+      "Growth teams iterating on paid social creative",
+      "Creative teams replacing routine photoshoots"
+    ],
+    "key_features": [
+      "Custom brand training on visual identity and products",
+      "Image, static ad, and video generation",
+      "Campaign-ready output for Meta, TikTok, email, and print",
+      "MCP connection to Claude, ChatGPT, and Codex",
+      "Custom scene and style training",
+      "Expert artworking support on higher tiers"
+    ],
+    "editor_rating": 4.2,
+    "founded_year": null,
+    "company_name": null,
+    "verification_source": "https://www.riverflow.ai/ ; https://www.riverflow.ai/pricing ; https://help.riverflow.ai/en/articles/14322110-riverflow-pricing-credits"
+  },
+  {
+    "name": "intellijend",
+    "slug": "intellijend",
+    "tagline": "Music marketing platform that runs optimized Meta ads and tracks Spotify popularity scores for artists.",
+    "description": "intellijend is a marketing automation platform for independent musicians that builds and optimizes Meta (Facebook/Instagram) ad campaigns aimed at streaming growth. It front-loads ad spend around releases, tests multiple creatives with automatic pausing of underperformers, and tracks Spotify's internal popularity scores to time algorithmic playlist pushes. The company reports usage by over 10,000 artists.",
+    "website_url": "https://www.intellijend.com/",
+    "category": "music-audio",
+    "pricing_model": "paid",
+    "pricing_details": "Subscription from $24.99/month, with Meta ad spend billed separately (the platform's guidance centers on roughly $10/day campaign budgets). Annual subscribers receive monthly ad creative packs.",
+    "use_cases": [
+      "Launching Meta ad campaigns for new music releases",
+      "Triggering Spotify algorithmic playlists with timed ad spend",
+      "Tracking Spotify popularity scores release-over-release",
+      "Testing ad creatives systematically without Meta Ads Manager expertise",
+      "Growing monthly listeners as an independent artist"
+    ],
+    "pros": [
+      "Purpose-built for music promotion, not generic ad tooling",
+      "Automates Meta campaign structure and creative testing",
+      "Surfaces Spotify popularity data that is otherwise hidden",
+      "Strong user reviews for support and results"
+    ],
+    "cons": [
+      "Total cost requires meaningful ad spend on top of the subscription",
+      "Results depend heavily on music quality and creative",
+      "Narrow focus; only useful for streaming-focused music marketing"
+    ],
+    "who_its_for": [
+      "Independent artists releasing music regularly",
+      "Artist managers running release campaigns",
+      "Small labels promoting streaming growth",
+      "Musicians without Meta Ads Manager experience"
+    ],
+    "key_features": [
+      "Automated Meta ads campaign creation for music",
+      "Front-loaded release-day budget strategy",
+      "Spotify popularity score tracking",
+      "Multi-creative ad testing with auto-optimization",
+      "Ad spend overlayed on streaming metrics",
+      "Educational guides on Spotify algorithm mechanics"
+    ],
+    "editor_rating": 4.1,
+    "founded_year": null,
+    "company_name": "intellijend",
+    "verification_source": "https://www.intellijend.com/ ; https://intellijend.com/learn"
+  }
+]

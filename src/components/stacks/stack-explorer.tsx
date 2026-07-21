@@ -151,7 +151,7 @@ export function StackExplorer({ tools }: StackExplorerProps) {
 
   // Sync state to URL whenever it changes (for shareability)
   useEffect(() => {
-    router.replace(stackQueryString ? `?${stackQueryString}` : "?", {
+    router.replace(stackQueryString ? `?${stackQueryString}` : "/stacks/build", {
       scroll: false,
     });
   }, [router, stackQueryString]);
@@ -285,6 +285,7 @@ export function StackExplorer({ tools }: StackExplorerProps) {
                 key={cap.slug}
                 type="button"
                 onClick={() => toggleCap(cap.slug)}
+                aria-pressed={active}
                 className={cn(
                   "group inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs transition-colors",
                   active
@@ -466,6 +467,7 @@ function ConstraintChip({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={cn(
         "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors",
         active

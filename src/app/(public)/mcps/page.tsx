@@ -158,6 +158,7 @@ export default function McpsIndex() {
                         {s.official && (
                           <ShieldCheck
                             className="h-4 w-4 shrink-0 text-white/55"
+                            role="img"
                             aria-label="Official"
                           />
                         )}
@@ -185,6 +186,23 @@ export default function McpsIndex() {
             <Badge variant="outline" className="text-[11px]">
               <Github className="mr-1.5 h-3 w-3" /> Open standard
             </Badge>
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+              Runs in
+            </span>
+            {[
+              { href: "/tools/claude", label: "Claude" },
+              { href: "/tools/cursor", label: "Cursor" },
+              { href: "/tools/chatgpt", label: "ChatGPT" },
+              { href: "/tools/windsurf", label: "Windsurf" },
+            ].map((host) => (
+              <Link
+                key={host.href}
+                href={host.href}
+                className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
+              >
+                {host.label}
+              </Link>
+            ))}
             <Link
               href="/contact"
               className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"

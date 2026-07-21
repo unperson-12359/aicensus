@@ -84,6 +84,7 @@ function Chip({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={cn(
         "inline-flex items-center rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors",
         active
@@ -235,6 +236,13 @@ export function StacksBrowser({
           <p className="mt-2 font-serif text-sm italic text-white/55">
             Try fewer filters.
           </p>
+          <button
+            type="button"
+            onClick={clearAll}
+            className="mt-5 font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 underline-offset-4 transition-colors hover:text-white hover:underline sm:text-[11px]"
+          >
+            Clear filters
+          </button>
         </div>
       )}
     </>

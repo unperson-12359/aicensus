@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -17,10 +18,12 @@ import { JsonLd } from "@/components/shared/json-ld";
 import {
   getMcpBySlug,
   getAllMcpSlugs,
+  getMcpClientConfig,
   MCP_SERVERS,
   MCP_CATEGORY_LABELS,
   MCP_TRANSPORT_LABELS,
 } from "@/lib/mcp-servers";
+import { InstallCommand } from "@/components/mcps/install-command";
 
 export const revalidate = 3600;
 
@@ -32,13 +35,41 @@ export function generateStaticParams() {
   return getAllMcpSlugs().map((slug) => ({ slug }));
 }
 
+/** Tagline plus the first sentence of the description, truncated on a word
+ *  boundary to stay within SERP display limits (~160 chars). */
+function metaDescription(server: NonNullable<ReturnType<typeof getMcpBySlug>>): string {
+  const firstSentence = server.description.match(/^[^.]+\./)?.[0] ?? server.description;
+  const candidate = `${server.tagline} ${firstSentence}`.trim();
+  const text = candidate.length <= 160 ? candidate : server.tagline;
+  if (text.length <= 160) return text;
+  const cut = text.slice(0, 157);
+  return `${cut.slice(0, cut.lastIndexOf(" "))}…`;
+}
+
+function McpHostLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+    >
+      {children}
+    </Link>
+  );
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const server = getMcpBySlug(slug);
   if (!server) return { title: "Not Found" };
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
-  const description = `${server.tagline} ${server.description}`.slice(0, 280);
+  const description = metaDescription(server);
 
   return {
     title: `${server.name} MCP Server — Setup, Tools, Use Cases`,
@@ -69,13 +100,13 @@ export default async function McpDetailPage({ params }: Props) {
   }
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
+  const clientConfig = getMcpClientConfig(server);
 
   const ld = {
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
     name: `${server.name} MCP Server`,
     codeRepository: server.repoUrl,
-    programmingLanguage: "TypeScript / Python",
     description: server.description,
     author: { "@type": "Organization", name: server.maintainer },
     url: `${siteUrl}/mcps/${slug}`,
@@ -152,6 +183,18 @@ export default async function McpDetailPage({ params }: Props) {
                 </a>
               )}
             </div>
+
+            <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+              Runs in{" "}
+              <McpHostLink href="/tools/claude">Claude</McpHostLink>
+              {" · "}
+              <McpHostLink href="/tools/cursor">Cursor</McpHostLink>
+              {" · "}
+              <McpHostLink href="/tools/chatgpt">ChatGPT</McpHostLink>
+              {" · "}
+              <McpHostLink href="/tools/windsurf">Windsurf</McpHostLink>
+              {" "}— any MCP-compatible client
+            </p>
           </div>
         </FadeIn>
 
@@ -165,9 +208,7 @@ export default async function McpDetailPage({ params }: Props) {
                   Install
                 </p>
               </div>
-              <pre className="mt-3 overflow-x-auto rounded-lg border border-white/10 bg-black p-4 text-xs leading-relaxed text-white/85 sm:text-sm">
-                <code>{server.installCommand}</code>
-              </pre>
+              <InstallCommand command={server.installCommand} />
             </div>
             <div className="bento-tile p-5 sm:p-6">
               <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/60">
@@ -194,6 +235,53 @@ export default async function McpDetailPage({ params }: Props) {
                 </>
               )}
             </div>
+          </section>
+        </FadeIn>
+
+        {/* Add to your AI client */}
+        <FadeIn delay={0.2}>
+          <section className="mt-14 sm:mt-20">
+            <div className="flex items-center justify-between gap-4">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                § Add to your AI client
+              </p>
+              <span className="h-px flex-1 bg-white/10" />
+            </div>
+            {clientConfig ? (
+              <>
+                <p className="mt-6 max-w-3xl text-sm leading-relaxed text-white/70 sm:text-base">
+                  Drop this into your client&apos;s MCP config —{" "}
+                  <code className="rounded border border-white/10 bg-white/[0.04] px-1.5 py-0.5 text-[0.85em] text-white/85">
+                    claude_desktop_config.json
+                  </code>{" "}
+                  for Claude Desktop, or{" "}
+                  <code className="rounded border border-white/10 bg-white/[0.04] px-1.5 py-0.5 text-[0.85em] text-white/85">
+                    .cursor/mcp.json
+                  </code>{" "}
+                  for Cursor — then restart the app. Replace placeholder paths
+                  and credentials with your own.
+                </p>
+                <pre className="mt-4 max-w-3xl overflow-x-auto rounded-lg border border-white/10 bg-black p-4 text-xs leading-relaxed text-white/85 sm:text-sm">
+                  <code>{clientConfig}</code>
+                </pre>
+              </>
+            ) : (
+              <p className="mt-6 max-w-3xl text-sm leading-relaxed text-white/70 sm:text-base">
+                {server.name} runs as a hosted remote MCP server — nothing to
+                install locally. Connect it from your client&apos;s MCP
+                settings using your {server.maintainer} credentials.{" "}
+                {server.docsUrl && (
+                  <a
+                    href={server.docsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+                  >
+                    Setup guide <ExternalLink className="inline h-3 w-3" />
+                  </a>
+                )}
+              </p>
+            )}
           </section>
         </FadeIn>
 

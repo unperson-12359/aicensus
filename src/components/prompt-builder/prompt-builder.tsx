@@ -12,6 +12,7 @@ import {
   Code2,
   Copy,
   Database,
+  Download,
   Eraser,
   FileJson,
   FileText,
@@ -906,6 +907,7 @@ function ModeButton({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={cn(
         "flex min-h-[88px] flex-col items-start gap-2 rounded-md border p-3 text-left transition-colors",
         active
@@ -943,6 +945,7 @@ function PatternButton({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={cn(
         "min-h-[72px] rounded-md border px-3 py-2 text-left transition-colors",
         active
@@ -976,6 +979,7 @@ function ToggleButton({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={cn(
         "flex min-h-10 items-start gap-2 rounded-md border px-3 py-2 text-left text-xs transition-colors",
         active
@@ -1070,6 +1074,20 @@ export function PromptBuilder() {
       setCopyError(true);
       window.setTimeout(() => setCopyError(false), 2400);
     }
+  }
+
+  function downloadPrompt() {
+    const blob = new Blob([generated.combined], {
+      type: "text/plain;charset=utf-8",
+    });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `aicensus-${state.mode}-prompt.txt`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
   }
 
   const previewText =
@@ -1384,6 +1402,7 @@ export function PromptBuilder() {
               <Textarea
                 value={previewText}
                 readOnly
+                aria-label="Generated prompt preview"
                 className="min-h-[620px] rounded-none border-0 bg-black/40 font-mono text-xs leading-relaxed text-white/80 shadow-none focus-visible:ring-0"
               />
             </TabsContent>
@@ -1391,6 +1410,7 @@ export function PromptBuilder() {
               <Textarea
                 value={previewText}
                 readOnly
+                aria-label="Generated prompt preview"
                 className="min-h-[620px] rounded-none border-0 bg-black/40 font-mono text-xs leading-relaxed text-white/80 shadow-none focus-visible:ring-0"
               />
             </TabsContent>
@@ -1398,12 +1418,13 @@ export function PromptBuilder() {
               <Textarea
                 value={previewText}
                 readOnly
+                aria-label="Generated prompt preview"
                 className="min-h-[620px] rounded-none border-0 bg-black/40 font-mono text-xs leading-relaxed text-white/80 shadow-none focus-visible:ring-0"
               />
             </TabsContent>
           </Tabs>
 
-          <div className="grid gap-2 border-t border-white/10 p-3 sm:grid-cols-[1fr_1fr_auto_auto]">
+          <div className="grid gap-2 border-t border-white/10 p-3 sm:grid-cols-[1fr_1fr_auto_auto_auto]">
             <Button onClick={() => copyPrompt("full", generated.combined)}>
               {copied === "full" ? (
                 <>
@@ -1425,6 +1446,14 @@ export function PromptBuilder() {
             >
               <Copy className="h-4 w-4" />
               Copy tab
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={downloadPrompt}
+              aria-label="Download prompt as text file"
+            >
+              <Download className="h-4 w-4" />
             </Button>
             <Button type="button" variant="outline" onClick={sharpenPrompt}>
               <RefreshCw className="h-4 w-4" />

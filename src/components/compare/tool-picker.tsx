@@ -65,16 +65,17 @@ export function ToolPicker({ tools }: ToolPickerProps) {
               <button
                 key={tool.slug}
                 onClick={() => toggle(tool)}
+                aria-label={`Remove ${tool.name} from comparison`}
                 className="flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-3 py-1.5 text-sm font-medium transition-colors hover:bg-primary/10"
               >
                 {tool.name}
-                <X className="h-3 w-3 text-muted-foreground" />
+                <X className="h-3 w-3 text-muted-foreground" aria-hidden="true" />
               </button>
             ))}
           </div>
           {selected.length >= 2 && (
             <Button onClick={compare} className="mt-4">
-              Compare {selected.length} tools <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+              Compare {selected.length} tools <ArrowRight className="ml-1.5 h-3.5 w-3.5" aria-hidden="true" />
             </Button>
           )}
         </div>
@@ -82,16 +83,23 @@ export function ToolPicker({ tools }: ToolPickerProps) {
 
       {/* Search */}
       <div className="relative mb-4">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
         <Input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search tools to compare..."
+          aria-label="Search tools to compare"
           className="h-9 pl-9 text-sm"
         />
       </div>
 
       {/* Tool list */}
+      {tools.length === 0 ? (
+        <p className="rounded-lg border border-border/40 py-8 text-center text-sm text-muted-foreground">
+          The tool directory is unavailable right now — try one of the
+          pre-built comparisons above instead.
+        </p>
+      ) : (
       <div className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
         {filtered.map((tool) => {
           const isSelected = selected.some((t) => t.slug === tool.slug);
@@ -101,6 +109,7 @@ export function ToolPicker({ tools }: ToolPickerProps) {
               key={tool.slug}
               onClick={() => toggle(tool)}
               disabled={!isSelected && selected.length >= 4}
+              aria-pressed={isSelected}
               className={`flex items-center gap-3 rounded-lg border p-3 text-left text-sm transition-colors duration-150 ${
                 isSelected
                   ? "border-primary bg-primary/5"
@@ -119,7 +128,10 @@ export function ToolPicker({ tools }: ToolPickerProps) {
                 </p>
               </div>
               {isSelected && (
-                <div className="h-5 w-5 shrink-0 rounded-full bg-primary flex items-center justify-center">
+                <div
+                  aria-hidden="true"
+                  className="h-5 w-5 shrink-0 rounded-full bg-primary flex items-center justify-center"
+                >
                   <span className="text-[10px] font-bold text-primary-foreground">✓</span>
                 </div>
               )}
@@ -127,8 +139,9 @@ export function ToolPicker({ tools }: ToolPickerProps) {
           );
         })}
       </div>
+      )}
 
-      {filtered.length === 0 && (
+      {tools.length > 0 && filtered.length === 0 && (
         <p className="py-8 text-center text-sm text-muted-foreground">
           No tools match &quot;{search}&quot;
         </p>

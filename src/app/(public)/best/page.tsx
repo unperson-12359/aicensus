@@ -12,6 +12,18 @@ export const metadata: Metadata = {
   title: "Best AI Tools by Use Case",
   description:
     "Curated picks of the best AI tools for every persona and job — solo founders, PMs, marketers, designers, students, podcasters, researchers, and more.",
+  openGraph: {
+    title: "Best AI Tools by Use Case",
+    description:
+      "Curated picks of the best AI tools for every persona and job — solo founders, PMs, marketers, designers, students, podcasters, researchers, and more.",
+    url: "/best",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best AI Tools by Use Case",
+    description:
+      "Curated picks of the best AI tools for every persona and job — solo founders, PMs, marketers, designers, students, podcasters, researchers, and more.",
+  },
   alternates: { canonical: "/best" },
 };
 
@@ -96,7 +108,7 @@ export default function BestForIndex() {
                 <p className="mt-3 font-serif text-sm italic leading-relaxed text-white/65">
                   {page.tagline}
                 </p>
-                <div className="mt-auto pt-5 flex items-center justify-between gap-3 border-t border-white/10 pt-4">
+                <div className="mt-auto flex items-center justify-between gap-3 border-t border-white/10 pt-4">
                   <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50 sm:text-[11px]">
                     {page.picks.length} picks
                   </span>

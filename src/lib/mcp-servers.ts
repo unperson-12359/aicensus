@@ -479,6 +479,27 @@ export const MCP_SERVERS: McpServer[] = [
   },
 ];
 
+/**
+ * Build a ready-to-paste MCP client config (Claude Desktop / Cursor shape)
+ * for servers installed via a local command. Returns null for hosted remote
+ * servers that connect through a vendor endpoint instead.
+ */
+export function getMcpClientConfig(server: McpServer): string | null {
+  const match = server.installCommand.match(/^(npx|uvx|docker)\s+(.+)$/);
+  if (!match) return null;
+  const [, command, rest] = match;
+  const args = rest.split(/\s+/);
+  return JSON.stringify(
+    {
+      mcpServers: {
+        [server.slug]: { command, args },
+      },
+    },
+    null,
+    2
+  );
+}
+
 export function getMcpBySlug(slug: string): McpServer | undefined {
   return MCP_SERVERS.find((s) => s.slug === slug);
 }

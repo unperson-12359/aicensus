@@ -97,10 +97,7 @@ export default async function ToolsPage({ searchParams }: PageProps) {
 
   // DB failures throw to the error boundary (500) instead of rendering a
   // thin, silent 200 that looks like an empty directory to crawlers.
-  const [tools, categories]: [
-    { tools: ToolWithCategory[]; count: number },
-    Category[],
-  ] = await Promise.all([
+  const fetchTools = (offsetOverride?: number) =>
     getTools({
       search: params.q,
       category: params.category,
@@ -108,8 +105,18 @@ export default async function ToolsPage({ searchParams }: PageProps) {
       verified: params.verified === "true" ? true : undefined,
       sort: (params.sort as "rating" | "name" | "newest") || "newest",
       limit: TOOLS_PER_PAGE,
-      offset,
-    }),
+      offset: offsetOverride ?? offset,
+    });
+
+  const [tools, categories]: [
+    { tools: ToolWithCategory[]; count: number },
+    Category[],
+  ] = await Promise.all([
+    // PostgREST errors when the requested range starts past the last row
+    // (e.g. ?page=99), which would otherwise surface as a 500. Refetch from
+    // the first page to learn the real count so the clamp below can redirect.
+    // Genuine DB failures re-throw from the retry and hit the error boundary.
+    fetchTools().catch(() => fetchTools(0)),
     getCategories(),
   ]);
 
@@ -120,7 +127,11 @@ export default async function ToolsPage({ searchParams }: PageProps) {
     redirect(buildToolsPagePath(clampedPage, params));
   }
 
-  if (tools.count === 0 && hasFilters) {
+  if (tools.count === 0 && hasFilters && !params.q) {
+    // Filter combinations with no matches (e.g. an unknown category slug) are
+    // thin, no-value URLs — keep them out of the index with a real 404.
+    // Searches (q) fall through to a helpful empty state instead, since a 404
+    // page is a dead end for someone who just typed a query.
     notFound();
   }
 
@@ -167,6 +178,33 @@ export default async function ToolsPage({ searchParams }: PageProps) {
         <FilterBar categories={categories} />
       </div>
 
+      {!params.q && categories.length > 0 && (
+        <nav
+          aria-label="Browse by category"
+          className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1.5"
+        >
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/40 sm:text-[11px]">
+            Categories
+          </span>
+          {categories.map((category) => (
+            <Link
+              key={category.id}
+              href={`/categories/${category.slug}`}
+              aria-current={
+                params.category === category.slug ? "page" : undefined
+              }
+              className={
+                params.category === category.slug
+                  ? "font-mono text-[10px] uppercase tracking-[0.18em] text-white sm:text-[11px]"
+                  : "font-mono text-[10px] uppercase tracking-[0.18em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
+              }
+            >
+              {category.name}
+            </Link>
+          ))}
+        </nav>
+      )}
+
       <div id="results" className="mt-6 scroll-mt-24">
         {tools.tools.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -176,6 +214,14 @@ export default async function ToolsPage({ searchParams }: PageProps) {
                 ? `No tools match "${params.q}". Try a different search term.`
                 : "No tools match your current filters. Try adjusting or clearing them."}
             </p>
+            {hasFilters && (
+              <Link
+                href="/tools"
+                className="mt-6 font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 transition-colors hover:text-white sm:text-[11px]"
+              >
+                Clear {params.q ? "search" : "filters"} &amp; browse all tools
+              </Link>
+            )}
           </div>
         ) : (
           <ToolGrid tools={tools.tools} />

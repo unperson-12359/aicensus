@@ -1,0 +1,405 @@
+[
+  {
+    "name": "Anything",
+    "slug": "anything",
+    "tagline": "AI agent that turns natural-language descriptions into working apps, sites, and tools.",
+    "description": "Anything (formerly CreateAnything) is an AI app builder that generates mobile apps, websites, and internal tools from plain-English prompts, with real code, integrations, and custom domains. It targets non-technical founders and small teams who want functional products without hiring developers. Paid tiers add private projects, custom domains, parallel agents, and automated testing.",
+    "website_url": "https://www.createanything.com",
+    "category": "coding-development",
+    "pricing_model": "freemium",
+    "pricing_details": "Free tier available. Pro is $19/mo with 20K monthly credits; Max is $199/mo with 220K credits, parallel agents, and automated testing. Teams pricing is custom.",
+    "use_cases": [
+      "Building MVP web or mobile apps from prompts",
+      "Creating internal tools without engineers",
+      "Prototyping product ideas quickly",
+      "Launching sites with GPT-powered features and integrations"
+    ],
+    "pros": [
+      "Generates functional apps with real code, not just mockups",
+      "Includes 40+ integrations and AI features out of the box",
+      "Clear credit-based pricing with a free entry tier"
+    ],
+    "cons": [
+      "Credit limits constrain larger or iterative projects",
+      "Complex apps may still require developer cleanup",
+      "Branding removal and private projects require a paid plan"
+    ],
+    "who_its_for": [
+      "Non-technical founders",
+      "Indie hackers and solopreneurs",
+      "Small business owners",
+      "Product managers prototyping ideas"
+    ],
+    "key_features": [
+      "Prompt-to-app generation for mobile, web, and tools",
+      "Built-in GPT-5 and 40+ integrations",
+      "Custom domains and private projects",
+      "Max tier with parallel agents and automated testing",
+      "Credit-based usage system"
+    ],
+    "editor_rating": 4.2,
+    "founded_year": null,
+    "company_name": "Anything",
+    "verification_source": "https://www.createanything.com, https://www.createanything.com/pricing"
+  },
+  {
+    "name": "Viktor",
+    "slug": "viktor",
+    "tagline": "AI employee inside Slack and Microsoft Teams that completes tasks across 3,200+ tools.",
+    "description": "Viktor is an AI coworker that operates inside Slack and Microsoft Teams, executing tasks end to end rather than just answering questions. It runs code on its own cloud computer, connects to over 3,200 workplace tools, and can deliver decks, dashboards, reports, and scheduled automations. Built by former Meta engineers and used by thousands of organizations, it is aimed at lean teams offloading repetitive operational work.",
+    "website_url": "https://www.viktor.com",
+    "category": "ai-agents",
+    "pricing_model": "freemium",
+    "pricing_details": "Free to start with up to $100 in credits and all features included, no credit card required. Paid plans start at $50/month.",
+    "use_cases": [
+      "Automating recurring reports and digests",
+      "Auditing ad spend and business metrics",
+      "Building internal dashboards and small apps",
+      "Running cross-tool workflows from a single chat message"
+    ],
+    "pros": [
+      "Delivers finished work products, not just suggestions",
+      "Lives natively in Slack and Teams with fast setup",
+      "Approval controls for irreversible actions",
+      "Broad integration coverage across 3,200+ tools"
+    ],
+    "cons": [
+      "Only useful if your team works in Slack or Teams",
+      "Per-action credit costs can add up on heavy usage",
+      "Less customizable than building agents yourself"
+    ],
+    "who_its_for": [
+      "Lean startup teams",
+      "Operations and marketing managers",
+      "Founders doing too much manual work",
+      "Teams standardized on Slack or Microsoft Teams"
+    ],
+    "key_features": [
+      "AI employee with its own cloud computer for running code",
+      "3,200+ tool integrations",
+      "Scheduled and recurring task automation",
+      "Approval gates and per-person permissions",
+      "Company memory that retains decisions and preferences"
+    ],
+    "editor_rating": 4.3,
+    "founded_year": 2023,
+    "company_name": "Viktor",
+    "verification_source": "https://www.viktor.com"
+  },
+  {
+    "name": "Marblism",
+    "slug": "marblism",
+    "tagline": "A team of six AI employees that runs your inbox, social media, SEO, leads, calls, and contracts.",
+    "description": "Marblism provides a bundle of six named AI employees — covering inbox management, social media, SEO content, lead generation, phone reception, and contract review — under one subscription. It integrates with Gmail, Outlook, Instagram, LinkedIn, and other common small-business tools and works autonomously in the background. The product targets solopreneurs and small businesses that cannot justify hiring for each role.",
+    "website_url": "https://www.marblism.com",
+    "category": "ai-agents",
+    "pricing_model": "paid",
+    "pricing_details": "Plans start at $24/month on annual billing; every plan includes all 6 AI employees, 50 monthly hours of AI work, unlimited team members, and unlimited businesses. 7-day money-back guarantee.",
+    "use_cases": [
+      "Triaging and drafting replies to a busy inbox",
+      "Keeping social media channels posting consistently",
+      "Publishing SEO blog articles on autopilot",
+      "Prospecting and outbound lead generation",
+      "Answering inbound calls and booking appointments"
+    ],
+    "pros": [
+      "Six business functions covered in one low-cost subscription",
+      "No prompting skill required; works autonomously",
+      "Integrates with common email, social, and calendar tools",
+      "7-day full refund guarantee"
+    ],
+    "cons": [
+      "Each AI employee is a generalist, not best-in-class per function",
+      "50-hour monthly work cap with paid top-ups",
+      "No SOC 2 certification reported, limiting regulated-industry use"
+    ],
+    "who_its_for": [
+      "Solopreneurs and one-person businesses",
+      "Coaches, consultants, and agencies",
+      "Small e-commerce owners",
+      "Founders wearing too many hats"
+    ],
+    "key_features": [
+      "Six role-based AI employees (inbox, social, SEO, leads, calls, legal)",
+      "Autonomous background operation with approval check-ins",
+      "Integrations with Gmail, Outlook, Instagram, Facebook, LinkedIn, X",
+      "AI receptionist with US/CA/UK phone numbers",
+      "Hours-based usage with monthly resets and top-ups"
+    ],
+    "editor_rating": 4.0,
+    "founded_year": 2024,
+    "company_name": "Marblism",
+    "verification_source": "https://www.marblism.com, https://www.marblism.com/pricing"
+  },
+  {
+    "name": "Appy.AI",
+    "slug": "appy-ai",
+    "tagline": "Violet, an AI business partner in Slack and Teams, delegates work to specialist AI agents.",
+    "description": "Appy.AI lets teams hire AI coworkers that work inside Slack and Microsoft Teams. Users state a goal in plain English and Violet, the coordinator agent, plans the work, delegates to specialist agents, and delivers results with a full audit trail. It connects to 900+ applications and supports recurring, scheduled, and third-party-triggered tasks for lean business teams.",
+    "website_url": "https://www.appy.ai",
+    "category": "ai-agents",
+    "pricing_model": "freemium",
+    "pricing_details": "Free starter with $100 in credits, no card required. Team plans start from $50/month per workspace (not per seat), per the company's own comparison pages.",
+    "use_cases": [
+      "Delegating research, writing, and analysis tasks in Slack",
+      "Running recurring automated business tasks",
+      "Coordinating multi-step work across connected apps",
+      "Creating custom AI coworkers for company-specific workflows"
+    ],
+    "pros": [
+      "Zero-setup adoption inside existing Slack/Teams channels",
+      "Coordinator-plus-specialists model produces structured, trackable work",
+      "Full audit logs and task ownership for accountability",
+      "Custom AI coworkers can be created by asking"
+    ],
+    "cons": [
+      "Pricing beyond the free credits is not published in detail",
+      "Limited to teams already living in Slack or Teams",
+      "Newer entrant with a smaller public track record"
+    ],
+    "who_its_for": [
+      "Lean teams doing more with less",
+      "Operations and marketing teams",
+      "Startups on Slack or Microsoft Teams",
+      "Managers wanting delegated AI work without new tooling"
+    ],
+    "key_features": [
+      "Violet coordinator agent that plans and delegates",
+      "Specialist AI agents for research, writing, analysis, outreach",
+      "900+ app integrations",
+      "Recurring and third-party-triggered scheduled tasks",
+      "Activity stream with structured tasks, assets, and audit logs"
+    ],
+    "editor_rating": 4.1,
+    "founded_year": null,
+    "company_name": "Appy.AI",
+    "verification_source": "https://www.appy.ai, https://appy.ai/compare/appy-vs-claude"
+  },
+  {
+    "name": "Chipp",
+    "slug": "chipp",
+    "tagline": "No-code platform to build, deploy, and sell branded AI agents without an engineering team.",
+    "description": "Chipp is a no-code platform for building custom AI agents trained on a business's own knowledge, deployable to web chat, WhatsApp, Slack, phone, and other channels. It includes built-in payments so builders can sell agents or agent bundles, plus white-label and HIPAA-compliant tiers. Based in Fargo, North Dakota, it reports 125,000+ agents built and 14M+ conversations served.",
+    "website_url": "https://www.chipp.ai",
+    "category": "ai-agents",
+    "pricing_model": "freemium",
+    "pricing_details": "Free to start. Builder $29/mo (+ usage over $10 included), Studio $99/mo (+ usage over $30), Studio Pro $299/mo (+ usage over $100) with zero data retention and HIPAA. Enterprise and add-ons (white-label $999/mo, HIPAA $249/mo) available.",
+    "use_cases": [
+      "Customer support agents trained on company docs",
+      "White-label AI chatbots for agency clients",
+      "Voice agents answering phones and booking appointments",
+      "Selling branded AI agents as a productized service"
+    ],
+    "pros": [
+      "True no-code agent builder with 40+ templates",
+      "Omnichannel deployment including WhatsApp and phone",
+      "Built-in monetization and white-label options",
+      "SOC 2 Type II with HIPAA and zero-data-retention tiers"
+    ],
+    "cons": [
+      "Usage-based overages can surprise heavy deployments",
+      "Advanced privacy features locked to the $299/mo tier",
+      "Template quality varies; serious agents need tuning"
+    ],
+    "who_its_for": [
+      "Small businesses deploying customer-facing AI",
+      "Agencies reselling branded AI agents",
+      "Consultants productizing their expertise",
+      "Nonprofits and community organizations"
+    ],
+    "key_features": [
+      "Prompt-based agent builder with knowledge uploads",
+      "Deployment to web, WhatsApp, Slack, Discord, email, voice/phone",
+      "Built-in Stripe payments for selling agents",
+      "Voice AI with cloning and call transcripts",
+      "White-label platform and client management add-ons",
+      "SOC 2, GDPR, and HIPAA compliance options"
+    ],
+    "editor_rating": 4.1,
+    "founded_year": 2023,
+    "company_name": "Chipp",
+    "verification_source": "https://www.chipp.ai, https://www.chipp.ai/pricing"
+  },
+  {
+    "name": "Durable",
+    "slug": "durable",
+    "tagline": "AI website builder that generates a business site in 30 seconds, plus CRM, invoicing, and marketing.",
+    "description": "Durable is an AI business builder that generates a complete website in about 30 seconds from three questions, then bundles CRM, booking, invoicing, payments, and AI marketing tools in one subscription. It targets solopreneurs and small service businesses that want to replace multiple tools with a single platform. The Vancouver-based company reports millions of websites generated since launch.",
+    "website_url": "https://durable.co",
+    "category": "coding-development",
+    "pricing_model": "freemium",
+    "pricing_details": "Free $0 plan (durable.site subdomain, 5 images/mo, 10 AI chat messages/mo). Launch $25/mo and Grow $49/mo, with discounted annual rates ($22/mo and $41/mo respectively).",
+    "use_cases": [
+      "Launching a service-business website in minutes",
+      "Managing leads and customers in a built-in CRM",
+      "Sending invoices and accepting payments",
+      "Generating ads, logos, and social content with AI",
+      "Automating blog posts and review collection"
+    ],
+    "pros": [
+      "Fastest path from idea to live site — under a minute",
+      "Replaces several subscriptions (site, CRM, booking, invoicing)",
+      "Genuine free tier for testing a business idea",
+      "Strong user ratings (4.8 on Trustpilot per the site)"
+    ],
+    "cons": [
+      "Limited design and code customization versus traditional builders",
+      "Not designed for full e-commerce",
+      "Best features (AI agents, SEO/GEO) gated to paid plans"
+    ],
+    "who_its_for": [
+      "Solopreneurs and freelancers",
+      "Local service businesses (trades, coaches, cleaners)",
+      "First-time business owners",
+      "Non-technical founders needing an online presence fast"
+    ],
+    "key_features": [
+      "AI website generation in ~30 seconds",
+      "Built-in CRM, booking, invoicing, and payments",
+      "AI agents for blogging, reviews, and lead replies",
+      "AI image, ad, and logo generation",
+      "SEO and GEO (AI-search visibility) tools",
+      "Free custom domain on paid plans"
+    ],
+    "editor_rating": 4.3,
+    "founded_year": 2021,
+    "company_name": "Durable Technologies Inc.",
+    "verification_source": "https://durable.co, https://durable.co/pricing"
+  },
+  {
+    "name": "Magic Patterns",
+    "slug": "magic-patterns",
+    "tagline": "AI design tool that generates UI prototypes matching your existing product and design system.",
+    "description": "Magic Patterns is an AI design tool for product teams that generates UI from prompts and matches the styling of an existing product or imported design system. It supports rapid prototyping, live team collaboration, GitHub sync, and MCP integration, with export toward production workflows. Developed by North Park Labs, it is used by tens of thousands of product teams for exploring features before engineering commits.",
+    "website_url": "https://www.magicpatterns.com",
+    "category": "design-creative",
+    "pricing_model": "freemium",
+    "pricing_details": "Free tier available. Starter $20/seat/mo (1K credits) and Business $100/seat/mo (5K credits, SSO, usage reporting), billed annually. Enterprise is custom.",
+    "use_cases": [
+      "Prototyping new features before engineering work",
+      "Generating UI variations that match an existing design system",
+      "Testing design concepts directly with customers",
+      "Collaborating between design and engineering on live prototypes"
+    ],
+    "pros": [
+      "Output matches your real product styling, not generic mockups",
+      "Fast idea-to-prototype loop praised by product teams",
+      "Design-system import and GitHub/MCP integrations",
+      "SOC 2 and ISO 27001 certified"
+    ],
+    "cons": [
+      "Credit-based pricing makes heavy iteration costly",
+      "Per-seat pricing scales up quickly for larger teams",
+      "Generated code typically still needs engineering refinement"
+    ],
+    "who_its_for": [
+      "Product designers and product managers",
+      "Startup founders mocking up features",
+      "Design engineers and frontend teams",
+      "Enterprise product teams with design systems"
+    ],
+    "key_features": [
+      "Prompt-to-UI generation matching existing products",
+      "Design system import for consistent prototyping",
+      "Real-time team collaboration and sharing",
+      "GitHub sync and MCP support",
+      "Credit-based usage with monthly rollover",
+      "Enterprise security (SOC 2, ISO 27001, SSO, SCIM)"
+    ],
+    "editor_rating": 4.4,
+    "founded_year": 2023,
+    "company_name": "North Park Labs, Inc.",
+    "verification_source": "https://www.magicpatterns.com, https://www.magicpatterns.com/pricing"
+  },
+  {
+    "name": "FLORA",
+    "slug": "flora",
+    "tagline": "Infinite canvas that combines 50+ text, image, and video AI models into one creative workflow.",
+    "description": "FLORA is a node-based infinite canvas for creative professionals that unifies dozens of leading text, image, and video AI models in a single subscription and workflow. Teams use it to ideate, iterate in real time, and scale concepts into production-grade assets, with reusable workflow templates called Techniques. Founded in 2024 by Weber Wong, it counts design firms, film studios, and brand teams among its users.",
+    "website_url": "https://www.florafauna.ai",
+    "category": "design-creative",
+    "pricing_model": "freemium",
+    "pricing_details": "Free plan available. Paid plans are seat-based with a shared workspace usage pool metered at published model rates; third-party listings report Starter around $18/seat/mo, Pro $50, and Max $200.",
+    "use_cases": [
+      "Creative concepting and mood-board exploration",
+      "Campaign previz and virtual product shoots",
+      "Brand identity and asset generation at scale",
+      "Video pre-production and visual effects experiments",
+      "Team-based iteration across image and video models"
+    ],
+    "pros": [
+      "One subscription covers 50+ models, updated as new ones release",
+      "Node-based canvas gives real creative control and reproducibility",
+      "Pooled team usage with per-project cost visibility",
+      "Strong adoption among professional studios and agencies"
+    ],
+    "cons": [
+      "Learning curve for the node-based workflow",
+      "Usage costs can grow quickly with video models",
+      "Official per-seat prices are not prominently published on the site"
+    ],
+    "who_its_for": [
+      "Creative agencies and design studios",
+      "Brand and marketing teams",
+      "Film, fashion, and motion professionals",
+      "Creative directors exploring AI workflows"
+    ],
+    "key_features": [
+      "Infinite canvas unifying text, image, and video models",
+      "FAUNA creative agent for ideation and direction",
+      "Reusable workflow templates (Techniques)",
+      "Real-time team collaboration",
+      "Pooled workspace budget with per-member usage tracking",
+      "Access to 50+ models including Veo, Kling, FLUX, and Gemini"
+    ],
+    "editor_rating": 4.3,
+    "founded_year": 2024,
+    "company_name": "FLORA",
+    "verification_source": "https://www.florafauna.ai, https://www.florafauna.ai/pricing"
+  },
+  {
+    "name": "Hedra",
+    "slug": "hedra",
+    "tagline": "AI creation platform for character-driven video, image, and audio, powered by the Character-3 model.",
+    "description": "Hedra is a generative media platform best known for turning a single image and audio clip into expressive talking or singing character videos using its proprietary Character-3 model. Hedra Studio combines video, image, and audio generation from its own and partner models on an infinite canvas, with an API for developers. Founded in 2023 in San Francisco and backed by Andreessen Horowitz, it reports over 20 million users.",
+    "website_url": "https://www.hedra.com",
+    "category": "video-audio",
+    "pricing_model": "freemium",
+    "pricing_details": "Free plan with no credit card required. Basic $15/mo (1,500 credits), Creator $30/mo (5,400 credits), Professional and Teams $75/mo (14,400 credits); Enterprise is custom. Monthly credits do not roll over.",
+    "use_cases": [
+      "Talking-avatar videos from a photo and voice clip",
+      "Character-driven marketing and social content",
+      "AI-generated imagery and audio alongside video",
+      "Developer integrations via the Hedra API"
+    ],
+    "pros": [
+      "Character-3 produces notably expressive, lip-synced characters",
+      "Simple pipeline: one image plus audio yields a finished video",
+      "Free plan and low entry price for individuals",
+      "Combines proprietary and partner models in one studio"
+    ],
+    "cons": [
+      "Monthly credits expire with no rollover on subscription plans",
+      "Generation speed gated behind higher tiers",
+      "Focused on character video rather than general text-to-video"
+    ],
+    "who_its_for": [
+      "Content creators and social media teams",
+      "Marketers producing character-driven video",
+      "Educators and e-learning producers",
+      "Developers building on a video-generation API"
+    ],
+    "key_features": [
+      "Character-3 omnimodal model for talking/singing avatars",
+      "Hedra Studio infinite canvas for video, image, and audio",
+      "Hedra Agent for creative planning and execution",
+      "Credit-based usage across multiple partner models",
+      "Commercial use rights on all paid plans",
+      "Enterprise options with private deployments and SSO"
+    ],
+    "editor_rating": 4.3,
+    "founded_year": 2023,
+    "company_name": "Hedra",
+    "verification_source": "https://www.hedra.com, https://www.hedra.com/pricing"
+  }
+]

@@ -123,13 +123,30 @@ export default async function ComparePage({ params }: Props) {
     })),
   };
 
-  // Try to look up tool names for related comparison cards. We avoid extra DB
-  // calls — slugs are human-readable enough to render fallback labels.
+  // Slug → display label helper; used as a fallback whenever a DB name
+  // lookup misses, since slugs are human-readable enough to render.
   const titleCase = (s: string) =>
     s
       .split("-")
       .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
+
+  // Resolve real display names ("GitHub Copilot", not "Github Copilot") for
+  // the related-comparison cards. One batched lookup per unique slug; any
+  // miss falls back to the title-cased slug.
+  const relatedSlugs = Array.from(
+    new Set(related.flatMap((p) => p.slugs as string[]))
+  ).filter((s) => !normalizedSlugs.includes(s));
+  const relatedTools = await Promise.all(
+    relatedSlugs.map((s) => getToolBySlug(s))
+  );
+  const nameBySlug = new Map<string, string>(
+    tools.map((t) => [t.slug, t.name] as [string, string])
+  );
+  relatedTools.forEach((t, i) => {
+    if (t) nameBySlug.set(relatedSlugs[i], t.name);
+  });
+  const relatedName = (s: string) => nameBySlug.get(s) ?? titleCase(s);
 
   return (
     <>
@@ -186,9 +203,9 @@ export default async function ComparePage({ params }: Props) {
           <FadeIn delay={0.15}>
             <section className={section.gap}>
               <div className="flex items-center justify-between gap-4">
-                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                <h2 className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                   § Verdict
-                </p>
+                </h2>
                 <span className="h-px flex-1 bg-white/10" />
               </div>
               <div className="mt-6 grid gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -220,9 +237,9 @@ export default async function ComparePage({ params }: Props) {
         <FadeIn delay={0.2}>
           <section className={section.gapLoose}>
             <div className="flex items-center justify-between gap-4">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+              <h2 className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                 § Spec sheet
-              </p>
+              </h2>
               <span className="h-px flex-1 bg-white/10" />
             </div>
             <div className="mt-6">
@@ -235,9 +252,9 @@ export default async function ComparePage({ params }: Props) {
         <FadeIn delay={0.2}>
           <section className={section.gapLoose}>
             <div className="flex items-center justify-between gap-4">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+              <h2 className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                 § Best for
-              </p>
+              </h2>
               <span className="h-px flex-1 bg-white/10" />
             </div>
             <div className="mt-6 grid gap-3 sm:gap-4 md:grid-cols-2">
@@ -270,9 +287,9 @@ export default async function ComparePage({ params }: Props) {
           <FadeIn delay={0.2}>
             <section className={section.gapLoose}>
               <div className="flex items-center justify-between gap-4">
-                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                <h2 className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                   § Common questions
-                </p>
+                </h2>
                 <span className="h-px flex-1 bg-white/10" />
               </div>
               <div className="mt-6 grid gap-4 sm:gap-5 lg:grid-cols-2">
@@ -299,9 +316,9 @@ export default async function ComparePage({ params }: Props) {
           <FadeIn delay={0.2}>
             <section className={section.divider}>
               <div className="flex items-center justify-between gap-4">
-                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                <h2 className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                   § Related comparisons
-                </p>
+                </h2>
                 <span className="h-px flex-1 bg-white/10" />
               </div>
               <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -312,7 +329,7 @@ export default async function ComparePage({ params }: Props) {
                     className="bento-tile group flex items-center justify-between p-4 transition-colors hover:border-white/30 sm:p-5"
                   >
                     <span className="font-serif text-base text-white/85 sm:text-lg">
-                      {p.slugs.map((s) => titleCase(s)).join(" vs ")}
+                      {p.slugs.map((s) => relatedName(s)).join(" vs ")}
                     </span>
                     <ArrowRight className="h-4 w-4 shrink-0 text-white/40 transition-colors group-hover:text-white" />
                   </Link>

@@ -1,0 +1,442 @@
+[
+  {
+    "name": "Chatbase",
+    "slug": "chatbase",
+    "tagline": "Platform for building and deploying AI agents for customer support, sales, and product guidance.",
+    "description": "Chatbase lets teams train AI agents on their own content (websites, docs, files) and deploy them across live chat, email, phone, Slack, WhatsApp, and other channels. It includes analytics, testing, integrations with helpdesks and CRMs, and AI Actions that let agents take steps in connected systems. The company reports over 10,000 business customers and holds SOC 2 Type II, GDPR, and HIPAA-eligible compliance posture.",
+    "website_url": "https://www.chatbase.co",
+    "category": "chatbots-assistants",
+    "pricing_model": "freemium",
+    "pricing_details": "Free plan at $0 with 50 message credits/month. Paid plans billed annually: Hobby $32/mo, Standard $120/mo, Pro $400/mo; Enterprise custom. Add-ons include extra agents and branding removal.",
+    "use_cases": [
+      "Automating customer support across chat, email, and voice",
+      "Building a sales agent that qualifies and guides prospects",
+      "Embedding a docs-trained chatbot on a website",
+      "Deflecting repetitive tickets from human support teams",
+      "Running product guidance and onboarding conversations"
+    ],
+    "pros": [
+      "Fast no-code setup and training on own data",
+      "Broad channel and helpdesk/CRM integration coverage",
+      "Free tier and transparent tiered pricing",
+      "Compliance posture (SOC 2 Type II, GDPR, HIPAA-eligible)"
+    ],
+    "cons": [
+      "Message-credit model can get expensive at higher volumes",
+      "Key capabilities (more models, actions, seats) locked to upper tiers",
+      "Branding removal costs extra on lower plans"
+    ],
+    "who_its_for": [
+      "Support teams automating repetitive inquiries",
+      "SaaS and e-commerce businesses",
+      "Agencies building chatbots for clients",
+      "Product teams adding in-app guidance"
+    ],
+    "key_features": [
+      "AI agents trained on websites, docs, and files",
+      "Deployment across chat, email, phone, Slack, WhatsApp, Messenger, Instagram",
+      "AI Actions for tasks in Stripe, Shopify, Calendly, and custom APIs",
+      "Analytics on topics, sentiment, and resolution rates",
+      "Playground testing and agent debugging tools",
+      "Helpdesk integrations (Zendesk, Intercom, Salesforce, HubSpot)"
+    ],
+    "editor_rating": 4.5,
+    "founded_year": 2023,
+    "company_name": "Chatbase, Inc.",
+    "verification_source": "https://www.chatbase.co, https://www.chatbase.co/pricing"
+  },
+  {
+    "name": "Watermelon",
+    "slug": "watermelon",
+    "tagline": "AI agent for customer service that resolves conversations across chat, email, and social channels.",
+    "description": "Watermelon provides an AI agent that answers customer questions, executes actions in connected systems, and hands off to humans through a shared inbox when needed. It supports website chat, email, WhatsApp, Facebook Messenger, and Instagram, and integrates with e-commerce platforms such as Shopify and WooCommerce. The company is ISO 27001 certified and hosts data in the EU.",
+    "website_url": "https://watermelon.ai",
+    "category": "chatbots-assistants",
+    "pricing_model": "freemium",
+    "pricing_details": "Free plan includes 50 conversations/month. Paid tiers (Starter, Advanced, Business) raise limits to 250, 500, and 1,000 conversations/month with add-ons at EUR 25/month each; exact euro prices were not shown in the fetched page text. Yearly billing saves 15%.",
+    "use_cases": [
+      "Automating order status and returns questions for e-commerce",
+      "Providing 24/7 support outside office hours",
+      "Centralizing chat, email, WhatsApp, and social DMs in one inbox",
+      "Reducing phone support volume with self-service AI answers"
+    ],
+    "pros": [
+      "Genuine free plan for testing and small volumes",
+      "Strong e-commerce integrations (Shopify, WooCommerce, Returnless)",
+      "EU data hosting and ISO 27001 certification",
+      "Clear conversation-based pricing model"
+    ],
+    "cons": [
+      "Conversation limits are low on entry plans",
+      "Actual plan prices not clearly published on the pricing page",
+      "Extra agents, users, and conversations all cost add-on fees"
+    ],
+    "who_its_for": [
+      "E-commerce and retail support teams",
+      "European SMBs needing GDPR-compliant automation",
+      "Leisure and education organizations with high inquiry volume"
+    ],
+    "key_features": [
+      "AI agent trained via website scraping and file upload",
+      "Unified inbox with seamless human handoff",
+      "AI Actions (handoff, search, apps, API calls)",
+      "Channels: website chat, email, WhatsApp, Messenger, Instagram DM",
+      "Shopify, WooCommerce, Lightspeed, Magento, BigCommerce integrations",
+      "Analytics on automation rate and team performance"
+    ],
+    "editor_rating": 4.2,
+    "founded_year": null,
+    "company_name": "Watermelon",
+    "verification_source": "https://watermelon.ai, https://watermelon.ai/pricing"
+  },
+  {
+    "name": "Weav",
+    "slug": "weav",
+    "tagline": "AI customer support agent trained on your website, docs, and resolved tickets.",
+    "description": "Weav builds a support agent by connecting to a company's website, documentation, and files, and claims to resolve over 70% of customer questions autonomously. It also learns from a team's resolved tickets to match brand voice and improve over time. Setup is no-code and a free tier is offered to get started.",
+    "website_url": "https://weav.com",
+    "category": "chatbots-assistants",
+    "pricing_model": "freemium",
+    "pricing_details": "The site advertises free setup and 'pricing that scales with your business,' but no published plan prices were visible on the fetched pages; details require signing up or contacting the team.",
+    "use_cases": [
+      "Deflecting repetitive support emails and tickets",
+      "Founders and small teams handling support without hiring",
+      "Keeping an AI agent current as documentation changes",
+      "Answering customers 24/7 in the company's tone of voice"
+    ],
+    "pros": [
+      "Very fast no-code setup from existing docs and site content",
+      "Learns continuously from resolved tickets",
+      "Free entry point for small teams"
+    ],
+    "cons": [
+      "No public price list to evaluate cost upfront",
+      "Young product with limited public track record",
+      "Fewer published integrations than established competitors"
+    ],
+    "who_its_for": [
+      "Startup founders handling support themselves",
+      "Small support teams",
+      "SaaS companies with documentation-heavy products"
+    ],
+    "key_features": [
+      "Knowledge engine built from website, docs, and file uploads",
+      "Learning from real ticket resolutions",
+      "Brand voice matching",
+      "Unified workspace for AI and human support",
+      "No-code launch in minutes"
+    ],
+    "editor_rating": 4.0,
+    "founded_year": null,
+    "company_name": null,
+    "verification_source": "https://weav.com, https://weav.com/pricing, https://partners.dub.co/weav"
+  },
+  {
+    "name": "Heyy",
+    "slug": "heyy",
+    "tagline": "AI employees that automate sales, marketing, and support on WhatsApp, Instagram, and Messenger.",
+    "description": "Heyy lets businesses create configurable 'AI Employees' that handle customer conversations across WhatsApp, Instagram, Messenger, and a website chat widget. It includes campaigns, a mini-CRM, a shared inbox, automations, and API access, with credit-based usage for AI interactions. Setup is no-code, and integrations connect CRMs, e-commerce, and ticketing tools.",
+    "website_url": "https://heyy.ai",
+    "category": "chatbots-assistants",
+    "pricing_model": "paid",
+    "pricing_details": "Hobby $49/mo (1 user, 1,000 credits, 1 AI employee), Pro $149/mo (5 users, 6,000 credits), Ultra $499/mo (10 users, 20,000 credits); Enterprise custom. Annual billing gives two months free; credits and WhatsApp messages cost extra.",
+    "use_cases": [
+      "Automating WhatsApp sales and support conversations",
+      "Qualifying and capturing leads on Instagram and Messenger",
+      "Running outbound messaging campaigns",
+      "Managing all customer chats in one shared inbox"
+    ],
+    "pros": [
+      "Strong focus on WhatsApp/Instagram/Messenger commerce",
+      "No-code AI employee setup with CRM and campaign tools included",
+      "Published tiered pricing with a free trial"
+    ],
+    "cons": [
+      "Credit-based model plus extra WhatsApp message fees complicate cost forecasting",
+      "Entry plan limited to one user and three channels",
+      "No permanent free plan"
+    ],
+    "who_its_for": [
+      "SMBs selling through WhatsApp and Instagram",
+      "E-commerce and service businesses",
+      "Teams wanting a shared inbox with AI automation"
+    ],
+    "key_features": [
+      "Configurable AI Employees for support, sales, and onboarding",
+      "WhatsApp, Instagram, Messenger, and website chat channels",
+      "Campaigns, journeys, and scheduled messaging",
+      "Mini-CRM and shared inbox",
+      "Automations and full API access",
+      "AI Actions connecting to external tools"
+    ],
+    "editor_rating": 4.1,
+    "founded_year": null,
+    "company_name": null,
+    "verification_source": "https://heyy.ai, https://heyy.ai/pricing"
+  },
+  {
+    "name": "Comp AI",
+    "slug": "comp-ai",
+    "tagline": "AI compliance automation for SOC 2, ISO 27001, HIPAA, GDPR, and more frameworks.",
+    "description": "Comp AI automates compliance programs by collecting evidence from a company's stack, mapping it to controls, drafting policies, and answering security questionnaires. Controls map across frameworks, so adding ISO 27001 to an existing SOC 2 program starts largely complete. The platform also bundles expert-run penetration testing and a live Trust Center for sharing compliance status with buyers, and reports 830+ customer companies.",
+    "website_url": "https://trycomp.ai",
+    "category": "agents-automation",
+    "pricing_model": "paid",
+    "pricing_details": "No public rate card; pricing is quoted on a 20-minute scoping call based on frameworks, company size, timeline, and whether audits or penetration testing are included.",
+    "use_cases": [
+      "Getting SOC 2 audit-ready to close enterprise deals",
+      "Running multi-framework programs (SOC 2, ISO 27001, HIPAA, GDPR)",
+      "Automating evidence collection across the tech stack",
+      "Answering buyer security questionnaires quickly",
+      "Publishing a live Trust Center for prospects"
+    ],
+    "pros": [
+      "Cross-framework control mapping reduces duplicate work",
+      "Automated evidence collection with 580+ integrations",
+      "Penetration testing and Trust Center built in",
+      "Strong customer ratings (4.7/5 on G2 per vendor)"
+    ],
+    "cons": [
+      "No transparent public pricing",
+      "Sales call required before any cost estimate",
+      "Aimed at B2B SaaS; overkill for very small teams"
+    ],
+    "who_its_for": [
+      "B2B SaaS startups pursuing their first SOC 2",
+      "Scale-ups adding ISO 27001, HIPAA, or GDPR",
+      "Security and compliance leads at growing companies"
+    ],
+    "key_features": [
+      "Automated evidence collection mapped to controls",
+      "Multi-framework support (SOC 2, ISO 27001, HIPAA, GDPR, PCI DSS, NIST, FedRAMP)",
+      "AI-drafted policies and questionnaire answers",
+      "Expert-run penetration testing with remediation tracking",
+      "Live Trust Center for buyers",
+      "580+ stack integrations"
+    ],
+    "editor_rating": 4.3,
+    "founded_year": null,
+    "company_name": "Comp AI",
+    "verification_source": "https://trycomp.ai, https://trycomp.ai/pricing"
+  },
+  {
+    "name": "AI Fiesta",
+    "slug": "ai-fiesta",
+    "tagline": "One subscription to chat with ChatGPT, Gemini, Claude, Perplexity, Grok, and DeepSeek side by side.",
+    "description": "AI Fiesta aggregates multiple premium AI models into a single chat interface, letting users compare answers side by side and toggle models mid-conversation. It includes prompt enhancement, image generation, audio transcription, custom projects with system instructions, and a 'Super Fiesta' mode that auto-selects a model. Launched in August 2025 by YouTuber Dhruv Rathee with TagMango co-founders, it targets price-sensitive users, especially in India with UPI payments.",
+    "website_url": "https://aifiesta.ai",
+    "category": "chatbots-assistants",
+    "pricing_model": "paid",
+    "pricing_details": "$12/month or discounted annual billing (India: Rs. 999/month, Rs. 833/month annual) with 3 million tokens/month; premium models consume tokens at 4x. Payments are non-refundable except for billing errors.",
+    "use_cases": [
+      "Comparing answers from multiple AI models in one window",
+      "Consolidating several AI subscriptions into one cheaper plan",
+      "Writing, research, and coding assistance",
+      "Image generation and audio transcription alongside chat"
+    ],
+    "pros": [
+      "Much cheaper than paying for each premium model separately",
+      "Side-by-side model comparison is genuinely useful",
+      "India-friendly pricing and UPI payment support",
+      "Mobile apps and browser access"
+    ],
+    "cons": [
+      "Token cap with 4x multiplier on premium models limits heavy use",
+      "Strict no-refund policy",
+      "Mixed reception with public criticism of value and marketing claims",
+      "Aggregated access may lag native apps' newest features"
+    ],
+    "who_its_for": [
+      "Students and professionals on a budget",
+      "Users in India wanting local payment options",
+      "People who routinely compare multiple chatbots"
+    ],
+    "key_features": [
+      "9+ premium models (ChatGPT, Gemini, Claude, Perplexity, Grok, DeepSeek, Kimi, Qwen, Mistral)",
+      "Side-by-side answer comparison",
+      "Super Fiesta automatic model selection",
+      "Prompt enhancer and memory",
+      "Image generation and audio transcription",
+      "Custom projects with system instructions"
+    ],
+    "editor_rating": 3.8,
+    "founded_year": 2025,
+    "company_name": "AI Fiesta (co-founded by Dhruv Rathee; payments via TagMango)",
+    "verification_source": "https://aifiesta.ai"
+  },
+  {
+    "name": "Magica",
+    "slug": "magica",
+    "tagline": "All-in-one AI platform (formerly Galaxy.ai) bundling thousands of models for text, image, video, and audio.",
+    "description": "Magica, formerly known as Galaxy.ai, aggregates a large catalog of AI models and tools into a single subscription covering chat, image generation, video, and audio. It provides access to leading models such as GPT, Gemini, Claude, Grok, Perplexity, and Mistral from one interface, plus custom agents and automation features. A free Hobby plan is available alongside paid subscriptions.",
+    "website_url": "https://galaxy.ai",
+    "category": "chatbots-assistants",
+    "pricing_model": "freemium",
+    "pricing_details": "Free Hobby plan with limited AI requests; paid plans reported to start around $15/month. Detailed plan pricing is rendered dynamically on the site and was not captured in the fetched pages.",
+    "use_cases": [
+      "Replacing multiple AI subscriptions with one account",
+      "Generating text, images, video, and audio in one place",
+      "Trying many models without separate signups",
+      "Building simple custom agents and automations"
+    ],
+    "pros": [
+      "Very broad model and tool catalog under one subscription",
+      "Free tier for evaluation",
+      "Covers multimodal generation, not just chat"
+    ],
+    "cons": [
+      "Rebrand from Galaxy.ai to Magica creates brand confusion",
+      "Plan pricing not clearly published",
+      "Depth per tool can lag dedicated single-purpose products"
+    ],
+    "who_its_for": [
+      "General users wanting one AI subscription",
+      "Content creators working across text, image, and video",
+      "Budget-conscious users consolidating AI tools"
+    ],
+    "key_features": [
+      "Access to thousands of AI models and tools",
+      "Chat with GPT, Gemini, Claude, Grok, Perplexity, Mistral",
+      "Image, video, and audio generation",
+      "Custom AI agents and automation",
+      "Single account replacing multiple subscriptions"
+    ],
+    "editor_rating": 4.0,
+    "founded_year": null,
+    "company_name": "Galaxy.ai",
+    "verification_source": "https://galaxy.ai, https://galaxy.ai/pricing"
+  },
+  {
+    "name": "Supercut",
+    "slug": "supercut",
+    "tagline": "AI-powered video messaging: record up to 4K, auto-edit, and share instantly with your team.",
+    "description": "Supercut is a video messaging and screen recording tool with native macOS and Windows recorders capturing up to 4K. AI features auto-edit recordings (removing silences and filler words), generate chapters, titles, summaries, and multi-language transcripts, and videos are shared instantly via branded links with calls to action, comments, and view analytics. The product holds ISO 27001 and SOC 2 Type II certifications and exposes MCP and API access.",
+    "website_url": "https://supercut.ai",
+    "category": "video-audio",
+    "pricing_model": "paid",
+    "pricing_details": "Pro plan at $15 per seat/month billed yearly, with unlimited viewer seats; no credit card required to start, indicating a free trial or starter access. No other tiers were published on the fetched pricing page.",
+    "use_cases": [
+      "Async video updates replacing meetings",
+      "Sales outreach with personalized screen recordings",
+      "Product demos with auto-chapters and CTAs",
+      "Team knowledge sharing and walkthroughs"
+    ],
+    "pros": [
+      "Polished AI editing (silence/filler removal, auto-chapters)",
+      "Instant link sharing with branding and analytics",
+      "Unlimited videos and 4K recording at a modest per-seat price",
+      "Security certifications (ISO 27001, SOC 2 Type II)"
+    ],
+    "cons": [
+      "Single published plan; little pricing flexibility",
+      "Yearly billing emphasized; monthly terms unclear",
+      "Crowded category with free or cheaper alternatives (Loom, etc.)"
+    ],
+    "who_its_for": [
+      "Sales and customer success teams",
+      "Remote product and engineering teams",
+      "Founders and agencies sending video updates"
+    ],
+    "key_features": [
+      "Native macOS/Windows recorders up to 4K",
+      "AI auto-edit, auto-chapters, titles, and summaries",
+      "Transcript and timeline editing with zooms",
+      "Instant sharing with layouts, branding, and CTAs",
+      "Comments, reactions, and engagement analytics",
+      "MCP and API access"
+    ],
+    "editor_rating": 4.3,
+    "founded_year": null,
+    "company_name": null,
+    "verification_source": "https://supercut.ai, https://supercut.ai/pricing"
+  },
+  {
+    "name": "Clico",
+    "slug": "clico",
+    "tagline": "Browser extension that puts AI writing help inside every text box on the web.",
+    "description": "Clico is a Chromium browser extension that opens an AI assistant inside any text field via a keyboard shortcut, reading the visible page for context so users can draft, rewrite, summarize, search, or dictate without switching tabs. It works across Gmail, Google Docs, Notion, Slack, LinkedIn, and other sites, requires no API key, and skips password and payment fields for privacy. It launched on Product Hunt in March 2026.",
+    "website_url": "https://tryclico.com",
+    "category": "writing-content",
+    "pricing_model": "freemium",
+    "pricing_details": "Free plan includes 100 AI generations per month with no credit card; a Pro plan adds unlimited generations and premium models, but its price was not published on the fetched site.",
+    "use_cases": [
+      "Drafting and replying to emails in Gmail without tab switching",
+      "Rewriting and improving text in Google Docs and Notion",
+      "Summarizing the current page with a shortcut",
+      "Dictating messages via voice input",
+      "Quick contextual research from any webpage"
+    ],
+    "pros": [
+      "Works in any text field on any website",
+      "Reads page context automatically, no copy-pasting",
+      "Generous free plan and no API key required",
+      "Privacy-conscious design (skips sensitive fields, no background listening)"
+    ],
+    "cons": [
+      "Chromium-only (Chrome, Edge, Brave, Arc)",
+      "Pro pricing not published",
+      "Very young product with a small team"
+    ],
+    "who_its_for": [
+      "Knowledge workers living in browser-based tools",
+      "Students writing across web apps",
+      "Support and sales teams drafting replies all day"
+    ],
+    "key_features": [
+      "Cmd/Ctrl+O AI dialog inside any text field",
+      "Page-context awareness for relevant drafts",
+      "Page summarization via double-tap shortcut",
+      "Voice input dictation",
+      "Highlight-to-search",
+      "Dark mode and Clerk-based authentication"
+    ],
+    "editor_rating": 4.2,
+    "founded_year": 2026,
+    "company_name": null,
+    "verification_source": "https://tryclico.com"
+  },
+  {
+    "name": "Maple",
+    "slug": "maple",
+    "tagline": "Voice AI for restaurants that answers calls, takes orders, and manages reservations 24/7.",
+    "description": "Maple is a voice AI platform that answers restaurant phone calls around the clock, taking pickup and delivery orders directly into POS systems (including Toast, SkyTab, and TRAY) and handling reservations through OpenTable and SevenRooms. It also fields catering inquiries, hours, directions, and FAQs, and reports over 1 million calls answered for 1,000+ restaurants with a resolution rate above 90% without human intervention. The New York-based company launched in December 2023 and graduated from the AWS Generative AI Accelerator.",
+    "website_url": "https://maple.inc",
+    "category": "ai-agents",
+    "pricing_model": "paid",
+    "pricing_details": "Pricing is not published on the public site; the company sells through demos and POS-partner channels (TRAY, SkyTab), so plans are quoted per restaurant.",
+    "use_cases": [
+      "Capturing phone orders missed during peak service",
+      "Automating reservation bookings over the phone",
+      "Answering hours, directions, and menu questions 24/7",
+      "Reducing front-of-house phone interruptions"
+    ],
+    "pros": [
+      "Deep POS integrations (Toast, SkyTab, TRAY) send orders straight to the kitchen",
+      "OpenTable and SevenRooms reservation sync",
+      "Proven scale: 1M+ calls, 1,000+ restaurants",
+      "Handles complex modifiers and upsells"
+    ],
+    "cons": [
+      "No public pricing; sales process required",
+      "Restaurants only; not a general-purpose voice agent",
+      "Order depth trails some competitors on payment capture, per third-party comparisons"
+    ],
+    "who_its_for": [
+      "Independent restaurants and multi-location chains",
+      "High-volume QSR and fast-casual operators",
+      "Restaurants already on Toast, SkyTab, or TRAY POS"
+    ],
+    "key_features": [
+      "24/7 AI phone answering for restaurants",
+      "Phone order capture synced to POS (Toast, SkyTab, TRAY)",
+      "Reservation management via OpenTable and SevenRooms",
+      "Catering inquiries, hours, directions, and FAQ handling",
+      "Upsell suggestions during ordering",
+      "Call transcripts for staff follow-up"
+    ],
+    "editor_rating": 4.1,
+    "founded_year": 2023,
+    "company_name": "Maple AI Inc.",
+    "verification_source": "https://maple.inc (returned HTTP 403 to automated fetch; identity and details confirmed via https://www.businesswire.com/news/home/20260504039708/en/ and https://www.businesswire.com/news/home/20251211467969/en/)"
+  }
+]

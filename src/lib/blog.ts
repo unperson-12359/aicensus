@@ -88,6 +88,90 @@ export function getAllPosts(): BlogPostMeta[] {
   return posts;
 }
 
+export interface BlogTocItem {
+  id: string;
+  text: string;
+  level: 2 | 3;
+}
+
+/**
+ * Turn heading text into a stable URL-fragment slug. Must stay in sync with
+ * the heading components rendered on the post page so TOC links resolve.
+ */
+export function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[`*_~[\]()]/g, "") // markdown inline markers
+    .replace(/[^\p{L}\p{N}\s-]/gu, "") // punctuation
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/**
+ * Extract h2/h3 headings from post content for the on-page table of
+ * contents. Skips headings inside fenced code blocks and de-duplicates
+ * slugs the same way the rendered heading components do (append -1, -2…).
+ */
+export function extractToc(content: string): BlogTocItem[] {
+  const items: BlogTocItem[] = [];
+  const seen = new Map<string, number>();
+  let inFence = false;
+
+  for (const line of content.split("\n")) {
+    const trimmed = line.trim();
+    if (/^(```|~~~)/.test(trimmed)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) continue;
+
+    const match = /^(#{2,3})\s+(.+?)\s*#*\s*$/.exec(trimmed);
+    if (!match) continue;
+
+    const text = stripMarkdown(match[2]);
+    const base = slugifyHeading(text);
+    if (!text || !base) continue;
+
+    const count = seen.get(base) ?? 0;
+    seen.set(base, count + 1);
+    items.push({
+      id: count === 0 ? base : `${base}-${count}`,
+      text,
+      level: match[1].length as 2 | 3,
+    });
+  }
+
+  return items;
+}
+
+/**
+ * Posts most related to the given slug, scored by shared tags and ordered
+ * by score then recency. Used for the "Related guides" section on post
+ * pages to strengthen internal linking.
+ */
+export function getRelatedPosts(slug: string, limit = 3): BlogPostMeta[] {
+  const current = getPostBySlug(slug);
+  if (!current) return [];
+
+  const tagSet = new Set(current.tags);
+  return getAllPosts()
+    .filter((post) => post.slug !== slug)
+    .map((post) => ({
+      post,
+      score: post.tags.reduce((sum, tag) => sum + (tagSet.has(tag) ? 1 : 0), 0),
+    }))
+    .filter(({ score }) => score > 0)
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        new Date(b.post.date).getTime() - new Date(a.post.date).getTime()
+    )
+    .slice(0, limit)
+    .map(({ post }) => post);
+}
+
 /**
  * Previous / next post relative to the given slug, using the same date-desc
  * ordering as `getAllPosts`. "Previous" means the post before this one in

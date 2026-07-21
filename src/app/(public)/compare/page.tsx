@@ -20,6 +20,18 @@ export const metadata: Metadata = {
   description:
     "Compare AI tools head-to-head. See pricing, features, pros & cons, and ratings side by side. Includes 50+ pre-built comparisons of the most popular AI tools in 2026.",
   alternates: { canonical: "/compare" },
+  openGraph: {
+    title: "Compare AI Tools Side by Side",
+    description:
+      "Head-to-head AI tool comparisons — pricing, features, pros & cons, ratings, and editorial verdicts on the most popular pairs.",
+    url: "/compare",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Compare AI Tools Side by Side",
+    description:
+      "Head-to-head AI tool comparisons — pricing, features, pros & cons, ratings, and editorial verdicts.",
+  },
 };
 
 function titleCase(slug: string): string {
@@ -64,6 +76,13 @@ export default async function CompareIndexPage() {
 
   const grouped = groupComparisons(POPULAR_COMPARISONS);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aicensus.co";
+
+  // Prefer real tool names from the DB ("GitHub Copilot") over the
+  // title-cased slug fallback ("Github Copilot") for card labels.
+  const nameBySlug = new Map(allTools.map((t) => [t.slug, t.name]));
+  const displayName = (slug: string) => nameBySlug.get(slug) ?? titleCase(slug);
+  const pairLabel = (pair: ComparisonPair) =>
+    pair.slugs.map(displayName).join(" vs ");
   const itemListLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -79,7 +98,7 @@ export default async function CompareIndexPage() {
         position: index + 1,
         item: {
           "@type": "WebPage",
-          name: pair.slugs.map(titleCase).join(" vs "),
+          name: pair.slugs.map(displayName).join(" vs "),
           url: `${siteUrl}${getComparisonPath(pair.slugs)}`,
         },
       })),
@@ -131,7 +150,7 @@ export default async function CompareIndexPage() {
                       className="bento-tile group flex items-center justify-between p-3 transition-colors hover:border-white/30 sm:p-4"
                     >
                       <span className="text-sm text-white/85 sm:text-[15px]">
-                        {p.slugs.map(titleCase).join(" vs ")}
+                        {pairLabel(p)}
                       </span>
                       <ArrowRight className="h-4 w-4 shrink-0 text-white/40 transition-colors group-hover:text-white" />
                     </Link>

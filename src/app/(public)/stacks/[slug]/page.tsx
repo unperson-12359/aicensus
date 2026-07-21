@@ -206,9 +206,9 @@ export default async function StackDetailPage({ params }: PageProps) {
                   className="scroll-mt-24"
                 >
                   <FadeIn>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
+                    <h2 className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/55 sm:text-[11px]">
                       {step.role}
-                    </p>
+                    </h2>
                     <div className="mt-2 flex items-baseline gap-4">
                       <span className="font-serif text-5xl italic leading-none text-white/25 sm:text-6xl">
                         {num}
